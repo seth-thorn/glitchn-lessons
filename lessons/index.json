@@ -1,0 +1,71 @@
+{
+ "format": "glitchn-index/1",
+ "generated": "2026-10-16T23:41:58+00:00",
+ "lessons": [
+  {
+   "slug": "blink-to-drum-machine",
+   "title": "From Blink to Drum Machine",
+   "summary": "Build an oscillator that blinks an LED, then grow it step by step into a drum machine.",
+   "status": "draft",
+   "duration": 475.79,
+   "steps": 7,
+   "subSteps": 32,
+   "thumb": "blink-to-drum-machine/thumbs/1-7-8.jpg",
+   "links": [
+    {
+     "to": "day-2-material",
+     "kind": "next"
+    }
+   ]
+  }
+ ],
+ "planned": [
+  {
+   "slug": "day-2-material",
+   "title": "Day 2 material",
+   "summary": "One slow oscillator, two slow oscillators, Blade Runner, Radio Amor, 4040 drummer, 4040 reset, voltage starving.",
+   "status": "planned",
+   "origin": "Five-day course, Day 2",
+   "links": [
+    {
+     "to": "day-3-material",
+     "kind": "next"
+    }
+   ]
+  },
+  {
+   "slug": "day-3-material",
+   "title": "Day 3 material",
+   "summary": "Slow and fast oscillators, the 4021 and LEDs, repetitive and generative 4021 drummers, microsound, glitch as musical structure.",
+   "status": "planned",
+   "origin": "Five-day course, Day 3",
+   "links": [
+    {
+     "to": "day-4-material",
+     "kind": "next"
+    }
+   ]
+  },
+  {
+   "slug": "day-4-material",
+   "title": "Day 4 material",
+   "summary": "Two slow oscillators, 4051 LEDs, a third oscillator, stepped low-pass clicks and tones, stepped band-pass tones.",
+   "status": "planned",
+   "origin": "Five-day course, Day 4",
+   "links": [
+    {
+     "to": "day-5-material",
+     "kind": "next"
+    }
+   ]
+  },
+  {
+   "slug": "day-5-material",
+   "title": "Day 5 material",
+   "summary": "Three oscillators, a diode network, an adjustable high-pass filter, voltage starving, static, strange things.",
+   "status": "planned",
+   "origin": "Five-day course, Day 5",
+   "links": []
+  }
+ ]
+}

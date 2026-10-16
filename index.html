@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Glitch'n Lessons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: the lesson library. A header, a row of lesson cards, then the whole map of lessons
+   (a growing, non-linear web), then what's coming. Same ink outlines and skins as the player. */
+:root {
+  --ink: #161514; --page: #FAF9F7; --muted: #5E5955; --white: #FFFFFF;
+  --panel: #EE6668; --card: #FCE4E4; --on-panel: #161514;
+  --display: "Archivo", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --body: "Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --bw: 3.5px;
+  color-scheme: light;
+}
+:root[data-skin="navy"]   { --panel: #4259A8; --card: #E4E9F8; --on-panel: #FFFFFF; }
+:root[data-skin="sky"]    { --panel: #57BEE4; --card: #E1F4FB; }
+:root[data-skin="green"]  { --panel: #66C26A; --card: #E3F5E4; }
+:root[data-skin="yellow"] { --panel: #F5CF42; --card: #FDF5D6; }
+:root[data-skin="red"]    { --panel: #E8493F; --card: #FCE1DF; --on-panel: #FFFFFF; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { background: var(--page); color: var(--ink); }
+body { margin: 0; font-family: var(--body); font-size: 17px; line-height: 1.5; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 32px 48px; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+main { max-width: 1120px; margin: 0 auto; display: grid; gap: 30px; }
+.eyebrow { font-family: var(--mono); font-size: 12.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-family: var(--display); font-weight: 860; font-stretch: 112%; font-size: clamp(36px, 6vw, 60px); line-height: 1; margin: 6px 0 12px; }
+h2 { font-family: var(--display); font-weight: 800; font-stretch: 108%; font-size: 24px; margin: 0 0 12px; }
+.intro { margin: 0; max-width: 62ch; font-size: 18px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 18px; }
+a.card { display: grid; grid-template-rows: auto 1fr; text-decoration: none; color: var(--ink); background: var(--panel); border: var(--bw) solid var(--ink); border-radius: 20px; overflow: hidden; box-shadow: 0 5px 0 var(--ink); transition: transform .12s, box-shadow .12s; }
+a.card:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--ink); }
+.card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; border-bottom: var(--bw) solid var(--ink); background: var(--card); }
+.card .body { padding: 14px 16px 16px; display: grid; gap: 6px; align-content: start; color: var(--on-panel); }
+.card b { font-family: var(--display); font-weight: 800; font-stretch: 106%; font-size: 21px; line-height: 1.15; }
+.card .meta { font-family: var(--mono); font-size: 12.5px; font-weight: 600; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.chip { border: 2px solid var(--ink); background: var(--white); color: var(--ink); border-radius: 99px; padding: 0 8px; font-size: 11.5px; }
+.mapwrap { background: var(--card); border: var(--bw) solid var(--ink); border-radius: 20px; padding: 16px; }
+.mapscroll { overflow-x: auto; background: var(--panel); border-radius: 12px; padding: 8px; }
+#map { display: block; margin: 0 auto; max-width: none; color: var(--ink); }
+#map .edge { stroke: var(--ink); stroke-width: 3; fill: none; }
+#map .edge.soft { stroke-dasharray: 5 5; opacity: .75; }
+#map .node circle { fill: var(--white); stroke: var(--ink); stroke-width: 3.5; }
+#map .node.later circle { fill: var(--card); stroke-dasharray: 6 4; }
+#map .node text { font-family: var(--body); font-weight: 700; fill: var(--ink); text-anchor: middle; dominant-baseline: middle; pointer-events: none; }
+#map .node .sub { font-family: var(--mono); font-weight: 600; fill: var(--muted); }
+#map .node { cursor: pointer; }
+#map .node:hover circle, #map .node:focus-visible circle { fill: var(--card); }
+#map .node:focus { outline: none; }
+#map .elabel rect { fill: var(--white); stroke: var(--ink); stroke-width: 2; }
+#map .elabel text { font-family: var(--mono); font-weight: 600; font-size: 11px; fill: var(--ink); text-anchor: middle; dominant-baseline: middle; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px; margin-top: 10px; }
+.legend i { display: inline-block; width: 14px; height: 14px; border-radius: 50%; border: 2.5px solid var(--ink); background: var(--white); vertical-align: -2px; margin-right: 6px; }
+.legend i.dash { border-style: dashed; background: var(--card); }
+.coming { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.coming li { border: 2.5px dashed var(--ink); border-radius: 14px; padding: 10px 14px; background: var(--white); }
+.coming b { font-family: var(--display); font-weight: 700; }
+.coming span { display: block; font-size: 15px; color: var(--muted); }
+.team { font-size: 15px; color: var(--muted); border-top: 2px solid var(--ink); padding-top: 14px; }
+.team a { color: var(--ink); font-weight: 700; }
+.err { border: var(--bw) solid var(--ink); border-radius: 16px; background: var(--card); padding: 16px; }
+.toast { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: var(--ink); color: var(--white); padding: 10px 16px; border-radius: 10px; font-weight: 700; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; max-width: calc(100% - 32px); text-align: center; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">Glitch'n</div>
+    <h1>Lessons</h1>
+    <p class="intro">Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.</p>
+  </header>
+
+  <section aria-labelledby="h-lessons">
+    <h2 id="h-lessons">Start building</h2>
+    <div class="cards" id="cards"><p>Loading lessons…</p></div>
+  </section>
+
+  <section class="mapwrap" aria-labelledby="h-map">
+    <h2 id="h-map">Map of lessons</h2>
+    <div class="mapscroll"><svg id="map" role="group" aria-label="How the lessons connect"></svg></div>
+    <div class="legend"><span><i></i>Ready to build</span><span><i class="dash"></i>Coming</span><span>Arrows point to where a lesson leads.</span></div>
+  </section>
+
+  <section aria-labelledby="h-coming" id="comingSec" hidden>
+    <h2 id="h-coming">Coming</h2>
+    <ul class="coming" id="coming"></ul>
+  </section>
+
+  <p class="team">For the Glitch'n team: <a href="editor/index.html">open the step editor</a> to turn a new video into a lesson.</p>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const fmt = (s) => { s = Math.round(s); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+  try { const sk = localStorage.getItem('glitchn-skin'); const v = sk && JSON.parse(sk); if (v && v !== 'coral') document.documentElement.dataset.skin = v; } catch (e) {}
+  let tt; function toast(m) { const t = $('toast'); t.textContent = m; t.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 2600); }
+  const lessonHref = (slug) => 'lessons/' + slug + '/index.html';
+
+  fetch('lessons/index.json').then((r) => r.json()).then(render).catch(() => {
+    $('cards').innerHTML = '<div class="err"><b>The lesson list did not load.</b> It lives in lessons/index.json; run tools/build_index.py to make it.</div>';
+  });
+
+  function render(IDX) {
+    const ready = IDX.lessons || [], planned = IDX.planned || [];
+    $('cards').innerHTML = ready.length ? ready.map((l) => (
+      '<a class="card" href="' + lessonHref(l.slug) + '">' +
+        (l.thumb ? '<img src="lessons/' + esc(l.thumb) + '" alt="" loading="lazy">' : '') +
+        '<div class="body"><b>' + esc(l.title) + '</b><span>' + esc(l.summary) + '</span>' +
+        '<span class="meta">' + fmt(l.duration) + ' · ' + l.steps + ' steps · ' + l.subSteps + ' sub-steps' + (l.status === 'draft' ? ' <span class="chip">Draft</span>' : '') + '</span></div>' +
+      '</a>')).join('') : '<p>No lessons yet.</p>';
+    $('comingSec').hidden = !planned.length;
+    $('coming').innerHTML = planned.map((p) => '<li><b>' + esc(p.title) + '</b><span>' + esc(p.summary) + '</span></li>').join('');
+    drawMap(ready, planned);
+  }
+
+  function wrap(text, max) {
+    const words = String(text).split(/\s+/); const lines = []; let line = '';
+    words.forEach((w) => { if ((line + ' ' + w).trim().length > max && line) { lines.push(line); line = w; } else line = (line + ' ' + w).trim(); });
+    if (line) lines.push(line); return lines.slice(0, 4);
+  }
+
+  // Layered layout: each lesson sits one column to the right of the lessons that lead to it.
+  function drawMap(ready, planned) {
+    const nodes = {}; const order = [];
+    [...ready.map((l) => ({ ...l, ready: true })), ...planned.map((p) => ({ ...p, ready: false }))].forEach((n) => { nodes[n.slug] = n; order.push(n.slug); });
+    const edges = [];
+    order.forEach((s) => (nodes[s].links || []).forEach((l) => { if (nodes[l.to]) edges.push({ from: s, to: l.to, kind: l.kind || 'next' }); }));
+    const depth = {}; order.forEach((s) => { depth[s] = 0; });
+    for (let k = 0; k < order.length; k++) edges.forEach((e) => { if (depth[e.to] < depth[e.from] + 1) depth[e.to] = Math.min(depth[e.from] + 1, order.length); });
+    const cols = {}; order.forEach((s) => { (cols[depth[s]] = cols[depth[s]] || []).push(s); });
+    const nCols = Math.max(...Object.keys(cols).map(Number)) + 1;
+    const maxRows = Math.max(...Object.values(cols).map((c) => c.length));
+    const R = 52, CW = 170, RH = 130, PAD = 18;
+    const W = PAD * 2 + R * 2 + (nCols - 1) * CW, H = PAD * 2 + R * 2 + (maxRows - 1) * RH;
+    const pos = {};
+    Object.entries(cols).forEach(([c, list]) => list.forEach((s, i) => { pos[s] = [PAD + R + c * CW, H / 2 + (i - (list.length - 1) / 2) * RH]; }));
+    let out = '<defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>';
+    edges.forEach((e) => {
+      const [x1, y1] = pos[e.from], [x2, y2] = pos[e.to]; const dx = x2 - x1, dy = y2 - y1, d = Math.hypot(dx, dy) || 1;
+      const sx = x1 + dx / d * R, sy = y1 + dy / d * R, ex = x2 - dx / d * (R + 5), ey = y2 - dy / d * (R + 5);
+      out += '<path class="edge' + (nodes[e.to].ready ? '' : ' soft') + '" d="M' + sx + ' ' + sy + 'L' + ex + ' ' + ey + '" marker-end="url(#arr)"/>';
+      if (e.kind !== 'next') { const mx = (sx + ex) / 2, my = (sy + ey) / 2, w = e.kind.length * 6.8 + 12; out += '<g class="elabel"><rect x="' + (mx - w / 2) + '" y="' + (my - 9) + '" width="' + w + '" height="18" rx="9"/><text x="' + mx + '" y="' + (my + 0.5) + '">' + esc(e.kind) + '</text></g>'; }
+    });
+    order.forEach((s) => {
+      const n = nodes[s], [x, y] = pos[s]; const lines = wrap(n.title, 12); const lh = 14; const y0 = y - (lines.length - 1) * lh / 2 - (n.ready ? 0 : 6);
+      out += '<g class="node' + (n.ready ? '' : ' later') + '" tabindex="0" role="button" data-slug="' + esc(s) + '" aria-label="' + esc(n.title) + (n.ready ? '' : ', coming') + '"><circle cx="' + x + '" cy="' + y + '" r="' + R + '"/>' +
+        lines.map((l, i) => '<text x="' + x + '" y="' + (y0 + i * lh) + '" font-size="12.5">' + esc(l) + '</text>').join('') +
+        (n.ready ? '' : '<text class="sub" x="' + x + '" y="' + (y0 + lines.length * lh + 2) + '" font-size="10.5">coming</text>') + '</g>';
+    });
+    const svg = $('map'); svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.setAttribute('width', W); svg.setAttribute('height', H); svg.innerHTML = out;
+    const open = (s) => { const n = nodes[s]; if (n.ready) location.href = lessonHref(s); else toast('“' + n.title + '” isn’t ready yet.'); };
+    svg.addEventListener('click', (e) => { const g = e.target.closest('.node'); if (g) open(g.dataset.slug); });
+    svg.addEventListener('keydown', (e) => { const g = e.target.closest('.node'); if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(g.dataset.slug); } });
+  }
+})();
+</script>
+</body>
+</html>

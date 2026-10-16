@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Glitch'n Step Editor</title>
+<meta name="glitchn-example" content="../lessons/blink-to-drum-machine/">
+<meta name="glitchn-index" content="../lessons/index.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+/* Layout: an editing bench. Left: the video, transport and a marker timeline with the big "mark" buttons.
+   Right: the outline of steps and sub-steps, each with its time, text and captured still.
+   Same ink-outlined panels as the player, in a quieter tool treatment. */
+:root {
+  --ink: #161514;
+  --page: #F6F5F2;
+  --muted: #5E5955;
+  --panel: #EE6668;
+  --card: #FCE4E4;
+  --paper: #FFFFFF;
+  --line: #D9D4CF;
+  --sel: #FFF3B8;
+  --display: "Archivo", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --body: "Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --bw: 3px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { background: var(--page); color: var(--ink); }
+body { font-family: var(--body); font-size: 15px; line-height: 1.4; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 16px 36px; }
+button, input, textarea, select { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.app { max-width: 1320px; margin: 0 auto; display: grid; gap: 16px; }
+
+.top { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: flex-end; justify-content: space-between; }
+.eyebrow { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-family: var(--display); font-weight: 860; font-stretch: 112%; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.05; margin: 4px 0 0; }
+.fields { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.field { display: grid; gap: 2px; }
+.field label { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+.field input { border: 2.5px solid var(--ink); border-radius: 8px; background: var(--paper); padding: 5px 9px; min-width: 0; }
+#fTitle { width: min(300px, 80vw); }
+#fSlug { width: min(240px, 80vw); font-family: var(--mono); }
+#fSummary { width: min(520px, 86vw); }
+.field small { font-size: 12px; color: var(--muted); }
+.links { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.link-chip { display: inline-flex; align-items: center; gap: 6px; border: 2.5px solid var(--ink); border-radius: 99px; background: var(--paper); padding: 2px 4px 2px 10px; font-family: var(--mono); font-size: 12.5px; font-weight: 600; }
+.link-chip em { font-style: normal; color: var(--muted); }
+.link-chip button { border: 0; background: none; width: 22px; height: 22px; border-radius: 50%; cursor: pointer; font-weight: 800; }
+.link-chip button:hover { background: var(--card); }
+.link-add { display: inline-flex; gap: 4px; align-items: center; }
+.link-add input, .link-add select { border: 2.5px solid var(--ink); border-radius: 8px; background: var(--paper); padding: 4px 7px; font-size: 13.5px; }
+.link-add input { width: 190px; font-family: var(--mono); }
+.link-add button { border: 2.5px solid var(--ink); border-radius: 8px; background: var(--card); padding: 4px 10px; font-weight: 700; cursor: pointer; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { border: 2.5px solid var(--ink); background: var(--paper); border-radius: 10px; padding: 7px 13px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+.btn:hover { background: var(--card); }
+.btn.primary { background: var(--ink); color: var(--paper); }
+.btn.primary:hover { background: #333; }
+.btn kbd { font-family: var(--mono); font-size: 11.5px; border: 1.5px solid currentColor; border-radius: 4px; padding: 0 4px; opacity: .8; }
+.file-btn { position: relative; overflow: hidden; }
+.file-btn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+.banner { border: 2.5px solid var(--ink); border-radius: 12px; background: var(--sel); padding: 10px 14px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
+
+.grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.panel { background: var(--panel); border: var(--bw) solid var(--ink); border-radius: 18px; padding: 14px; }
+
+.screen { position: relative; aspect-ratio: 16 / 9; max-width: 100%; background: #0E0E0E; border: var(--bw) solid var(--ink); border-radius: 12px; overflow: hidden; }
+.screen video { width: 100%; height: 100%; object-fit: contain; display: block; }
+.screen .chip { position: absolute; left: 10px; top: 10px; background: var(--paper); border: 2.5px solid var(--ink); border-radius: 8px; padding: 3px 9px; font-family: var(--mono); font-weight: 600; font-size: 13px; }
+.flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+.flash.go { animation: flash .35s ease-out; }
+@keyframes flash { from { opacity: .7; } to { opacity: 0; } }
+.empty { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; color: #EEE; padding: 20px; }
+.empty b { font-family: var(--display); font-size: 20px; display: block; margin-bottom: 6px; color: #fff; }
+.drop .screen { outline: 4px dashed var(--paper); outline-offset: -12px; }
+
+.transport { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-top: 10px; }
+.tbtn { border: 0; background: var(--paper); border: 2.5px solid var(--ink); border-radius: 8px; height: 36px; min-width: 40px; padding: 0 8px; font-family: var(--mono); font-weight: 600; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+.tbtn:hover { background: var(--card); }
+.tbtn svg { width: 18px; height: 18px; }
+.tbtn.play { min-width: 52px; background: var(--ink); color: var(--paper); }
+.time { font-family: var(--mono); font-weight: 600; font-size: 14px; font-variant-numeric: tabular-nums; margin-left: auto; background: var(--paper); border: 2.5px solid var(--ink); border-radius: 8px; padding: 6px 10px; white-space: nowrap; }
+select.tbtn { padding: 0 6px; }
+
+.timeline { position: relative; margin-top: 12px; height: 70px; background: var(--paper); border: 2.5px solid var(--ink); border-radius: 10px; cursor: pointer; overflow: hidden; touch-action: none; }
+.timeline .clip { position: absolute; top: 0; bottom: 0; border-right: 2px dashed var(--line); }
+.timeline .clip span { position: absolute; left: 4px; bottom: 2px; font-family: var(--mono); font-size: 10.5px; color: var(--muted); white-space: nowrap; overflow: hidden; max-width: calc(100% - 6px); text-overflow: ellipsis; }
+.timeline .mk { position: absolute; top: 6px; width: 3px; margin-left: -1.5px; background: var(--ink); border-radius: 2px; }
+.timeline .mk.mk-step { top: 0; height: 52px; width: 5px; margin-left: -2.5px; background: var(--panel); border: 1.5px solid var(--ink); }
+.timeline .mk.mk-sub { height: 30px; top: 12px; }
+.timeline .mk.sel { background: #E2A200; box-shadow: 0 0 0 2px var(--ink); }
+.timeline .head { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: #D22; pointer-events: none; }
+.timeline .head::before { content: ""; position: absolute; top: 0; left: -5px; border: 6px solid transparent; border-top-color: #D22; }
+
+.markrow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; align-items: center; }
+.markrow .btn { padding: 9px 14px; }
+.opt { display: inline-flex; gap: 6px; align-items: center; font-size: 14px; font-weight: 700; color: var(--ink); background: var(--card); border-radius: 8px; padding: 5px 10px; }
+.opt input { width: 16px; height: 16px; accent-color: var(--ink); }
+.help { margin-top: 10px; font-size: 13px; color: var(--ink); display: flex; flex-wrap: wrap; gap: 4px 14px; background: var(--card); border-radius: 10px; padding: 8px 12px; }
+.help kbd { font-family: var(--mono); font-size: 11.5px; border: 1.5px solid var(--ink); border-radius: 4px; padding: 0 4px; background: var(--paper); margin-right: 3px; }
+
+.outline-panel { position: sticky; top: max(12px, env(safe-area-inset-top, 0px)); display: flex; flex-direction: column; max-height: calc(100vh - 24px); }
+.outline-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 0 4px 10px; }
+.outline-head h2 { font-family: var(--display); font-weight: 800; font-stretch: 108%; font-size: 20px; margin: 0; }
+.outline-head span { font-family: var(--mono); font-size: 12.5px; font-weight: 600; }
+.outline { overflow-y: auto; min-height: 120px; display: grid; gap: 10px; align-content: start; padding: 2px 6px 4px 2px; scrollbar-width: thin; }
+.step { background: var(--card); border-radius: 12px; padding: 8px; border: 2.5px solid transparent; }
+.step.sel { border-color: var(--ink); }
+.step-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 6px; align-items: center; }
+.num { font-family: var(--display); font-weight: 800; font-size: 17px; min-width: 1.6em; text-align: right; }
+.step-title { font-family: var(--display); font-weight: 700; font-size: 16px; border: 2px solid transparent; background: transparent; border-radius: 7px; padding: 3px 6px; min-width: 0; width: 100%; }
+.step-title:hover, .step-title:focus { border-color: var(--ink); background: var(--paper); }
+.tchip { font-family: var(--mono); font-size: 12px; font-weight: 600; background: var(--paper); border: 2px solid var(--ink); border-radius: 6px; padding: 2px 6px; cursor: pointer; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tchip:hover { background: var(--sel); }
+.icons { display: flex; gap: 2px; }
+.ib { width: 28px; height: 28px; border: 0; background: none; border-radius: 6px; display: grid; place-items: center; cursor: pointer; padding: 0; }
+.ib:hover { background: rgba(0,0,0,.08); }
+.ib svg { width: 17px; height: 17px; }
+.subs { display: grid; gap: 4px; margin-top: 6px; }
+.sub { display: grid; grid-template-columns: 86px minmax(0, 1fr); gap: 8px; background: var(--paper); border: 2px solid var(--line); border-radius: 9px; padding: 6px; }
+.sub.sel { border-color: var(--ink); background: var(--sel); }
+.sub.now { box-shadow: inset 4px 0 0 var(--panel); }
+.thumb { width: 86px; aspect-ratio: 16 / 9; border: 2px solid var(--ink); border-radius: 5px; background: #ccc center / cover no-repeat; position: relative; cursor: zoom-in; padding: 0; }
+.thumb.missing { background-image: none !important; background: repeating-linear-gradient(45deg, #eee 0 6px, #ddd 6px 12px); }
+.thumb .busy { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--mono); font-size: 10px; background: rgba(255,255,255,.7); }
+.sub-main { display: grid; gap: 4px; min-width: 0; }
+.sub-top { display: flex; align-items: center; gap: 6px; }
+.sub-top .lbl { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--muted); }
+.sub-top .icons { margin-left: auto; }
+.sub textarea { width: 100%; border: 2px solid var(--line); border-radius: 7px; padding: 5px 7px; resize: none; background: var(--paper); line-height: 1.35; min-height: 34px; overflow: hidden; }
+.sub textarea:focus { border-color: var(--ink); }
+.step-still { display: flex; gap: 8px; align-items: center; margin-top: 6px; font-size: 12.5px; color: var(--muted); }
+.step-still .thumb { width: 64px; }
+.none { padding: 24px 12px; text-align: center; color: var(--ink); background: var(--card); border-radius: 12px; }
+
+.viewer { position: fixed; inset: 0; background: rgba(20,20,20,.86); display: grid; place-items: center; padding: 24px; z-index: 30; }
+.viewer img { max-width: 100%; max-height: calc(100vh - 110px); border: 4px solid var(--paper); border-radius: 10px; }
+.viewer p { color: #fff; text-align: center; margin: 10px 0 0; font-weight: 700; }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 10px; font-weight: 700; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 40; display: flex; gap: 12px; align-items: center; max-width: calc(100% - 32px); }
+.toast.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.toast button { background: var(--paper); color: var(--ink); border: 0; border-radius: 6px; padding: 3px 10px; font-weight: 700; cursor: pointer; }
+
+@media (max-width: 980px) {
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  .outline-panel { position: static; max-height: none; }
+  .outline { max-height: 70vh; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+
+<div class="app" id="app">
+  <header class="top">
+    <div>
+      <div class="eyebrow">Glitch'n · Lesson step editor</div>
+      <h1>Step Editor</h1>
+      <div class="fields">
+        <div class="field"><label for="fTitle">Lesson title</label><input id="fTitle" value=""></div>
+        <div class="field"><label for="fSlug">Address</label><input id="fSlug" value="" spellcheck="false" title="The lesson's permanent web address. Choose it once; don't change it after the lesson is published."><small>lessons/<span id="slugEcho">…</span>/ · permanent once published</small></div>
+        <div class="field"><label for="fSummary">One-line summary</label><input id="fSummary" value=""></div>
+        <div class="field" style="flex-basis:100%"><label>Leads to (for the map)</label>
+          <div class="links"><span id="linkList" class="links"></span>
+            <span class="link-add"><input id="linkTo" list="slugList" placeholder="lesson address" aria-label="Address of the lesson this one leads to" spellcheck="false"><select id="linkKind" aria-label="Kind of link"><option value="next">next</option><option value="variation">variation</option><option value="related">related</option></select><button id="linkAdd" type="button">Add link</button></span>
+          </div><datalist id="slugList"></datalist></div>
+      </div>
+    </div>
+    <div class="actions">
+      <label class="btn file-btn">Open clips…<input type="file" id="inClips" accept="video/*,.mov,.mp4,.m4v,.webm" multiple></label>
+      <label class="btn file-btn">Open lesson file…<input type="file" id="inJson" accept=".json,application/json"></label>
+      <label class="btn file-btn" title="Pick the stills a lesson file refers to, so they go into the export">Add stills…<input type="file" id="inStills" accept="image/*" multiple></label>
+      <button class="btn" id="saveJson">Save lesson.json</button>
+      <button class="btn primary" id="exportZip">Export lesson + stills</button>
+    </div>
+  </header>
+
+  <div class="banner" id="banner" hidden></div>
+
+  <div class="grid">
+    <section aria-label="Video">
+      <div class="panel" id="vidPanel">
+        <div class="screen" id="screen">
+          <video id="vid" playsinline preload="auto"></video>
+          <div class="chip" id="chip" hidden></div>
+          <div class="flash" id="flash"></div>
+          <div class="empty" id="empty"><div><b>Open your clips to start</b>Pick one video, or several clips in order. They play from your computer and are never uploaded.<br>You can also drop them here.</div></div>
+        </div>
+        <div class="transport">
+          <button class="tbtn" id="prevMk" title="Previous marker (↑)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 4h2.5v16H5zM20 4v16L9 12z"/></svg></button>
+          <button class="tbtn" id="back1" title="Back 1 second (←)">−1s</button>
+          <button class="tbtn" id="backF" title="Back one frame (,)">−1f</button>
+          <button class="tbtn play" id="playBtn" title="Play / pause (Space)"><svg viewBox="0 0 24 24" fill="currentColor" id="playIcon"><path d="M6 3.5v17l14-8.5z"/></svg></button>
+          <button class="tbtn" id="fwdF" title="Forward one frame (.)">+1f</button>
+          <button class="tbtn" id="fwd1" title="Forward 1 second (→)">+1s</button>
+          <button class="tbtn" id="nextMk" title="Next marker (↓)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 4H19v16h-2.5zM4 4v16l11-8z"/></svg></button>
+          <select class="tbtn" id="rate" aria-label="Speed"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select>
+          <span class="time" id="time">0:00.0 / 0:00.0</span>
+        </div>
+        <div class="timeline" id="timeline" aria-label="Timeline: click to jump"><div class="head" id="head"></div></div>
+        <div class="markrow">
+          <button class="btn primary" id="addStep">New step here <kbd>S</kbd></button>
+          <button class="btn primary" id="addSub">Sub-step here <kbd>A</kbd></button>
+          <button class="btn" id="recap">Re-capture still <kbd>C</kbd></button>
+          <label class="opt"><input type="checkbox" id="pauseOnMark" checked>Pause while I type</label>
+        </div>
+        <div class="help">
+          <span><kbd>Space</kbd>play/pause</span><span><kbd>←</kbd><kbd>→</kbd>1 s (with Shift, 5 s)</span><span><kbd>,</kbd><kbd>.</kbd>one frame</span><span><kbd>↑</kbd><kbd>↓</kbd>previous / next marker</span><span><kbd>Enter</kbd>finish typing and resume</span><span><kbd>Esc</kbd>leave a text box</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel outline-panel" aria-label="Outline">
+      <div class="outline-head"><h2>Outline</h2><span id="counts"></span></div>
+      <div class="outline" id="outline"></div>
+    </section>
+  </div>
+</div>
+<div class="viewer" id="viewer" hidden><div><img id="viewerImg" alt=""><p id="viewerCap"></p></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button id="toastBtn" hidden>Undo</button></div>
+<video id="capVid" muted playsinline preload="auto" hidden></video>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const FRAME = 1 / 24;
+  const EX = (document.querySelector('meta[name="glitchn-example"]') || {}).content || ''; // folder of the example lesson
+  const INDEX_URL = (document.querySelector('meta[name="glitchn-index"]') || {}).content || (EX ? EX + '../index.json' : 'lessons/index.json');
+  const slugify = (t) => String(t).toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+  const fmt = (s, dec = 1) => { s = Math.round(Math.max(0, s) * 10 ** dec) / 10 ** dec; const m = Math.floor(s / 60); const r = s - m * 60; return m + ':' + (r < 10 ? '0' : '') + r.toFixed(dec); };
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const uid = () => Math.random().toString(36).slice(2, 9);
+  const ls = { get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+  const ICON = {
+    clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg>',
+    cam: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"><path d="M3.5 8h4l1.6-2.5h5.8L16.5 8h4v11h-17z"/><circle cx="12" cy="13" r="3.4"/></svg>',
+    x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+  };
+
+  /* ---------- state ----------
+     markers: one sorted list of {id, kind:'step'|'sub', t (seconds on the whole timeline), text, still}
+     A sub-step belongs to the step marker before it. still = {t, url, blob?, path?, busy?} */
+  const S = { links: [], slugTouched: false, exampleSegs: null, exampleSlug: null, clips: [], offsets: [], total: 0, seg: -1, markers: [], sel: null, playing: false, resumeAfterType: false, lastDeleted: null, jsonSegments: null };
+  const vid = $('vid'), capVid = $('capVid');
+
+  let toastTimer;
+  function toast(msg, undo) {
+    $('toastMsg').textContent = msg; $('toastBtn').hidden = !undo; $('toast').classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').classList.remove('show'), undo ? 6000 : 3000);
+  }
+  function banner(html) { const b = $('banner'); if (!html) { b.hidden = true; return; } b.innerHTML = html; b.hidden = false; }
+
+  /* ---------- clips & timeline ---------- */
+  function computeOffsets() {
+    S.offsets = []; S.total = 0;
+    S.clips.forEach((c) => { S.offsets.push(S.total); S.total += c.duration; });
+    if (!S.clips.length && S.jsonSegments) S.jsonSegments.forEach((d) => { S.offsets.push(S.total); S.total += d; });
+  }
+  function segIndex(g) { let i = 0; while (i + 1 < S.offsets.length && g >= S.offsets[i + 1]) i++; return i; }
+  const now = () => (S.seg >= 0 ? S.offsets[S.seg] + (vid.currentTime || 0) : 0);
+  function loadMeta(url) {
+    return new Promise((res, rej) => { const v = document.createElement('video'); v.preload = 'metadata'; v.onloadedmetadata = () => res(v.duration); v.onerror = () => rej(new Error('unreadable')); v.src = url; });
+  }
+  async function openClips(files, { autoSteps = true } = {}) {
+    files = [...files].sort((a, b) => clipOrder(a.name) - clipOrder(b.name) || a.name.localeCompare(b.name, undefined, { numeric: true }));
+    const clips = [];
+    for (const f of files) {
+      const url = f.url || URL.createObjectURL(f);
+      try { clips.push({ name: f.name, url, duration: await loadMeta(url) }); }
+      catch (e) { toast('“' + f.name + '” would not open in this browser. Try the web .mp4 copy.'); }
+    }
+    if (!clips.length) return;
+    const hadMarkers = S.markers.length > 0;
+    const oldOffsets = S.offsets.slice();
+    S.clips = clips; computeOffsets(); S.seg = -1;
+    // Times from a lesson file are kept relative to their own clip, so small length differences don't shift later clips.
+    if (hadMarkers && oldOffsets.length === S.offsets.length) {
+      const remap = (g) => { let i = 0; while (i + 1 < oldOffsets.length && g >= oldOffsets[i + 1] - 0.001) i++; return S.offsets[i] + (g - oldOffsets[i]); };
+      S.markers.forEach((m) => { m.t = remap(m.t); m.still.t = remap(m.still.t); });
+    }
+    $('empty').hidden = true;
+    await gotoTime(0, false);
+    if (!hadMarkers && autoSteps) {
+      clips.forEach((c, i) => addMarker('step', S.offsets[i], titleFromName(c.name), { select: false, capture: true }));
+      toast('Made one step per clip. Rename them in the outline.');
+    }
+    // stills a lesson file referred to but we have no image for: capture them from the video
+    S.markers.forEach((m) => { if (!m.still.url) captureInto(m, m.still.t); });
+    render();
+  }
+  function clipOrder(name) { const m = name.match(/-\s*(\d+)\s*-/); return m ? +m[1] : 1e6; }
+  function titleFromName(name) {
+    let t = name.replace(/\.[a-z0-9]+$/i, '').replace(/-HD.*$/i, '').replace(/^day\s*\d+\s*-\s*\d+\s*-\s*/i, '').replace(/^day\d+-\d+$/i, '').trim();
+    return t || 'New step';
+  }
+  async function gotoTime(g, play = S.playing) {
+    if (!S.clips.length) return;
+    g = Math.min(Math.max(g, 0), S.total - 0.02);
+    const i = segIndex(g), local = g - S.offsets[i];
+    if (i !== S.seg) {
+      S.seg = i; vid.src = S.clips[i].url; vid.playbackRate = +$('rate').value;
+      await new Promise((r) => { vid.onloadedmetadata = r; });
+    }
+    vid.currentTime = local;
+    if (play) vid.play().catch(() => {}); else vid.pause();
+  }
+  vid.addEventListener('ended', () => { if (S.seg + 1 < S.clips.length) gotoTime(S.offsets[S.seg + 1] + 0.001, true); else setPlaying(false); });
+  function setPlaying(p) { S.playing = p; $('playIcon').innerHTML = p ? '<rect x="5" y="4" width="5" height="16" rx="1"/><rect x="14" y="4" width="5" height="16" rx="1"/>' : '<path d="M6 3.5v17l14-8.5z"/>'; }
+  function togglePlay() { if (!S.clips.length) return; if (S.playing) { vid.pause(); setPlaying(false); } else { if (now() >= S.total - 0.1) gotoTime(0, true); else vid.play().catch(() => {}); setPlaying(true); } }
+
+  /* ---------- frame capture ---------- */
+  function drawToBlob(videoEl) {
+    const c = document.createElement('canvas'); c.width = videoEl.videoWidth; c.height = videoEl.videoHeight;
+    c.getContext('2d').drawImage(videoEl, 0, 0);
+    return new Promise((res) => c.toBlob(res, 'image/jpeg', 0.88));
+  }
+  let capChain = Promise.resolve();
+  function captureAt(g) {
+    capChain = capChain.then(async () => {
+      if (!S.clips.length) return null;
+      const i = segIndex(g), local = Math.min(g - S.offsets[i], S.clips[i].duration - 0.05);
+      if (i === S.seg && Math.abs(vid.currentTime - local) < 0.03 && vid.readyState >= 2) return drawToBlob(vid);
+      if (capVid.dataset.clip !== String(i)) { capVid.dataset.clip = String(i); capVid.src = S.clips[i].url; await new Promise((r) => { capVid.onloadeddata = r; capVid.onerror = r; }); }
+      await new Promise((r) => { capVid.onseeked = r; capVid.currentTime = Math.max(0, local); setTimeout(r, 4000); });
+      return drawToBlob(capVid);
+    }).catch(() => null);
+    return capChain;
+  }
+  async function captureInto(m, g) {
+    m.still.busy = true; m.still.t = g; renderThumb(m);
+    const blob = await captureAt(g);
+    m.still.busy = false;
+    if (blob) { if (m.still.blobUrl) URL.revokeObjectURL(m.still.blobUrl); m.still.blob = blob; m.still.blobUrl = URL.createObjectURL(blob); m.still.url = m.still.blobUrl; m.still.path = null; }
+    renderThumb(m); save();
+  }
+
+  /* ---------- markers ---------- */
+  function sortMarkers() { S.markers.sort((a, b) => a.t - b.t || (a.kind === 'step' ? -1 : 1) - (b.kind === 'step' ? -1 : 1)); }
+  function addMarker(kind, t, text = '', { select = true, capture = true } = {}) {
+    const m = { id: uid(), kind, t, text, still: { t, url: null } };
+    S.markers.push(m); sortMarkers();
+    if (kind === 'sub' && !S.markers.some((x) => x.kind === 'step' && x.t <= m.t)) {
+      S.markers.unshift({ id: uid(), kind: 'step', t: Math.min(0, m.t), text: 'Step 1', still: { t: 0, url: null } });
+      if (S.clips.length) captureInto(S.markers[0], 0);
+    }
+    if (select) S.sel = m.id;
+    if (capture && S.clips.length) captureInto(m, t);
+    render(); save();
+    return m;
+  }
+  function structure() {
+    const steps = [];
+    S.markers.forEach((m) => { if (m.kind === 'step') steps.push({ m, subs: [] }); else if (steps.length) steps[steps.length - 1].subs.push(m); });
+    return steps;
+  }
+  const byId = (id) => S.markers.find((m) => m.id === id);
+  function del(id) {
+    const i = S.markers.findIndex((m) => m.id === id); if (i < 0) return;
+    S.lastDeleted = S.markers.splice(i, 1)[0];
+    if (S.sel === id) S.sel = null;
+    render(); save(); toast((S.lastDeleted.kind === 'step' ? 'Step' : 'Sub-step') + ' deleted.', true);
+  }
+  $('toastBtn').addEventListener('click', () => { if (S.lastDeleted) { S.markers.push(S.lastDeleted); sortMarkers(); S.sel = S.lastDeleted.id; S.lastDeleted = null; render(); save(); $('toast').classList.remove('show'); } });
+
+  function markHere(kind) {
+    if (!S.clips.length) { toast('Open your clips first.'); return; }
+    const t = now();
+    S.resumeAfterType = S.playing && $('pauseOnMark').checked;
+    if (S.resumeAfterType) { vid.pause(); setPlaying(false); }
+    $('flash').classList.remove('go'); void $('flash').offsetWidth; $('flash').classList.add('go');
+    const m = addMarker(kind, t, kind === 'step' ? 'New step' : '');
+    requestAnimationFrame(() => { const el = document.querySelector('[data-id="' + m.id + '"] ' + (kind === 'step' ? '.step-title' : 'textarea')); if (el) { el.focus(); if (kind === 'step') el.select(); el.scrollIntoView({ block: 'nearest' }); } });
+  }
+  function selectedOrCurrent() { return byId(S.sel) || currentMarker(); }
+  function currentMarker() { const t = now() + 0.02; let c = null; S.markers.forEach((m) => { if (m.t <= t) c = m; }); return c; }
+
+  /* ---------- rendering ---------- */
+  function render() {
+    const steps = structure();
+    const out = $('outline');
+    const nSubs = S.markers.filter((m) => m.kind === 'sub').length;
+    $('counts').textContent = steps.length + ' steps · ' + nSubs + ' sub-steps';
+    if (!steps.length) { out.innerHTML = '<div class="none"><b>No steps yet.</b><br>Play the video and press <b>A</b> when a new action starts, or <b>S</b> for a new main step.</div>'; renderTimeline(); return; }
+    out.innerHTML = steps.map((st, si) => (
+      '<div class="step' + (S.sel === st.m.id ? ' sel' : '') + '" data-id="' + st.m.id + '">' +
+        '<div class="step-row"><span class="num">' + (si + 1) + '.</span>' +
+        '<input class="step-title" value="' + esc(st.m.text) + '" aria-label="Step ' + (si + 1) + ' title" data-edit="' + st.m.id + '">' +
+        '<button class="tchip" data-seek="' + st.m.id + '" title="Jump here">' + fmt(st.m.t) + '</button>' +
+        '<span class="icons"><button class="ib" data-settime="' + st.m.id + '" title="Move this step to the playhead">' + ICON.clock + '</button><button class="ib" data-del="' + st.m.id + '" title="Delete step (its sub-steps join the step above)">' + ICON.x + '</button></span></div>' +
+        '<div class="step-still"><button class="thumb" data-view="' + st.m.id + '" id="th-' + st.m.id + '" aria-label="View starting still"></button><span>Starting still · ' + fmt(st.m.still.t) + ' <button class="ib" style="display:inline-grid;vertical-align:middle" data-recap="' + st.m.id + '" title="Re-capture from the playhead">' + ICON.cam + '</button></span></div>' +
+        '<div class="subs">' + st.subs.map((m, ui) => (
+          '<div class="sub' + (S.sel === m.id ? ' sel' : '') + '" data-id="' + m.id + '">' +
+            '<button class="thumb" data-view="' + m.id + '" id="th-' + m.id + '" aria-label="View still"></button>' +
+            '<div class="sub-main"><div class="sub-top"><span class="lbl">' + (si + 1) + '.' + (ui + 1) + '</span><button class="tchip" data-seek="' + m.id + '" title="Jump here">' + fmt(m.t) + '</button>' +
+            '<span class="icons"><button class="ib" data-settime="' + m.id + '" title="Move to the playhead">' + ICON.clock + '</button><button class="ib" data-recap="' + m.id + '" title="Re-capture still from the playhead">' + ICON.cam + '</button><button class="ib" data-del="' + m.id + '" title="Delete">' + ICON.x + '</button></span></div>' +
+            '<textarea rows="1" data-edit="' + m.id + '" placeholder="What does the learner do here?" aria-label="Sub-step ' + (si + 1) + '.' + (ui + 1) + ' text">' + esc(m.text) + '</textarea></div>' +
+          '</div>')).join('') + '</div>' +
+      '</div>')).join('');
+    S.markers.forEach(renderThumb);
+    out.querySelectorAll('textarea').forEach(autoGrow);
+    renderTimeline();
+  }
+  function renderThumb(m) {
+    const el = $('th-' + m.id); if (!el) return;
+    el.classList.toggle('missing', !m.still.url);
+    el.style.backgroundImage = m.still.url ? 'url("' + m.still.url + '")' : '';
+    el.innerHTML = m.still.busy ? '<span class="busy">capturing</span>' : '';
+  }
+  function autoGrow(t) { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; }
+  function renderTimeline() {
+    const tl = $('timeline'); const head = $('head');
+    tl.innerHTML = ''; tl.appendChild(head);
+    if (!S.total) return;
+    S.offsets.forEach((o, i) => { const d = document.createElement('div'); d.className = 'clip'; d.style.left = (o / S.total * 100) + '%'; d.style.width = ((S.clips[i] ? S.clips[i].duration : S.jsonSegments[i]) / S.total * 100) + '%'; d.innerHTML = '<span>' + esc(S.clips[i] ? S.clips[i].name : 'clip ' + (i + 1)) + '</span>'; tl.appendChild(d); });
+    S.markers.forEach((m) => { const d = document.createElement('div'); d.className = 'mk mk-' + m.kind + (S.sel === m.id ? ' sel' : ''); d.style.left = (m.t / S.total * 100) + '%'; d.dataset.mk = m.id; d.title = fmt(m.t) + ' · ' + (m.text || '(no text yet)'); tl.appendChild(d); });
+  }
+
+  /* ---------- outline interactions ---------- */
+  const out = $('outline');
+  out.addEventListener('input', (e) => {
+    const id = e.target.dataset.edit; if (!id) return;
+    byId(id).text = e.target.value; if (e.target.tagName === 'TEXTAREA') autoGrow(e.target);
+    const mk = document.querySelector('[data-mk="' + id + '"]'); if (mk) mk.title = fmt(byId(id).t) + ' · ' + e.target.value;
+    save();
+  });
+  out.addEventListener('focusin', (e) => { const row = e.target.closest('[data-id]'); if (row && S.sel !== row.dataset.id) { S.sel = row.dataset.id; document.querySelectorAll('.sub.sel, .step.sel').forEach((x) => x.classList.remove('sel')); row.classList.add('sel'); renderTimeline(); } });
+  out.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey && e.target.dataset.edit) { e.preventDefault(); e.target.blur(); if (S.resumeAfterType) { S.resumeAfterType = false; vid.play().catch(() => {}); setPlaying(true); } }
+    if (e.key === 'Escape') e.target.blur();
+  });
+  out.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.seek) { const m = byId(b.dataset.seek); S.sel = m.id; gotoTime(m.t + 0.001); render(); }
+    else if (b.dataset.settime) { const m = byId(b.dataset.settime); if (!S.clips.length) return toast('Open your clips first.'); m.t = now(); sortMarkers(); render(); save(); toast('Moved to ' + fmt(m.t) + '. Press the camera if the still should move too.'); }
+    else if (b.dataset.recap) { const m = byId(b.dataset.recap); if (!S.clips.length) return toast('Open your clips first.'); captureInto(m, now()); toast('Still re-captured at ' + fmt(now()) + '.'); }
+    else if (b.dataset.del) del(b.dataset.del);
+    else if (b.dataset.view) { const m = byId(b.dataset.view); if (m.still.url) { $('viewerImg').src = m.still.url; $('viewerCap').textContent = fmt(m.still.t) + ' · ' + (m.text || ''); $('viewer').hidden = false; } }
+  });
+  $('viewer').addEventListener('click', () => { $('viewer').hidden = true; });
+
+  /* ---------- timeline & transport ---------- */
+  const tl = $('timeline');
+  function tlTime(e) { const r = tl.getBoundingClientRect(); return Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1) * S.total; }
+  let dragging = false;
+  tl.addEventListener('pointerdown', (e) => {
+    if (!S.total) return;
+    const mk = e.target.closest('[data-mk]');
+    if (mk) { S.sel = mk.dataset.mk; gotoTime(byId(S.sel).t + 0.001); render(); const row = document.querySelector('.outline [data-id="' + S.sel + '"]'); if (row) row.scrollIntoView({ block: 'nearest' }); return; }
+    dragging = true; tl.setPointerCapture(e.pointerId); gotoTime(tlTime(e));
+  });
+  tl.addEventListener('pointermove', (e) => { if (dragging) gotoTime(tlTime(e)); });
+  tl.addEventListener('pointerup', () => { dragging = false; });
+  $('playBtn').addEventListener('click', togglePlay);
+  $('back1').addEventListener('click', () => gotoTime(now() - 1));
+  $('fwd1').addEventListener('click', () => gotoTime(now() + 1));
+  $('backF').addEventListener('click', () => { vid.pause(); setPlaying(false); gotoTime(now() - FRAME, false); });
+  $('fwdF').addEventListener('click', () => { vid.pause(); setPlaying(false); gotoTime(now() + FRAME, false); });
+  function jumpMarker(dir) { const t = now(); const list = dir > 0 ? S.markers.filter((m) => m.t > t + 0.05) : S.markers.filter((m) => m.t < t - 0.3).reverse(); const m = list[0]; if (m) { S.sel = m.id; gotoTime(m.t + 0.001); render(); const row = document.querySelector('.outline [data-id="' + m.id + '"]'); if (row) row.scrollIntoView({ block: 'nearest' }); } }
+  $('prevMk').addEventListener('click', () => jumpMarker(-1));
+  $('nextMk').addEventListener('click', () => jumpMarker(1));
+  $('rate').addEventListener('change', () => { vid.playbackRate = +$('rate').value; });
+  $('addStep').addEventListener('click', () => markHere('step'));
+  $('addSub').addEventListener('click', () => markHere('sub'));
+  $('recap').addEventListener('click', () => { const m = selectedOrCurrent(); if (!m) return toast('Select a sub-step first.'); if (!S.clips.length) return toast('Open your clips first.'); captureInto(m, now()); toast('Still for ' + (m.text ? '“' + m.text.slice(0, 40) + '”' : 'this step') + ' re-captured.'); });
+  document.addEventListener('keydown', (e) => {
+    if (e.target.closest('input, textarea, select') || e.metaKey || e.ctrlKey || e.altKey) return;
+    const k = e.key;
+    if (k === ' ') { if (e.target.closest('button')) return; e.preventDefault(); togglePlay(); }
+    else if (k === 'a' || k === 'A') { e.preventDefault(); markHere('sub'); }
+    else if (k === 's' || k === 'S') { e.preventDefault(); markHere('step'); }
+    else if (k === 'c' || k === 'C') { e.preventDefault(); $('recap').click(); }
+    else if (k === 'ArrowLeft') { e.preventDefault(); gotoTime(now() - (e.shiftKey ? 5 : 1)); }
+    else if (k === 'ArrowRight') { e.preventDefault(); gotoTime(now() + (e.shiftKey ? 5 : 1)); }
+    else if (k === ',') { vid.pause(); setPlaying(false); gotoTime(now() - FRAME, false); }
+    else if (k === '.') { vid.pause(); setPlaying(false); gotoTime(now() + FRAME, false); }
+    else if (k === 'ArrowUp') { e.preventDefault(); jumpMarker(-1); }
+    else if (k === 'ArrowDown') { e.preventDefault(); jumpMarker(1); }
+    else if (k === 'Escape') $('viewer').hidden = true;
+  });
+  let lastCur = null;
+  (function tick() {
+    const t = now();
+    $('time').textContent = fmt(t) + ' / ' + fmt(S.total);
+    if (S.total) $('head').style.left = (t / S.total * 100) + '%';
+    const c = currentMarker();
+    if (c !== lastCur) {
+      lastCur = c;
+      document.querySelectorAll('.sub.now').forEach((x) => x.classList.remove('now'));
+      if (c) { const row = document.querySelector('.sub[data-id="' + c.id + '"]'); if (row) { row.classList.add('now'); if (S.playing && !out.contains(document.activeElement)) row.scrollIntoView({ block: 'nearest' }); } }
+      const chip = $('chip'); chip.hidden = !c || !S.clips.length; if (c) chip.textContent = (c.kind === 'step' ? 'Step: ' : '') + (c.text || '(no text yet)');
+    }
+    requestAnimationFrame(tick);
+  })();
+
+  /* ---------- drop ---------- */
+  const vp = $('vidPanel');
+  ['dragenter', 'dragover'].forEach((ev) => vp.addEventListener(ev, (e) => { e.preventDefault(); vp.classList.add('drop'); }));
+  ['dragleave', 'drop'].forEach((ev) => vp.addEventListener(ev, () => vp.classList.remove('drop')));
+  vp.addEventListener('drop', (e) => { e.preventDefault(); const f = [...e.dataTransfer.files].filter((x) => /^video\//.test(x.type) || /\.(mov|mp4|m4v|webm)$/i.test(x.name)); if (f.length) openClips(f); });
+  $('inClips').addEventListener('change', (e) => { if (e.target.files.length) openClips(e.target.files); e.target.value = ''; });
+
+  /* ---------- lesson files ---------- */
+  const stillFiles = {}; // basename -> object URL (from "Add stills")
+  function applyLesson(L, base = '') {
+    $('fTitle').value = L.title || ''; $('fSlug').value = L.slug || L.id || ''; $('fSummary').value = L.summary || L.subtitle || '';
+    S.links = (L.links || []).map((l) => ({ to: l.to, kind: l.kind || 'next' })); S.slugTouched = true; renderLinks(); echoSlug();
+    S.jsonSegments = (L.segments || []).map((s) => s.duration);
+    const offs = []; let acc = 0; S.jsonSegments.forEach((d) => { offs.push(acc); acc += d; });
+    S.markers = [];
+    (L.steps || []).forEach((st) => {
+      const o = offs[st.segment || 0] || 0;
+      const first = (st.subs && st.subs[0]) ? st.subs[0].t : 0;
+      S.markers.push({ id: uid(), kind: 'step', t: o + Math.min(0, first), text: st.title || '', still: { t: o + Math.min(0, first), url: null, path: st.startStill ? base + st.startStill : null } });
+      (st.subs || []).forEach((sb) => S.markers.push({ id: uid(), kind: 'sub', t: o + sb.t, text: sb.text || '', still: { t: o + (sb.stillT ?? sb.t), url: null, path: sb.still ? base + sb.still : null } }));
+    });
+    S.markers.forEach((m) => { if (m.still.path) { const b = m.still.path.split('/').pop(); m.still.url = stillFiles[b] || m.still.path; } });
+    sortMarkers(); if (!S.clips.length) computeOffsets(); S.sel = null; render(); save();
+  }
+  $('inJson').addEventListener('change', async (e) => {
+    const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+    try {
+      const L = JSON.parse(await f.text());
+      if (!L.steps) throw new Error('no steps');
+      applyLesson(L);
+      const missing = S.markers.filter((m) => m.still.path && !stillFiles[m.still.path.split('/').pop()]).length;
+      toast('Loaded ' + f.name + '.' + (missing ? ' Add its stills, or open its clips to re-capture them.' : ''));
+      if (S.clips.length) S.markers.forEach((m) => { if (!m.still.url || m.still.url === m.still.path) captureInto(m, m.still.t); });
+    } catch (err) { toast('That file is not a lesson file (it needs a "steps" list).'); }
+  });
+  $('inStills').addEventListener('change', (e) => {
+    [...e.target.files].forEach((f) => { stillFiles[f.name] = URL.createObjectURL(f); });
+    let hit = 0;
+    S.markers.forEach((m) => { if (m.still.path) { const u = stillFiles[m.still.path.split('/').pop()]; if (u) { m.still.url = u; hit++; } } });
+    e.target.value = ''; render(); toast('Matched ' + hit + ' stills to the outline.');
+  });
+
+  function buildLesson() {
+    const slug = slugify($('fSlug').value) || slugify($('fTitle').value) || 'new-lesson';
+    const durations = S.clips.length ? S.clips.map((c) => +c.duration.toFixed(3)) : (S.jsonSegments || [S.total]);
+    const offs = []; let acc = 0; durations.forEach((d) => { offs.push(acc); acc += d; });
+    const seg = (g) => { let i = 0; while (i + 1 < offs.length && g >= offs[i + 1] - 0.25) i++; return i; };
+    const files = [];
+    const steps = structure().map((st, si) => {
+      const s = seg(st.m.t), o = offs[s];
+      const startName = 'stills/s' + (si + 1) + '-0.jpg';
+      files.push({ name: startName, m: st.m });
+      return {
+        id: 's' + (si + 1), title: st.m.text || 'Step ' + (si + 1), segment: s, startStill: startName,
+        subs: st.subs.map((m, ui) => {
+          const name = 'stills/s' + (si + 1) + '-' + (ui + 1) + '.jpg';
+          files.push({ name, m });
+          return { t: +(m.t - o).toFixed(2), text: m.text, still: name, stillT: +(m.still.t - o).toFixed(2) };
+        })
+      };
+    });
+    const lesson = { format: 'glitchn-lesson/2', slug, title: $('fTitle').value.trim() || 'Untitled lesson', summary: $('fSummary').value.trim(), status: 'draft',
+      links: S.links.filter((l) => l.to && l.to !== slug),
+      segments: durations.map((d, i) => ({ src: 'video/part-' + (i + 1) + '.mp4', duration: d })), steps };
+    return { lesson, files };
+  }
+  const PAGE = (title) => '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<title>' + esc(title) + " · Glitch'n</title>\n" +
+    '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
+    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&display=swap">\n' +
+    '<link rel="stylesheet" href="../../player/player.css">\n</head>\n<body>\n<div id="glitchn-player"></div>\n<script src="../../player/player.js"><' + '/script>\n</body>\n</html>\n';
+  async function stillBlob(m) {
+    if (m.still.blob) return m.still.blob;
+    if (m.still.url) { try { const r = await fetch(m.still.url); if (r.ok) return await r.blob(); } catch (e) {} }
+    if (S.clips.length) return captureAt(m.still.t);
+    return null;
+  }
+  async function thumbOf(blob) {
+    const bmp = await createImageBitmap(blob); const c = document.createElement('canvas'); c.width = 320; c.height = 180;
+    c.getContext('2d').drawImage(bmp, 0, 0, 320, 180); return new Promise((r) => c.toBlob(r, 'image/jpeg', 0.78));
+  }
+  let dlPromise = null;
+  function getDl() { if (!dlPromise) dlPromise = (window.claude && window.claude.use) ? window.claude.use('downloads').catch(() => null) : Promise.resolve(null); return dlPromise; }
+  async function offer(filename, blob) {
+    const dl = await getDl();
+    if (dl) {
+      try { await dl.save({ filename, data: blob }); toast('Saved ' + filename + '.'); return; }
+      catch (e) { if (e && e.code === 'declined') { toast('Save cancelled.'); return; } if (e && e.code === 'rate_limited') { toast('A save is already waiting for your answer.'); return; } }
+    }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+    toast('Saving ' + filename + '…');
+  }
+  $('saveJson').addEventListener('click', () => { const { lesson } = buildLesson(); if (!lesson.steps.length) return toast('There are no steps to save yet.'); offer('lesson.json', new Blob([JSON.stringify(lesson, null, 1)], { type: 'application/json' })); });
+  $('exportZip').addEventListener('click', async () => {
+    if (!window.JSZip) return toast('The zip library did not load. Check your internet connection and reload.');
+    const { lesson, files } = buildLesson(); if (!lesson.steps.length) return toast('There are no steps to export yet.');
+    const zip = new JSZip(); const root = zip.folder(lesson.slug);
+    root.file('lesson.json', JSON.stringify(lesson, null, 1));
+    root.file('index.html', PAGE(lesson.title));
+    let missing = 0, n = 0;
+    toast('Gathering ' + files.length + ' stills…');
+    for (const f of files) {
+      const b = await stillBlob(f.m);
+      if (!b) { missing++; continue; }
+      root.file(f.name, b); root.file(f.name.replace(/^stills\//, 'thumbs/'), await thumbOf(b)); n++;
+    }
+    root.file('README.txt', "Glitch'n lesson: " + lesson.title + '\n\nThis folder is one lesson. Its address is lessons/' + lesson.slug + '/\n\n' +
+      'lesson.json  steps, sub-steps, timestamps and links to other lessons\nindex.html   the lesson page (it loads the shared player)\nstills/      full-size stills\nthumbs/      small stills for the film strip\n\n' +
+      'To publish it:\n1. Put this folder in the site\'s lessons/ folder.\n2. Make the web videos into video/ inside it, in order, named ' + lesson.segments.map((s) => s.src.split('/').pop()).join(', ') + ':\n   bash tools/encode_clips.sh lessons/' + lesson.slug + '/video clip1.mov clip2.mov ...\n' +
+      '3. Run python3 tools/build_index.py so the home page and the map include it.\n');
+    const blob = await zip.generateAsync({ type: 'blob' });
+    await offer(lesson.slug + '.zip', blob);
+    if (missing) toast(missing + ' stills had no image and were left out. Open the clips and export again.');
+  });
+
+  /* ---------- autosave (this browser only) ---------- */
+  let saveTimer;
+  function save() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      const plain = S.markers.map((m) => ({ kind: m.kind, t: m.t, text: m.text, stillT: m.still.t, path: m.still.path || null }));
+      ls.set('glitchn-editor-draft', { v: 2, at: Date.now(), slug: $('fSlug').value, title: $('fTitle').value, summary: $('fSummary').value, links: S.links, slugTouched: S.slugTouched, segments: S.jsonSegments, clips: S.clips.map((c) => c.name), markers: plain });
+    }, 400);
+  }
+  ['fTitle', 'fSlug', 'fSummary'].forEach((id) => $(id).addEventListener('input', save));
+  function echoSlug() { $('slugEcho').textContent = slugify($('fSlug').value) || '…'; }
+  $('fTitle').addEventListener('input', () => { if (!S.slugTouched) { $('fSlug').value = slugify($('fTitle').value); echoSlug(); } });
+  $('fSlug').addEventListener('input', () => { S.slugTouched = true; echoSlug(); });
+  $('fSlug').addEventListener('change', () => { $('fSlug').value = slugify($('fSlug').value); echoSlug(); save(); });
+  function renderLinks() {
+    $('linkList').innerHTML = S.links.map((l, i) => '<span class="link-chip">' + esc(l.to) + ' <em>' + esc(l.kind) + '</em><button type="button" data-unlink="' + i + '" aria-label="Remove link to ' + esc(l.to) + '">×</button></span>').join('');
+  }
+  $('linkList').addEventListener('click', (e) => { const b = e.target.closest('[data-unlink]'); if (b) { S.links.splice(+b.dataset.unlink, 1); renderLinks(); save(); } });
+  function addLink() { const to = slugify($('linkTo').value); if (!to) return; if (!S.links.some((l) => l.to === to)) S.links.push({ to, kind: $('linkKind').value }); $('linkTo').value = ''; renderLinks(); save(); }
+  $('linkAdd').addEventListener('click', addLink);
+  $('linkTo').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); addLink(); } });
+  fetch(INDEX_URL).then((r) => r.json()).then((idx) => {
+    $('slugList').innerHTML = [...(idx.lessons || []), ...(idx.planned || [])].map((l) => '<option value="' + esc(l.slug) + '">' + esc(l.title) + '</option>').join('');
+  }).catch(() => {});
+  function restoreDraft(d) {
+    $('fTitle').value = d.title || ''; $('fSlug').value = d.slug || d.id || ''; $('fSummary').value = d.summary || d.subtitle || ''; S.links = d.links || []; S.slugTouched = !!d.slugTouched || !!d.slug; renderLinks(); echoSlug();
+    S.jsonSegments = d.segments || null;
+    S.markers = d.markers.map((p) => ({ id: uid(), kind: p.kind, t: p.t, text: p.text, still: { t: p.stillT, url: p.path || null, path: p.path } }));
+    sortMarkers(); if (!S.clips.length) computeOffsets(); render();
+    banner(d.clips && d.clips.length && !S.clips.length ? 'Draft restored. Open the same clips (' + esc(d.clips.slice(0, 3).join(', ')) + (d.clips.length > 3 ? '…' : '') + ') to see the video and re-capture stills. <button class="btn" id="dismiss">OK</button>' : '');
+    const x = $('dismiss'); if (x) x.onclick = () => banner('');
+  }
+
+  /* ---------- start: last draft, else the Day 1 example published next to this page ---------- */
+  async function startUp() {
+    const d = ls.get('glitchn-editor-draft');
+    if (d && d.markers && d.markers.length) {
+      restoreDraft(d);
+      if (EX) { try { const L = await (await fetch(EX + 'lesson.json')).json(); if (L.slug === d.slug) { S.exampleSegs = L.segments.map((x) => new URL(x.src, new URL(EX + 'lesson.json', location.href)).href); await loadExampleClips(true); } } catch (e) {} }
+      return;
+    }
+    try {
+      if (!EX) throw new Error('no example');
+      const L = await (await fetch(EX + 'lesson.json')).json();
+      applyLesson(L, EX);
+      S.exampleSegs = L.segments.map((x) => new URL(x.src, new URL(EX + 'lesson.json', location.href)).href);
+      await loadExampleClips(false);
+      banner('<span><b>“' + esc(L.title) + '” loaded</b> with its video, so you can fix its step text and timing. To make a new lesson, start a blank one.</span><button class="btn" id="newLesson">Start a blank lesson</button>');
+      $('newLesson').onclick = blankLesson;
+    } catch (e) { render(); echoSlug(); }
+  }
+  function blankLesson() {
+    S.markers = []; S.clips = []; S.jsonSegments = null; S.links = []; S.slugTouched = false; computeOffsets();
+    vid.removeAttribute('src'); vid.load(); S.seg = -1; $('empty').hidden = false;
+    $('fTitle').value = ''; $('fSlug').value = ''; $('fSummary').value = ''; renderLinks(); echoSlug(); banner(''); render(); save(); $('fTitle').focus();
+  }
+  async function loadExampleClips(quiet) {
+    if (!S.exampleSegs || !S.exampleSegs.length) return;
+    const files = S.exampleSegs.map((url) => ({ name: url.split('/').pop(), url }));
+    try { const r = await fetch(files[0].url, { method: 'HEAD' }); if (!r.ok) return; } catch (e) { return; }
+    await openClips(files, { autoSteps: false });
+    if (S.clips.length && quiet) banner('');
+    if (!quiet) toast('Example video loaded.');
+  }
+  $('inClips').addEventListener('click', () => {
+    if (S.markers.length && S.clips.length) banner('Opening new clips keeps this outline and its times. To start fresh, use “Start a blank lesson” first. <button class="btn" id="blank2">Start a blank lesson</button>');
+    const b = $('blank2'); if (b) b.onclick = blankLesson;
+  });
+  startUp();
+})();
+</script>
+
+</body>
+</html>

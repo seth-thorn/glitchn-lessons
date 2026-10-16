@@ -1,0 +1,53 @@
+{
+ "format": "glitchn-planned/1",
+ "note": "Lessons that exist as video but aren't in the player yet. Their slugs are provisional until published.",
+ "planned": [
+  {
+   "slug": "day-2-material",
+   "title": "Day 2 material",
+   "summary": "One slow oscillator, two slow oscillators, Blade Runner, Radio Amor, 4040 drummer, 4040 reset, voltage starving.",
+   "status": "planned",
+   "origin": "Five-day course, Day 2",
+   "links": [
+    {
+     "to": "day-3-material",
+     "kind": "next"
+    }
+   ]
+  },
+  {
+   "slug": "day-3-material",
+   "title": "Day 3 material",
+   "summary": "Slow and fast oscillators, the 4021 and LEDs, repetitive and generative 4021 drummers, microsound, glitch as musical structure.",
+   "status": "planned",
+   "origin": "Five-day course, Day 3",
+   "links": [
+    {
+     "to": "day-4-material",
+     "kind": "next"
+    }
+   ]
+  },
+  {
+   "slug": "day-4-material",
+   "title": "Day 4 material",
+   "summary": "Two slow oscillators, 4051 LEDs, a third oscillator, stepped low-pass clicks and tones, stepped band-pass tones.",
+   "status": "planned",
+   "origin": "Five-day course, Day 4",
+   "links": [
+    {
+     "to": "day-5-material",
+     "kind": "next"
+    }
+   ]
+  },
+  {
+   "slug": "day-5-material",
+   "title": "Day 5 material",
+   "summary": "Three oscillators, a diode network, an adjustable high-pass filter, voltage starving, static, strange things.",
+   "status": "planned",
+   "origin": "Five-day course, Day 5",
+   "links": []
+  }
+ ]
+}
