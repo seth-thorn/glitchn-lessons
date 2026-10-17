@@ -104,6 +104,7 @@
     <section class="tv-wrap" aria-label="${t('tutorialVideo')}">
       <div class="tv panel" id="tv">
         <span class="ant" aria-hidden="true"><i class="rod l"></i><i class="rod r"></i><i class="base"></i></span>
+        <span class="deco" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
         <div class="screen idle" id="screen">
           <video id="vA" class="on" playsinline preload="auto"></video>
           <video id="vB" playsinline preload="auto"></video>
@@ -441,6 +442,7 @@
     }
 
     /* ---------- render loop ---------- */
+    const appEl = $('app');
     function render(force) {
       const tm = S.switching ? S.lastT : now();
       S.lastT = tm;
@@ -448,6 +450,10 @@
       const pct = tm / total * 100;
       $('fill').style.width = pct + '%';
       $('knob').style.left = pct + '%';
+      // for the styles: how far through the lesson we are (0–1), and whether it's playing
+      const played = (tm / total).toFixed(3);
+      if (played !== S.playedVar) { S.playedVar = played; appEl.style.setProperty('--played', played); }
+      if (S.playing !== S.playingClass) { S.playingClass = S.playing; appEl.classList.toggle('is-playing', S.playing); }
       $('time').textContent = fmt(tm) + ' / ' + fmt(total);
       seekEl.setAttribute('aria-valuetext', t('of', { a: fmt(tm), b: fmt(total) }));
       $('progPct').textContent = Math.round(pct) + '%';

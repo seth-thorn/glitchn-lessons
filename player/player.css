@@ -97,6 +97,7 @@ h1 .sub { display: block; font-weight: 600; font-stretch: 100%; font-size: .44em
 .divider { width: 2.5px; height: 26px; background: currentColor; border-radius: 2px; opacity: .9; }
 .time { font-family: var(--mono); font-size: 14px; font-weight: 600; margin-left: 6px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .grow { flex: 1; min-width: 0; }
+.deco { display: none; } /* a spare decoration slot inside the TV; styles switch it on and draw in it */
 
 .tv:fullscreen { border-radius: 0; display: flex; flex-direction: column; justify-content: center; padding: 18px 24px; }
 .tv:fullscreen .screen { width: min(100%, calc((100vh - 120px) * 16 / 9)); margin: 0 auto; }
@@ -321,3 +322,14 @@ body { margin: 0; }
   .ctl.dial .dial-face { display: none; }
   .ctl.dial { padding: 0 8px !important; }
 }
+
+/* ---------- TV comes alive: a power light on the cabinet glows while the video plays, and the antenna sways a little ---------- */
+:root[data-style="tv"] .tv .deco { display: block; position: absolute; top: 7px; right: 26px; width: 12px; height: 12px; pointer-events: none; }
+:root[data-style="tv"] .tv .deco i { display: none; }
+:root[data-style="tv"] .tv .deco i:first-child { display: block; width: 100%; height: 100%; border-radius: 50%; background: #5A1E1C; border: 2px solid var(--ink); }
+:root[data-style="tv"] .is-playing .tv .deco i:first-child { background: #FF4B3E; box-shadow: 0 0 8px 2px rgba(255, 75, 62, .75); }
+:root[data-style="tv"] .is-playing .ant .rod.l { animation: tv-sway-l 3.2s ease-in-out infinite alternate; }
+:root[data-style="tv"] .is-playing .ant .rod.r { animation: tv-sway-r 3.6s ease-in-out infinite alternate; }
+@keyframes tv-sway-l { from { transform: rotate(-144deg); } to { transform: rotate(-138deg); } }
+@keyframes tv-sway-r { from { transform: rotate(-36deg); } to { transform: rotate(-43deg); } }
+@media (prefers-reduced-motion: reduce) { .ant .rod { animation: none !important; } }

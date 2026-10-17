@@ -59,14 +59,16 @@ To add another language later, add its column to the two interface tables and a 
 
 Every page has a **Style** menu that changes the page's whole personality, not just its colours. The choice is remembered across pages, and a link can force one with `?style=treehouse` (for example).
 
-- **TV** (the default): the video sits in a chunky television with an antenna, feet, curved glass and a speed dial.
-- **Gadget**: quiet, precise and tactile, after Dieter Rams's devices for Braun: warm greys, hairlines, round buttons and one orange accent. (It was called "Rams" at first; old links with `?style=rams` still work.)
-- **Solar Punk**: a hopeful green future: sunlit sky, frosted-glass panels with leaf-shaped corners, a solar panel on the screen and a vine growing over it.
-- **Treehouse**: a clubhouse in the leaves: wooden plank panels with nails, the screen hung from a branch by ropes, steps on paper notes.
+- **TV** (the default): the video sits in a chunky television with an antenna, feet, curved glass and a speed dial. While it plays, a power light glows and the antenna sways.
+- **Gadget**: quiet, precise and tactile, after Dieter Rams's devices for Braun: warm greys, hairlines, round buttons and one orange accent. A radio-style tuning scale above the screen has a needle that moves through the lesson. (It was called "Rams" at first; old links with `?style=rams` still work.)
+- **Solar Punk**: a cozy retro-future workshop full of plants: cream 1970s consoles, a CRT monitor with a radar dial, LED readouts and a level meter that come alive while the video plays, steps on green-bar printout paper, a radar-screen map, and a rug on the floor.
+- **Treehouse**: a clubhouse in the leaves: wooden plank panels with nails, the screen hung from a branch by ropes with string lights, steps on paper notes. A little bird hops along the branch as the lesson plays.
 
 The colour swatches work in every style: in TV they paint the cabinet, in Gadget and Solar Punk they change the accent, and in Treehouse they paint the wood.
 
 **Where styles live:** TV is part of `player/player.css`. Each other style is one file in `styles/` (`gadget.css`, `solarpunk.css`, `treehouse.css`) that styles both the lesson player and the home page. `styles/all.css` loads them all, along with their fonts.
+
+**Things a style can use:** the player adds the class `is-playing` to `.app` while the video plays, sets `--played` (0 to 1) on `.app` as it goes, and has a spare decoration slot `.deco` (five empty `<i>` elements) inside the TV. Moving decorations stop for people who ask their device for reduced motion. The drawings are SVG pictures written into the CSS; their sources are in `tools/style_art.py`.
 
 **To add a style** (Cartoon, say):
 1. Copy a file in `styles/` to `styles/cartoon.css` and change `data-style="…"` throughout. Start with the colour and font tokens at the top, then restyle the parts.
