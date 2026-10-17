@@ -28,7 +28,7 @@
       keyPlay: 'play / pause', keySeconds: '5 seconds', keySub: 'previous / next sub-step', keyMute: 'mute',
       startingPoint: 'Starting point', finishedResult: 'Finished result of {n}', beforeStep: 'Before step {n}: ', boardAt: 'Breadboard at {n}: {t}',
       done: 'done ✓', watched: 'Watched {x} of {y} sub-steps', stepOf: 'Step <b>{n}</b> of {m} · {t}', goToStep: 'Go to step {n}: {t}', of: '{a} of {b}',
-      startHere: 'Start here', requires: 'Requires', partsList: 'Parts list', partsNote: 'Everything this lesson uses, at most at once.', kitPart: 'Kit part', oscillators1: '1 oscillator', oscillatorsN: '{n} oscillators', learn: 'You’ll learn', difficulty: 'Difficulty', moreSoon: 'More soon', youAreHere: 'You’re in this lesson.', notReady: '“{t}” isn’t ready yet.',
+      startHere: 'Start here', words: 'Words', wordsSimple: 'Simple', wordsTech: 'Technical', wordsSimpleTitle: 'Plain words for the parts and steps', wordsTechTitle: 'The real names of the parts', requires: 'Requires', partsList: 'Parts list', partsNote: 'Everything this lesson uses, at most at once.', kitPart: 'Kit part', oscillators1: '1 oscillator', oscillatorsN: '{n} oscillators', learn: 'You’ll learn', difficulty: 'Difficulty', moreSoon: 'More soon', youAreHere: 'You’re in this lesson.', notReady: '“{t}” isn’t ready yet.',
       noFullScreen: 'Full screen is not available here.', videoError: 'This video could not load. Check that {f} is next to the page.',
       notFound: 'Lesson not found', notFoundBody: '<b>The lesson file did not load.</b> Each lesson folder needs a lesson.json beside its page.',
       untranslated: '', machine: '',
@@ -45,7 +45,7 @@
       keyPlay: 'reproducir / pausar', keySeconds: '5 segundos', keySub: 'subpaso anterior / siguiente', keyMute: 'silenciar',
       startingPoint: 'Punto de partida', finishedResult: 'Resultado terminado de {n}', beforeStep: 'Antes del paso {n}: ', boardAt: 'Protoboard en {n}: {t}',
       done: 'listo ✓', watched: 'Viste {x} de {y} subpasos', stepOf: 'Paso <b>{n}</b> de {m} · {t}', goToStep: 'Ir al paso {n}: {t}', of: '{a} de {b}',
-      startHere: 'Empieza aquí', requires: 'Requiere', partsList: 'Lista de piezas', partsNote: 'Todo lo que usa esta lección, como máximo a la vez.', kitPart: 'Pieza del kit', oscillators1: '1 oscilador', oscillatorsN: '{n} osciladores', learn: 'Aprenderás', difficulty: 'Dificultad', moreSoon: 'Pronto habrá más', youAreHere: 'Ya estás en esta lección.', notReady: '“{t}” todavía no está lista.',
+      startHere: 'Empieza aquí', words: 'Palabras', wordsSimple: 'Sencillo', wordsTech: 'Técnico', wordsSimpleTitle: 'Palabras sencillas para las piezas y los pasos', wordsTechTitle: 'Los nombres reales de las piezas', requires: 'Requiere', partsList: 'Lista de piezas', partsNote: 'Todo lo que usa esta lección, como máximo a la vez.', kitPart: 'Pieza del kit', oscillators1: '1 oscilador', oscillatorsN: '{n} osciladores', learn: 'Aprenderás', difficulty: 'Dificultad', moreSoon: 'Pronto habrá más', youAreHere: 'Ya estás en esta lección.', notReady: '“{t}” todavía no está lista.',
       noFullScreen: 'La pantalla completa no está disponible aquí.', videoError: 'Este video no se pudo cargar ({f}).',
       notFound: 'No se encontró la lección', notFoundBody: '<b>No se pudo cargar el archivo de la lección.</b> Cada carpeta de lección necesita un lesson.json junto a su página.',
       untranslated: 'Esta lección todavía no está traducida. Se muestra en inglés.', machine: 'Traducción automática',
@@ -61,6 +61,18 @@
   const LANG = pickLang();
   document.documentElement.lang = LANG;
   const t = (k, v) => String(UI[LANG][k] ?? UI.en[k] ?? k).replace(/\{(\w+)\}/g, (_, n) => (v && v[n] != null ? v[n] : ''));
+  /* ---------- words: Simple (plain words for kids, the default) or Technical (the real names of the parts) ----------
+     Simple text lives beside each lesson in lesson.simple.json: each technical English line with its simple
+     English and Spanish versions. A line without a simple version shows as it is. Choice order: ?words= in
+     the address, then the visitor's last choice, then Simple. */
+  const WORDS_LIST = ['simple', 'technical'];
+  function pickWords() {
+    const q = new URLSearchParams(location.search).get('words'); if (WORDS_LIST.includes(q)) return q;
+    try { const v = JSON.parse(localStorage.getItem('glitchn-words')); if (WORDS_LIST.includes(v)) return v; } catch (e) {}
+    return 'simple';
+  }
+  const WORDS = pickWords();
+  document.documentElement.dataset.words = WORDS;
   /* ---------- styles: whole looks for the page (colours, type, shapes, the TV itself) ----------
      TV is the default, in player.css. Each other style is a file in /styles (see styles/all.css).
      Choice order: ?style= in the address, then the visitor's last choice, then TV.
@@ -86,6 +98,7 @@
     </div>
     <div class="top-tools">
     <label class="style-pick"><span>${t('style')}</span><select id="styleSel">${STYLES.map((k) => '<option value="' + k + '"' + (k === STYLE ? ' selected' : '') + '>' + t('style_' + k) + '</option>').join('')}</select></label>
+    <div class="langs words" role="group" aria-label="${t('words')}">${WORDS_LIST.map((k) => '<button class="lang" data-words="' + k + '" title="' + t(k === 'simple' ? 'wordsSimpleTitle' : 'wordsTechTitle') + '" aria-pressed="' + (k === WORDS) + '">' + t(k === 'simple' ? 'wordsSimple' : 'wordsTech') + '</button>').join('')}</div>
     <div class="langs" role="group" aria-label="${t('language')}">${Object.entries(LANGS).map(([k, n]) => '<button class="lang" data-lang="' + k + '" lang="' + k + '" aria-pressed="' + (k === LANG) + '">' + n + '</button>').join('')}</div>
     </div>
   </header>
@@ -204,30 +217,45 @@
   const lessonAbs = new URL(LESSON_URL, location.href);
   // Switching language reloads the page in that language and returns to the same moment in the video.
   let currentTime = () => 0;
-  document.querySelectorAll('.lang').forEach((b) => b.addEventListener('click', () => {
+  document.querySelectorAll('.lang[data-lang]').forEach((b) => b.addEventListener('click', () => {
     if (b.dataset.lang === LANG) return;
     store.set('glitchn-lang', b.dataset.lang);
     try { sessionStorage.setItem('glitchn-resume', JSON.stringify({ path: location.pathname, t: currentTime() })); } catch (e) {}
     const u = new URL(location.href); u.searchParams.set('lang', b.dataset.lang); location.href = u.href;
   }));
+  // Switching words works the same way: reload with the other words, back at the same moment.
+  document.querySelectorAll('.lang[data-words]').forEach((b) => b.addEventListener('click', () => {
+    if (b.dataset.words === WORDS) return;
+    store.set('glitchn-words', b.dataset.words);
+    try { sessionStorage.setItem('glitchn-resume', JSON.stringify({ path: location.pathname, t: currentTime() })); } catch (e) {}
+    const u = new URL(location.href); u.searchParams.set('words', b.dataset.words); location.href = u.href;
+  }));
+  const simpleUrl = new URL(lessonAbs.pathname.replace(/lesson\.json$/, 'lesson.simple.json') + lessonAbs.search, lessonAbs).href;
   const translationUrl = new URL(lessonAbs.pathname.replace(/lesson\.json$/, 'lesson.' + LANG + '.json') + lessonAbs.search, lessonAbs).href;
   Promise.all([
     fetch(LESSON_URL).then((r) => { if (!r.ok) throw new Error(r.status + ' ' + LESSON_URL); return r.json(); }),
     fetch(INDEX_URL).then((r) => r.json()).catch(() => null),
-    LANG === 'en' ? Promise.resolve(null) : fetch(translationUrl).then((r) => (r.ok ? r.json() : null)).catch(() => null)
+    LANG === 'en' ? Promise.resolve(null) : fetch(translationUrl).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    WORDS === 'simple' ? fetch(simpleUrl).then((r) => (r.ok ? r.json() : null)).catch(() => null) : Promise.resolve(null)
   ])
-    .then(([lesson, idx, tr]) => start(translate(lesson, tr), idx))
+    .then(([lesson, idx, tr, simple]) => start(translate(lesson, tr, simple), idx))
     .catch((e) => { $('title').textContent = t('notFound'); $('app').insertAdjacentHTML('beforeend', '<div class="err">' + t('notFoundBody') + ' (' + esc(e.message) + ')</div>'); });
 
-  // Replace each English line with its translation when one exists.
-  function translate(L, tr) {
-    if (LANG === 'en') return L;
-    const note = $('langNote');
-    if (!tr || !tr.strings) { note.textContent = t('untranslated'); note.hidden = false; return L; }
-    const d = tr.strings, tx = (s) => (s && d[s]) || s;
-    L.title = tx(L.title); L.summary = tx(L.summary);
+  // Replace each English line with its simple version (in Simple mode) and/or its translation, when one exists.
+  // The title stays the same in both modes; only the language changes it.
+  function translate(L, tr, simple) {
+    const S = (simple && simple.strings) || {};
+    const d = (tr && tr.strings) || {};
+    const plain = (s) => (s && S[s] && S[s][LANG]) || null;
+    const tx = (s) => plain(s) || (LANG !== 'en' && s && d[s]) || s;
+    if (LANG !== 'en') L.title = (L.title && d[L.title]) || L.title;
+    L.summary = tx(L.summary);
     L.steps.forEach((st) => { st.title = tx(st.title); st.subs.forEach((sb) => { sb.text = tx(sb.text); }); });
-    if (tr.machine && !tr.reviewed) { note.textContent = t('machine'); note.title = tr.note || ''; note.hidden = false; }
+    if (LANG !== 'en') {
+      const note = $('langNote');
+      if (!tr || !tr.strings) { note.textContent = t('untranslated'); note.hidden = false; }
+      else if (tr.machine && !tr.reviewed) { note.textContent = t('machine'); note.title = tr.note || ''; note.hidden = false; }
+    }
     return L;
   }
 
@@ -235,7 +263,7 @@
   function renderFacts(me, IDX) {
     if (!me || !me.parts) return;
     const cat = (IDX && IDX.catalog) || {};
-    const label = (kind, k) => { const e = (cat[kind] || {})[k]; return e ? (e[LANG] || e.en) : k; };
+    const label = (kind, k) => { const e = (cat[kind] || {})[k]; if (!e) return k; const sp = WORDS === 'simple' && e.simple; return (sp && (sp[LANG] || sp.en)) || e[LANG] || e.en; };
     const titleOf = (s) => { const x = (IDX.lessons || []).find((l) => l.slug === s); return x ? ((x.i18n && x.i18n[LANG] && x.i18n[LANG].title) || x.title) : s; };
     const keep = new URLSearchParams(location.search).get('lang') ? '?lang=' + LANG : '';
     const bits = [];
@@ -254,7 +282,12 @@
     const order = Object.keys(cat.groups || {}).concat(['other']);
     $('partsBody').innerHTML = order.filter((g) => groups[g]).map((g) => (
       '<div class="parts-group"><h3>' + esc(label('groups', g)) + '</h3><ul>' +
-      groups[g].map(([k, q]) => { const e = (cat.parts || {})[k] || {}; return '<li><b class="qty">' + esc(q) + '</b><span class="pname">' + esc(e[LANG] || e.en || k) + (e.id ? '<small>' + esc(e.id) + '</small>' : '') + '</span></li>'; }).join('') +
+      groups[g].map(([k, q]) => {
+        const e = (cat.parts || {})[k] || {}, sp = WORDS === 'simple' && e.simple;
+        // Simple: a plain name and what the part is or does. Technical: the real name and the kit part number.
+        const name = sp ? (sp[LANG] || sp.en) : (e[LANG] || e.en || k), small = sp ? (sp['about_' + LANG] || sp.about_en) : e.id;
+        return '<li><b class="qty">' + esc(q) + '</b><span class="pname">' + esc(name) + (small ? '<small>' + esc(small) + '</small>' : '') + '</span></li>';
+      }).join('') +
       '</ul></div>')).join('');
     $('partsPanel').hidden = false;
   }

@@ -140,6 +140,7 @@ header > div { min-width: 0; }
     </div>
     <div class="tools">
       <label class="style-pick"><span id="styleLabel">Style</span><select id="styleSel"></select></label>
+      <div class="langs words" role="group" aria-label="Words" id="words"></div>
       <div class="langs" role="group" aria-label="Language" id="langs"></div>
     </div>
   </header>
@@ -174,12 +175,12 @@ header > div { min-width: 0; }
   const LANGS = { en: 'English', es: 'Español' };
   const UI = {
     en: { style: 'Style', style_tv: 'TV', style_clean: 'Clean', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', lessons: 'Lessons', intro: 'Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.',
-      startBuilding: 'Start building', fDifficulty: 'Difficulty', fChips: 'Chips', fOsc: 'Oscillators', fConcepts: 'Concepts', fClear: 'Show all', fToggle: 'Filter lessons', fNone: 'No lessons match these filters.', startHere: 'Start here', requires: 'Requires', oscN: '{n} osc.', loading: 'Loading lessons…', map: 'Map of lessons', mapAria: 'How the lessons connect', ready: 'Ready to build', coming: 'Coming', arrows: 'Arrows point to where a lesson leads.',
+      startBuilding: 'Start building', fDifficulty: 'Difficulty', fChips: 'Chips', fOsc: 'Oscillators', fConcepts: 'Concepts', fClear: 'Show all', fToggle: 'Filter lessons', fNone: 'No lessons match these filters.', startHere: 'Start here', words: 'Words', wordsSimple: 'Simple', wordsTech: 'Technical', wordsSimpleTitle: 'Plain words for the parts and steps', wordsTechTitle: 'The real names of the parts', requires: 'Requires', oscN: '{n} osc.', loading: 'Loading lessons…', map: 'Map of lessons', mapAria: 'How the lessons connect', ready: 'Ready to build', coming: 'Coming', arrows: 'Arrows point to where a lesson leads.',
       language: 'Language', steps: 'steps', subSteps: 'sub-steps', seeSteps: 'See the {n} steps', draft: 'Draft', comingSmall: 'coming', notReady: '“{t}” isn’t ready yet.', none: 'No lessons yet.',
       listError: '<b>The lesson list did not load.</b> It lives in lessons/index.json; run tools/build_index.py to make it.', title: "Glitch'n Lessons", machine: '',
       'kind_variation': 'variation', 'kind_related': 'related', 'kind_next day': 'next day', 'kind_revisited': 'revisited' },
     es: { style: 'Estilo', style_tv: 'Tele', style_clean: 'Limpio', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', lessons: 'Lecciones', intro: 'Arma circuitos de sonido en una protoboard, un pequeño paso a la vez. Cada lección muestra un video del armado junto a instrucciones paso a paso, con fotos de cerca que puedes ampliar y un mapa de a dónde ir después.',
-      startBuilding: 'Empieza a armar', fDifficulty: 'Dificultad', fChips: 'Chips', fOsc: 'Osciladores', fConcepts: 'Conceptos', fClear: 'Mostrar todas', fToggle: 'Filtrar lecciones', fNone: 'Ninguna lección coincide con estos filtros.', startHere: 'Empieza aquí', requires: 'Requiere', oscN: '{n} osc.', loading: 'Cargando lecciones…', map: 'Mapa de lecciones', mapAria: 'Cómo se conectan las lecciones', ready: 'Lista para armar', coming: 'Próximamente', arrows: 'Las flechas apuntan hacia donde lleva cada lección.',
+      startBuilding: 'Empieza a armar', fDifficulty: 'Dificultad', fChips: 'Chips', fOsc: 'Osciladores', fConcepts: 'Conceptos', fClear: 'Mostrar todas', fToggle: 'Filtrar lecciones', fNone: 'Ninguna lección coincide con estos filtros.', startHere: 'Empieza aquí', words: 'Palabras', wordsSimple: 'Sencillo', wordsTech: 'Técnico', wordsSimpleTitle: 'Palabras sencillas para las piezas y los pasos', wordsTechTitle: 'Los nombres reales de las piezas', requires: 'Requiere', oscN: '{n} osc.', loading: 'Cargando lecciones…', map: 'Mapa de lecciones', mapAria: 'Cómo se conectan las lecciones', ready: 'Lista para armar', coming: 'Próximamente', arrows: 'Las flechas apuntan hacia donde lleva cada lección.',
       language: 'Idioma', steps: 'pasos', subSteps: 'subpasos', seeSteps: 'Ver los {n} pasos', draft: 'Borrador', comingSmall: 'próximamente', notReady: '“{t}” todavía no está lista.', none: 'Todavía no hay lecciones.',
       listError: '<b>No se pudo cargar la lista de lecciones.</b>', title: 'Lecciones de Glitch’n', machine: 'Traducción automática',
       'kind_variation': 'variación', 'kind_related': 'relacionada', 'kind_next day': 'día siguiente', 'kind_revisited': 'repaso' }
@@ -198,8 +199,13 @@ header > div { min-width: 0; }
   let STYLE = (() => { const q = okStyle(new URLSearchParams(location.search).get('style')); if (q) return q; try { const v = okStyle(JSON.parse(localStorage.getItem('glitchn-style'))); if (v) return v; } catch (e) {} return 'tv'; })();
   document.documentElement.dataset.style = STYLE;
   const t = (k, v) => String(UI[LANG][k] ?? UI.en[k] ?? k).replace(/\{(\w+)\}/g, (_, n) => (v && v[n] != null ? v[n] : ''));
-  const keepLang = new URLSearchParams(location.search).get('lang') ? '?lang=' + LANG : '';
-  const loc = (x, f) => (x.i18n && x.i18n[LANG] && x.i18n[LANG][f]) || x[f];
+  // Words: Simple (plain words, the default) or Technical (the real names of the parts); same storage as the player.
+  const WORDS_LIST = ['simple', 'technical'];
+  const WORDS = (() => { const q = new URLSearchParams(location.search).get('words'); if (WORDS_LIST.includes(q)) return q; try { const v = JSON.parse(localStorage.getItem('glitchn-words')); if (WORDS_LIST.includes(v)) return v; } catch (e) {} return 'simple'; })();
+  document.documentElement.dataset.words = WORDS;
+  const keepLang = (() => { const q = new URLSearchParams(location.search), k = new URLSearchParams(); if (q.get('lang')) k.set('lang', LANG); if (q.get('words')) k.set('words', WORDS); const s = k.toString(); return s ? '?' + s : ''; })();
+  // a lesson's text in the chosen words and language: simple in this language, then simple English only for English, then the normal text
+  const loc = (x, f) => (WORDS === 'simple' && x.simple && x.simple[LANG] && x.simple[LANG][f]) || (x.i18n && x.i18n[LANG] && x.i18n[LANG][f]) || x[f];
   document.documentElement.lang = LANG; document.title = t('title');
   document.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = t(el.dataset.i18n); });
   document.querySelectorAll('[data-i18n-aria]').forEach((el) => el.setAttribute('aria-label', t(el.dataset.i18nAria)));
@@ -208,6 +214,13 @@ header > div { min-width: 0; }
   $('styleSel').innerHTML = STYLES.map((k) => '<option value="' + k + '"' + (k === STYLE ? ' selected' : '') + '>' + t('style_' + k) + '</option>').join('');
   $('styleSel').addEventListener('change', (e) => { STYLE = e.target.value; document.documentElement.dataset.style = STYLE; try { localStorage.setItem('glitchn-style', JSON.stringify(STYLE)); } catch (err) {} });
   $('langs').innerHTML = Object.entries(LANGS).map(([k, n]) => '<button class="lang" data-lang="' + k + '" lang="' + k + '" aria-pressed="' + (k === LANG) + '">' + n + '</button>').join('');
+  $('words').setAttribute('aria-label', t('words'));
+  $('words').innerHTML = WORDS_LIST.map((k) => '<button class="lang" data-words="' + k + '" title="' + t(k === 'simple' ? 'wordsSimpleTitle' : 'wordsTechTitle') + '" aria-pressed="' + (k === WORDS) + '">' + t(k === 'simple' ? 'wordsSimple' : 'wordsTech') + '</button>').join('');
+  $('words').addEventListener('click', (e) => {
+    const b = e.target.closest('.lang'); if (!b || b.dataset.words === WORDS) return;
+    try { localStorage.setItem('glitchn-words', JSON.stringify(b.dataset.words)); } catch (err) {}
+    const u = new URL(location.href); u.searchParams.set('words', b.dataset.words); location.href = u.href;
+  });
   $('langs').addEventListener('click', (e) => {
     const b = e.target.closest('.lang'); if (!b || b.dataset.lang === LANG) return;
     try { localStorage.setItem('glitchn-lang', JSON.stringify(b.dataset.lang)); } catch (err) {}
@@ -244,7 +257,9 @@ header > div { min-width: 0; }
   /* ---------- the fold-out list of a lesson's steps, each linking straight to that step ---------- */
   function outline(l) {
     if (!l.outline || !l.outline.length) return '';
-    const titles = (l.i18n && l.i18n[LANG] && l.i18n[LANG].outline) || [];
+    const plain = (WORDS === 'simple' && l.simple && l.simple[LANG] && l.simple[LANG].outline) || [];
+    const tech = (l.i18n && l.i18n[LANG] && l.i18n[LANG].outline) || [];
+    const titles = l.outline.map((o, i) => plain[i] || tech[i] || '');
     return '<details class="outline"><summary>' + esc(t('seeSteps', { n: l.outline.length })) + '</summary><ol>' +
       l.outline.map((o, i) => '<li><a href="' + lessonHref(l.slug) + '#step-' + (i + 1) + '">' +
         '<span class="pic">' + (o.thumb ? '<img data-src="lessons/' + esc(o.thumb) + '" alt="" width="320" height="180">' : '') + '</span>' +
@@ -252,7 +267,7 @@ header > div { min-width: 0; }
       '</ol></details>';
   }
   /* ---------- descriptors on cards, and filters (difficulty, chips, oscillators, concepts) ---------- */
-  const catLabel = (IDX, kind, k) => { const e = ((IDX && IDX.catalog) || {})[kind] && IDX.catalog[kind][k]; return e ? (e[LANG] || e.en) : k; };
+  const catLabel = (IDX, kind, k) => { const e = ((IDX && IDX.catalog) || {})[kind] && IDX.catalog[kind][k]; if (!e) return k; const sp = WORDS === 'simple' && e.simple; return (sp && (sp[LANG] || sp.en)) || e[LANG] || e.en; };
   function badges(l, IDX) {
     if (!l.difficulty) return '';
     const titleOf = (s) => { const x = (IDX.lessons || []).find((y) => y.slug === s); return x ? loc(x, 'title') : s; };

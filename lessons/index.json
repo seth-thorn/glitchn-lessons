@@ -1,6 +1,6 @@
 {
  "format": "glitchn-index/1",
- "generated": "2026-10-17T19:15:16+00:00",
+ "generated": "2026-10-17T21:44:56+00:00",
  "lessons": [
   {
    "slug": "blink-to-drum-machine",
@@ -98,6 +98,32 @@
       "Controlar la velocidad con una perilla",
       "Usar un botón como compuerta",
       "Agregar un filtro",
+      "Patrones de luz",
+      "Caja de ritmos"
+     ]
+    }
+   },
+   "simple": {
+    "en": {
+     "summary": "Build an oscillator that makes a light blink. Then grow it, step by step, into a drum machine.",
+     "outline": [
+      "Blink a light",
+      "Make some clicks",
+      "Use a knob to control speed",
+      "Use a button as a gate that lets sound through",
+      "Add a filter",
+      "Light patterns",
+      "Drum machine"
+     ]
+    },
+    "es": {
+     "summary": "Construye un oscilador que hace parpadear una luz. Luego conviértelo, paso a paso, en una caja de ritmos.",
+     "outline": [
+      "Haz parpadear una luz",
+      "Haz unos clics",
+      "Usa una perilla para controlar la velocidad",
+      "Usa un botón como compuerta que deja pasar el sonido",
+      "Agrega un filtro",
       "Patrones de luz",
       "Caja de ritmos"
      ]
@@ -209,6 +235,32 @@
       "Quitarle voltaje"
      ]
     }
+   },
+   "simple": {
+    "en": {
+     "summary": "Make slow and fast oscillators. Send a tone to an AM radio. Build the 4040 drummer again, this time with a reset. Then starve it of power to make glitches.",
+     "outline": [
+      "One slow oscillator",
+      "Two slow oscillators",
+      "Two fast oscillators (Blade Runner)",
+      "Radio Amor",
+      "4040 drummer again",
+      "4040 reset",
+      "Starving it of power"
+     ]
+    },
+    "es": {
+     "summary": "Arma osciladores lentos y rápidos. Envía un tono a una radio AM. Vuelve a armar la caja de ritmos con el chip 4040, esta vez con un reinicio. Luego quítale energía para crear fallas.",
+     "outline": [
+      "Un oscilador lento",
+      "Dos osciladores lentos",
+      "Dos osciladores rápidos (Blade Runner)",
+      "Radio Amor",
+      "Otra vez la caja de ritmos con el 4040",
+      "Reinicio del 4040",
+      "Quitarle energía"
+     ]
+    }
    }
   },
   {
@@ -314,6 +366,32 @@
       "El glitch como estructura musical"
      ]
     }
+   },
+   "simple": {
+    "en": {
+     "summary": "Use a slow and a fast oscillator to run the 4021 shift register. Make random light patterns, repeating and changing drum beats, microsound (tiny sounds), and glitches that shape music.",
+     "outline": [
+      "Build a slow oscillator and a fast oscillator",
+      "The 4021 chip and lights",
+      "A 4021 drummer that repeats",
+      "Microsound 1: tiny sounds",
+      "A 4021 drummer that keeps changing",
+      "Microsound 2: tiny sounds",
+      "Glitches that shape the music"
+     ]
+    },
+    "es": {
+     "summary": "Usa un oscilador lento y uno rápido para controlar el chip 4021 (un registro de desplazamiento). Haz patrones de luz al azar, ritmos de batería que se repiten y que cambian, microsonido (sonidos diminutos) y fallas que dan forma a la música.",
+     "outline": [
+      "Arma un oscilador lento y uno rápido",
+      "El chip 4021 y las luces",
+      "Una caja de ritmos que se repite, con el 4021",
+      "Microsonido 1: sonidos diminutos",
+      "Una caja de ritmos que siempre cambia, con el 4021",
+      "Microsonido 2: sonidos diminutos",
+      "Fallas que dan forma a la música"
+     ]
+    }
    }
   },
   {
@@ -412,6 +490,30 @@
       "Tonos con filtro pasabanda escalonado"
      ]
     }
+   },
+   "simple": {
+    "en": {
+     "summary": "Let two slow oscillators control the 4051 chip, which picks one path at a time. First they step through lights. Then they step a third oscillator through different filters.",
+     "outline": [
+      "Two slow oscillators",
+      "4051 lights",
+      "Third oscillator",
+      "Clicks, step by step, through filters that let low sounds through",
+      "Tones, step by step, through filters that let low sounds through",
+      "Tones, step by step, through filters that cut low and high sounds"
+     ]
+    },
+    "es": {
+     "summary": "Deja que dos osciladores lentos controlen el chip 4051, que elige un camino a la vez. Primero recorren unas luces. Luego pasan un tercer oscilador por distintos filtros, uno tras otro.",
+     "outline": [
+      "Dos osciladores lentos",
+      "Luces con el 4051",
+      "Tercer oscilador",
+      "Clics paso a paso por filtros que dejan pasar los sonidos graves",
+      "Tonos paso a paso por filtros que dejan pasar los sonidos graves",
+      "Tonos paso a paso por filtros que cortan los sonidos graves y agudos"
+     ]
+    }
    }
   },
   {
@@ -501,163 +603,337 @@
       "Cosas extrañas"
      ]
     }
+   },
+   "simple": {
+    "en": {
+     "summary": "Build three oscillators and join them with diodes. Shape them with an adjustable filter that lets high sounds through. Then explore starving it of power, static and strange sounds.",
+     "outline": [
+      "Three oscillators",
+      "Joining with diodes",
+      "Adjustable filter that lets high sounds through",
+      "Starving it of power",
+      "Static",
+      "Strange things"
+     ]
+    },
+    "es": {
+     "summary": "Arma tres osciladores y únelos con diodos. Dales forma con un filtro ajustable que deja pasar los sonidos agudos. Luego explora quitarle energía, la estática y sonidos extraños.",
+     "outline": [
+      "Tres osciladores",
+      "Unir con diodos",
+      "Filtro ajustable que deja pasar los sonidos agudos",
+      "Quitarle energía",
+      "Estática",
+      "Cosas extrañas"
+     ]
+    }
    }
   }
  ],
  "planned": [],
  "catalog": {
   "format": "glitchn-catalog/1",
-  "note": "Shared vocabulary for lessons: parts (from the kit list at glitchn.net/course), concepts and sounds. Lessons refer to these by key. Edit by hand; tools/build_index.py copies it into lessons/index.json.",
+  "note": "Shared vocabulary for lessons: parts (from the kit list at glitchn.net/course), concepts and sounds. Lessons refer to these by key. Edit by hand; tools/build_index.py copies it into lessons/index.json. \"simple\" holds the plain words shown in Simple mode (and, for parts, a short plain description).",
   "parts": {
    "40106": {
     "group": "chip",
     "en": "40106 chip (hex Schmitt trigger)",
     "es": "Chip 40106 (Schmitt trigger séxtuple)",
-    "id": "TI CD40106BE"
+    "id": "TI CD40106BE",
+    "simple": {
+     "en": "40106 chip",
+     "es": "Chip 40106",
+     "about_en": "A black chip with 14 legs. It makes the oscillators.",
+     "about_es": "Un chip negro con 14 patas. Hace los osciladores."
+    }
    },
    "4040": {
     "group": "chip",
     "en": "4040 chip (12-stage counter)",
     "es": "Chip 4040 (contador de 12 etapas)",
-    "id": "TI CD4040BE"
+    "id": "TI CD4040BE",
+    "simple": {
+     "en": "4040 chip",
+     "es": "Chip 4040",
+     "about_en": "A black chip with 16 legs. It counts.",
+     "about_es": "Un chip negro con 16 patas. Cuenta."
+    }
    },
    "4021": {
     "group": "chip",
     "en": "4021 chip (8-stage shift register)",
     "es": "Chip 4021 (registro de desplazamiento de 8 etapas)",
-    "id": "TI CD4021BE"
+    "id": "TI CD4021BE",
+    "simple": {
+     "en": "4021 chip",
+     "es": "Chip 4021",
+     "about_en": "A black chip with 16 legs. It passes on-and-off patterns along.",
+     "about_es": "Un chip negro con 16 patas. Pasa patrones de encendido y apagado de un lugar a otro."
+    }
    },
    "4051": {
     "group": "chip",
     "en": "4051 chip (8-channel multiplexer)",
     "es": "Chip 4051 (multiplexor de 8 canales)",
-    "id": "TI CD4051BE"
+    "id": "TI CD4051BE",
+    "simple": {
+     "en": "4051 chip",
+     "es": "Chip 4051",
+     "about_en": "A black chip with 16 legs. It picks one of 8 paths at a time.",
+     "about_es": "Un chip negro con 16 patas. Elige uno de 8 caminos a la vez."
+    }
    },
    "pot": {
     "group": "control",
     "en": "Potentiometer (knob)",
     "es": "Potenciómetro (perilla)",
-    "id": "Adafruit #356"
+    "id": "Adafruit #356",
+    "simple": {
+     "en": "Knob",
+     "es": "Perilla",
+     "about_en": "A small knob you turn to change speed or sound.",
+     "about_es": "Una perilla pequeña que giras para cambiar la velocidad o el sonido."
+    }
    },
    "photocell": {
     "group": "control",
     "en": "Photocell",
     "es": "Fotocelda",
-    "id": "Adafruit #161"
+    "id": "Adafruit #161",
+    "simple": {
+     "en": "Light sensor",
+     "es": "Sensor de luz",
+     "about_en": "Changes the circuit when more or less light falls on it.",
+     "about_es": "Cambia el circuito cuando le llega más o menos luz."
+    }
    },
    "button": {
     "group": "control",
     "en": "Button",
     "es": "Botón",
-    "id": "Adafruit #1009"
+    "id": "Adafruit #1009",
+    "simple": {
+     "en": "Button",
+     "es": "Botón",
+     "about_en": "A small button you press.",
+     "about_es": "Un botón pequeño que presionas."
+    }
    },
    "led": {
     "group": "output",
     "en": "LED",
     "es": "LED",
-    "id": "Adafruit #4202"
+    "id": "Adafruit #4202",
+    "simple": {
+     "en": "Light (LED)",
+     "es": "Luz (LED)",
+     "about_en": "A tiny light.",
+     "about_es": "Una lucecita."
+    }
    },
    "diode": {
     "group": "passive",
     "en": "Diode",
     "es": "Diodo",
-    "id": "Adafruit #1641"
+    "id": "Adafruit #1641",
+    "simple": {
+     "en": "Diode",
+     "es": "Diodo",
+     "about_en": "Lets electricity go only one way.",
+     "about_es": "Deja pasar la electricidad en un solo sentido."
+    }
    },
    "r_1k": {
     "group": "passive",
     "en": "1K resistor (red stripe)",
     "es": "Resistencia de 1K (franja roja)",
-    "id": "Adafruit #4294"
+    "id": "Adafruit #4294",
+    "simple": {
+     "en": "Resistor (red stripe)",
+     "es": "Resistencia (franja roja)",
+     "about_en": "A small part with coloured stripes. It slows electricity down.",
+     "about_es": "Una pieza pequeña con franjas de colores. Frena la electricidad."
+    }
    },
    "r_10k": {
     "group": "passive",
     "en": "10K resistor (orange stripe)",
     "es": "Resistencia de 10K (franja naranja)",
-    "id": "Adafruit #2784"
+    "id": "Adafruit #2784",
+    "simple": {
+     "en": "Resistor (orange stripe)",
+     "es": "Resistencia (franja naranja)",
+     "about_en": "A small part with coloured stripes. It slows electricity down.",
+     "about_es": "Una pieza pequeña con franjas de colores. Frena la electricidad."
+    }
    },
    "r_4k7": {
     "group": "passive",
     "en": "4.7K resistor",
     "es": "Resistencia de 4.7K",
-    "id": "given in class"
+    "id": "given in class",
+    "simple": {
+     "en": "Resistor (4.7K)",
+     "es": "Resistencia (4.7K)",
+     "about_en": "A small part with coloured stripes. It slows electricity down.",
+     "about_es": "Una pieza pequeña con franjas de colores. Frena la electricidad."
+    }
    },
    "r_22k": {
     "group": "passive",
     "en": "22K resistor",
     "es": "Resistencia de 22K",
-    "id": "given in class"
+    "id": "given in class",
+    "simple": {
+     "en": "Resistor (22K)",
+     "es": "Resistencia (22K)",
+     "about_en": "A small part with coloured stripes. It slows electricity down.",
+     "about_es": "Una pieza pequeña con franjas de colores. Frena la electricidad."
+    }
    },
    "r_other": {
     "group": "passive",
     "en": "Other resistor (assorted)",
     "es": "Otra resistencia (surtidas)",
-    "id": "given in class"
+    "id": "given in class",
+    "simple": {
+     "en": "Other resistor",
+     "es": "Otra resistencia",
+     "about_en": "A small part with coloured stripes. It slows electricity down.",
+     "about_es": "Una pieza pequeña con franjas de colores. Frena la electricidad."
+    }
    },
    "c_0u1": {
     "group": "passive",
     "en": "0.1 µF capacitor (tiny, yellowish)",
     "es": "Capacitor de 0.1 µF (pequeño, amarillento)",
-    "id": "Adafruit #753"
+    "id": "Adafruit #753",
+    "simple": {
+     "en": "Tiny yellow capacitor (0.1 µF)",
+     "es": "Capacitor amarillo pequeñito (0.1 µF)",
+     "about_en": "Stores a little electricity and lets it out again.",
+     "about_es": "Guarda un poco de electricidad y la vuelve a soltar."
+    }
    },
    "c_68p": {
     "group": "passive",
     "en": "68 pF capacitor",
     "es": "Capacitor de 68 pF",
-    "id": "given in class"
+    "id": "given in class",
+    "simple": {
+     "en": "Tiniest capacitor (68 pF)",
+     "es": "Capacitor más pequeño (68 pF)",
+     "about_en": "Stores a tiny bit of electricity and lets it out again.",
+     "about_es": "Guarda muy poquita electricidad y la vuelve a soltar."
+    }
    },
    "c_1u": {
     "group": "passive",
     "en": "1 µF capacitor (can)",
     "es": "Capacitor de 1 µF (lata)",
-    "id": "Rubycon 50NXA1MEFC5X11"
+    "id": "Rubycon 50NXA1MEFC5X11",
+    "simple": {
+     "en": "Can capacitor (1 µF)",
+     "es": "Capacitor de lata (1 µF)",
+     "about_en": "Shaped like a little can. Stores electricity and lets it out again.",
+     "about_es": "Tiene forma de latita. Guarda electricidad y la vuelve a soltar."
+    }
    },
    "c_10u": {
     "group": "passive",
     "en": "10 µF capacitor (can)",
     "es": "Capacitor de 10 µF (lata)",
-    "id": "Adafruit #2195"
+    "id": "Adafruit #2195",
+    "simple": {
+     "en": "Can capacitor (10 µF)",
+     "es": "Capacitor de lata (10 µF)",
+     "about_en": "Shaped like a little can. Stores electricity and lets it out again.",
+     "about_es": "Tiene forma de latita. Guarda electricidad y la vuelve a soltar."
+    }
    },
    "c_100u": {
     "group": "passive",
     "en": "100 µF capacitor (can)",
     "es": "Capacitor de 100 µF (lata)",
-    "id": "Adafruit #2193"
+    "id": "Adafruit #2193",
+    "simple": {
+     "en": "Can capacitor (100 µF)",
+     "es": "Capacitor de lata (100 µF)",
+     "about_en": "Shaped like a little can. Stores electricity and lets it out again.",
+     "about_es": "Tiene forma de latita. Guarda electricidad y la vuelve a soltar."
+    }
    },
    "jack": {
     "group": "connect",
     "en": "Stereo audio jack",
     "es": "Conector de audio estéreo",
-    "id": "Adafruit #1699"
+    "id": "Adafruit #1699",
+    "simple": {
+     "en": "Jack",
+     "es": "Conector de audio",
+     "about_en": "The socket the speaker cable plugs into.",
+     "about_es": "El enchufe donde se conecta el cable del parlante."
+    }
    },
    "cable": {
     "group": "connect",
     "en": "Stereo audio cable and a speaker",
     "es": "Cable de audio estéreo y un parlante",
-    "id": "e.g. JBL Go2"
+    "id": "e.g. JBL Go2",
+    "simple": {
+     "en": "Speaker cable and a speaker",
+     "es": "Cable del parlante y un parlante",
+     "about_en": "So you can hear your circuit.",
+     "about_es": "Para que puedas oír tu circuito."
+    }
    },
    "battery": {
     "group": "connect",
     "en": "9 V battery and battery clip",
     "es": "Batería de 9 V y su conector",
-    "id": "RP Electronics MB-921"
+    "id": "RP Electronics MB-921",
+    "simple": {
+     "en": "9-volt battery and battery clip",
+     "es": "Batería de 9 voltios y su conector",
+     "about_en": "Gives the circuit its power.",
+     "about_es": "Le da energía al circuito."
+    }
    },
    "radio": {
     "group": "connect",
     "en": "AM radio",
     "es": "Radio AM",
-    "id": "given in class"
+    "id": "given in class",
+    "simple": {
+     "en": "AM radio",
+     "es": "Radio AM",
+     "about_en": "An ordinary radio, set to AM.",
+     "about_es": "Una radio común, en AM."
+    }
    },
    "jumpers": {
     "group": "connect",
     "en": "Jumper wires (pre-cut, short and long)",
     "es": "Cables puente (precortados, cortos y largos)",
-    "id": "AUSTOR assortment"
+    "id": "AUSTOR assortment",
+    "simple": {
+     "en": "Wires (short and long)",
+     "es": "Cables (cortos y largos)",
+     "about_en": "Wires that connect the parts on the board.",
+     "about_es": "Cables que conectan las piezas en el tablero."
+    }
    },
    "breadboard": {
     "group": "connect",
     "en": "Breadboard",
     "es": "Protoboard",
-    "id": "Elenco"
+    "id": "Elenco",
+    "simple": {
+     "en": "Board",
+     "es": "Tablero",
+     "about_en": "The board full of little holes that holds everything.",
+     "about_es": "El tablero lleno de agujeritos que sostiene todo."
+    }
    }
   },
   "groups": {
@@ -685,47 +961,91 @@
   "concepts": {
    "oscillator": {
     "en": "Oscillators",
-    "es": "Osciladores"
+    "es": "Osciladores",
+    "simple": {
+     "en": "Oscillators",
+     "es": "Osciladores"
+    }
    },
    "light-sensing": {
     "en": "Light sensing",
-    "es": "Sensores de luz"
+    "es": "Sensores de luz",
+    "simple": {
+     "en": "Sensing light",
+     "es": "Sentir la luz"
+    }
    },
    "counter": {
     "en": "Counters (4040)",
-    "es": "Contadores (4040)"
+    "es": "Contadores (4040)",
+    "simple": {
+     "en": "Counting (4040)",
+     "es": "Contar (4040)"
+    }
    },
    "shift-register": {
     "en": "Shift registers (4021)",
-    "es": "Registros de desplazamiento (4021)"
+    "es": "Registros de desplazamiento (4021)",
+    "simple": {
+     "en": "Passing patterns along (4021)",
+     "es": "Pasar patrones (4021)"
+    }
    },
    "multiplexer": {
     "en": "Multiplexers (4051)",
-    "es": "Multiplexores (4051)"
+    "es": "Multiplexores (4051)",
+    "simple": {
+     "en": "Picking one of 8 (4051)",
+     "es": "Elegir uno de 8 (4051)"
+    }
    },
    "mixing": {
     "en": "Mixing signals",
-    "es": "Mezclar señales"
+    "es": "Mezclar señales",
+    "simple": {
+     "en": "Mixing sounds",
+     "es": "Mezclar sonidos"
+    }
    },
    "filter": {
     "en": "Filters",
-    "es": "Filtros"
+    "es": "Filtros",
+    "simple": {
+     "en": "Shaping sound with filters",
+     "es": "Dar forma al sonido con filtros"
+    }
    },
    "radio": {
     "en": "Radio waves",
-    "es": "Ondas de radio"
+    "es": "Ondas de radio",
+    "simple": {
+     "en": "Radio waves",
+     "es": "Ondas de radio"
+    }
    },
    "voltage-starving": {
     "en": "Voltage starving",
-    "es": "Quitar voltaje"
+    "es": "Quitar voltaje",
+    "simple": {
+     "en": "Starving it of power",
+     "es": "Quitarle energía"
+    }
    },
    "randomness": {
     "en": "Randomness",
-    "es": "Azar"
+    "es": "Azar",
+    "simple": {
+     "en": "Random patterns",
+     "es": "Patrones al azar"
+    }
    },
    "noise": {
     "en": "Noise",
-    "es": "Ruido"
+    "es": "Ruido",
+    "simple": {
+     "en": "Noise",
+     "es": "Ruido"
+    }
    }
   },
   "sounds": {

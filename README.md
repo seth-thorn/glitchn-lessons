@@ -68,6 +68,15 @@ On the home page, each lesson card can also unfold its steps ("See the 7 steps")
 
 `tools/build_index.py` checks every key against the catalog and every `requires` against the real lessons, and copies the catalog and the ratings into `lessons/index.json`.
 
+## Simple and Technical words
+
+Every page has a **Simple | Technical** switch next to the language buttons. **Simple** (the default) uses plain words for kids: "wire" for jumper, "knob" for trimmer, "light" for LED, "the minus (−) row" for ground, and so on. **Technical** shows the real names. Kids can switch back and forth as they learn the real names. The choice is remembered, and a link can set it with `?words=technical` or `?words=simple`.
+
+- Each lesson's simple text lives beside it in `lesson.simple.json`: every technical English line from `lesson.json` with its simple English (`en`) and simple Spanish (`es`) version. A line with no simple version shows as it is, so editing a lesson never breaks Simple mode; `tools/build_index.py` lists lines that still need a simple version.
+- Lesson titles stay the same in both modes. Chip numbers stay too, because they're printed on the chips.
+- In Simple mode, the parts list shows a plain name and what each part is or does; in Technical mode, the real name and the kit part number. These come from the `simple` entries in `lessons/catalog.json`, which also give plain names for the concepts.
+- The wording rules and the English/Spanish glossary are in `tools/simple-words.md`. Ask Claude to write or update a lesson's `lesson.simple.json` when its text changes.
+
 ## Spanish (and other languages)
 
 Visitors can switch between **English** and **Español** on every page. The choice is remembered, Spanish-language browsers start in Spanish, and a link can force a language with `?lang=es` (useful when embedding a lesson in Spanish).

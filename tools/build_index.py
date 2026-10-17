@@ -120,7 +120,7 @@ def main():
         i18n = {}
         english = [L.get("title"), L.get("summary")] + [st.get("title") for st in steps] + [sb.get("text") for st in steps for sb in st.get("subs", [])]
         english = [x for x in english if x]
-        for tf in sorted(f.parent.glob("lesson.*.json")):
+        for tf in sorted(x for x in f.parent.glob("lesson.*.json") if x.name != "lesson.simple.json"):  # lesson.simple.json is Simple words, not a language
             lang = tf.name.split(".")[1]
             try:
                 strings = json.loads(tf.read_text()).get("strings", {})
@@ -135,6 +135,28 @@ def main():
                 problems.append(f"{slug}: {len(missing)} of {len(english)} lines have no {lang} translation yet (they show in English), e.g. \"{missing[0][:60]}\"")
         if i18n:
             lessons[-1]["i18n"] = i18n
+        # Simple words (lesson.simple.json): each technical English line with its simple English and Spanish versions.
+        sf = f.parent / "lesson.simple.json"
+        if sf.exists():
+            try:
+                simple = json.loads(sf.read_text()).get("strings", {})
+            except Exception as e:  # noqa: BLE001
+                problems.append(f"{sf}: not valid JSON ({e})")
+                simple = {}
+            lacking = [x for x in english if x != L.get("title") and x not in simple]
+            if lacking:
+                problems.append(f"{slug}: {len(lacking)} lines have no simple version yet (they show as they are), e.g. \"{lacking[0][:60]}\"")
+            for x, v in simple.items():
+                if x not in english:
+                    problems.append(f"{slug}: lesson.simple.json has a line that isn't in the lesson (old wording?): \"{x[:60]}\"")
+                elif not (isinstance(v, dict) and v.get("en")):
+                    problems.append(f"{slug}: simple line has no English: \"{x[:60]}\"")
+            langs = sorted({k for v in simple.values() if isinstance(v, dict) for k in v})
+            lessons[-1]["simple"] = {lg: {"summary": (simple.get(L.get("summary"), {}) or {}).get(lg),
+                                          "outline": [(simple.get(st.get("title"), {}) or {}).get(lg) for st in steps]}
+                                     for lg in langs}
+        else:
+            problems.append(f"{slug}: no lesson.simple.json yet, so Simple mode shows the technical words")
         (f.parent / "index.html").write_text(lesson_page(L.get("title", slug)))
 
     planned_file = LESSONS / "planned.json"

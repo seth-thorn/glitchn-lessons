@@ -1,0 +1,203 @@
+{
+ "format": "glitchn-simple/1",
+ "note": "Simple words for kids. Each technical English line from lesson.json, with its simple English (en) and simple Spanish (es) version. Shown when the Simple | Technical switch is on Simple. A line missing here shows as it is. Wording rules and glossary: tools/simple-words.md.",
+ "reviewed": false,
+ "strings": {
+  "Make slow and fast oscillators, send a tone to an AM radio, rebuild the 4040 drummer with a reset, and starve it of power for glitches.": {
+   "en": "Make slow and fast oscillators. Send a tone to an AM radio. Build the 4040 drummer again, this time with a reset. Then starve it of power to make glitches.",
+   "es": "Arma osciladores lentos y rápidos. Envía un tono a una radio AM. Vuelve a armar la caja de ritmos con el chip 4040, esta vez con un reinicio. Luego quítale energía para crear fallas."
+  },
+  "One slow oscillator": {
+   "en": "One slow oscillator",
+   "es": "Un oscilador lento"
+  },
+  "Connect the power rails on both sides with two jumpers at the right end of the breadboard.": {
+   "en": "At the right end of the board, add two wires that join the power rows along the top edge to the power rows along the bottom edge.",
+   "es": "En el extremo derecho del tablero, agrega dos cables que unan las filas de energía del borde de arriba con las del borde de abajo."
+  },
+  "Place the 40106 chip across the center gap, then add its power and ground jumpers.": {
+   "en": "Put the 40106 chip across the groove in the middle of the board. Then add its two power wires: one to plus (+) and one to minus (−).",
+   "es": "Pon el chip 40106 sobre la ranura del centro del tablero. Luego agrega sus dos cables de energía: uno a más (+) y otro a menos (−)."
+  },
+  "Add a trimmer (a small knob) next to the chip and two short red jumpers below it.": {
+   "en": "Add a small knob next to the chip, and two short red wires below it.",
+   "es": "Agrega una perilla pequeña junto al chip y dos cables rojos cortos debajo."
+  },
+  "Add the large capacitor at the bottom left. A big capacitor makes the oscillator slow.": {
+   "en": "Add the big capacitor at the bottom left. A big capacitor makes the oscillator slow.",
+   "es": "Agrega el capacitor grande abajo a la izquierda. Un capacitor grande hace que el oscilador sea lento."
+  },
+  "Add a long jumper from the top rail to the middle of the board, and a yellow jumper below it.": {
+   "en": "Add a long wire from the power rows along the top edge to the middle of the board. Add a yellow wire below it.",
+   "es": "Agrega un cable largo desde las filas de energía del borde de arriba hasta el centro del tablero. Agrega un cable amarillo debajo."
+  },
+  "Insert the audio jack.": {
+   "en": "Push in the jack.",
+   "es": "Coloca el conector de audio."
+  },
+  "Clip the battery connector onto the 9V battery.": {
+   "en": "Snap the battery clip onto the 9-volt battery.",
+   "es": "Encaja el conector de la batería en la batería de 9 voltios."
+  },
+  "Plug the battery wires into the top power rail.": {
+   "en": "Plug the battery's two wires into the power rows along the top edge.",
+   "es": "Enchufa los dos cables de la batería en las filas de energía del borde de arriba."
+  },
+  "Plug the audio cable into the jack.": {
+   "en": "Plug the speaker cable into the jack.",
+   "es": "Enchufa el cable del parlante en el conector de audio."
+  },
+  "Add a resistor from the oscillator's output to the yellow jumper, and listen to the slow pulse.": {
+   "en": "Add a resistor from the oscillator's output leg (where the signal comes out) to the yellow wire. Listen to the slow pulse.",
+   "es": "Agrega una resistencia desde la pata de salida del oscilador (por donde sale la señal) hasta el cable amarillo. Escucha el pulso lento."
+  },
+  "Two slow oscillators": {
+   "en": "Two slow oscillators",
+   "es": "Dos osciladores lentos"
+  },
+  "Remove the output resistor.": {
+   "en": "Take out the resistor on the output leg (where the signal comes out).",
+   "es": "Quita la resistencia de la pata de salida (por donde sale la señal)."
+  },
+  "Add a second trimmer at the top, with two short red jumpers to the chip.": {
+   "en": "Add a second knob at the top, with two short red wires to the chip.",
+   "es": "Agrega una segunda perilla arriba, con dos cables rojos cortos hacia el chip."
+  },
+  "Add a second large capacitor at the top left. Now there are two slow oscillators.": {
+   "en": "Add a second big capacitor at the top left. Now you have two slow oscillators.",
+   "es": "Agrega un segundo capacitor grande arriba a la izquierda. Ahora tienes dos osciladores lentos."
+  },
+  "Add two resistors, one from each oscillator, to the yellow jumper to mix them.": {
+   "en": "Add two resistors to the yellow wire, one from each oscillator. This mixes the two oscillators.",
+   "es": "Agrega dos resistencias hasta el cable amarillo, una desde cada oscilador. Así se mezclan los dos osciladores."
+  },
+  "Take the two resistors out again.": {
+   "en": "Take the two resistors out again.",
+   "es": "Vuelve a quitar las dos resistencias."
+  },
+  "Put two diodes in their place. Diodes combine the oscillators in a different way.": {
+   "en": "Put two diodes where the resistors were. Diodes mix the oscillators in a different way.",
+   "es": "Pon dos diodos donde estaban las resistencias. Los diodos mezclan los osciladores de otra manera."
+  },
+  "Two fast oscillators (Blade Runner)": {
+   "en": "Two fast oscillators (Blade Runner)",
+   "es": "Dos osciladores rápidos (Blade Runner)"
+  },
+  "Remove both large capacitors.": {
+   "en": "Take out both big capacitors.",
+   "es": "Quita los dos capacitores grandes."
+  },
+  "Add two small capacitors in their places. Both oscillators now sing as tones, like the Blade Runner soundtrack.": {
+   "en": "Put two small capacitors where the big ones were. Now both oscillators play tones, like the music in Blade Runner.",
+   "es": "Pon dos capacitores pequeños donde estaban los grandes. Ahora los dos osciladores suenan como tonos, como la música de Blade Runner."
+  },
+  "Radio Amor": {
+   "en": "Radio Amor",
+   "es": "Radio Amor"
+  },
+  "Unplug the audio cable.": {
+   "en": "Unplug the speaker cable.",
+   "es": "Desenchufa el cable del parlante."
+  },
+  "Remove the audio jack and its two jumpers.": {
+   "en": "Take out the jack and its two wires.",
+   "es": "Quita el conector de audio y sus dos cables."
+  },
+  "Remove the two diodes.": {
+   "en": "Take out the two diodes.",
+   "es": "Quita los dos diodos."
+  },
+  "Add a diode from the upper oscillator's output to the lower oscillator. The upper oscillator will switch the lower one on and off.": {
+   "en": "Add a diode from the top oscillator's output leg (where the signal comes out) to the bottom oscillator. The top oscillator will turn the bottom one on and off.",
+   "es": "Agrega un diodo desde la pata de salida del oscilador de arriba (por donde sale la señal) hasta el oscilador de abajo. El oscilador de arriba va a prender y apagar al de abajo."
+  },
+  "Adjust the diode so its legs sit firmly in the right rows.": {
+   "en": "Move the diode so its legs sit firmly in the correct rows.",
+   "es": "Acomoda el diodo para que sus patas queden firmes en las filas correctas."
+  },
+  "Swap the lower capacitor for the tiny 68 pF one, so the lower oscillator runs at radio frequency.": {
+   "en": "Swap the bottom capacitor for the tiny 68 pF capacitor. This makes the bottom oscillator run at radio speed.",
+   "es": "Cambia el capacitor de abajo por el capacitor pequeñito de 68 pF. Así el oscilador de abajo funciona a velocidad de radio."
+  },
+  "Hold an AM radio near the board and turn the trimmer until you hear the upper oscillator's tone on the radio.": {
+   "en": "Hold an AM radio near the board. Turn the knob until you hear the top oscillator's tone on the radio.",
+   "es": "Acerca una radio AM al tablero. Gira la perilla hasta que escuches en la radio el tono del oscilador de arriba."
+  },
+  "4040 drummer again": {
+   "en": "4040 drummer again",
+   "es": "Otra vez la caja de ritmos con el 4040"
+  },
+  "Put the radio away and remove the diode and the small capacitors.": {
+   "en": "Put the radio away. Take out the diode and the small capacitors.",
+   "es": "Guarda la radio. Quita el diodo y los capacitores pequeños."
+  },
+  "Put the two large capacitors back: two slow oscillators again.": {
+   "en": "Put the two big capacitors back. Now you have two slow oscillators again.",
+   "es": "Vuelve a poner los dos capacitores grandes. Ahora tienes otra vez dos osciladores lentos."
+  },
+  "Place the 4040 counter chip in the middle and add its power and ground jumpers.": {
+   "en": "Put the 4040 chip in the middle. Then add its two power wires: one to plus (+) and one to minus (−).",
+   "es": "Pon el chip 4040 en el centro. Luego agrega sus dos cables de energía: uno a más (+) y otro a menos (−)."
+  },
+  "Add a short red jumper from the top rail to the 4040's top row.": {
+   "en": "Add a short red wire from the power rows along the top edge to the top row of the 4040 chip.",
+   "es": "Agrega un cable rojo corto desde las filas de energía del borde de arriba hasta la fila de arriba del chip 4040."
+  },
+  "Run a long orange wire from the first oscillator's output to the 4040's clock input.": {
+   "en": "Add a long orange wire from the first oscillator's output leg (where the signal comes out) to the clock input leg of the 4040 chip.",
+   "es": "Pon un cable naranja largo desde la pata de salida del primer oscilador (por donde sale la señal) hasta la pata de entrada de reloj del chip 4040."
+  },
+  "Add a short red jumper at the bottom right for the jack's signal, then a jumper from the top rail for the jack's ground.": {
+   "en": "At the bottom right, add a short red wire for the jack's signal. Then add a wire from the minus (−) row along the top edge for the jack's minus (−).",
+   "es": "Abajo a la derecha, agrega un cable rojo corto para la señal del conector de audio. Luego agrega un cable desde la fila de menos (−) del borde de arriba para el menos (−) del conector."
+  },
+  "Insert the audio jack and plug in the cable.": {
+   "en": "Push in the jack and plug in the speaker cable.",
+   "es": "Coloca el conector de audio y enchufa el cable del parlante."
+  },
+  "Add a resistor and a diode from the 4040's outputs to the jack.": {
+   "en": "Add a resistor and a diode from the 4040 chip's output legs to the jack.",
+   "es": "Agrega una resistencia y un diodo desde las patas de salida del chip 4040 hasta el conector de audio."
+  },
+  "Add another diode and a small capacitor, then turn the trimmer to change the tempo.": {
+   "en": "Add another diode and a small capacitor. Then turn the knob to change the speed of the beat.",
+   "es": "Agrega otro diodo y un capacitor pequeño. Luego gira la perilla para cambiar la velocidad del ritmo."
+  },
+  "4040 reset": {
+   "en": "4040 reset",
+   "es": "Reinicio del 4040"
+  },
+  "Remove the short red jumper above the 4040.": {
+   "en": "Take out the short red wire above the 4040 chip.",
+   "es": "Quita el cable rojo corto que está arriba del chip 4040."
+  },
+  "Connect the second oscillator's output to the 4040's reset pin. Now the second oscillator restarts the pattern.": {
+   "en": "Connect the second oscillator's output leg (where the signal comes out) to the reset leg of the 4040 chip. Now the second oscillator starts the pattern over.",
+   "es": "Conecta la pata de salida del segundo oscilador (por donde sale la señal) a la pata de reinicio del chip 4040. Ahora el segundo oscilador vuelve a empezar el patrón."
+  },
+  "Add a second small capacitor next to the first. Turn both trimmers to find patterns you like. An LED from the jack's signal row to ground shows the rhythm.": {
+   "en": "Add a second small capacitor next to the first one. Turn both knobs to find patterns you like. A light from the jack's signal row to the minus (−) row shows the rhythm.",
+   "es": "Agrega un segundo capacitor pequeño junto al primero. Gira las dos perillas hasta encontrar patrones que te gusten. Una luz desde la fila de la señal del conector de audio hasta la fila de menos (−) muestra el ritmo."
+  },
+  "Take the LED out and listen to the finished drummer with reset.": {
+   "en": "Take the light out. Listen to the finished drummer with reset.",
+   "es": "Quita la luz. Escucha la caja de ritmos terminada con reinicio."
+  },
+  "Voltage starving": {
+   "en": "Starving it of power",
+   "es": "Quitarle energía"
+  },
+  "Unplug the battery's red (+) wire.": {
+   "en": "Unplug the battery's red wire (the + one).",
+   "es": "Desenchufa el cable rojo de la batería (el de +)."
+  },
+  "Add a short jumper from the + rail at the right end.": {
+   "en": "At the right end, add a short wire from the plus (+) row.",
+   "es": "En el extremo derecho, agrega un cable corto desde la fila de más (+)."
+  },
+  "Add a trimmer and plug the red wire into it, so all the power passes through the knob. Turn it slowly to starve the circuit of voltage and hear it glitch.": {
+   "en": "Add a knob and plug the red wire into it. Now all the power goes through the knob. Turn it slowly to give the circuit less power, and listen to it glitch.",
+   "es": "Agrega una perilla y enchufa el cable rojo en ella. Ahora toda la energía pasa por la perilla. Gírala despacio para quitarle energía al circuito y escucha cómo falla."
+  }
+ }
+}

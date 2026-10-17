@@ -1,0 +1,231 @@
+{
+ "format": "glitchn-simple/1",
+ "note": "Simple words for kids. Each technical English line from lesson.json, with its simple English (en) and simple Spanish (es) version. Shown when the Simple | Technical switch is on Simple. A line missing here shows as it is. Wording rules and glossary: tools/simple-words.md.",
+ "reviewed": false,
+ "strings": {
+  "Let two slow oscillators drive the 4051 selector: first to step through LEDs, then to step a third oscillator through different filters.": {
+   "en": "Let two slow oscillators control the 4051 chip, which picks one path at a time. First they step through lights. Then they step a third oscillator through different filters.",
+   "es": "Deja que dos osciladores lentos controlen el chip 4051, que elige un camino a la vez. Primero recorren unas luces. Luego pasan un tercer oscilador por distintos filtros, uno tras otro."
+  },
+  "Two slow oscillators": {
+   "en": "Two slow oscillators",
+   "es": "Dos osciladores lentos"
+  },
+  "Connect the power rails on both sides with two jumpers at the right end of the breadboard.": {
+   "en": "At the right end of the board, add two wires that join the power rows along the top edge to the power rows along the bottom edge.",
+   "es": "En el extremo derecho del tablero, agrega dos cables que unan las filas de energía del borde de arriba con las del borde de abajo."
+  },
+  "Place the 40106 chip across the center gap, then add its power and ground jumpers.": {
+   "en": "Put the 40106 chip across the groove in the middle of the board. Then add its two power wires: one to plus (+) and one to minus (−).",
+   "es": "Pon el chip 40106 sobre la ranura del centro del tablero. Luego agrega sus dos cables de energía: uno a más (+) y otro a menos (−)."
+  },
+  "Add two short red jumpers below the chip.": {
+   "en": "Add two short red wires below the chip.",
+   "es": "Agrega dos cables rojos cortos debajo del chip."
+  },
+  "Add a trimmer next to the chip.": {
+   "en": "Add a knob next to the chip.",
+   "es": "Agrega una perilla junto al chip."
+  },
+  "Add two short red jumpers above the chip.": {
+   "en": "Add two short red wires above the chip.",
+   "es": "Agrega dos cables rojos cortos arriba del chip."
+  },
+  "Add a second trimmer at the top.": {
+   "en": "Add a second knob at the top.",
+   "es": "Agrega una segunda perilla arriba."
+  },
+  "Add a large capacitor for each oscillator.": {
+   "en": "Add a big capacitor for each oscillator.",
+   "es": "Agrega un capacitor grande para cada oscilador."
+  },
+  "Add a resistor from each oscillator's output toward the middle.": {
+   "en": "For each oscillator, add a resistor from its output leg (where the signal comes out) toward the middle.",
+   "es": "Para cada oscilador, agrega una resistencia desde su pata de salida (por donde sale la señal) hacia el centro."
+  },
+  "Add a red LED and a green LED at the ends of the resistors.": {
+   "en": "Add a red light and a green light at the ends of the resistors.",
+   "es": "Agrega una luz roja y una luz verde en las puntas de las resistencias."
+  },
+  "Clip the battery connector onto the 9V battery.": {
+   "en": "Snap the battery clip onto the 9-volt battery.",
+   "es": "Encaja el conector de la batería en la batería de 9 voltios."
+  },
+  "Plug in the battery: the two LEDs blink at different speeds.": {
+   "en": "Plug in the battery. The two lights blink at different speeds.",
+   "es": "Conecta la batería. Las dos luces parpadean a distintas velocidades."
+  },
+  "4051 LEDs": {
+   "en": "4051 lights",
+   "es": "Luces con el 4051"
+  },
+  "Unplug the battery.": {
+   "en": "Unplug the battery.",
+   "es": "Desconecta la batería."
+  },
+  "Remove the two LEDs.": {
+   "en": "Take out the two lights.",
+   "es": "Quita las dos luces."
+  },
+  "Remove the two resistors.": {
+   "en": "Take out the two resistors.",
+   "es": "Quita las dos resistencias."
+  },
+  "Place the 4051 chip in the middle and add its power and ground jumpers. The 4051 connects one of eight channels at a time.": {
+   "en": "Put the 4051 chip in the middle. Add its two power wires: one to plus (+) and one to minus (−). It links one of eight channels at a time.",
+   "es": "Pon el chip 4051 en el centro. Luego agrega sus dos cables de energía: uno a más (+) y otro a menos (−). Conecta uno de sus ocho canales a la vez."
+  },
+  "Add one jumper above the 4051 and two more short jumpers below it, so three sit side by side.": {
+   "en": "Add one wire above the 4051. Then add two more short wires below it. Now three wires sit side by side.",
+   "es": "Agrega un cable arriba del 4051. Luego agrega dos cables cortos más debajo. Así quedan tres cables uno al lado del otro."
+  },
+  "Run a yellow wire from the first oscillator to one of the 4051's channel-select pins.": {
+   "en": "Add a yellow wire from the first oscillator to one of the 4051's legs that choose the channel.",
+   "es": "Agrega un cable amarillo desde el primer oscilador hasta una de las patas del 4051 que eligen el canal."
+  },
+  "Run a second yellow wire from the other oscillator to the next select pin.": {
+   "en": "Add a second yellow wire from the other oscillator to the next leg that chooses the channel.",
+   "es": "Agrega un segundo cable amarillo desde el otro oscilador hasta la siguiente pata que elige el canal."
+  },
+  "Add a red LED to the first channel.": {
+   "en": "Add a red light to the first channel.",
+   "es": "Agrega una luz roja al primer canal."
+  },
+  "Add three more LEDs to the next channels.": {
+   "en": "Add three more lights to the next channels.",
+   "es": "Agrega tres luces más a los canales siguientes."
+  },
+  "Plug the battery back in at the right end.": {
+   "en": "Plug the battery back in at the right end.",
+   "es": "Vuelve a conectar la batería en el extremo derecho."
+  },
+  "Add a resistor from the 4051's common pin to ground. Now one LED at a time lights up as the oscillators choose the channel.": {
+   "en": "Add a resistor from the 4051's common leg to the minus (−) row. Now one light at a time turns on as the oscillators choose the channel.",
+   "es": "Agrega una resistencia desde la pata común del 4051 hasta la fila de menos (−). Ahora se enciende una luz a la vez mientras los osciladores eligen el canal."
+  },
+  "Third oscillator": {
+   "en": "Third oscillator",
+   "es": "Tercer oscilador"
+  },
+  "Remove the resistor at the bottom.": {
+   "en": "Take out the resistor at the bottom.",
+   "es": "Quita la resistencia de abajo."
+  },
+  "Add two short red jumpers at the bottom for a third oscillator.": {
+   "en": "Add two short red wires at the bottom for a third oscillator.",
+   "es": "Agrega dos cables rojos cortos abajo para un tercer oscilador."
+  },
+  "Adjust the jumpers.": {
+   "en": "Adjust the wires.",
+   "es": "Acomoda los cables."
+  },
+  "Add a third trimmer, a large capacitor and a short yellow jumper.": {
+   "en": "Add a third knob, a big capacitor and a short yellow wire.",
+   "es": "Agrega una tercera perilla, un capacitor grande y un cable amarillo corto."
+  },
+  "Add a resistor from the third oscillator's output to the 4051's common pin.": {
+   "en": "Add a resistor from the third oscillator's output leg (where the signal comes out) to the 4051's common leg.",
+   "es": "Agrega una resistencia desde la pata de salida del tercer oscilador (por donde sale la señal) hasta la pata común del 4051."
+  },
+  "Take the resistor out to compare.": {
+   "en": "Take the resistor out to compare.",
+   "es": "Quita la resistencia para comparar."
+  },
+  "Put it back, then turn the new trimmer and watch how the lights change.": {
+   "en": "Put it back. Then turn the new knob and watch how the lights change.",
+   "es": "Vuelve a ponerla. Luego gira la nueva perilla y mira cómo cambian las luces."
+  },
+  "Stepped low-pass clicks": {
+   "en": "Clicks, step by step, through filters that let low sounds through",
+   "es": "Clics paso a paso por filtros que dejan pasar los sonidos graves"
+  },
+  "Remove the four LEDs.": {
+   "en": "Take out the four lights.",
+   "es": "Quita las cuatro luces."
+  },
+  "Add a resistor from the first 4051 channel to a shared row.": {
+   "en": "Add a resistor from the 4051's first channel to a shared row.",
+   "es": "Agrega una resistencia desde el primer canal del 4051 hasta una fila compartida."
+  },
+  "Add a second resistor, a different value, from the next channel.": {
+   "en": "Add a second resistor from the next channel. Use one with a different value.",
+   "es": "Agrega una segunda resistencia desde el canal siguiente. Usa una de otro valor."
+  },
+  "Add a third resistor.": {
+   "en": "Add a third resistor.",
+   "es": "Agrega una tercera resistencia."
+  },
+  "Add a fourth resistor: a ladder of different resistances.": {
+   "en": "Add a fourth resistor. Now the resistors make a ladder of different values.",
+   "es": "Agrega una cuarta resistencia. Ahora las resistencias forman una escalera de valores distintos."
+  },
+  "Add a jumper across the center gap from the shared row.": {
+   "en": "Add a wire from the shared row, across the groove in the middle of the board.",
+   "es": "Agrega un cable desde la fila compartida, cruzando la ranura del centro del tablero."
+  },
+  "Add a small capacitor to ground. With the chosen resistor, it makes a low-pass filter.": {
+   "en": "Add a small capacitor to the minus (−) row. Together with the chosen resistor, it makes a filter that lets low sounds through.",
+   "es": "Agrega un capacitor pequeño a la fila de menos (−). Junto con la resistencia elegida, forma un filtro que deja pasar los sonidos graves."
+  },
+  "Add a red jumper toward the audio jack.": {
+   "en": "Add a red wire toward the jack.",
+   "es": "Agrega un cable rojo hacia el conector de audio."
+  },
+  "Add a ground jumper from the top rail for the jack.": {
+   "en": "Add a wire from the minus (−) row along the top edge, for the jack.",
+   "es": "Agrega un cable desde la fila de menos (−) del borde de arriba, para el conector de audio."
+  },
+  "Insert the audio jack.": {
+   "en": "Push in the jack.",
+   "es": "Coloca el conector de audio."
+  },
+  "Plug in the audio cable.": {
+   "en": "Plug in the speaker cable.",
+   "es": "Enchufa el cable del parlante."
+  },
+  "Connect the third oscillator to the 4051's common pin. Each step sends its clicks through a different resistor, so they sound brighter or duller.": {
+   "en": "Connect the third oscillator to the 4051's common leg. At each step, its clicks go through a different resistor. So they sound brighter or duller.",
+   "es": "Conecta el tercer oscilador a la pata común del 4051. En cada paso, sus clics pasan por otra resistencia. Por eso suenan más brillantes o más apagados."
+  },
+  "Stepped low-pass tones": {
+   "en": "Tones, step by step, through filters that let low sounds through",
+   "es": "Tonos paso a paso por filtros que dejan pasar los sonidos graves"
+  },
+  "Unplug the orange wire.": {
+   "en": "Unplug the orange wire.",
+   "es": "Desenchufa el cable naranja."
+  },
+  "Remove the third oscillator's large capacitor.": {
+   "en": "Take out the third oscillator's big capacitor.",
+   "es": "Quita el capacitor grande del tercer oscilador."
+  },
+  "Put a smaller capacitor in its place, so the third oscillator makes a tone.": {
+   "en": "Put a smaller capacitor in its place. Now the third oscillator makes a tone.",
+   "es": "Pon un capacitor más pequeño en su lugar. Así el tercer oscilador hace un tono."
+  },
+  "Plug the orange wire back in and listen to the tone step through the filters.": {
+   "en": "Plug the orange wire back in. Listen to the tone step through the filters.",
+   "es": "Vuelve a enchufar el cable naranja. Escucha cómo el tono pasa por los filtros, uno tras otro."
+  },
+  "Stepped band-pass tones": {
+   "en": "Tones, step by step, through filters that cut low and high sounds",
+   "es": "Tonos paso a paso por filtros que cortan los sonidos graves y agudos"
+  },
+  "Add a small capacitor after the third oscillator.": {
+   "en": "Add a small capacitor after the third oscillator.",
+   "es": "Agrega un capacitor pequeño después del tercer oscilador."
+  },
+  "Add a fourth trimmer next to the 4051.": {
+   "en": "Add a fourth knob next to the 4051.",
+   "es": "Agrega una cuarta perilla junto al 4051."
+  },
+  "Add a short jumper below it.": {
+   "en": "Add a short wire below it.",
+   "es": "Agrega un cable corto debajo de la perilla."
+  },
+  "Plug the orange wire back in, from the far side of the new capacitor to the 4051's common pin. The capacitor and trimmer cut the low sounds and the resistors cut the high ones: a band-pass filter. Turn the new trimmer to move the band.": {
+   "en": "Plug the orange wire back in, from the far side of the new capacitor to the 4051's common leg. The capacitor and knob cut low sounds. The resistors cut high sounds. Together they make a filter that lets only middle sounds through. Turn the new knob to move that middle range.",
+   "es": "Vuelve a enchufar el cable naranja, desde el otro lado del nuevo capacitor hasta la pata común del 4051. El capacitor y la perilla cortan los sonidos graves. Las resistencias cortan los agudos. Juntos forman un filtro que solo deja pasar los sonidos del medio. Gira la nueva perilla para mover ese rango del medio."
+  }
+ }
+}

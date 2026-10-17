@@ -1,0 +1,167 @@
+{
+ "format": "glitchn-simple/1",
+ "note": "Simple words for kids. Each technical English line from lesson.json, with its simple English (en) and simple Spanish (es) version. Shown when the Simple | Technical switch is on Simple. A line missing here shows as it is. Wording rules and glossary: tools/simple-words.md.",
+ "reviewed": false,
+ "strings": {
+  "Build three oscillators, join them with a diode network, shape them with an adjustable high-pass filter, then explore voltage starving, static and strange sounds.": {
+   "en": "Build three oscillators and join them with diodes. Shape them with an adjustable filter that lets high sounds through. Then explore starving it of power, static and strange sounds.",
+   "es": "Arma tres osciladores y únelos con diodos. Dales forma con un filtro ajustable que deja pasar los sonidos agudos. Luego explora quitarle energía, la estática y sonidos extraños."
+  },
+  "Three oscillators": {
+   "en": "Three oscillators",
+   "es": "Tres osciladores"
+  },
+  "Connect the power rails on both sides with two jumpers at the right end of the breadboard.": {
+   "en": "At the right end of the board, add two wires that join the power rows along the top edge to the power rows along the bottom edge.",
+   "es": "En el extremo derecho del tablero, agrega dos cables que unan las filas de energía del borde de arriba con las del borde de abajo."
+  },
+  "Place the 40106 chip across the center gap, then add its power and ground jumpers.": {
+   "en": "Put the 40106 chip across the groove in the middle of the board. Then add its two power wires: one to plus (+) and one to minus (−).",
+   "es": "Pon el chip 40106 sobre la ranura del centro del tablero. Luego agrega sus dos cables de energía: uno a más (+) y otro a menos (−)."
+  },
+  "Add a trimmer and two short red jumpers.": {
+   "en": "Add a knob and two short red wires.",
+   "es": "Agrega una perilla y dos cables rojos cortos."
+  },
+  "Add a large capacitor: the first oscillator is slow.": {
+   "en": "Add a big capacitor. The first oscillator is slow.",
+   "es": "Agrega un capacitor grande. El primer oscilador es lento."
+  },
+  "Add a second trimmer and two red jumpers at the top.": {
+   "en": "Add a second knob and two red wires at the top.",
+   "es": "Agrega una segunda perilla y dos cables rojos arriba."
+  },
+  "Add a small capacitor on the top rail: the second oscillator makes a tone.": {
+   "en": "Add a small capacitor on the power rows along the top edge. The second oscillator makes a tone.",
+   "es": "Agrega un capacitor pequeño en las filas de energía del borde de arriba. El segundo oscilador hace un tono."
+  },
+  "Add two more red jumpers, a third trimmer and a capacitor at the bottom: the third oscillator.": {
+   "en": "Add two more red wires, a third knob and a capacitor at the bottom. This is the third oscillator.",
+   "es": "Agrega dos cables rojos más, una tercera perilla y un capacitor abajo. Este es el tercer oscilador."
+  },
+  "Add a ground jumper from the top rail for the audio jack.": {
+   "en": "Add a wire from the minus (−) row along the top edge. It is for the jack.",
+   "es": "Agrega un cable desde la fila de menos (−) del borde de arriba. Es para el conector de audio."
+  },
+  "Add a long wire with a free end to use as a probe.": {
+   "en": "Add a long wire with one loose end. You will use it as a touch wire.",
+   "es": "Agrega un cable largo con una punta suelta. Lo usarás como cable de toque."
+  },
+  "Insert the audio jack.": {
+   "en": "Push in the jack.",
+   "es": "Coloca el conector de audio."
+  },
+  "Plug in the audio cable.": {
+   "en": "Plug in the speaker cable.",
+   "es": "Enchufa el cable del parlante."
+  },
+  "Clip the battery connector onto the 9V battery.": {
+   "en": "Snap the battery clip onto the 9-volt battery.",
+   "es": "Encaja el conector de la batería en la batería de 9 voltios."
+  },
+  "Plug the battery wires into the top power rail.": {
+   "en": "Plug the battery's two wires into the power rows along the top edge.",
+   "es": "Enchufa los dos cables de la batería en las filas de energía del borde de arriba."
+  },
+  "Touch the probe to the first oscillator and listen.": {
+   "en": "Touch the first oscillator with the touch wire and listen.",
+   "es": "Toca el primer oscilador con el cable de toque y escucha."
+  },
+  "Touch the probe to the second oscillator.": {
+   "en": "Touch the second oscillator with the touch wire.",
+   "es": "Toca el segundo oscilador con el cable de toque."
+  },
+  "Touch the probe to the third oscillator.": {
+   "en": "Touch the third oscillator with the touch wire.",
+   "es": "Toca el tercer oscilador con el cable de toque."
+  },
+  "Rest the probe by the jack. All three oscillators are ready.": {
+   "en": "Leave the touch wire next to the jack. All three oscillators are ready.",
+   "es": "Deja el cable de toque junto al conector de audio. Los tres osciladores están listos."
+  },
+  "Diode network": {
+   "en": "Joining with diodes",
+   "es": "Unir con diodos"
+  },
+  "Add a diode from the first oscillator's output to a shared point by the chip.": {
+   "en": "Add a diode from the first oscillator's output leg (where the signal comes out). Put its other end in a shared spot next to the chip.",
+   "es": "Agrega un diodo desde la pata de salida del primer oscilador (por donde sale la señal). Pon su otra punta en un punto compartido junto al chip."
+  },
+  "Add a diode from the second oscillator to the same point.": {
+   "en": "Add a diode from the second oscillator to the same spot.",
+   "es": "Agrega un diodo desde el segundo oscilador hasta el mismo punto."
+  },
+  "Add a diode from the third oscillator: all three are now combined.": {
+   "en": "Add a diode from the third oscillator. Now all three are joined together.",
+   "es": "Agrega un diodo desde el tercer oscilador. Ahora los tres están unidos."
+  },
+  "Touch the probe to the point where the three diodes meet to hear the combined signal.": {
+   "en": "Touch the spot where the three diodes meet with the touch wire. Listen to the three signals joined together.",
+   "es": "Toca con el cable de toque el punto donde se juntan los tres diodos. Escucha las tres señales juntas."
+  },
+  "Listen to all three oscillators at once.": {
+   "en": "Listen to all three oscillators at once.",
+   "es": "Escucha los tres osciladores a la vez."
+  },
+  "Adjustable high-pass filter": {
+   "en": "Adjustable filter that lets high sounds through",
+   "es": "Filtro ajustable que deja pasar los sonidos agudos"
+  },
+  "Run an orange wire from the diode network to the upper half of the board.": {
+   "en": "Add an orange wire from the diodes to the top half of the board.",
+   "es": "Pon un cable naranja desde los diodos hasta la mitad de arriba del tablero."
+  },
+  "Add a small capacitor across the center gap. It lets only the higher sounds through.": {
+   "en": "Add a small capacitor across the groove in the middle of the board. It lets only the higher sounds through.",
+   "es": "Agrega un capacitor pequeño sobre la ranura del centro del tablero. Solo deja pasar los sonidos más agudos."
+  },
+  "Add a short jumper beside it.": {
+   "en": "Add a short wire next to it.",
+   "es": "Agrega un cable corto a su lado."
+  },
+  "Plug the free end of the yellow probe wire into the row after the filter. Now the filter feeds the jack.": {
+   "en": "Plug the loose end of the yellow touch wire into the row after the filter. Now the filter sends the signal to the jack.",
+   "es": "Enchufa la punta suelta del cable de toque amarillo en la fila que está después del filtro. Ahora el filtro manda la señal al conector de audio."
+  },
+  "Add a trimmer to ground and turn it to choose how much of the low sound is cut.": {
+   "en": "Add a knob connected to the minus (−) row. Turn it to choose how much of the low sound gets cut.",
+   "es": "Agrega una perilla conectada a la fila de menos (−). Gírala para elegir cuánto del sonido grave se corta."
+  },
+  "Voltage starving": {
+   "en": "Starving it of power",
+   "es": "Quitarle energía"
+  },
+  "Unplug the battery's red (+) wire.": {
+   "en": "Unplug the battery's red wire (the + one).",
+   "es": "Desenchufa el cable rojo de la batería (el de +)."
+  },
+  "Add a short jumper from the + rail.": {
+   "en": "Add a short wire from the plus (+) row.",
+   "es": "Agrega un cable corto desde la fila de más (+)."
+  },
+  "Add a trimmer next to it.": {
+   "en": "Add a knob next to it.",
+   "es": "Agrega una perilla a su lado."
+  },
+  "Plug the red wire into the trimmer, so all the power passes through it, and turn it slowly to starve the circuit.": {
+   "en": "Plug the red wire into the knob, so all the power goes through it. Turn it slowly to give the circuit less power.",
+   "es": "Enchufa el cable rojo en la perilla, para que toda la energía pase por ella. Gírala despacio para quitarle energía al circuito."
+  },
+  "Static": {
+   "en": "Static",
+   "es": "Estática"
+  },
+  "Pull out the third oscillator's small capacitor (the one below the bottom rail). Without it the oscillator runs wild and the circuit makes static.": {
+   "en": "Take out the third oscillator's small capacitor. It is the one below the power rows along the bottom edge. Without it, the oscillator goes wild and the circuit makes static.",
+   "es": "Quita el capacitor pequeño del tercer oscilador. Es el que está debajo de las filas de energía del borde de abajo. Sin él, el oscilador se descontrola y el circuito hace estática."
+  },
+  "Strange things": {
+   "en": "Strange things",
+   "es": "Cosas extrañas"
+  },
+  "Remove the three diodes. The oscillators are no longer connected, yet turning one knob still changes the others: parts of a circuit affect each other even when disconnected.": {
+   "en": "Take out the three diodes. Now the oscillators are not connected. But turning one knob still changes the others. Parts of a circuit affect each other, even when not connected.",
+   "es": "Quita los tres diodos. Ahora los osciladores no están conectados. Pero girar una perilla todavía cambia a los otros. Las partes de un circuito se afectan entre sí, aunque no estén conectadas."
+  }
+ }
+}
