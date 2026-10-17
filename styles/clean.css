@@ -1,0 +1,181 @@
+/* Clean style: calm, simple and precise, in the spirit of Dieter Rams. Built on Universal Design for Learning:
+   - Low stimulation: no motion of any kind, no textures or decoration, nothing laid over the video, a warm off-white
+     page instead of glaring pure white, soft dark grey text instead of pure black.
+   - Readable: Atkinson Hyperlegible (designed for legibility), larger text, generous line spacing, left-aligned,
+     no italics or capitals for emphasis.
+   - Colour-safe: one quiet blue accent, and nothing is shown by colour alone. The current sub-step has a bar,
+     a tint and bold text; finished sub-steps have check marks; "coming" lessons are dashed and labelled.
+   - Easy to operate: large, predictable targets and a very visible focus ring.
+   This file styles the player and home page. */
+
+/* ---------- tokens ---------- */
+:root[data-style="clean"] {
+  --ink: #24272C; --page: #F3F2EE; --muted: #555A62; --white: #FFFFFF;
+  --panel: #FFFFFF; --card: #F7F6F3; --deep: #24272C; --on-panel: #24272C;
+  --line: #DEDCD5; --rule: #E9E7E1; --accent: #2F5F8F; --accent-soft: #E7EEF6; --done: #3D4148; --track: #E2E0D9;
+  --display: "Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
+  --body: "Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
+  --bw: 1px; --r-lg: 16px; --r-md: 10px; --r-sm: 8px;
+}
+:root[data-style="clean"], :root[data-style="clean"] body { background: var(--page); }
+:root[data-style="clean"] body { font-size: 17px; line-height: 1.55; letter-spacing: .005em; }
+/* nothing moves */
+:root[data-style="clean"] *, :root[data-style="clean"] *::before, :root[data-style="clean"] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+:root[data-style="clean"] :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+:root[data-style="clean"] .eyebrow { font-family: var(--body); font-size: 15px; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--muted); gap: 12px; }
+:root[data-style="clean"] .home-link { color: var(--ink); border-bottom: 1px solid var(--muted); font-weight: 700; }
+:root[data-style="clean"] .home-link:hover { background: none; border-bottom-color: var(--ink); }
+:root[data-style="clean"] .draft-chip, :root[data-style="clean"] .chip { font-family: var(--body); letter-spacing: 0; font-weight: 400; font-size: 13px; border: 1px solid var(--line); background: var(--white); color: var(--muted); }
+:root[data-style="clean"] h1 { font-family: var(--display); font-weight: 700; font-stretch: 100%; font-size: clamp(30px, 3.6vw, 42px); letter-spacing: -.01em; line-height: 1.15; }
+:root[data-style="clean"] h1 .sub { font-weight: 400; font-size: .48em; line-height: 1.5; letter-spacing: 0; color: var(--muted); margin-top: 10px; max-width: 62ch; }
+:root[data-style="clean"] .style-pick { font-family: var(--body); font-size: 15px; color: var(--muted); }
+:root[data-style="clean"] .style-pick select, :root[data-style="clean"] .langs { border: 1px solid var(--line); background: var(--white); border-radius: 22px; }
+:root[data-style="clean"] .style-pick select { font-family: var(--body); font-weight: 700; font-size: 15px; color: var(--ink); padding: 8px 14px; }
+:root[data-style="clean"] .lang { font-family: var(--body); font-weight: 700; font-size: 15px; padding: 8px 16px; color: var(--ink); }
+:root[data-style="clean"] .lang + .lang { border-left: 1px solid var(--line); }
+:root[data-style="clean"] .lang:hover { background: var(--card); }
+:root[data-style="clean"] .lang[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+:root[data-style="clean"] .err { border: 1px solid var(--line); background: var(--white); }
+:root[data-style="clean"] .toast { background: var(--ink); color: var(--white); border-radius: 12px; font-weight: 700; }
+
+/* ---------- lesson player: soft white panels with hairline edges ---------- */
+:root[data-style="clean"] .grid { gap: 28px; }
+:root[data-style="clean"] .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; box-shadow: none; }
+:root[data-style="clean"] .panel-title { font-family: var(--body); font-weight: 700; font-stretch: 100%; font-size: 19px; letter-spacing: 0; }
+:root[data-style="clean"] .ant, :root[data-style="clean"] .feet, :root[data-style="clean"] .glass, :root[data-style="clean"] .grille, :root[data-style="clean"] .divider, :root[data-style="clean"] .now-chip, :root[data-style="clean"] .ticks { display: none; }
+:root[data-style="clean"] .tv-wrap { padding: 0; }
+:root[data-style="clean"] .tv { padding: 16px 16px 14px; }
+:root[data-style="clean"] .screen { border: 0; border-radius: 10px; background: #E9E7E1; }
+:root[data-style="clean"] .big-play span { width: 72px; height: 72px; border: 0; background: var(--accent); color: var(--white); box-shadow: none; }
+:root[data-style="clean"] .big-play svg { width: 28px; height: 28px; margin-left: 4px; }
+:root[data-style="clean"] .big-play:hover span { transform: none; }
+/* the scrub bar: a plain line with a large, easy handle */
+:root[data-style="clean"] .scrub { margin-top: 16px; height: 30px; }
+:root[data-style="clean"] .track { top: 12px; height: 6px; border: 0; border-radius: 3px; background: var(--track); }
+:root[data-style="clean"] .track .fill { background: var(--accent); }
+:root[data-style="clean"] .track .sep { top: 0; bottom: 0; width: 3px; background: var(--white); }
+:root[data-style="clean"] .scrub .knob { top: 5px; width: 20px; height: 20px; margin-left: -10px; border: 3px solid var(--accent); background: var(--white); }
+:root[data-style="clean"] .scrub:focus-within .knob { box-shadow: 0 0 0 3px var(--white), 0 0 0 6px var(--accent); }
+:root[data-style="clean"] .hover-tip { background: var(--ink); border-radius: 8px; font-size: 14px; }
+:root[data-style="clean"] .hover-tip b { font-family: var(--body); color: var(--white); }
+/* round controls, all the same size */
+:root[data-style="clean"] .controls { border-top: 1px solid var(--rule); margin-top: 12px; padding-top: 14px; gap: 10px; color: var(--ink); }
+:root[data-style="clean"] .ctl { width: 46px; min-width: 46px; height: 46px; padding: 0; border-radius: 50%; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-family: var(--body); font-weight: 700; font-size: 15px; }
+:root[data-style="clean"] .ctl:hover { background: var(--white); border-color: var(--muted); }
+:root[data-style="clean"] .ctl svg { width: 20px; height: 20px; }
+:root[data-style="clean"] #playBtn { background: var(--accent); border-color: var(--accent); color: var(--white); }
+:root[data-style="clean"] .ctl.dial { width: auto; padding: 0 16px; border-radius: 23px; }
+:root[data-style="clean"] .ctl.dial .dial-face { display: none; }
+:root[data-style="clean"] .time { font-family: var(--body); font-weight: 400; font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; margin-left: 4px; margin-right: auto; }
+:root[data-style="clean"] .controls > .grow { flex: 1; }
+
+/* build steps */
+:root[data-style="clean"] .steps { padding: 18px 12px 14px 18px; }
+:root[data-style="clean"] .steps-head { padding: 0 6px 14px 0; }
+:root[data-style="clean"] .follow { border: 1px solid var(--line); background: var(--white); border-radius: 22px; padding: 7px 14px 7px 10px; font-weight: 700; font-size: 14px; color: var(--ink); }
+:root[data-style="clean"] .follow i { width: 14px; height: 14px; border: 2px solid var(--muted); background: var(--white); }
+:root[data-style="clean"] .follow[aria-pressed="true"] i { background: var(--accent); border-color: var(--accent); box-shadow: inset 0 0 0 2px var(--white); }
+:root[data-style="clean"] .step-list { gap: 0; padding: 0 6px 6px 0; scrollbar-color: var(--line) transparent; }
+:root[data-style="clean"] .step { background: transparent; border: 0; border-top: 1px solid var(--rule); border-radius: 0; }
+:root[data-style="clean"] .step:first-child { border-top: 0; }
+:root[data-style="clean"] .step.active { box-shadow: none; }
+:root[data-style="clean"] .step-btn { padding: 14px 8px; border-radius: 10px; }
+:root[data-style="clean"] .step-btn:hover { background: var(--card); }
+:root[data-style="clean"] .step-num { font-family: var(--body); font-weight: 700; font-size: 17px; color: var(--muted); }
+:root[data-style="clean"] .step-title { font-family: var(--body); font-weight: 700; font-size: 18px; line-height: 1.3; }
+:root[data-style="clean"] .step-meta { font-family: var(--body); font-size: 14px; color: var(--muted); }
+:root[data-style="clean"] .step-meta .ok { color: var(--ink); font-weight: 700; }
+:root[data-style="clean"] .subs { padding: 0 0 14px; gap: 4px; }
+:root[data-style="clean"] .sub { grid-template-columns: 24px 48px minmax(0, 1fr); gap: 8px; padding: 10px 10px; border-radius: 10px; font-size: 16.5px; line-height: 1.45; }
+:root[data-style="clean"] .sub:hover { background: var(--card); }
+:root[data-style="clean"] .sub .chk { width: 20px; height: 20px; margin-top: 1px; border: 2px solid #8A8F98; border-radius: 50%; }
+:root[data-style="clean"] .sub .chk svg { width: 11px; height: 11px; }
+:root[data-style="clean"] .sub.watched .chk { background: var(--done); border-color: var(--done); }
+:root[data-style="clean"] .sub.watched .chk svg { stroke: var(--white); }
+:root[data-style="clean"] .sub .ts { font-family: var(--body); font-weight: 400; font-size: 14.5px; padding-top: 1px; color: var(--muted); font-variant-numeric: tabular-nums; }
+/* the current sub-step: a bar, a tint and bold text, so it never depends on colour alone */
+:root[data-style="clean"] .sub.current { background: var(--accent-soft); color: var(--ink); font-weight: 700; box-shadow: inset 4px 0 0 var(--accent); border-radius: 4px 10px 10px 4px; }
+:root[data-style="clean"] .sub.current .ts { color: var(--ink); font-weight: 700; }
+:root[data-style="clean"] .sub.current .chk { border-color: var(--accent); }
+:root[data-style="clean"] .sub.current.watched .chk { background: var(--done); border-color: var(--done); }
+:root[data-style="clean"] .sub.current.watched .chk svg { stroke: var(--white); }
+
+/* close-up stills */
+:root[data-style="clean"] .stills { padding: 16px 52px 16px; }
+:root[data-style="clean"] .viewport { border: 0; border-radius: 10px; background: #E9E7E1; }
+:root[data-style="clean"] .lens { border: 3px solid var(--white); box-shadow: 0 0 0 1px var(--ink), 0 8px 24px rgba(36, 39, 44, .25); }
+:root[data-style="clean"] .lens::after { width: 56px; height: 9px; background: var(--ink); }
+:root[data-style="clean"] .hint, :root[data-style="clean"] .zoom { border: 1px solid var(--line); background: var(--white); font-weight: 700; font-size: 14px; }
+:root[data-style="clean"] .zoom button { width: 38px; height: 32px; font-weight: 700; }
+:root[data-style="clean"] .zoom button:hover { background: var(--card); }
+:root[data-style="clean"] .zoom output { font-family: var(--body); font-weight: 700; }
+:root[data-style="clean"] .arrow { color: var(--ink); width: 42px; border-radius: 50%; height: 42px; }
+:root[data-style="clean"] .arrow:hover { background: var(--card); }
+:root[data-style="clean"] .caption-row { margin-top: 14px; }
+:root[data-style="clean"] .caption { background: transparent; padding: 0 6px; font-weight: 700; font-size: 17px; line-height: 1.4; }
+:root[data-style="clean"] .caption .tag { font-family: var(--body); font-weight: 400; font-size: 14px; letter-spacing: 0; color: var(--muted); margin-bottom: 2px; }
+:root[data-style="clean"] .back-btn { border: 1px solid var(--line); background: var(--white); border-radius: 22px; padding: 7px 14px; font-weight: 700; font-size: 14px; }
+:root[data-style="clean"] .film { gap: 8px; margin-top: 14px; }
+:root[data-style="clean"] .film button { border: 1px solid var(--line); border-radius: 6px; opacity: .75; }
+:root[data-style="clean"] .film button[aria-current="true"] { opacity: 1; border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+:root[data-style="clean"] .film button span { font-family: var(--body); font-size: 11px; font-weight: 700; background: rgba(36, 39, 44, .78); }
+
+/* progress */
+:root[data-style="clean"] .progress { padding: 18px 20px 18px; }
+:root[data-style="clean"] .prog-pct { font-family: var(--body); font-weight: 700; font-size: 16px; }
+:root[data-style="clean"] .prog-bar { height: 12px; gap: 4px; margin-top: 14px; }
+:root[data-style="clean"] .prog-seg { border: 0; border-radius: 6px; background: var(--track); background-image: none; }
+:root[data-style="clean"] .prog-seg .f { background: var(--accent); }
+:root[data-style="clean"] .prog-seg.cur { box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--ink); }
+:root[data-style="clean"] .prog-note { margin-top: 14px; font-size: 15px; color: var(--muted); }
+:root[data-style="clean"] .prog-note b { font-family: var(--body); font-weight: 700; color: var(--ink); }
+
+/* what's next */
+:root[data-style="clean"] .mapbox { padding: 14px; }
+:root[data-style="clean"] .map-inner, :root[data-style="clean"] .mapscroll { background: var(--card); border-radius: 10px; }
+:root[data-style="clean"] .map-svg .edge, :root[data-style="clean"] #map .edge { stroke: #8A8F98; stroke-width: 1.5; }
+:root[data-style="clean"] .map-svg, :root[data-style="clean"] #map { color: #8A8F98; }
+:root[data-style="clean"] .map-svg .node circle, :root[data-style="clean"] #map .node circle { fill: var(--white); stroke: #8A8F98; stroke-width: 1.5; }
+:root[data-style="clean"] .map-svg .node:hover circle, :root[data-style="clean"] #map .node:hover circle { fill: var(--accent-soft); stroke: var(--accent); }
+:root[data-style="clean"] #map.map-svg .node.center circle { fill: var(--accent); stroke: var(--accent); }
+:root[data-style="clean"] #map.map-svg .node.center text { fill: var(--white); }
+:root[data-style="clean"] .map-svg .node.later circle, :root[data-style="clean"] #map .node.later circle { fill: var(--card); stroke-dasharray: 4 4; }
+:root[data-style="clean"] .map-svg .node text, :root[data-style="clean"] #map .node text { font-family: var(--body); font-weight: 700; fill: var(--ink); }
+:root[data-style="clean"] .map-svg .node .day, :root[data-style="clean"] #map .node .sub { font-family: var(--body); font-weight: 400; fill: var(--muted); }
+:root[data-style="clean"] .map-svg .elabel rect, :root[data-style="clean"] #map .elabel rect { fill: var(--white); stroke: var(--line); stroke-width: 1; }
+:root[data-style="clean"] .map-svg .elabel text, :root[data-style="clean"] #map .elabel text { font-family: var(--body); font-weight: 400; fill: var(--muted); }
+:root[data-style="clean"] .map-svg .map-note { font-family: var(--body); font-weight: 700; fill: var(--muted); }
+:root[data-style="clean"] .map-legend, :root[data-style="clean"] .legend { color: var(--muted); font-size: 14px; }
+:root[data-style="clean"] .map-legend i, :root[data-style="clean"] .legend i { border: 1.5px solid #8A8F98; background: var(--white); }
+:root[data-style="clean"] .map-legend i.dash, :root[data-style="clean"] .legend i.dash { border-style: dashed; background: var(--card); }
+:root[data-style="clean"] .keys { font-size: 14px; color: var(--muted); }
+:root[data-style="clean"] .keys kbd { font-family: var(--body); font-weight: 700; border: 1px solid var(--line); border-radius: 6px; background: var(--white); color: var(--ink); }
+
+@media (max-width: 699px) {
+  :root[data-style="clean"] .grid { gap: 20px; }
+  :root[data-style="clean"] .tv { padding: 12px 12px 10px; }
+  :root[data-style="clean"] .controls { gap: 6px; }
+  :root[data-style="clean"] .ctl { width: 44px; min-width: 44px; height: 44px; }
+  :root[data-style="clean"] .ctl.dial { width: auto; padding: 0 12px; }
+  :root[data-style="clean"] .stills { padding: 12px; }
+  :root[data-style="clean"] .sub { grid-template-columns: 22px 44px minmax(0, 1fr); }
+}
+
+/* ---------- home page ---------- */
+:root[data-style="clean"] main { gap: 36px; }
+:root[data-style="clean"] h2 { font-family: var(--body); font-weight: 700; font-stretch: 100%; font-size: 21px; letter-spacing: 0; }
+:root[data-style="clean"] .intro { color: var(--muted); font-size: 18px; line-height: 1.6; }
+:root[data-style="clean"] a.card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; box-shadow: none; }
+:root[data-style="clean"] a.card:hover { transform: none; border-color: var(--muted); box-shadow: none; }
+:root[data-style="clean"] .card img { border: 0; border-radius: 10px; margin: 12px 12px 0; width: calc(100% - 24px); background: #E9E7E1; }
+:root[data-style="clean"] .card .body { color: var(--ink); padding: 14px 16px 16px; }
+:root[data-style="clean"] .card b { font-family: var(--body); font-weight: 700; font-stretch: 100%; font-size: 19px; line-height: 1.3; }
+:root[data-style="clean"] .card .meta { font-family: var(--body); font-weight: 400; font-size: 14px; color: var(--muted); }
+:root[data-style="clean"] .mapwrap { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+:root[data-style="clean"] .coming { gap: 10px; }
+:root[data-style="clean"] .coming li { background: var(--panel); border: 1px dashed #B9B6AE; border-radius: 12px; padding: 12px 16px; }
+:root[data-style="clean"] .coming b { font-family: var(--body); font-weight: 700; font-size: 17px; }
+:root[data-style="clean"] .coming span { color: var(--muted); font-size: 15px; }
+:root[data-style="clean"] .team { border-top: 1px solid var(--line); font-size: 15px; color: var(--muted); }
+:root[data-style="clean"] .team a { color: var(--ink); }

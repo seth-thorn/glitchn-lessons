@@ -1,10 +1,10 @@
 /* Gadget style (was called "Rams"): quiet, precise and tactile, in the spirit of Dieter Rams's Braun devices.
    Grey-white housings, anthracite type and controls, one orange accent, a green indicator, round buttons,
-   perforated speaker grilles, hairline rules. The colour swatches change the accent.
+   perforated speaker grilles, hairline rules.
    This file styles both the lesson player and the home page. */
 
 /* ---------- lesson player ---------- */
-:root[data-style="gadget"], :root[data-style="gadget"][data-skin] {
+:root[data-style="gadget"] {
   --ink: #262624; --page: #E2E2DE; --muted: #76756F; --white: #FAFAF8;
   --panel: #F4F4F1; --card: #EAEAE6; --deep: #262624; --on-panel: #262624;
   --line: #CDCCC6; --accent: #F05A28; --ok: #3C9A5F;
@@ -13,11 +13,6 @@
   --mono: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --bw: 1px; --r-lg: 18px; --r-md: 10px; --r-sm: 8px;
 }
-:root[data-style="gadget"][data-skin="navy"]   { --accent: #2F5AA8; }
-:root[data-style="gadget"][data-skin="sky"]    { --accent: #2A8DC2; }
-:root[data-style="gadget"][data-skin="green"]  { --accent: #3C9A5F; }
-:root[data-style="gadget"][data-skin="yellow"] { --accent: #E0A30C; }
-:root[data-style="gadget"][data-skin="red"]    { --accent: #D2362B; }
 :root[data-style="gadget"] body { font-weight: 400; }
 :root[data-style="gadget"] :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 :root[data-style="gadget"] .eyebrow { font-family: var(--body); font-size: 13px; font-weight: 500; letter-spacing: 0; text-transform: none; }
@@ -114,29 +109,16 @@
 :root[data-style="gadget"] .langs, :root[data-style="gadget"] .style-pick select { border: 1px solid var(--line); }
 :root[data-style="gadget"] .lang + .lang { border-left: 1px solid var(--line); }
 :root[data-style="gadget"] .lang, :root[data-style="gadget"] .style-pick select { font-weight: 500; }
-:root[data-style="gadget"] .style-pick, :root[data-style="gadget"] .skins span { font-family: var(--body); font-size: 13px; }
-:root[data-style="gadget"] .skin { width: 24px; height: 24px; border: 0; border-radius: 50%; box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .3); }
-:root[data-style="gadget"] .skin[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--page), 0 0 0 3.5px var(--ink); }
+:root[data-style="gadget"] .style-pick { font-family: var(--body); font-size: 13px; }
 :root[data-style="gadget"] .err { border: 1px solid var(--line); }
-@media (pointer: coarse) { :root[data-style="gadget"] .skin { width: 32px; height: 32px; } }
 
-/* swatches show the accent each skin gives this style */
-:root[data-style="gadget"] .skin[data-skin="navy"]   { --c: #2F5AA8 !important; }
-:root[data-style="gadget"] .skin[data-skin="sky"]    { --c: #2A8DC2 !important; }
-:root[data-style="gadget"] .skin[data-skin="coral"]  { --c: #F05A28 !important; }
-:root[data-style="gadget"] .skin[data-skin="green"]  { --c: #3C9A5F !important; }
-:root[data-style="gadget"] .skin[data-skin="yellow"] { --c: #E0A30C !important; }
-:root[data-style="gadget"] .skin[data-skin="red"]    { --c: #D2362B !important; }
 
 /* ---------- home page ---------- */
-:root[data-style="gadget"], :root[data-style="gadget"][data-skin] {
+:root[data-style="gadget"] {
   --ink: #262624; --page: #E2E2DE; --muted: #76756F; --white: #FAFAF8; --panel: #F4F4F1; --card: #EAEAE6; --on-panel: #262624;
   --line: #CDCCC6; --accent: #F05A28; --bw: 1px;
   --display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif; --body: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif; --mono: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-:root[data-style="gadget"][data-skin="navy"] { --accent: #2F5AA8; } :root[data-style="gadget"][data-skin="sky"] { --accent: #2A8DC2; }
-:root[data-style="gadget"][data-skin="green"] { --accent: #3C9A5F; } :root[data-style="gadget"][data-skin="yellow"] { --accent: #E0A30C; }
-:root[data-style="gadget"][data-skin="red"] { --accent: #D2362B; }
 :root[data-style="gadget"] body { font-weight: 400; }
 :root[data-style="gadget"] :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 :root[data-style="gadget"] .eyebrow { font-family: var(--body); font-size: 13px; font-weight: 500; letter-spacing: 0; text-transform: none; }

@@ -4,10 +4,10 @@
    the scrub bar is a water slide and the playhead is a little raft (the water flows while the video plays);
    progress fills with orchard rows; the map is a landscape of lakes joined by channels.
    Type: Fredoka (round and friendly) for headings, Lexend (made for easy reading) for text.
-   The colour swatches change the accent (orchard orange by default). This file styles the player and home page. */
+   This file styles the player and home page. */
 
 /* ---------- tokens ---------- */
-:root[data-style="daydream"], :root[data-style="daydream"][data-skin] {
+:root[data-style="daydream"] {
   --ink: #17305E; --page: #4A92EE; --muted: #4A6290; --white: #FFFFFF;
   --panel: #FFFFFF; --card: #EEF5FF; --deep: #17305E; --on-panel: #17305E;
   --accent: #F07A2B; --grass: #3E9B3A; --lake: #2C6378; --water: #9FD3F5; --stone: #8D98AE; --stone-d: #2B3550; --puff: #C9DBF5;
@@ -16,17 +16,6 @@
   --mono: "Lexend", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
   --bw: 2px; --r-lg: 26px; --r-md: 18px; --r-sm: 12px;
 }
-:root[data-style="daydream"][data-skin="navy"]   { --accent: #2F5FD0; }
-:root[data-style="daydream"][data-skin="sky"]    { --accent: #1E9BE0; }
-:root[data-style="daydream"][data-skin="green"]  { --accent: #3E9B3A; }
-:root[data-style="daydream"][data-skin="yellow"] { --accent: #E9A51C; }
-:root[data-style="daydream"][data-skin="red"]    { --accent: #E2483D; }
-:root[data-style="daydream"] .skin[data-skin="navy"]   { --c: #2F5FD0 !important; }
-:root[data-style="daydream"] .skin[data-skin="sky"]    { --c: #1E9BE0 !important; }
-:root[data-style="daydream"] .skin[data-skin="coral"]  { --c: #F07A2B !important; }
-:root[data-style="daydream"] .skin[data-skin="green"]  { --c: #3E9B3A !important; }
-:root[data-style="daydream"] .skin[data-skin="yellow"] { --c: #E9A51C !important; }
-:root[data-style="daydream"] .skin[data-skin="red"]    { --c: #E2483D !important; }
 
 /* ---------- the sky: deep blue, towering clouds, and the patchwork land far below ---------- */
 :root[data-style="daydream"] {
@@ -48,15 +37,12 @@
 :root[data-style="daydream"] h1 { font-family: var(--display); font-weight: 700; font-stretch: 100%; letter-spacing: 0; line-height: 1.04; color: #FFFFFF; text-shadow: 0 3px 0 rgba(15, 50, 120, .35), 0 8px 26px rgba(15, 50, 120, .35); }
 :root[data-style="daydream"] h1 .sub { font-family: var(--body); font-weight: 400; color: #EAF3FF; text-shadow: 0 1px 8px rgba(15, 50, 120, .5); }
 :root[data-style="daydream"] .draft-chip, :root[data-style="daydream"] .chip { font-family: var(--body); letter-spacing: 0; font-weight: 600; border: 0; background: #FFFFFF; color: var(--ink); box-shadow: 0 2px 0 var(--puff); }
-:root[data-style="daydream"] .style-pick, :root[data-style="daydream"] .skins span { font-family: var(--body); font-size: 13.5px; font-weight: 500; color: #FFFFFF; }
+:root[data-style="daydream"] .style-pick { font-family: var(--body); font-size: 13.5px; font-weight: 500; color: #FFFFFF; }
 :root[data-style="daydream"] .langs, :root[data-style="daydream"] .style-pick select { border: 0; background: #FFFFFF; box-shadow: 0 3px 0 var(--puff), 0 8px 18px -8px rgba(15, 50, 120, .5); }
 :root[data-style="daydream"] .lang, :root[data-style="daydream"] .style-pick select { font-family: var(--display); font-weight: 600; color: var(--ink); }
 :root[data-style="daydream"] .lang + .lang { border-left: 2px solid var(--card); }
 :root[data-style="daydream"] .lang:hover { background: var(--card); }
 :root[data-style="daydream"] .lang[aria-pressed="true"] { background: var(--accent); color: #FFFFFF; }
-:root[data-style="daydream"] .skin { width: 26px; height: 26px; border: 3px solid #FFFFFF; border-radius: 50%; box-shadow: 0 2px 6px rgba(15, 50, 120, .35); }
-:root[data-style="daydream"] .skin[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--c), 0 4px 10px rgba(15, 50, 120, .4); }
-@media (pointer: coarse) { :root[data-style="daydream"] .skin { width: 34px; height: 34px; } }
 :root[data-style="daydream"] .err { background: #FFFFFF; border: 0; }
 :root[data-style="daydream"] .toast { background: #FFFFFF; color: var(--ink); box-shadow: 0 6px 20px rgba(15, 50, 120, .35); font-family: var(--display); }
 

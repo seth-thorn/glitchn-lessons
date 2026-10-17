@@ -18,9 +18,8 @@
   const LANGS = { en: 'English', es: 'Español' };
   const UI = {
     en: {
-      style: 'Style', style_tv: 'TV', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', allLessons: '← All lessons', lessonEyebrow: "Glitch'n lesson", draft: 'Draft', draftTitle: 'Step text and links are drafts for the team to review',
-      loading: 'Loading…', skin: 'Skin', skinGroup: 'Colour skin', language: 'Language',
-      skin_navy: 'Navy skin', skin_sky: 'Sky skin', skin_coral: 'Coral skin', skin_green: 'Green skin', skin_yellow: 'Yellow skin', skin_red: 'Red skin',
+      style: 'Style', style_tv: 'TV', style_clean: 'Clean', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', allLessons: '← All lessons', lessonEyebrow: "Glitch'n lesson", draft: 'Draft', draftTitle: 'Step text and links are drafts for the team to review',
+      loading: 'Loading…', language: 'Language',
       tutorialVideo: 'Tutorial video', play: 'Play', pause: 'Pause', mute: 'Mute', unmute: 'Unmute', speed: 'Playback speed', fullScreen: 'Full screen', seek: 'Seek through the lesson',
       instructions: 'Instructions', buildSteps: 'Build steps', follow: 'Follow video', followTitle: 'Scroll the list to follow the video',
       closeups: 'Close-up stills', hint: 'Point at the board to magnify', hintTouch: 'Touch and drag to magnify', zoomLess: 'Less magnification', zoomMore: 'More magnification',
@@ -36,9 +35,8 @@
       kind_variation: 'variation', kind_related: 'related', 'kind_next day': 'next day', kind_revisited: 'revisited'
     },
     es: {
-      style: 'Estilo', style_tv: 'Tele', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', allLessons: '← Todas las lecciones', lessonEyebrow: 'Lección de Glitch’n', draft: 'Borrador', draftTitle: 'El texto de los pasos y los enlaces son un borrador',
-      loading: 'Cargando…', skin: 'Color', skinGroup: 'Color de la interfaz', language: 'Idioma',
-      skin_navy: 'Azul marino', skin_sky: 'Celeste', skin_coral: 'Coral', skin_green: 'Verde', skin_yellow: 'Amarillo', skin_red: 'Rojo',
+      style: 'Estilo', style_tv: 'Tele', style_clean: 'Limpio', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', allLessons: '← Todas las lecciones', lessonEyebrow: 'Lección de Glitch’n', draft: 'Borrador', draftTitle: 'El texto de los pasos y los enlaces son un borrador',
+      loading: 'Cargando…', language: 'Idioma',
       tutorialVideo: 'Video de la lección', play: 'Reproducir', pause: 'Pausar', mute: 'Silenciar', unmute: 'Activar sonido', speed: 'Velocidad de reproducción', fullScreen: 'Pantalla completa', seek: 'Avanzar o retroceder en la lección',
       instructions: 'Instrucciones', buildSteps: 'Pasos de armado', follow: 'Seguir el video', followTitle: 'Desplazar la lista para seguir el video',
       closeups: 'Fotos de cerca', hint: 'Señala la protoboard para ampliar', hintTouch: 'Toca y arrastra para ampliar', zoomLess: 'Menos aumento', zoomMore: 'Más aumento',
@@ -67,7 +65,7 @@
      TV is the default, in player.css. Each other style is a file in /styles (see styles/all.css).
      Choice order: ?style= in the address, then the visitor's last choice, then TV.
      To add a style: add its name here and in index.html, its menu name (style_<name>) to UI, and its CSS file. */
-  const STYLES = ['tv', 'gadget', 'solarpunk', 'treehouse', 'quest', 'skyline', 'daydream', 'terminal'];
+  const STYLES = ['tv', 'clean', 'gadget', 'solarpunk', 'treehouse', 'quest', 'skyline', 'daydream', 'terminal'];
   const OLD_STYLE_NAMES = { rams: 'gadget' }; // earlier names, so old links and saved choices still work
   function pickStyle() {
     const ok = (v) => { v = OLD_STYLE_NAMES[v] || v; return STYLES.includes(v) ? v : null; };
@@ -88,15 +86,6 @@
     <div class="top-tools">
     <label class="style-pick"><span>${t('style')}</span><select id="styleSel">${STYLES.map((k) => '<option value="' + k + '"' + (k === STYLE ? ' selected' : '') + '>' + t('style_' + k) + '</option>').join('')}</select></label>
     <div class="langs" role="group" aria-label="${t('language')}">${Object.entries(LANGS).map(([k, n]) => '<button class="lang" data-lang="' + k + '" lang="' + k + '" aria-pressed="' + (k === LANG) + '">' + n + '</button>').join('')}</div>
-    <div class="skins" role="group" aria-label="${t('skinGroup')}">
-      <span>${t('skin')}</span>
-      <button class="skin" data-skin="navy" style="--c:#4259A8" aria-label="${t('skin_navy')}" aria-pressed="false"></button>
-      <button class="skin" data-skin="sky" style="--c:#57BEE4" aria-label="${t('skin_sky')}" aria-pressed="false"></button>
-      <button class="skin" data-skin="coral" style="--c:#EE6668" aria-label="${t('skin_coral')}" aria-pressed="true"></button>
-      <button class="skin" data-skin="green" style="--c:#66C26A" aria-label="${t('skin_green')}" aria-pressed="false"></button>
-      <button class="skin" data-skin="yellow" style="--c:#F5CF42" aria-label="${t('skin_yellow')}" aria-pressed="false"></button>
-      <button class="skin" data-skin="red" style="--c:#E8493F" aria-label="${t('skin_red')}" aria-pressed="false"></button>
-    </div>
     </div>
   </header>
 
@@ -187,7 +176,9 @@
 
 `;
   const RATES = [0.5, 0.75, 1, 1.25, 1.5, 2];
-  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduceMotionPref = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // No smooth scrolling for people who ask for reduced motion, or in the calm Clean style.
+  const calm = () => reduceMotionPref || document.documentElement.dataset.style === 'clean';
   const store = {
     get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
@@ -197,14 +188,8 @@
   let toastTimer;
   function toast(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2600); }
 
-  /* ---------- skins ---------- */
-  function setSkin(name) {
-    if (name === 'coral') delete document.documentElement.dataset.skin; else document.documentElement.dataset.skin = name;
-    document.querySelectorAll('.skin').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.skin === name)));
-    store.set('glitchn-skin', name);
-  }
-  document.querySelectorAll('.skin').forEach((b) => b.addEventListener('click', () => setSkin(b.dataset.skin)));
-  setSkin(store.get('glitchn-skin', 'coral'));
+  // Colour skins were removed on Oct 16, 2026; each style now has its own fixed colours.
+  delete document.documentElement.dataset.skin;
   $('styleSel').addEventListener('change', (e) => { STYLE = e.target.value; document.documentElement.dataset.style = STYLE; store.set('glitchn-style', STYLE); });
 
   const homeUrl = new URL(HOME_URL, location.href); if (new URLSearchParams(location.search).get('lang')) homeUrl.searchParams.set('lang', LANG);
@@ -422,7 +407,7 @@
       if (S.cur < 0) return;
       const el = $('sub-' + S.cur); const r = el.getBoundingClientRect(), lr = list.getBoundingClientRect();
       const top = r.top - lr.top + list.scrollTop - list.clientHeight * 0.28;
-      list.scrollTo({ top: Math.max(0, top), behavior: reduceMotion ? 'auto' : 'smooth' });
+      list.scrollTo({ top: Math.max(0, top), behavior: calm() ? 'auto' : 'smooth' });
     }
     function setCurrent(i) {
       if (i === S.cur) return;
@@ -482,7 +467,7 @@
       }
       film.querySelectorAll('button').forEach((b) => b.setAttribute('aria-current', String(+b.dataset.k === k)));
       const curBtn = film.querySelector('[aria-current="true"]');
-      if (curBtn) film.scrollTo({ left: curBtn.offsetLeft - film.clientWidth / 2 + curBtn.clientWidth / 2, behavior: reduceMotion ? 'auto' : 'smooth' });
+      if (curBtn) film.scrollTo({ left: curBtn.offsetLeft - film.clientWidth / 2 + curBtn.clientWidth / 2, behavior: calm() ? 'auto' : 'smooth' });
     }
     function pin(k) { S.pinned = k; showStill(k); $('backBtn').hidden = false; }
     function unpin() { S.pinned = -1; $('backBtn').hidden = true; if (S.cur >= 0) { const f = flat[S.cur]; showStill(L.steps[f.si].subStillIdx[f.ui]); } }

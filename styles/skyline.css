@@ -3,11 +3,11 @@
    lit windows, then the dark city; dark glass panels warmed by lamplight (brighter while the video plays); the video
    in a big window frame; progress shown as windows lighting up; a night map with light trails; the sofa at the foot of the page.
    Type: Syne (wide, architectural) for headings, Manrope for reading.
-   The colour swatches change the accent (the sofa's burnt orange by default). This file styles the player and home page. */
+   This file styles the player and home page. */
 
 /* ---------- tokens ---------- */
 @property --lamp { syntax: "<number>"; inherits: true; initial-value: .08; }
-:root[data-style="skyline"], :root[data-style="skyline"][data-skin] {
+:root[data-style="skyline"] {
   --ink: #E8EDEC; --page: #121819; --muted: #9DAEAC; --white: #1C2526;
   --panel: rgba(28, 37, 38, .86); --card: #233031; --deep: #0B0F10; --on-panel: #E8EDEC;
   --line: rgba(220, 234, 234, .14); --accent: #D2692E; --warm: #F3B562; --night: #0B0F10;
@@ -17,17 +17,6 @@
   --bw: 1px; --r-lg: 16px; --r-md: 12px; --r-sm: 9px;
   color-scheme: dark;
 }
-:root[data-style="skyline"][data-skin="navy"]   { --accent: #6E8FD8; }
-:root[data-style="skyline"][data-skin="sky"]    { --accent: #4FB0CC; }
-:root[data-style="skyline"][data-skin="green"]  { --accent: #5FB283; }
-:root[data-style="skyline"][data-skin="yellow"] { --accent: #E3A73C; }
-:root[data-style="skyline"][data-skin="red"]    { --accent: #E0554A; }
-:root[data-style="skyline"] .skin[data-skin="navy"]   { --c: #6E8FD8 !important; }
-:root[data-style="skyline"] .skin[data-skin="sky"]    { --c: #4FB0CC !important; }
-:root[data-style="skyline"] .skin[data-skin="coral"]  { --c: #D2692E !important; }
-:root[data-style="skyline"] .skin[data-skin="green"]  { --c: #5FB283 !important; }
-:root[data-style="skyline"] .skin[data-skin="yellow"] { --c: #E3A73C !important; }
-:root[data-style="skyline"] .skin[data-skin="red"]    { --c: #E0554A !important; }
 
 /* ---------- the view: misty sky, a snowy peak, the skyline, then the city below; the sofa at the foot of the page ---------- */
 :root[data-style="skyline"] {
@@ -54,16 +43,13 @@
 :root[data-style="skyline"] h1 { font-family: var(--display); font-weight: 700; font-stretch: 100%; letter-spacing: -.01em; line-height: 1.04; color: #F4F7F6; text-shadow: 0 2px 18px rgba(10, 16, 17, .55); }
 :root[data-style="skyline"] h1 .sub { font-family: var(--body); font-weight: 500; letter-spacing: 0; color: #DCE5E4; }
 :root[data-style="skyline"] .draft-chip, :root[data-style="skyline"] .chip { font-family: var(--body); letter-spacing: 0; font-weight: 600; border: 1px solid rgba(232, 237, 236, .4); background: rgba(12, 16, 17, .4); color: var(--ink); }
-:root[data-style="skyline"] .style-pick, :root[data-style="skyline"] .skins span { font-family: var(--body); font-size: 13px; font-weight: 600; color: #D6E0DF; text-shadow: 0 1px 6px rgba(10, 16, 17, .9), 0 0 2px rgba(10, 16, 17, .9); }
+:root[data-style="skyline"] .style-pick { font-family: var(--body); font-size: 13px; font-weight: 600; color: #D6E0DF; text-shadow: 0 1px 6px rgba(10, 16, 17, .9), 0 0 2px rgba(10, 16, 17, .9); }
 :root[data-style="skyline"] .langs, :root[data-style="skyline"] .style-pick select { border: 1px solid rgba(232, 237, 236, .3); background: rgba(12, 16, 17, .55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); color: var(--ink); }
 :root[data-style="skyline"] .style-pick select option { background: #1C2526; color: var(--ink); }
 :root[data-style="skyline"] .lang, :root[data-style="skyline"] .style-pick select { font-family: var(--body); font-weight: 600; color: var(--ink); }
 :root[data-style="skyline"] .lang + .lang { border-left: 1px solid rgba(232, 237, 236, .3); }
 :root[data-style="skyline"] .lang:hover { background: rgba(255, 255, 255, .08); }
 :root[data-style="skyline"] .lang[aria-pressed="true"] { background: var(--ink); color: var(--night); }
-:root[data-style="skyline"] .skin { width: 22px; height: 22px; border: 0; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25); }
-:root[data-style="skyline"] .skin[aria-pressed="true"] { box-shadow: 0 0 0 2px #2B3738, 0 0 0 3.5px var(--ink), 0 0 12px 2px var(--c); }
-@media (pointer: coarse) { :root[data-style="skyline"] .skin { width: 30px; height: 30px; } }
 :root[data-style="skyline"] .err { background: var(--card); border: 1px solid var(--line); color: var(--ink); }
 :root[data-style="skyline"] .toast { background: #F4F7F6; color: var(--night); }
 

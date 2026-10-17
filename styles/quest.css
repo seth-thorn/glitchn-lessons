@@ -3,10 +3,10 @@
    reading surfaces on parchment; the video in a stone frame under a pointed arch, flanked by torches; a red wax seal
    for the play button; a lantern on the scrub bar; an old map with a compass rose.
    Type: Cinzel (carved Roman capitals) for headings, Alegreya (a warm book face) for reading.
-   The colour swatches are gemstones and change the light (torchlight by default). This file styles the player and home page. */
+   This file styles the player and home page. */
 
 /* ---------- tokens ---------- */
-:root[data-style="quest"], :root[data-style="quest"][data-skin] {
+:root[data-style="quest"] {
   --ink: #2A1E14; --page: #1B2140; --muted: #6B5536; --white: #F6EED8;
   --panel: #E9DDBF; --card: #F1E6C8; --deep: #2A1E14; --on-panel: #2A1E14;
   --parch: #E9DDBF; --sepia: #5B3A1E; --seal: #8E1F22; --stone: #3A3B52; --stone-d: #1E1F2C; --cream: #F1E6C8; --mist: #CFC8E8;
@@ -16,17 +16,6 @@
   --mono: "Alegreya", Georgia, serif;
   --bw: 2px; --r-lg: 8px; --r-md: 6px; --r-sm: 5px;
 }
-:root[data-style="quest"][data-skin="navy"]   { --glow: #A9C1F2; }
-:root[data-style="quest"][data-skin="sky"]    { --glow: #6FD6CF; }
-:root[data-style="quest"][data-skin="green"]  { --glow: #8FCB6B; }
-:root[data-style="quest"][data-skin="yellow"] { --glow: #F2CF5B; }
-:root[data-style="quest"][data-skin="red"]    { --glow: #FF6A4A; }
-:root[data-style="quest"] .skin[data-skin="navy"]   { --c: #6E8FD8 !important; }
-:root[data-style="quest"] .skin[data-skin="sky"]    { --c: #3FB5AE !important; }
-:root[data-style="quest"] .skin[data-skin="coral"]  { --c: #F29A2E !important; }
-:root[data-style="quest"] .skin[data-skin="green"]  { --c: #5FA34A !important; }
-:root[data-style="quest"] .skin[data-skin="yellow"] { --c: #E8C14A !important; }
-:root[data-style="quest"] .skin[data-skin="red"]    { --c: #D2382E !important; }
 
 /* ---------- the world: twilight, mountains, a castle, pines, then the dark forest ---------- */
 :root[data-style="quest"] {
@@ -45,18 +34,13 @@
 :root[data-style="quest"] h1 { font-family: var(--display); font-weight: 700; font-stretch: 100%; letter-spacing: .02em; line-height: 1.08; color: var(--cream); text-shadow: 0 2px 14px rgba(0, 0, 0, .8), 0 0 30px rgba(20, 22, 50, .9); }
 :root[data-style="quest"] h1 .sub { font-family: var(--body); font-weight: 500; font-style: italic; letter-spacing: 0; color: #DCD6F0; font-size: .46em; }
 :root[data-style="quest"] .draft-chip, :root[data-style="quest"] .chip { font-family: var(--body); font-style: normal; letter-spacing: 0; font-weight: 700; border: 1.5px solid var(--sepia); background: var(--parch); color: var(--ink); border-radius: 3px; }
-:root[data-style="quest"] .style-pick, :root[data-style="quest"] .skins span { font-family: var(--body); font-size: 15px; font-style: italic; color: var(--mist); }
+:root[data-style="quest"] .style-pick { font-family: var(--body); font-size: 15px; font-style: italic; color: var(--mist); }
 :root[data-style="quest"] .langs, :root[data-style="quest"] .style-pick select { border: 2px solid var(--sepia); background: var(--parch); border-radius: 4px; box-shadow: 0 0 0 2px rgba(0, 0, 0, .35); }
 :root[data-style="quest"] .lang, :root[data-style="quest"] .style-pick select { font-family: var(--body); font-weight: 700; color: var(--ink); }
 :root[data-style="quest"] .lang + .lang { border-left: 2px solid var(--sepia); }
 :root[data-style="quest"] .lang:hover { background: var(--card); }
 :root[data-style="quest"] .lang[aria-pressed="true"] { background: var(--seal); color: var(--cream); }
-:root[data-style="quest"] .eyebrow, :root[data-style="quest"] .style-pick, :root[data-style="quest"] .skins span { text-shadow: 0 1px 6px rgba(10, 10, 30, .95), 0 0 2px rgba(10, 10, 30, .95); }
-/* colour swatches are gemstones in gold settings */
-:root[data-style="quest"] .skin { width: 24px; height: 24px; border: 2.5px solid #C9A86A; border-radius: 50%;
-  background: radial-gradient(circle at 34% 30%, rgba(255, 255, 255, .75) 0 3px, rgba(255, 255, 255, 0) 7px), radial-gradient(circle at 60% 70%, rgba(0, 0, 0, .35), rgba(0, 0, 0, 0) 60%), var(--c); }
-:root[data-style="quest"] .skin[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--page), 0 0 12px 3px var(--c); }
-@media (pointer: coarse) { :root[data-style="quest"] .skin { width: 32px; height: 32px; } }
+:root[data-style="quest"] .eyebrow, :root[data-style="quest"] .style-pick { text-shadow: 0 1px 6px rgba(10, 10, 30, .95), 0 0 2px rgba(10, 10, 30, .95); }
 :root[data-style="quest"] .err { background: var(--parch); border: 2px solid var(--sepia); }
 :root[data-style="quest"] .toast { background: var(--parch); color: var(--ink); border: 2px solid var(--sepia); font-family: var(--body); }
 

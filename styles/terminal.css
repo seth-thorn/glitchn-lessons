@@ -3,10 +3,10 @@
    when pressed; the current sub-step is shown in inverse video; the scrub bar and progress fill with blocks; a block
    cursor blinks after the title. The video itself is never tinted, so wire colours stay true.
    Type: VT323 (terminal display) for headings and readouts, IBM Plex Mono for reading.
-   The colour swatches change the phosphor: green (default), amber, cyan, blue-white, white, red. Styles the player and home page. */
+   This file styles the player and home page. */
 
 /* ---------- tokens ---------- */
-:root[data-style="terminal"], :root[data-style="terminal"][data-skin] {
+:root[data-style="terminal"] {
   --phos: #33FF66;
   --ink: var(--phos); --page: #030603; --white: #050B06; --panel: #050B06; --card: #08140A; --deep: #000000; --on-panel: var(--phos);
   --muted: color-mix(in srgb, var(--phos) 62%, #000000);
@@ -19,17 +19,6 @@
   --bw: 2px; --r-lg: 0px; --r-md: 0px; --r-sm: 0px;
   color-scheme: dark;
 }
-:root[data-style="terminal"][data-skin="navy"]   { --phos: #B4C8FF; }
-:root[data-style="terminal"][data-skin="sky"]    { --phos: #4FE6FF; }
-:root[data-style="terminal"][data-skin="green"]  { --phos: #E2F2E2; }
-:root[data-style="terminal"][data-skin="yellow"] { --phos: #FFB000; }
-:root[data-style="terminal"][data-skin="red"]    { --phos: #FF5A4E; }
-:root[data-style="terminal"] .skin[data-skin="navy"]   { --c: #B4C8FF !important; }
-:root[data-style="terminal"] .skin[data-skin="sky"]    { --c: #4FE6FF !important; }
-:root[data-style="terminal"] .skin[data-skin="coral"]  { --c: #33FF66 !important; }
-:root[data-style="terminal"] .skin[data-skin="green"]  { --c: #E2F2E2 !important; }
-:root[data-style="terminal"] .skin[data-skin="yellow"] { --c: #FFB000 !important; }
-:root[data-style="terminal"] .skin[data-skin="red"]    { --c: #FF5A4E !important; }
 
 /* ---------- the glass: black, a faint phosphor bloom, scanlines and a vignette over everything ---------- */
 :root[data-style="terminal"] { background: radial-gradient(ellipse at 50% 30%, color-mix(in srgb, var(--phos) 7%, #030603), #030603 70%); background-color: #030603; }
@@ -49,16 +38,13 @@
 @keyframes t-blink { 50% { opacity: 0; } }
 :root[data-style="terminal"] h1 .sub { font-family: var(--body); font-weight: 500; font-size: .3em; line-height: 1.5; letter-spacing: 0; color: var(--muted); }
 :root[data-style="terminal"] .draft-chip, :root[data-style="terminal"] .chip { font-family: var(--body); letter-spacing: 0; font-weight: 600; border: 1px solid var(--phos); background: transparent; color: var(--phos); border-radius: 0; }
-:root[data-style="terminal"] .style-pick, :root[data-style="terminal"] .skins span { font-family: var(--body); font-size: 13px; color: var(--muted); }
+:root[data-style="terminal"] .style-pick { font-family: var(--body); font-size: 13px; color: var(--muted); }
 :root[data-style="terminal"] .langs, :root[data-style="terminal"] .style-pick select { border: 1.5px solid var(--phos); background: var(--black); color: var(--phos); border-radius: 0; }
 :root[data-style="terminal"] .style-pick select option { background: #000000; color: var(--phos); }
 :root[data-style="terminal"] .lang, :root[data-style="terminal"] .style-pick select { font-family: var(--body); font-weight: 600; color: var(--phos); }
 :root[data-style="terminal"] .lang + .lang { border-left: 1.5px solid var(--phos); }
 :root[data-style="terminal"] .lang:hover { background: var(--card); }
 :root[data-style="terminal"] .lang[aria-pressed="true"] { background: var(--phos); color: var(--black); text-shadow: none; }
-:root[data-style="terminal"] .skin { width: 22px; height: 22px; border: 1.5px solid var(--black); border-radius: 0; box-shadow: 0 0 8px color-mix(in srgb, var(--c) 55%, transparent); }
-:root[data-style="terminal"] .skin[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--black), 0 0 0 4px var(--phos), 0 0 12px var(--c); }
-@media (pointer: coarse) { :root[data-style="terminal"] .skin { width: 30px; height: 30px; } }
 :root[data-style="terminal"] .err { background: var(--black); border: 2px solid var(--phos); color: var(--phos); }
 :root[data-style="terminal"] .toast { background: var(--phos); color: var(--black); border-radius: 0; font-family: var(--body); text-shadow: none; box-shadow: 0 0 16px var(--halo); }
 

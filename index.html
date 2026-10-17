@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>
 /* Layout: the lesson library. A header, a row of lesson cards, then the whole map of lessons
-   (a growing, non-linear web), then what's coming. Same ink outlines and skins as the player. */
+   (a growing, non-linear web), then what's coming. Same ink outlines as the player. */
 :root {
   --ink: #161514; --page: #FAF9F7; --muted: #5E5955; --white: #FFFFFF;
   --panel: #EE6668; --card: #FCE4E4; --on-panel: #161514;
@@ -19,11 +19,6 @@
   --bw: 3.5px;
   color-scheme: light;
 }
-:root[data-skin="navy"]   { --panel: #4259A8; --card: #E4E9F8; --on-panel: #FFFFFF; }
-:root[data-skin="sky"]    { --panel: #57BEE4; --card: #E1F4FB; }
-:root[data-skin="green"]  { --panel: #66C26A; --card: #E3F5E4; }
-:root[data-skin="yellow"] { --panel: #F5CF42; --card: #FDF5D6; }
-:root[data-skin="red"]    { --panel: #E8493F; --card: #FCE1DF; --on-panel: #FFFFFF; }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { background: var(--page); color: var(--ink); }
@@ -127,16 +122,15 @@ header > div { min-width: 0; }
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const fmt = (s) => { s = Math.round(s); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
-  try { const sk = localStorage.getItem('glitchn-skin'); const v = sk && JSON.parse(sk); if (v && v !== 'coral') document.documentElement.dataset.skin = v; } catch (e) {}
   /* ---------- language: ?lang= in the address, then the visitor's last choice, then the browser ---------- */
   const LANGS = { en: 'English', es: 'Español' };
   const UI = {
-    en: { style: 'Style', style_tv: 'TV', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', lessons: 'Lessons', intro: 'Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.',
+    en: { style: 'Style', style_tv: 'TV', style_clean: 'Clean', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', lessons: 'Lessons', intro: 'Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.',
       startBuilding: 'Start building', loading: 'Loading lessons…', map: 'Map of lessons', mapAria: 'How the lessons connect', ready: 'Ready to build', coming: 'Coming', arrows: 'Arrows point to where a lesson leads.',
       language: 'Language', steps: 'steps', subSteps: 'sub-steps', draft: 'Draft', comingSmall: 'coming', notReady: '“{t}” isn’t ready yet.', none: 'No lessons yet.',
       listError: '<b>The lesson list did not load.</b> It lives in lessons/index.json; run tools/build_index.py to make it.', title: "Glitch'n Lessons", machine: '',
       'kind_variation': 'variation', 'kind_related': 'related', 'kind_next day': 'next day', 'kind_revisited': 'revisited' },
-    es: { style: 'Estilo', style_tv: 'Tele', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', lessons: 'Lecciones', intro: 'Arma circuitos de sonido en una protoboard, un pequeño paso a la vez. Cada lección muestra un video del armado junto a instrucciones paso a paso, con fotos de cerca que puedes ampliar y un mapa de a dónde ir después.',
+    es: { style: 'Estilo', style_tv: 'Tele', style_clean: 'Limpio', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', lessons: 'Lecciones', intro: 'Arma circuitos de sonido en una protoboard, un pequeño paso a la vez. Cada lección muestra un video del armado junto a instrucciones paso a paso, con fotos de cerca que puedes ampliar y un mapa de a dónde ir después.',
       startBuilding: 'Empieza a armar', loading: 'Cargando lecciones…', map: 'Mapa de lecciones', mapAria: 'Cómo se conectan las lecciones', ready: 'Lista para armar', coming: 'Próximamente', arrows: 'Las flechas apuntan hacia donde lleva cada lección.',
       language: 'Idioma', steps: 'pasos', subSteps: 'subpasos', draft: 'Borrador', comingSmall: 'próximamente', notReady: '“{t}” todavía no está lista.', none: 'Todavía no hay lecciones.',
       listError: '<b>No se pudo cargar la lista de lecciones.</b>', title: 'Lecciones de Glitch’n', machine: 'Traducción automática',
@@ -150,7 +144,7 @@ header > div { min-width: 0; }
   const LANG = pickLang();
   // Styles: same names and storage as the lesson player, so a choice made anywhere applies everywhere.
   // To add a style: add its name here and in player/player.js, its menu name (style_<name>) to UI, and its CSS file in /styles.
-  const STYLES = ['tv', 'gadget', 'solarpunk', 'treehouse', 'quest', 'skyline', 'daydream', 'terminal'];
+  const STYLES = ['tv', 'clean', 'gadget', 'solarpunk', 'treehouse', 'quest', 'skyline', 'daydream', 'terminal'];
   const OLD_STYLE_NAMES = { rams: 'gadget' }; // earlier names, so old links and saved choices still work
   const okStyle = (v) => { v = OLD_STYLE_NAMES[v] || v; return STYLES.includes(v) ? v : null; };
   let STYLE = (() => { const q = okStyle(new URLSearchParams(location.search).get('style')); if (q) return q; try { const v = okStyle(JSON.parse(localStorage.getItem('glitchn-style'))); if (v) return v; } catch (e) {} return 'tv'; })();

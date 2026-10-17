@@ -3,10 +3,10 @@
    with screws, a CRT monitor with an instrument strip (radar, LED readout, lamps, level meter), keycap buttons,
    amber LED readouts, green-bar printout paper for the steps, a radar screen for the map, plants growing over everything.
    Type: Righteous (1970s rounded) for headings, Nunito for reading, VT323 (terminal) for readouts.
-   The colour swatches change the console's accent colour. This file styles both the lesson player and the home page. */
+   This file styles both the lesson player and the home page. */
 
 /* ---------- tokens ---------- */
-:root[data-style="solarpunk"], :root[data-style="solarpunk"][data-skin] {
+:root[data-style="solarpunk"] {
   --ink: #2B2622; --page: #AEB99A; --muted: #4A4F3E; --white: #FBF6E8;
   --panel: #EAE1CA; --card: #F1EAD6; --deep: #2B2622; --on-panel: #2B2622;
   --hot: #C8562F; --amber: #FFB347; --phos: #6EE59A; --phos-hi: #B8FFC9; --crt: #0E2A1C; --led-bg: #1E1A16;
@@ -18,17 +18,6 @@
   --screw: radial-gradient(circle, #8A8170 0 1px, #D9D0BA 1.5px 3.6px, #6E6656 4px, transparent 4.6px);
   --floor: 300px;
 }
-:root[data-style="solarpunk"][data-skin="navy"]   { --hot: #2F4F8F; }
-:root[data-style="solarpunk"][data-skin="sky"]    { --hot: #2F86B3; }
-:root[data-style="solarpunk"][data-skin="green"]  { --hot: #3E7F45; }
-:root[data-style="solarpunk"][data-skin="yellow"] { --hot: #C98E12; }
-:root[data-style="solarpunk"][data-skin="red"]    { --hot: #A8302A; }
-:root[data-style="solarpunk"] .skin[data-skin="navy"]   { --c: #2F4F8F !important; }
-:root[data-style="solarpunk"] .skin[data-skin="sky"]    { --c: #2F86B3 !important; }
-:root[data-style="solarpunk"] .skin[data-skin="coral"]  { --c: #C8562F !important; }
-:root[data-style="solarpunk"] .skin[data-skin="green"]  { --c: #3E7F45 !important; }
-:root[data-style="solarpunk"] .skin[data-skin="yellow"] { --c: #C98E12 !important; }
-:root[data-style="solarpunk"] .skin[data-skin="red"]    { --c: #A8302A !important; }
 
 /* ---------- the room: sun through a window, sage wall, terracotta wainscot, wooden floor, a rug ---------- */
 :root[data-style="solarpunk"] {
@@ -52,17 +41,13 @@
 :root[data-style="solarpunk"] .draft-chip, :root[data-style="solarpunk"] .chip { font-family: var(--body); letter-spacing: 0; font-weight: 800; border: 2px solid var(--ink); background: var(--card); color: var(--ink); border-radius: 5px; }
 :root[data-style="solarpunk"] .home-link { font-weight: 800; border-bottom: 2.5px solid var(--ink); }
 :root[data-style="solarpunk"] .home-link:hover { background: var(--card); }
-:root[data-style="solarpunk"] .style-pick, :root[data-style="solarpunk"] .skins span { font-family: var(--body); font-size: 14px; font-weight: 800; color: #3A4032; }
+:root[data-style="solarpunk"] .style-pick { font-family: var(--body); font-size: 14px; font-weight: 800; color: #3A4032; }
 /* switches are console keys */
 :root[data-style="solarpunk"] .langs, :root[data-style="solarpunk"] .style-pick select { border: 2px solid var(--ink); background: linear-gradient(180deg, #F7F0DC, #E2D7BB); border-radius: 8px; box-shadow: 0 3px 0 var(--ink); }
 :root[data-style="solarpunk"] .lang, :root[data-style="solarpunk"] .style-pick select { font-family: var(--body); font-weight: 800; }
 :root[data-style="solarpunk"] .lang + .lang { border-left: 2px solid var(--ink); }
 :root[data-style="solarpunk"] .lang:hover { background: #FFF7E2; }
 :root[data-style="solarpunk"] .lang[aria-pressed="true"] { background: var(--hot); color: #FFF4DE; }
-/* colour swatches are indicator lamps */
-:root[data-style="solarpunk"] .skin { width: 26px; height: 26px; border: 2px solid var(--ink); border-radius: 50%; box-shadow: inset 0 -4px 6px rgba(0, 0, 0, .35), inset 0 3px 4px rgba(255, 255, 255, .45); }
-:root[data-style="solarpunk"] .skin[aria-pressed="true"] { box-shadow: inset 0 -4px 6px rgba(0, 0, 0, .2), inset 0 3px 4px rgba(255, 255, 255, .6), 0 0 0 3px var(--card), 0 0 0 5px var(--ink), 0 0 14px 4px var(--c); }
-@media (pointer: coarse) { :root[data-style="solarpunk"] .skin { width: 34px; height: 34px; } }
 :root[data-style="solarpunk"] .err { background: var(--card); border: 2px solid var(--ink); }
 :root[data-style="solarpunk"] .toast { background: var(--led-bg); color: var(--amber); font-family: var(--term); font-size: 22px; font-weight: 400; text-shadow: 0 0 8px rgba(255, 179, 71, .6); }
 /* LED readouts */

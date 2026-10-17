@@ -1,7 +1,7 @@
 /* Glitch'n lesson player styles.
    Layout: two columns like a workbench. Left: the "TV" video and the magnifier stills below it.
    Right: the step list (same height as the TV), progress, and the "what's next" map. Stacks on narrow screens.
-   Skins swap only the panel colours; ink outlines and type stay constant. */
+   Other looks live in /styles; this file is the default TV look. */
 :root {
   --ink: #161514;
   --page: #FAF9F7;
@@ -20,11 +20,6 @@
   --r-sm: 9px;
   color-scheme: light;
 }
-:root[data-skin="navy"]   { --panel: #4259A8; --card: #E4E9F8; --deep: #2B3E80; --on-panel: #FFFFFF; }
-:root[data-skin="sky"]    { --panel: #57BEE4; --card: #E1F4FB; --deep: #2A86AA; --on-panel: #161514; }
-:root[data-skin="green"]  { --panel: #66C26A; --card: #E3F5E4; --deep: #378C3C; --on-panel: #161514; }
-:root[data-skin="yellow"] { --panel: #F5CF42; --card: #FDF5D6; --deep: #B48D07; --on-panel: #161514; }
-:root[data-skin="red"]    { --panel: #E8493F; --card: #FCE1DF; --deep: #A92B23; --on-panel: #FFFFFF; }
 
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -50,11 +45,6 @@ button { font: inherit; color: inherit; }
 .draft-chip { font-family: var(--mono); letter-spacing: .04em; text-transform: none; font-size: 12px; border: 2px solid var(--ink); border-radius: 99px; padding: 1px 9px; color: var(--ink); background: var(--white); }
 h1 { font-family: var(--display); font-weight: 860; font-stretch: 112%; font-size: clamp(30px, 4.4vw, 50px); line-height: 1.02; letter-spacing: -.01em; margin: 6px 0 0; text-wrap: balance; }
 h1 .sub { display: block; font-weight: 600; font-stretch: 100%; font-size: .44em; letter-spacing: 0; margin-top: 8px; color: var(--muted); }
-.skins { display: flex; gap: 6px; align-items: center; }
-.skins span { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-right: 4px; }
-.skin { width: 34px; height: 30px; border: var(--bw) solid var(--ink); border-radius: 6px; padding: 0; cursor: pointer; background: var(--c); transition: transform .12s; }
-.skin:hover { transform: translateY(-2px); }
-.skin[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--page), 0 0 0 6px var(--ink); }
 
 /* ---------- Grid ---------- */
 .grid { display: grid; grid-template-columns: minmax(0, 1.42fr) minmax(0, 1fr); grid-template-areas: "tv steps" "stills side"; gap: 26px 26px; align-items: stretch; }
@@ -247,7 +237,6 @@ h1 .sub { display: block; font-weight: 600; font-stretch: 100%; font-size: .44em
 /* Touch screens (tablets, phones): larger targets for fingers. */
 @media (pointer: coarse) {
   .lang { padding: 8px 16px; font-size: 15px; }
-  .skin { width: 40px; height: 36px; }
   .ctl { height: 46px; min-width: 46px; }
   .step-btn { padding: 14px; }
   .sub { padding: 10px 8px; }
@@ -265,7 +254,7 @@ body { margin: 0; }
 .home-link { color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--ink); font-weight: 600; }
 .home-link:hover { background: var(--card); }
 .map-svg .map-note { font-family: var(--body); font-weight: 700; font-size: 12px; fill: var(--on-panel); text-anchor: middle; dominant-baseline: middle; }
-/* ---------- language switch and colour skins (header, top-right) ---------- */
+/* ---------- language switch and style menu (header, top-right) ---------- */
 .top-tools { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; padding-top: 2px; }
 .langs { display: inline-flex; border: var(--bw) solid var(--ink); border-radius: 99px; overflow: hidden; background: var(--white); }
 .lang { border: 0; background: none; padding: 4px 13px; font-family: var(--body); font-weight: 700; font-size: 14px; cursor: pointer; color: var(--ink); }
@@ -333,3 +322,7 @@ body { margin: 0; }
 @keyframes tv-sway-l { from { transform: rotate(-144deg); } to { transform: rotate(-138deg); } }
 @keyframes tv-sway-r { from { transform: rotate(-36deg); } to { transform: rotate(-43deg); } }
 @media (prefers-reduced-motion: reduce) { .ant .rod { animation: none !important; } }
+
+/* The lesson subtitle sits inside the title as <span class="sub">, which shares its class name with the build sub-steps.
+   Keep sub-step styling (padding, hover backgrounds) off it in every style. */
+:root[data-style] h1 .sub, :root[data-style] h1 .sub:hover { padding: 0; background: none; box-shadow: none; border-radius: 0; }
