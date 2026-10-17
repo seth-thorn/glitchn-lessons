@@ -67,9 +67,6 @@ h1 .sub { display: block; font-weight: 600; font-stretch: 100%; font-size: .44em
 
 /* ---------- TV ---------- */
 .tv { position: relative; padding: 18px 18px 10px; }
-.tv::before, .tv::after { content: ""; position: absolute; bottom: 100%; left: 50%; width: 92px; height: 9px; background: var(--ink); border-radius: 9px; transform-origin: 0 50%; }
-.tv::before { transform: translate(-2px, 2px) rotate(-148deg); }
-.tv::after  { transform: translate(-2px, 2px) rotate(-32deg); }
 .screen { position: relative; aspect-ratio: 16 / 9; max-width: 100%; background: #0E0E0E; border: var(--bw) solid var(--ink); border-radius: var(--r-md); overflow: hidden; }
 .screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; pointer-events: none; }
 .screen video.on { opacity: 1; }
@@ -99,7 +96,7 @@ h1 .sub { display: block; font-weight: 600; font-stretch: 100%; font-size: .44em
 .ctl svg { width: 24px; height: 24px; }
 .divider { width: 2.5px; height: 26px; background: currentColor; border-radius: 2px; opacity: .9; }
 .time { font-family: var(--mono); font-size: 14px; font-weight: 600; margin-left: 6px; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.grow { flex: 1; }
+.grow { flex: 1; min-width: 0; }
 
 .tv:fullscreen { border-radius: 0; display: flex; flex-direction: column; justify-content: center; padding: 18px 24px; }
 .tv:fullscreen .screen { width: min(100%, calc((100vh - 120px) * 16 / 9)); margin: 0 auto; }
@@ -277,3 +274,162 @@ body { margin: 0; }
   .follow { white-space: nowrap; }
   .hint { font-size: 12px; max-width: calc(100% - 150px); }
 }
+
+/* =====================================================================
+   STYLES — whole looks for the page. The default is "tv" (everything above plus the TV parts below).
+   Each other style is one block scoped to :root[data-style="…"]; add new ones the same way.
+   ===================================================================== */
+
+/* ---------- TV: a television set, antenna, cabinet, glass and all ---------- */
+.ant { position: absolute; left: 50%; bottom: 100%; width: 0; height: 0; pointer-events: none; }
+.ant .rod { position: absolute; left: 0; bottom: -2px; width: 98px; height: 7px; background: var(--ink); border-radius: 7px; transform-origin: 0 50%; }
+.ant .rod.l { transform: rotate(-144deg); }
+.ant .rod.r { transform: rotate(-36deg); }
+.ant .rod::after { content: ""; position: absolute; right: -8px; top: 50%; width: 16px; height: 16px; margin-top: -8px; border-radius: 50%; background: var(--ink); }
+.ant .base { position: absolute; left: -27px; bottom: -3px; width: 54px; height: 24px; border-radius: 27px 27px 4px 4px; background: var(--ink); }
+.ant .base::after { content: ""; position: absolute; left: 50%; top: 7px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--panel); }
+.tv { box-shadow: inset 0 -10px 0 rgba(0, 0, 0, .1); }
+.tv-wrap { padding-bottom: 16px; }
+.feet { position: absolute; top: 100%; left: 12%; right: 12%; display: flex; justify-content: space-between; pointer-events: none; }
+.feet i { width: 52px; height: 15px; background: var(--ink); border-radius: 0 0 12px 12px; }
+.screen { border-radius: 26px / 22px; }
+.glass { position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background: radial-gradient(130% 85% at 18% 0%, rgba(255, 255, 255, .16), rgba(255, 255, 255, 0) 46%),
+              repeating-linear-gradient(0deg, rgba(0, 0, 0, .06) 0 1px, rgba(0, 0, 0, 0) 1px 3px);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, .42); }
+.dial-face { position: relative; width: 30px; height: 30px; border-radius: 50%; background: var(--card); border: 2.5px solid var(--ink); flex: none; transform: rotate(var(--rot, 0deg)); transition: transform .25s; }
+.dial-mark { position: absolute; left: 50%; top: 2px; width: 3px; height: 9px; margin-left: -1.5px; border-radius: 2px; background: var(--ink); }
+.ctl.dial { gap: 8px; }
+.grille { align-self: center; height: 28px; margin: 0 10px; border-radius: 6px; opacity: .22;
+  background: repeating-linear-gradient(90deg, currentColor 0 3px, transparent 3px 9px); }
+.style-pick { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.style-pick select { font-family: var(--body); font-weight: 700; font-size: 14px; color: var(--ink); background: var(--white); border: var(--bw) solid var(--ink); border-radius: 99px; padding: 4px 10px; cursor: pointer; }
+@media (pointer: coarse) { .style-pick select { padding: 8px 12px; font-size: 15px; } }
+@media (prefers-reduced-motion: reduce) { .dial-face { transition: none; } }
+
+/* ---------- Rams: quiet, precise, tactile — in the spirit of Dieter Rams's Braun devices ----------
+   Grey-white plastic housings, anthracite type and controls, one orange accent, a green indicator,
+   round buttons, perforated speaker grilles, hairline rules, small lowercase labels. */
+:root[data-style="rams"], :root[data-style="rams"][data-skin] {
+  --ink: #262624; --page: #E2E2DE; --muted: #76756F; --white: #FAFAF8;
+  --panel: #F4F4F1; --card: #EAEAE6; --deep: #262624; --on-panel: #262624;
+  --line: #CDCCC6; --accent: #F05A28; --ok: #3C9A5F;
+  --display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --body: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --bw: 1px; --r-lg: 18px; --r-md: 10px; --r-sm: 8px;
+}
+:root[data-style="rams"][data-skin="navy"]   { --accent: #2F5AA8; }
+:root[data-style="rams"][data-skin="sky"]    { --accent: #2A8DC2; }
+:root[data-style="rams"][data-skin="green"]  { --accent: #3C9A5F; }
+:root[data-style="rams"][data-skin="yellow"] { --accent: #E0A30C; }
+:root[data-style="rams"][data-skin="red"]    { --accent: #D2362B; }
+:root[data-style="rams"] body { font-weight: 400; }
+:root[data-style="rams"] :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+:root[data-style="rams"] .eyebrow { font-family: var(--body); font-size: 13px; font-weight: 500; letter-spacing: 0; text-transform: none; }
+:root[data-style="rams"] .home-link { border-bottom-width: 1px; font-weight: 500; }
+:root[data-style="rams"] .draft-chip { font-family: var(--body); letter-spacing: 0; border: 1px solid var(--line); background: transparent; color: var(--muted); }
+:root[data-style="rams"] .lang-note { background: transparent; }
+:root[data-style="rams"] h1 { font-weight: 600; font-stretch: 100%; letter-spacing: -.025em; line-height: 1.05; }
+:root[data-style="rams"] h1 .sub { font-weight: 400; letter-spacing: 0; }
+:root[data-style="rams"] .panel { border: 1px solid var(--line); background: linear-gradient(180deg, #FBFBF9, #F0F0EC); box-shadow: inset 0 1px 0 #FFFFFF, 0 22px 44px -32px rgba(38, 38, 36, .55); }
+:root[data-style="rams"] .panel-title { font-weight: 600; font-stretch: 100%; font-size: 17px; letter-spacing: -.01em; }
+/* the video becomes a device: screen in a dark bezel above a control strip */
+:root[data-style="rams"] .ant, :root[data-style="rams"] .feet, :root[data-style="rams"] .glass { display: none; }
+:root[data-style="rams"] .tv-wrap { padding-top: 0; padding-bottom: 0; }
+:root[data-style="rams"] .tv { padding: 20px 20px 14px; box-shadow: inset 0 1px 0 #FFFFFF, 0 26px 50px -34px rgba(38, 38, 36, .6); }
+:root[data-style="rams"] .screen { border: 7px solid #2B2B29; border-radius: 12px; box-shadow: 0 0 0 1px #1A1A19; }
+:root[data-style="rams"] .big-play span { width: 74px; height: 74px; background: var(--accent); border: 0; color: #FFFFFF; box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .55); }
+:root[data-style="rams"] .now-chip { border: 0; border-radius: 6px; background: rgba(250, 250, 248, .93); font-weight: 500; }
+:root[data-style="rams"] .now-chip b { font-family: var(--body); color: var(--accent); }
+:root[data-style="rams"] .scrub { margin-top: 16px; }
+:root[data-style="rams"] .track { top: 13px; height: 4px; border: 0; border-radius: 2px; background: #D3D2CC; overflow: visible; }
+:root[data-style="rams"] .track .fill { border-radius: 2px; background: var(--ink); }
+:root[data-style="rams"] .track .sep { top: -3px; bottom: -3px; width: 2px; background: #F4F4F1; }
+:root[data-style="rams"] .ticks i { top: 3px; height: 5px; width: 1px; background: var(--muted); opacity: .6; }
+:root[data-style="rams"] .scrub .knob { top: 7px; width: 16px; height: 16px; margin-left: -8px; border: 0; background: var(--accent); box-shadow: 0 1px 3px rgba(0, 0, 0, .35); }
+:root[data-style="rams"] .scrub:focus-within .knob { box-shadow: 0 0 0 3px var(--panel), 0 0 0 5px var(--accent); }
+:root[data-style="rams"] .hover-tip b { font-family: var(--body); color: var(--accent); }
+:root[data-style="rams"] .controls { border-top: 1px solid var(--line); margin-top: 10px; padding-top: 12px; gap: 10px; color: var(--ink); }
+:root[data-style="rams"] .divider { display: none; }
+:root[data-style="rams"] .ctl { width: 44px; min-width: 44px; height: 44px; padding: 0; border-radius: 50%; font-family: var(--body); font-weight: 600; font-size: 13px;
+  background: linear-gradient(180deg, #FDFDFB, #E6E6E2); box-shadow: 0 1px 2px rgba(0, 0, 0, .28), inset 0 -2px 0 rgba(0, 0, 0, .06); }
+:root[data-style="rams"] .ctl:hover { background: linear-gradient(180deg, #FFFFFF, #ECECE8); }
+:root[data-style="rams"] .ctl svg { width: 20px; height: 20px; }
+:root[data-style="rams"] #playBtn { background: var(--accent); color: #FFFFFF; }
+:root[data-style="rams"] .ctl.dial { width: auto; border-radius: 22px; padding: 0 14px 0 7px; }
+:root[data-style="rams"] .dial-face { width: 30px; height: 30px; border: 0; background: radial-gradient(circle at 50% 35%, #F7F7F4, #DADAD5); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12); }
+:root[data-style="rams"] .dial-mark { background: var(--accent); width: 2px; margin-left: -1px; }
+:root[data-style="rams"] .time { font-family: var(--body); font-weight: 500; color: var(--muted); }
+:root[data-style="rams"] .grille { opacity: 1; height: 34px; margin: 0 6px; border-radius: 4px;
+  background: radial-gradient(circle, #A3A29C 1.7px, transparent 2.1px) 0 0 / 9px 9px; }
+:root[data-style="rams"] .steps { padding: 16px 12px 14px 16px; }
+:root[data-style="rams"] .follow { border: 1px solid var(--line); background: var(--white); font-weight: 500; }
+:root[data-style="rams"] .follow i { border: 0; background: #C9C8C2; box-shadow: inset 0 1px 1px rgba(0, 0, 0, .2); }
+:root[data-style="rams"] .follow[aria-pressed="true"] i { background: var(--ok); box-shadow: 0 0 6px rgba(60, 154, 95, .7); }
+:root[data-style="rams"] .step-list { gap: 0; scrollbar-color: #BBBAB4 transparent; }
+:root[data-style="rams"] .step { background: transparent; border: 0; border-top: 1px solid var(--line); border-radius: 0; }
+:root[data-style="rams"] .step:first-child { border-top: 0; }
+:root[data-style="rams"] .step.active { box-shadow: none; }
+:root[data-style="rams"] .step-btn { padding: 13px 6px; border-radius: 8px; }
+:root[data-style="rams"] .step-num { font-weight: 500; color: var(--muted); }
+:root[data-style="rams"] .step-title { font-weight: 600; font-size: 17px; letter-spacing: -.01em; }
+:root[data-style="rams"] .step-meta { font-family: var(--body); color: var(--muted); }
+:root[data-style="rams"] .subs { padding: 0 0 12px; }
+:root[data-style="rams"] .sub .chk { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid #A9A8A2; }
+:root[data-style="rams"] .sub.watched .chk { background: var(--ok); border-color: var(--ok); }
+:root[data-style="rams"] .sub.watched .chk svg { stroke: #FFFFFF; }
+:root[data-style="rams"] .sub .ts { font-family: var(--body); font-weight: 500; }
+:root[data-style="rams"] .sub.current { background: var(--white); color: var(--ink); box-shadow: inset 3px 0 0 var(--accent), 0 1px 3px rgba(0, 0, 0, .1); }
+:root[data-style="rams"] .sub.current .ts { color: var(--accent); }
+:root[data-style="rams"] .sub.current .chk { border-color: #A9A8A2; }
+:root[data-style="rams"] .sub.current.watched .chk { background: var(--ok); border-color: var(--ok); }
+:root[data-style="rams"] .sub.current.watched .chk svg { stroke: #FFFFFF; }
+:root[data-style="rams"] .viewport { border: 0; border-radius: 10px; box-shadow: 0 0 0 1px var(--line); }
+:root[data-style="rams"] .lens { border: 3px solid #FAFAF8; box-shadow: 0 0 0 1px #262624, 0 14px 28px rgba(0, 0, 0, .35); }
+:root[data-style="rams"] .lens::after { width: 62px; height: 10px; background: #2B2B29; }
+:root[data-style="rams"] .hint, :root[data-style="rams"] .zoom { border: 0; background: rgba(250, 250, 248, .94); box-shadow: 0 1px 3px rgba(0, 0, 0, .2); font-weight: 500; }
+:root[data-style="rams"] .zoom output { font-family: var(--body); }
+:root[data-style="rams"] .arrow { color: var(--muted); }
+:root[data-style="rams"] .caption { background: transparent; border-radius: 0; font-weight: 500; }
+:root[data-style="rams"] .caption .tag { font-family: var(--body); letter-spacing: 0; }
+:root[data-style="rams"] .back-btn { border: 1px solid var(--line); font-weight: 500; }
+:root[data-style="rams"] .film button { border: 0; border-radius: 6px; box-shadow: 0 0 0 1px var(--line); }
+:root[data-style="rams"] .film button[aria-current="true"] { box-shadow: 0 0 0 2px var(--accent); }
+:root[data-style="rams"] .film button span { font-family: var(--body); background: rgba(38, 38, 36, .82); }
+:root[data-style="rams"] .prog-pct { font-family: var(--body); font-weight: 500; }
+:root[data-style="rams"] .prog-bar { height: 10px; gap: 3px; margin-top: 14px; }
+:root[data-style="rams"] .prog-seg { border: 0; border-radius: 5px; background: #DCDBD5; }
+:root[data-style="rams"] .prog-seg .f { background: var(--ink); }
+:root[data-style="rams"] .prog-seg.cur { box-shadow: 0 0 0 2px var(--accent); }
+:root[data-style="rams"] .prog-note b { font-family: var(--body); font-weight: 600; }
+:root[data-style="rams"] .mapbox { padding: 12px; }
+:root[data-style="rams"] .map-inner { background: var(--card); border-radius: 12px; }
+:root[data-style="rams"] .map-svg .edge { stroke: #8F8E88; stroke-width: 1.5; }
+:root[data-style="rams"] .map-svg .node circle { fill: #FAFAF8; stroke: #262624; stroke-width: 1.5; }
+:root[data-style="rams"] .map-svg .node.center circle { fill: #262624; stroke-width: 1.5; }
+:root[data-style="rams"] .map-svg .node.center text { fill: #FAFAF8; }
+:root[data-style="rams"] .map-svg .node.later circle { fill: transparent; stroke-dasharray: 4 3; }
+:root[data-style="rams"] .map-svg .node text { font-weight: 600; }
+:root[data-style="rams"] .map-svg .node .day { font-family: var(--body); font-weight: 500; }
+:root[data-style="rams"] .map-svg .elabel rect { stroke: var(--line); stroke-width: 1; }
+:root[data-style="rams"] .map-svg .elabel text { font-family: var(--body); font-weight: 500; }
+:root[data-style="rams"] .map-svg .map-note { font-weight: 500; fill: var(--muted); }
+:root[data-style="rams"] .map-legend i { border-width: 1px; }
+:root[data-style="rams"] .keys kbd { font-family: var(--body); border: 1px solid var(--line); }
+:root[data-style="rams"] .langs, :root[data-style="rams"] .style-pick select { border: 1px solid var(--line); }
+:root[data-style="rams"] .lang + .lang { border-left: 1px solid var(--line); }
+:root[data-style="rams"] .lang, :root[data-style="rams"] .style-pick select { font-weight: 500; }
+:root[data-style="rams"] .style-pick, :root[data-style="rams"] .skins span { font-family: var(--body); font-size: 13px; }
+:root[data-style="rams"] .skin { width: 24px; height: 24px; border: 0; border-radius: 50%; box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .3); }
+:root[data-style="rams"] .skin[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--page), 0 0 0 3.5px var(--ink); }
+:root[data-style="rams"] .err { border: 1px solid var(--line); }
+@media (pointer: coarse) { :root[data-style="rams"] .skin { width: 32px; height: 32px; } }
+
+/* Rams: swatches show the accent each skin gives this style */
+:root[data-style="rams"] .skin[data-skin="navy"]   { --c: #2F5AA8 !important; }
+:root[data-style="rams"] .skin[data-skin="sky"]    { --c: #2A8DC2 !important; }
+:root[data-style="rams"] .skin[data-skin="coral"]  { --c: #F05A28 !important; }
+:root[data-style="rams"] .skin[data-skin="green"]  { --c: #3C9A5F !important; }
+:root[data-style="rams"] .skin[data-skin="yellow"] { --c: #E0A30C !important; }
+:root[data-style="rams"] .skin[data-skin="red"]    { --c: #D2362B !important; }

@@ -55,6 +55,20 @@ Visitors can switch between **English** and **Español** on every page. The choi
 
 To add another language later, add its column to the two interface tables and a `lesson.<code>.json` file per lesson.
 
+## Styles
+
+Every page has a **Style** menu that changes the page's whole personality, not just its colours. The choice is remembered, and a link can force one with `?style=rams`.
+
+- **TV** (the default): the lesson video sits in a chunky television with an antenna, feet, curved glass and a speed dial.
+- **Rams**: quiet, precise and tactile, after Dieter Rams's work at Braun: warm greys, hairlines, round buttons and one orange accent.
+
+The colour swatches still work in both styles: in TV they paint the cabinet, in Rams they change the accent.
+
+To add a style (Solar Punk, Treehouse, Cartoon…):
+1. Add its short name to the `STYLES` list in `player/player.js` and in `index.html`.
+2. Add its menu name to the interface tables (`style_<name>`, in English and Spanish) in both files.
+3. Add a block of CSS rules that start with `:root[data-style="<name>"]` to `player/player.css` (and to the style block in `index.html` for the home page). The Rams block is a good model: it changes the colour tokens first, then restyles each part.
+
 ## Status
 
 The first lesson's step text and the links are drafts for the Glitch'n team to review. Days 2–5 of the original five-day course are listed as planned lessons.

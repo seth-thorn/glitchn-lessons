@@ -18,7 +18,7 @@
   const LANGS = { en: 'English', es: 'Español' };
   const UI = {
     en: {
-      allLessons: '← All lessons', lessonEyebrow: "Glitch'n lesson", draft: 'Draft', draftTitle: 'Step text and links are drafts for the team to review',
+      style: 'Style', style_tv: 'TV', style_rams: 'Rams', allLessons: '← All lessons', lessonEyebrow: "Glitch'n lesson", draft: 'Draft', draftTitle: 'Step text and links are drafts for the team to review',
       loading: 'Loading…', skin: 'Skin', skinGroup: 'Colour skin', language: 'Language',
       skin_navy: 'Navy skin', skin_sky: 'Sky skin', skin_coral: 'Coral skin', skin_green: 'Green skin', skin_yellow: 'Yellow skin', skin_red: 'Red skin',
       tutorialVideo: 'Tutorial video', play: 'Play', pause: 'Pause', mute: 'Mute', unmute: 'Unmute', speed: 'Playback speed', fullScreen: 'Full screen', seek: 'Seek through the lesson',
@@ -36,7 +36,7 @@
       kind_variation: 'variation', kind_related: 'related', 'kind_next day': 'next day', kind_revisited: 'revisited'
     },
     es: {
-      allLessons: '← Todas las lecciones', lessonEyebrow: 'Lección de Glitch’n', draft: 'Borrador', draftTitle: 'El texto de los pasos y los enlaces son un borrador',
+      style: 'Estilo', style_tv: 'Tele', style_rams: 'Rams', allLessons: '← Todas las lecciones', lessonEyebrow: 'Lección de Glitch’n', draft: 'Borrador', draftTitle: 'El texto de los pasos y los enlaces son un borrador',
       loading: 'Cargando…', skin: 'Color', skinGroup: 'Color de la interfaz', language: 'Idioma',
       skin_navy: 'Azul marino', skin_sky: 'Celeste', skin_coral: 'Coral', skin_green: 'Verde', skin_yellow: 'Amarillo', skin_red: 'Rojo',
       tutorialVideo: 'Video de la lección', play: 'Reproducir', pause: 'Pausar', mute: 'Silenciar', unmute: 'Activar sonido', speed: 'Velocidad de reproducción', fullScreen: 'Pantalla completa', seek: 'Avanzar o retroceder en la lección',
@@ -63,6 +63,17 @@
   const LANG = pickLang();
   document.documentElement.lang = LANG;
   const t = (k, v) => String(UI[LANG][k] ?? UI.en[k] ?? k).replace(/\{(\w+)\}/g, (_, n) => (v && v[n] != null ? v[n] : ''));
+  /* ---------- styles: whole looks for the page (colours, type, shapes, the TV itself) ----------
+     Each style is CSS in player.css under :root[data-style="…"]. Choice order: ?style= in the address,
+     then the visitor's last choice, then TV. Add a style by adding it here and writing its CSS block. */
+  const STYLES = ['tv', 'rams'];
+  function pickStyle() {
+    const q = new URLSearchParams(location.search).get('style'); if (q && STYLES.includes(q)) return q;
+    try { const v = JSON.parse(localStorage.getItem('glitchn-style')); if (STYLES.includes(v)) return v; } catch (e) {}
+    return 'tv';
+  }
+  let STYLE = pickStyle();
+  document.documentElement.dataset.style = STYLE;
   const kindLabel = (k) => t('kind_' + k) === 'kind_' + k ? k : t('kind_' + k);
   const mount = document.getElementById('glitchn-player') || document.body.appendChild(document.createElement('div'));
   mount.innerHTML = `<div class="app" id="app">
@@ -72,6 +83,7 @@
       <h1 id="title">${t('loading')}</h1>
     </div>
     <div class="top-tools">
+    <label class="style-pick"><span>${t('style')}</span><select id="styleSel">${STYLES.map((k) => '<option value="' + k + '"' + (k === STYLE ? ' selected' : '') + '>' + t('style_' + k) + '</option>').join('')}</select></label>
     <div class="langs" role="group" aria-label="${t('language')}">${Object.entries(LANGS).map(([k, n]) => '<button class="lang" data-lang="' + k + '" lang="' + k + '" aria-pressed="' + (k === LANG) + '">' + n + '</button>').join('')}</div>
     <div class="skins" role="group" aria-label="${t('skinGroup')}">
       <span>${t('skin')}</span>
@@ -88,9 +100,11 @@
   <div class="grid">
     <section class="tv-wrap" aria-label="${t('tutorialVideo')}">
       <div class="tv panel" id="tv">
+        <span class="ant" aria-hidden="true"><i class="rod l"></i><i class="rod r"></i><i class="base"></i></span>
         <div class="screen idle" id="screen">
           <video id="vA" class="on" playsinline preload="auto"></video>
           <video id="vB" playsinline preload="auto"></video>
+          <span class="glass" aria-hidden="true"></span>
           <div class="now-chip" id="nowChip"></div>
           <button class="big-play" id="bigPlay" aria-label="${t('play')}"><span><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z" fill="currentColor"/></svg></span></button>
         </div>
@@ -104,13 +118,14 @@
         <div class="controls">
           <button class="ctl" id="playBtn" aria-label="${t('play')}"><svg viewBox="0 0 24 24" id="playIcon"><path d="M6 3.5v17l14-8.5z" fill="currentColor"/></svg></button>
           <span class="divider" aria-hidden="true"></span>
-          <button class="ctl" id="rateBtn" aria-label="${t('speed')}">1.0x</button>
+          <button class="ctl dial" id="rateBtn" aria-label="${t('speed')}"><span class="dial-face" aria-hidden="true"><span class="dial-mark"></span></span><span class="dial-label" id="rateLabel">1.0x</span></button>
           <span class="divider" aria-hidden="true"></span>
           <button class="ctl" id="muteBtn" aria-label="${t('mute')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" id="volIcon"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor" stroke="none"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18.3 6.5a8 8 0 0 1 0 11"/></svg></button>
           <span class="time" id="time">0:00 / 0:00</span>
-          <span class="grow"></span>
+          <span class="grow grille" aria-hidden="true"></span>
           <button class="ctl" id="fsBtn" aria-label="${t('fullScreen')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button>
         </div>
+        <span class="feet" aria-hidden="true"><i></i><i></i></span>
       </div>
     </section>
 
@@ -186,6 +201,7 @@
   }
   document.querySelectorAll('.skin').forEach((b) => b.addEventListener('click', () => setSkin(b.dataset.skin)));
   setSkin(store.get('glitchn-skin', 'coral'));
+  $('styleSel').addEventListener('change', (e) => { STYLE = e.target.value; document.documentElement.dataset.style = STYLE; store.set('glitchn-style', STYLE); });
 
   const homeUrl = new URL(HOME_URL, location.href); if (new URLSearchParams(location.search).get('lang')) homeUrl.searchParams.set('lang', LANG);
   $('homeLink').href = homeUrl.href;
@@ -370,7 +386,8 @@
     $('screen').addEventListener('click', (e) => { if (e.target.closest('.big-play')) return; S.everPlayed = true; S.playing ? pause() : play(); });
     $('rateBtn').addEventListener('click', () => {
       S.rate = RATES[(RATES.indexOf(S.rate) + 1) % RATES.length]; vids.forEach(applyAV);
-      $('rateBtn').textContent = (S.rate % 1 ? S.rate : S.rate.toFixed(1)) + 'x';
+      $('rateLabel').textContent = (S.rate % 1 ? S.rate : S.rate.toFixed(1)) + 'x';
+      $('rateBtn').style.setProperty('--rot', ((RATES.indexOf(S.rate) - 2) * 40) + 'deg'); // the dial turns with the speed
     });
     function toggleMute() {
       S.muted = !S.muted; vids.forEach(applyAV);

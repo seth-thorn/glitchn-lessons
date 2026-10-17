@@ -6,7 +6,7 @@
 <title>Glitch'n Lessons</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>
 /* Layout: the lesson library. A header, a row of lesson cards, then the whole map of lessons
    (a growing, non-linear web), then what's coming. Same ink outlines and skins as the player. */
@@ -68,7 +68,11 @@ a.card:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--ink); }
 .team a { color: var(--ink); font-weight: 700; }
 /* Header: text on the left, language switch pinned top-right whatever the text's length. */
 header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 12px 28px; }
-@media (max-width: 699px) { header { grid-template-columns: minmax(0, 1fr); } header .langs { justify-self: start; } }
+.tools { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; justify-content: flex-end; }
+@media (max-width: 699px) { header { grid-template-columns: minmax(0, 1fr); } header .tools { order: -1; } }
+.style-pick { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.style-pick select { font-family: var(--body); font-weight: 700; font-size: 14px; color: var(--ink); background: var(--white); border: var(--bw) solid var(--ink); border-radius: 99px; padding: 4px 10px; cursor: pointer; }
+@media (pointer: coarse) { .style-pick select { padding: 8px 12px; font-size: 15px; } }
 header > div { min-width: 0; }
 .langs { display: inline-flex; border: var(--bw) solid var(--ink); border-radius: 99px; overflow: hidden; background: var(--white); }
 .lang { border: 0; background: none; padding: 4px 13px; font-family: var(--body); font-weight: 700; font-size: 14px; cursor: pointer; color: var(--ink); }
@@ -80,6 +84,44 @@ header > div { min-width: 0; }
 .toast { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: var(--ink); color: var(--white); padding: 10px 16px; border-radius: 10px; font-weight: 700; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; max-width: calc(100% - 32px); text-align: center; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ---------- Rams style (see player/player.css for the full description) ---------- */
+:root[data-style="rams"], :root[data-style="rams"][data-skin] {
+  --ink: #262624; --page: #E2E2DE; --muted: #76756F; --white: #FAFAF8; --panel: #F4F4F1; --card: #EAEAE6; --on-panel: #262624;
+  --line: #CDCCC6; --accent: #F05A28; --bw: 1px;
+  --display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif; --body: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif; --mono: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+:root[data-style="rams"][data-skin="navy"] { --accent: #2F5AA8; } :root[data-style="rams"][data-skin="sky"] { --accent: #2A8DC2; }
+:root[data-style="rams"][data-skin="green"] { --accent: #3C9A5F; } :root[data-style="rams"][data-skin="yellow"] { --accent: #E0A30C; }
+:root[data-style="rams"][data-skin="red"] { --accent: #D2362B; }
+:root[data-style="rams"] body { font-weight: 400; }
+:root[data-style="rams"] :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+:root[data-style="rams"] .eyebrow { font-family: var(--body); font-size: 13px; font-weight: 500; letter-spacing: 0; text-transform: none; }
+:root[data-style="rams"] h1 { font-weight: 600; font-stretch: 100%; letter-spacing: -.03em; }
+:root[data-style="rams"] h2 { font-weight: 600; font-stretch: 100%; font-size: 20px; letter-spacing: -.01em; }
+:root[data-style="rams"] a.card { border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(180deg, #FBFBF9, #F0F0EC); box-shadow: inset 0 1px 0 #FFFFFF, 0 22px 44px -32px rgba(38, 38, 36, .55); }
+:root[data-style="rams"] a.card:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 #FFFFFF, 0 26px 48px -30px rgba(38, 38, 36, .6); }
+:root[data-style="rams"] .card img { border-bottom: 1px solid var(--line); }
+:root[data-style="rams"] .card b { font-weight: 600; font-stretch: 100%; letter-spacing: -.01em; }
+:root[data-style="rams"] .card .meta { font-family: var(--body); font-weight: 500; color: var(--muted); }
+:root[data-style="rams"] .chip { border: 1px solid var(--line); background: transparent; color: var(--muted); }
+:root[data-style="rams"] .mapwrap { border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(180deg, #FBFBF9, #F0F0EC); }
+:root[data-style="rams"] .mapscroll { background: var(--card); }
+:root[data-style="rams"] #map .edge { stroke: #8F8E88; stroke-width: 1.5; }
+:root[data-style="rams"] #map .node circle { fill: #FAFAF8; stroke: #262624; stroke-width: 1.5; }
+:root[data-style="rams"] #map .node.later circle { fill: transparent; stroke-dasharray: 4 3; }
+:root[data-style="rams"] #map .node text { font-weight: 600; }
+:root[data-style="rams"] #map .node .sub { font-family: var(--body); font-weight: 500; }
+:root[data-style="rams"] #map .elabel rect { stroke: var(--line); stroke-width: 1; }
+:root[data-style="rams"] .legend i { border-width: 1px; }
+:root[data-style="rams"] .coming li { border: 1px dashed #B5B4AE; background: transparent; }
+:root[data-style="rams"] .coming b { font-weight: 600; }
+:root[data-style="rams"] .team { border-top: 1px solid var(--line); }
+:root[data-style="rams"] .langs, :root[data-style="rams"] .style-pick select { border: 1px solid var(--line); }
+:root[data-style="rams"] .lang + .lang { border-left: 1px solid var(--line); }
+:root[data-style="rams"] .lang, :root[data-style="rams"] .style-pick select { font-weight: 500; }
+:root[data-style="rams"] .style-pick { font-family: var(--body); font-size: 13px; }
+:root[data-style="rams"] .err { border: 1px solid var(--line); }
 </style>
 </head>
 <body>
@@ -90,7 +132,10 @@ header > div { min-width: 0; }
       <h1 data-i18n="lessons">Lessons</h1>
       <p class="intro" data-i18n="intro">Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.</p>
     </div>
-    <div class="langs" role="group" aria-label="Language" id="langs"></div>
+    <div class="tools">
+      <label class="style-pick"><span id="styleLabel">Style</span><select id="styleSel"></select></label>
+      <div class="langs" role="group" aria-label="Language" id="langs"></div>
+    </div>
   </header>
 
   <section aria-labelledby="h-lessons">
@@ -122,12 +167,12 @@ header > div { min-width: 0; }
   /* ---------- language: ?lang= in the address, then the visitor's last choice, then the browser ---------- */
   const LANGS = { en: 'English', es: 'Español' };
   const UI = {
-    en: { lessons: 'Lessons', intro: 'Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.',
+    en: { style: 'Style', style_tv: 'TV', style_rams: 'Rams', lessons: 'Lessons', intro: 'Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.',
       startBuilding: 'Start building', loading: 'Loading lessons…', map: 'Map of lessons', mapAria: 'How the lessons connect', ready: 'Ready to build', coming: 'Coming', arrows: 'Arrows point to where a lesson leads.',
       language: 'Language', steps: 'steps', subSteps: 'sub-steps', draft: 'Draft', comingSmall: 'coming', notReady: '“{t}” isn’t ready yet.', none: 'No lessons yet.',
       listError: '<b>The lesson list did not load.</b> It lives in lessons/index.json; run tools/build_index.py to make it.', title: "Glitch'n Lessons", machine: '',
       'kind_variation': 'variation', 'kind_related': 'related', 'kind_next day': 'next day', 'kind_revisited': 'revisited' },
-    es: { lessons: 'Lecciones', intro: 'Arma circuitos de sonido en una protoboard, un pequeño paso a la vez. Cada lección muestra un video del armado junto a instrucciones paso a paso, con fotos de cerca que puedes ampliar y un mapa de a dónde ir después.',
+    es: { style: 'Estilo', style_tv: 'Tele', style_rams: 'Rams', lessons: 'Lecciones', intro: 'Arma circuitos de sonido en una protoboard, un pequeño paso a la vez. Cada lección muestra un video del armado junto a instrucciones paso a paso, con fotos de cerca que puedes ampliar y un mapa de a dónde ir después.',
       startBuilding: 'Empieza a armar', loading: 'Cargando lecciones…', map: 'Mapa de lecciones', mapAria: 'Cómo se conectan las lecciones', ready: 'Lista para armar', coming: 'Próximamente', arrows: 'Las flechas apuntan hacia donde lleva cada lección.',
       language: 'Idioma', steps: 'pasos', subSteps: 'subpasos', draft: 'Borrador', comingSmall: 'próximamente', notReady: '“{t}” todavía no está lista.', none: 'Todavía no hay lecciones.',
       listError: '<b>No se pudo cargar la lista de lecciones.</b>', title: 'Lecciones de Glitch’n', machine: 'Traducción automática',
@@ -139,6 +184,10 @@ header > div { min-width: 0; }
     return (navigator.languages || [navigator.language || '']).some((l) => /^es\b/i.test(l)) ? 'es' : 'en';
   }
   const LANG = pickLang();
+  // Styles: same names and storage as the lesson player, so a choice made anywhere applies everywhere.
+  const STYLES = ['tv', 'rams'];
+  let STYLE = (() => { const q = new URLSearchParams(location.search).get('style'); if (q && STYLES.includes(q)) return q; try { const v = JSON.parse(localStorage.getItem('glitchn-style')); if (STYLES.includes(v)) return v; } catch (e) {} return 'tv'; })();
+  document.documentElement.dataset.style = STYLE;
   const t = (k, v) => String(UI[LANG][k] ?? UI.en[k] ?? k).replace(/\{(\w+)\}/g, (_, n) => (v && v[n] != null ? v[n] : ''));
   const keepLang = new URLSearchParams(location.search).get('lang') ? '?lang=' + LANG : '';
   const loc = (x, f) => (x.i18n && x.i18n[LANG] && x.i18n[LANG][f]) || x[f];
@@ -146,6 +195,9 @@ header > div { min-width: 0; }
   document.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = t(el.dataset.i18n); });
   document.querySelectorAll('[data-i18n-aria]').forEach((el) => el.setAttribute('aria-label', t(el.dataset.i18nAria)));
   $('langs').setAttribute('aria-label', t('language'));
+  $('styleLabel').textContent = t('style');
+  $('styleSel').innerHTML = STYLES.map((k) => '<option value="' + k + '"' + (k === STYLE ? ' selected' : '') + '>' + t('style_' + k) + '</option>').join('');
+  $('styleSel').addEventListener('change', (e) => { STYLE = e.target.value; document.documentElement.dataset.style = STYLE; try { localStorage.setItem('glitchn-style', JSON.stringify(STYLE)); } catch (err) {} });
   $('langs').innerHTML = Object.entries(LANGS).map(([k, n]) => '<button class="lang" data-lang="' + k + '" lang="' + k + '" aria-pressed="' + (k === LANG) + '">' + n + '</button>').join('');
   $('langs').addEventListener('click', (e) => {
     const b = e.target.closest('.lang'); if (!b || b.dataset.lang === LANG) return;
