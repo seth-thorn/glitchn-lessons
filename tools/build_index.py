@@ -12,6 +12,9 @@ What it does
 - Writes lessons/index.json: every lesson's title, summary, links, length and thumbnail,
   plus the planned lessons from lessons/planned.json. The home page and the
   "What's next?" map read this file.
+- Reads each lesson's translations (lesson.<lang>.json, e.g. lesson.es.json) so the home page
+  and maps can show translated titles, and reports lines that have no translation yet
+  (for example after the English text was edited). Untranslated lines show in English.
 
 Lesson addresses (the folder name, called the slug) are permanent once published,
 because Circle lessons and bookmarks point at them. Rename a title freely; never rename a folder.
@@ -45,7 +48,7 @@ def lesson_page(title):
 
 
 def main():
-    lessons, problems = [], []
+    lessons, problems, translations = [], [], {}
     for f in sorted(LESSONS.glob("*/lesson.json")):
         slug = f.parent.name
         try:
@@ -79,6 +82,23 @@ def main():
             "thumb": thumb,
             "links": L.get("links", []),
         })
+        i18n = {}
+        english = [L.get("title"), L.get("summary")] + [st.get("title") for st in steps] + [sb.get("text") for st in steps for sb in st.get("subs", [])]
+        english = [x for x in english if x]
+        for tf in sorted(f.parent.glob("lesson.*.json")):
+            lang = tf.name.split(".")[1]
+            try:
+                strings = json.loads(tf.read_text()).get("strings", {})
+            except Exception as e:  # noqa: BLE001
+                problems.append(f"{tf}: not valid JSON ({e})")
+                continue
+            i18n[lang] = {k: strings[v] for k, v in (("title", L.get("title")), ("summary", L.get("summary"))) if v in strings}
+            missing = [x for x in english if x not in strings]
+            translations[lang] = translations.get(lang, 0) + 1
+            if missing:
+                problems.append(f"{slug}: {len(missing)} of {len(english)} lines have no {lang} translation yet (they show in English), e.g. \"{missing[0][:60]}\"")
+        if i18n:
+            lessons[-1]["i18n"] = i18n
         (f.parent / "index.html").write_text(lesson_page(L.get("title", slug)))
 
     planned_file = LESSONS / "planned.json"
@@ -99,7 +119,12 @@ def main():
         "planned": planned,
     }
     (LESSONS / "index.json").write_text(json.dumps(index, indent=1) + "\n")
-    print(f"lessons/index.json: {len(lessons)} lessons, {len(planned)} planned")
+    print(f"lessons/index.json: {len(lessons)} lessons, {len(planned)} planned"
+          + "".join(f"; {n} with {lang} translation" for lang, n in sorted(translations.items())))
+    for x in lessons:
+        for lang in translations:
+            if lang not in x.get("i18n", {}):
+                problems.append(f"{x['slug']}: no {lang} translation file yet (lesson.{lang}.json); it shows in English")
     for p in problems:
         print("  check:", p)
     return 1 if any("not valid JSON" in p for p in problems) else 0

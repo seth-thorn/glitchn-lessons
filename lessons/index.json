@@ -1,6 +1,6 @@
 {
  "format": "glitchn-index/1",
- "generated": "2026-10-16T23:41:58+00:00",
+ "generated": "2026-10-17T00:38:34+00:00",
  "lessons": [
   {
    "slug": "blink-to-drum-machine",
@@ -16,7 +16,13 @@
      "to": "day-2-material",
      "kind": "next"
     }
-   ]
+   ],
+   "i18n": {
+    "es": {
+     "title": "Del parpadeo a la caja de ritmos",
+     "summary": "Construye un oscilador que hace parpadear un LED y convi\u00e9rtelo, paso a paso, en una caja de ritmos."
+    }
+   }
   }
  ],
  "planned": [
@@ -31,7 +37,13 @@
      "to": "day-3-material",
      "kind": "next"
     }
-   ]
+   ],
+   "i18n": {
+    "es": {
+     "title": "Material del d\u00eda 2",
+     "summary": "Un oscilador lento, dos osciladores lentos, Blade Runner, Radio Amor, bater\u00eda con 4040, reinicio del 4040, voltage starving (bajo voltaje)."
+    }
+   }
   },
   {
    "slug": "day-3-material",
@@ -44,7 +56,13 @@
      "to": "day-4-material",
      "kind": "next"
     }
-   ]
+   ],
+   "i18n": {
+    "es": {
+     "title": "Material del d\u00eda 3",
+     "summary": "Osciladores lentos y r\u00e1pidos, el 4021 y los LED, bater\u00edas repetitivas y generativas con 4021, microsonido, el glitch como estructura musical."
+    }
+   }
   },
   {
    "slug": "day-4-material",
@@ -57,7 +75,13 @@
      "to": "day-5-material",
      "kind": "next"
     }
-   ]
+   ],
+   "i18n": {
+    "es": {
+     "title": "Material del d\u00eda 4",
+     "summary": "Dos osciladores lentos, LED con el 4051, un tercer oscilador, clics y tonos con filtro pasabajos escalonado, tonos con filtro pasabanda escalonado."
+    }
+   }
   },
   {
    "slug": "day-5-material",
@@ -65,7 +89,13 @@
    "summary": "Three oscillators, a diode network, an adjustable high-pass filter, voltage starving, static, strange things.",
    "status": "planned",
    "origin": "Five-day course, Day 5",
-   "links": []
+   "links": [],
+   "i18n": {
+    "es": {
+     "title": "Material del d\u00eda 5",
+     "summary": "Tres osciladores, una red de diodos, un filtro pasaaltos ajustable, voltage starving (bajo voltaje), est\u00e1tica, cosas extra\u00f1as."
+    }
+   }
   }
  ]
 }

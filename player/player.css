@@ -231,3 +231,12 @@ body { margin: 0; }
 .home-link { color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--ink); font-weight: 600; }
 .home-link:hover { background: var(--card); }
 .map-svg .map-note { font-family: var(--body); font-weight: 700; font-size: 12px; fill: var(--on-panel); text-anchor: middle; dominant-baseline: middle; }
+/* ---------- language switch ---------- */
+.top-tools { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.langs { display: inline-flex; border: var(--bw) solid var(--ink); border-radius: 99px; overflow: hidden; background: var(--white); }
+.lang { border: 0; background: none; padding: 4px 13px; font-family: var(--body); font-weight: 700; font-size: 14px; cursor: pointer; color: var(--ink); }
+.lang + .lang { border-left: 2.5px solid var(--ink); }
+.lang:hover { background: var(--card); }
+.lang[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+.lang-note { background: var(--card); }
+@media (max-width: 560px) { .top-tools { align-items: flex-start; } }

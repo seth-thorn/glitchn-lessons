@@ -65,6 +65,13 @@ a.card:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--ink); }
 .coming span { display: block; font-size: 15px; color: var(--muted); }
 .team { font-size: 15px; color: var(--muted); border-top: 2px solid var(--ink); padding-top: 14px; }
 .team a { color: var(--ink); font-weight: 700; }
+header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px 24px; flex-wrap: wrap; }
+header > div { min-width: 0; }
+.langs { display: inline-flex; border: var(--bw) solid var(--ink); border-radius: 99px; overflow: hidden; background: var(--white); }
+.lang { border: 0; background: none; padding: 4px 13px; font-family: var(--body); font-weight: 700; font-size: 14px; cursor: pointer; color: var(--ink); }
+.lang + .lang { border-left: 2.5px solid var(--ink); }
+.lang:hover { background: var(--card); }
+.lang[aria-pressed="true"] { background: var(--ink); color: var(--white); }
 .err { border: var(--bw) solid var(--ink); border-radius: 16px; background: var(--card); padding: 16px; }
 .toast { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: var(--ink); color: var(--white); padding: 10px 16px; border-radius: 10px; font-weight: 700; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; max-width: calc(100% - 32px); text-align: center; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
@@ -74,28 +81,31 @@ a.card:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--ink); }
 <body>
 <main>
   <header>
-    <div class="eyebrow">Glitch'n</div>
-    <h1>Lessons</h1>
-    <p class="intro">Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.</p>
+    <div>
+      <div class="eyebrow">Glitch'n</div>
+      <h1 data-i18n="lessons">Lessons</h1>
+      <p class="intro" data-i18n="intro">Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.</p>
+    </div>
+    <div class="langs" role="group" aria-label="Language" id="langs"></div>
   </header>
 
   <section aria-labelledby="h-lessons">
-    <h2 id="h-lessons">Start building</h2>
-    <div class="cards" id="cards"><p>Loading lessons…</p></div>
+    <h2 id="h-lessons" data-i18n="startBuilding">Start building</h2>
+    <div class="cards" id="cards"><p data-i18n="loading">Loading lessons…</p></div>
   </section>
 
   <section class="mapwrap" aria-labelledby="h-map">
-    <h2 id="h-map">Map of lessons</h2>
-    <div class="mapscroll"><svg id="map" role="group" aria-label="How the lessons connect"></svg></div>
-    <div class="legend"><span><i></i>Ready to build</span><span><i class="dash"></i>Coming</span><span>Arrows point to where a lesson leads.</span></div>
+    <h2 id="h-map" data-i18n="map">Map of lessons</h2>
+    <div class="mapscroll"><svg id="map" role="group" aria-label="How the lessons connect" data-i18n-aria="mapAria"></svg></div>
+    <div class="legend"><span><i></i><span data-i18n="ready">Ready to build</span></span><span><i class="dash"></i><span data-i18n="coming">Coming</span></span><span data-i18n="arrows">Arrows point to where a lesson leads.</span></div>
   </section>
 
   <section aria-labelledby="h-coming" id="comingSec" hidden>
-    <h2 id="h-coming">Coming</h2>
+    <h2 id="h-coming" data-i18n="coming">Coming</h2>
     <ul class="coming" id="coming"></ul>
   </section>
 
-  <p class="team">For the Glitch'n team: <a href="editor/index.html">open the step editor</a> to turn a new video into a lesson.</p>
+  <p class="team" lang="en">For the Glitch'n team: <a href="editor/index.html">open the step editor</a> to turn a new video into a lesson.</p>
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -105,11 +115,44 @@ a.card:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--ink); }
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const fmt = (s) => { s = Math.round(s); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
   try { const sk = localStorage.getItem('glitchn-skin'); const v = sk && JSON.parse(sk); if (v && v !== 'coral') document.documentElement.dataset.skin = v; } catch (e) {}
+  /* ---------- language: ?lang= in the address, then the visitor's last choice, then the browser ---------- */
+  const LANGS = { en: 'English', es: 'Español' };
+  const UI = {
+    en: { lessons: 'Lessons', intro: 'Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.',
+      startBuilding: 'Start building', loading: 'Loading lessons…', map: 'Map of lessons', mapAria: 'How the lessons connect', ready: 'Ready to build', coming: 'Coming', arrows: 'Arrows point to where a lesson leads.',
+      language: 'Language', steps: 'steps', subSteps: 'sub-steps', draft: 'Draft', comingSmall: 'coming', notReady: '“{t}” isn’t ready yet.', none: 'No lessons yet.',
+      listError: '<b>The lesson list did not load.</b> It lives in lessons/index.json; run tools/build_index.py to make it.', title: "Glitch'n Lessons", machine: '',
+      'kind_variation': 'variation', 'kind_related': 'related', 'kind_next day': 'next day', 'kind_revisited': 'revisited' },
+    es: { lessons: 'Lecciones', intro: 'Arma circuitos de sonido en una protoboard, un pequeño paso a la vez. Cada lección muestra un video del armado junto a instrucciones paso a paso, con fotos de cerca que puedes ampliar y un mapa de a dónde ir después.',
+      startBuilding: 'Empieza a armar', loading: 'Cargando lecciones…', map: 'Mapa de lecciones', mapAria: 'Cómo se conectan las lecciones', ready: 'Lista para armar', coming: 'Próximamente', arrows: 'Las flechas apuntan hacia donde lleva cada lección.',
+      language: 'Idioma', steps: 'pasos', subSteps: 'subpasos', draft: 'Borrador', comingSmall: 'próximamente', notReady: '“{t}” todavía no está lista.', none: 'Todavía no hay lecciones.',
+      listError: '<b>No se pudo cargar la lista de lecciones.</b>', title: 'Lecciones de Glitch’n', machine: 'Traducción automática',
+      'kind_variation': 'variación', 'kind_related': 'relacionada', 'kind_next day': 'día siguiente', 'kind_revisited': 'repaso' }
+  };
+  function pickLang() {
+    const q = new URLSearchParams(location.search).get('lang'); if (q && LANGS[q]) return q;
+    try { const v = JSON.parse(localStorage.getItem('glitchn-lang')); if (v && LANGS[v]) return v; } catch (e) {}
+    return (navigator.languages || [navigator.language || '']).some((l) => /^es\b/i.test(l)) ? 'es' : 'en';
+  }
+  const LANG = pickLang();
+  const t = (k, v) => String(UI[LANG][k] ?? UI.en[k] ?? k).replace(/\{(\w+)\}/g, (_, n) => (v && v[n] != null ? v[n] : ''));
+  const keepLang = new URLSearchParams(location.search).get('lang') ? '?lang=' + LANG : '';
+  const loc = (x, f) => (x.i18n && x.i18n[LANG] && x.i18n[LANG][f]) || x[f];
+  document.documentElement.lang = LANG; document.title = t('title');
+  document.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-aria]').forEach((el) => el.setAttribute('aria-label', t(el.dataset.i18nAria)));
+  $('langs').setAttribute('aria-label', t('language'));
+  $('langs').innerHTML = Object.entries(LANGS).map(([k, n]) => '<button class="lang" data-lang="' + k + '" lang="' + k + '" aria-pressed="' + (k === LANG) + '">' + n + '</button>').join('');
+  $('langs').addEventListener('click', (e) => {
+    const b = e.target.closest('.lang'); if (!b || b.dataset.lang === LANG) return;
+    try { localStorage.setItem('glitchn-lang', JSON.stringify(b.dataset.lang)); } catch (err) {}
+    const u = new URL(location.href); u.searchParams.set('lang', b.dataset.lang); location.href = u.href;
+  });
   let tt; function toast(m) { const t = $('toast'); t.textContent = m; t.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 2600); }
-  const lessonHref = (slug) => 'lessons/' + slug + '/index.html';
+  const lessonHref = (slug) => 'lessons/' + slug + '/index.html' + keepLang;
 
   fetch('lessons/index.json').then((r) => r.json()).then(render).catch(() => {
-    $('cards').innerHTML = '<div class="err"><b>The lesson list did not load.</b> It lives in lessons/index.json; run tools/build_index.py to make it.</div>';
+    $('cards').innerHTML = '<div class="err">' + t('listError') + '</div>';
   });
 
   function render(IDX) {
@@ -117,11 +160,11 @@ a.card:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--ink); }
     $('cards').innerHTML = ready.length ? ready.map((l) => (
       '<a class="card" href="' + lessonHref(l.slug) + '">' +
         (l.thumb ? '<img src="lessons/' + esc(l.thumb) + '" alt="" loading="lazy">' : '') +
-        '<div class="body"><b>' + esc(l.title) + '</b><span>' + esc(l.summary) + '</span>' +
-        '<span class="meta">' + fmt(l.duration) + ' · ' + l.steps + ' steps · ' + l.subSteps + ' sub-steps' + (l.status === 'draft' ? ' <span class="chip">Draft</span>' : '') + '</span></div>' +
-      '</a>')).join('') : '<p>No lessons yet.</p>';
+        '<div class="body"><b>' + esc(loc(l, 'title')) + '</b><span>' + esc(loc(l, 'summary')) + '</span>' +
+        '<span class="meta">' + fmt(l.duration) + ' · ' + l.steps + ' ' + t('steps') + ' · ' + l.subSteps + ' ' + t('subSteps') + (l.status === 'draft' ? ' <span class="chip">' + t('draft') + '</span>' : '') + (LANG !== 'en' && l.i18n && l.i18n[LANG] ? ' <span class="chip">' + t('machine') + '</span>' : '') + '</span></div>' +
+      '</a>')).join('') : '<p>' + t('none') + '</p>';
     $('comingSec').hidden = !planned.length;
-    $('coming').innerHTML = planned.map((p) => '<li><b>' + esc(p.title) + '</b><span>' + esc(p.summary) + '</span></li>').join('');
+    $('coming').innerHTML = planned.map((p) => '<li><b>' + esc(loc(p, 'title')) + '</b><span>' + esc(loc(p, 'summary')) + '</span></li>').join('');
     drawMap(ready, planned);
   }
 
@@ -134,7 +177,7 @@ a.card:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--ink); }
   // Layered layout: each lesson sits one column to the right of the lessons that lead to it.
   function drawMap(ready, planned) {
     const nodes = {}; const order = [];
-    [...ready.map((l) => ({ ...l, ready: true })), ...planned.map((p) => ({ ...p, ready: false }))].forEach((n) => { nodes[n.slug] = n; order.push(n.slug); });
+    [...ready.map((l) => ({ ...l, title: loc(l, 'title'), ready: true })), ...planned.map((p) => ({ ...p, title: loc(p, 'title'), ready: false }))].forEach((n) => { nodes[n.slug] = n; order.push(n.slug); });
     const edges = [];
     order.forEach((s) => (nodes[s].links || []).forEach((l) => { if (nodes[l.to]) edges.push({ from: s, to: l.to, kind: l.kind || 'next' }); }));
     const depth = {}; order.forEach((s) => { depth[s] = 0; });
@@ -151,16 +194,16 @@ a.card:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--ink); }
       const [x1, y1] = pos[e.from], [x2, y2] = pos[e.to]; const dx = x2 - x1, dy = y2 - y1, d = Math.hypot(dx, dy) || 1;
       const sx = x1 + dx / d * R, sy = y1 + dy / d * R, ex = x2 - dx / d * (R + 5), ey = y2 - dy / d * (R + 5);
       out += '<path class="edge' + (nodes[e.to].ready ? '' : ' soft') + '" d="M' + sx + ' ' + sy + 'L' + ex + ' ' + ey + '" marker-end="url(#arr)"/>';
-      if (e.kind !== 'next') { const mx = (sx + ex) / 2, my = (sy + ey) / 2, w = e.kind.length * 6.8 + 12; out += '<g class="elabel"><rect x="' + (mx - w / 2) + '" y="' + (my - 9) + '" width="' + w + '" height="18" rx="9"/><text x="' + mx + '" y="' + (my + 0.5) + '">' + esc(e.kind) + '</text></g>'; }
+      if (e.kind !== 'next') { const kl = UI[LANG]['kind_' + e.kind] || e.kind; const mx = (sx + ex) / 2, my = (sy + ey) / 2, w = kl.length * 6.8 + 12; out += '<g class="elabel"><rect x="' + (mx - w / 2) + '" y="' + (my - 9) + '" width="' + w + '" height="18" rx="9"/><text x="' + mx + '" y="' + (my + 0.5) + '">' + esc(kl) + '</text></g>'; }
     });
     order.forEach((s) => {
       const n = nodes[s], [x, y] = pos[s]; const lines = wrap(n.title, 12); const lh = 14; const y0 = y - (lines.length - 1) * lh / 2 - (n.ready ? 0 : 6);
-      out += '<g class="node' + (n.ready ? '' : ' later') + '" tabindex="0" role="button" data-slug="' + esc(s) + '" aria-label="' + esc(n.title) + (n.ready ? '' : ', coming') + '"><circle cx="' + x + '" cy="' + y + '" r="' + R + '"/>' +
+      out += '<g class="node' + (n.ready ? '' : ' later') + '" tabindex="0" role="button" data-slug="' + esc(s) + '" aria-label="' + esc(n.title) + (n.ready ? '' : ', ' + t('comingSmall')) + '"><circle cx="' + x + '" cy="' + y + '" r="' + R + '"/>' +
         lines.map((l, i) => '<text x="' + x + '" y="' + (y0 + i * lh) + '" font-size="12.5">' + esc(l) + '</text>').join('') +
-        (n.ready ? '' : '<text class="sub" x="' + x + '" y="' + (y0 + lines.length * lh + 2) + '" font-size="10.5">coming</text>') + '</g>';
+        (n.ready ? '' : '<text class="sub" x="' + x + '" y="' + (y0 + lines.length * lh + 2) + '" font-size="10.5">' + esc(t('comingSmall')) + '</text>') + '</g>';
     });
     const svg = $('map'); svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.setAttribute('width', W); svg.setAttribute('height', H); svg.innerHTML = out;
-    const open = (s) => { const n = nodes[s]; if (n.ready) location.href = lessonHref(s); else toast('“' + n.title + '” isn’t ready yet.'); };
+    const open = (s) => { const n = nodes[s]; if (n.ready) location.href = lessonHref(s); else toast(t('notReady', { t: n.title })); };
     svg.addEventListener('click', (e) => { const g = e.target.closest('.node'); if (g) open(g.dataset.slug); });
     svg.addEventListener('keydown', (e) => { const g = e.target.closest('.node'); if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(g.dataset.slug); } });
   }

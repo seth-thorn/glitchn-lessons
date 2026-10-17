@@ -15,6 +15,7 @@ lessons/
   <lesson-address>/        one folder per lesson
     index.html             the lesson page (made by the editor or build_index.py)
     lesson.json            steps, sub-steps, timestamps, and links to other lessons
+    lesson.es.json         Spanish text for the lesson (English line → Spanish line)
     video/part-1.mp4 …     web-sized video clips, played back to back
     stills/  thumbs/       close-up stills and their small versions
 editor/index.html          the step editor, for the Glitch'n team
@@ -41,6 +42,18 @@ Each lesson lists where it leads in its own `lesson.json`:
 ```
 
 `kind` is `next`, `variation` or `related` (any short word works and shows on the map). The home page and each lesson's "What's next?" panel draw the map from these links, so connecting a new lesson means editing only that lesson, or the lesson that should point to it.
+
+## Spanish (and other languages)
+
+Visitors can switch between **English** and **Español** on every page. The choice is remembered, Spanish-language browsers start in Spanish, and a link can force a language with `?lang=es` (useful when embedding a lesson in Spanish).
+
+- Interface wording (buttons, labels, messages) lives in `player/player.js` and `index.html`, in a small table with `en` and `es` entries.
+- Each lesson's Spanish text lives beside it in `lesson.es.json`: a list of English lines with their translations. A line with no translation shows in English, so editing a lesson never breaks its Spanish version. `tools/build_index.py` lists lines that still need translating.
+- The step editor stays English-only. When a lesson is ready, ask Claude to write or update its `lesson.es.json`.
+- Spanish pages are marked "Traducción automática" (automatic translation) until a Spanish speaker reviews them. To mark a reviewed lesson, set `"reviewed": true` in its `lesson.es.json`.
+- Planned lessons carry their Spanish titles in `lessons/planned.json` under `"i18n"`.
+
+To add another language later, add its column to the two interface tables and a `lesson.<code>.json` file per lesson.
 
 ## Status
 
