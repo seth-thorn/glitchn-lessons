@@ -1,4 +1,4 @@
-/* Terminal style: a green-phosphor CRT. Black glass, glowing monospace text, scanlines and a soft vignette;
+/* Terminal style: a green-phosphor CRT. Black glass, glowing monospace text, faint scanlines in the background;
    panels are terminal windows with double-line borders and [ BRACKETED ] titles; buttons are text keys that invert
    when pressed; the current sub-step is shown in inverse video; the scrub bar and progress fill with blocks; a block
    cursor blinks after the title. The video itself is never tinted, so wire colours stay true.
@@ -20,11 +20,9 @@
   color-scheme: dark;
 }
 
-/* ---------- the glass: black, a faint phosphor bloom, scanlines and a vignette over everything ---------- */
-:root[data-style="terminal"] { background: radial-gradient(ellipse at 50% 30%, color-mix(in srgb, var(--phos) 7%, #030603), #030603 70%); background-color: #030603; }
+/* ---------- the glass: black, a faint phosphor bloom, and faint scanlines on the background only (never over text, video or pictures) ---------- */
+:root[data-style="terminal"] { background: repeating-linear-gradient(180deg, rgba(0, 0, 0, .35) 0 1px, rgba(0, 0, 0, 0) 1px 3px), radial-gradient(ellipse at 50% 30%, color-mix(in srgb, var(--phos) 7%, #030603), #030603 70%); background-color: #030603; }
 :root[data-style="terminal"] body { background: transparent; color: var(--phos); font-weight: 500; text-shadow: 0 0 5px var(--halo); }
-:root[data-style="terminal"] body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 60;
-  background: repeating-linear-gradient(180deg, rgba(0, 0, 0, .22) 0 1px, rgba(0, 0, 0, 0) 1px 3px), radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0) 62%, rgba(0, 0, 0, .55)); }
 :root[data-style="terminal"] ::selection { background: var(--phos); color: var(--black); }
 :root[data-style="terminal"] :focus-visible { outline: 2px dashed var(--phos); outline-offset: 3px; }
 :root[data-style="terminal"] .eyebrow { font-family: var(--body); font-size: 13px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--muted); }
@@ -34,8 +32,7 @@
 :root[data-style="terminal"] h1 { font-family: var(--display); font-weight: 400; font-stretch: 100%; font-size: clamp(40px, 5.6vw, 66px); letter-spacing: .01em; line-height: .95; color: var(--phos); text-shadow: 0 0 8px var(--halo), 0 0 22px color-mix(in srgb, var(--phos) 30%, transparent); }
 :root[data-style="terminal"] h1::before { content: "> "; color: var(--muted); }
 /* the cursor waits after the last line of the title block */
-:root[data-style="terminal"] #title:not(:has(.sub))::after, :root[data-style="terminal"] #title .sub::after, :root[data-style="terminal"] main > header h1::after { content: ""; display: inline-block; width: .55em; height: 1em; margin-left: .3em; vertical-align: -.15em; background: var(--phos); box-shadow: 0 0 8px var(--halo); animation: t-blink 1.06s steps(1) infinite; }
-@keyframes t-blink { 50% { opacity: 0; } }
+:root[data-style="terminal"] #title:not(:has(.sub))::after, :root[data-style="terminal"] #title .sub::after, :root[data-style="terminal"] main > header h1::after { content: ""; display: inline-block; width: .55em; height: 1em; margin-left: .3em; vertical-align: -.15em; background: var(--phos); box-shadow: 0 0 8px var(--halo); }
 :root[data-style="terminal"] h1 .sub { font-family: var(--body); font-weight: 500; font-size: .3em; line-height: 1.5; letter-spacing: 0; color: var(--muted); }
 :root[data-style="terminal"] .draft-chip, :root[data-style="terminal"] .chip { font-family: var(--body); letter-spacing: 0; font-weight: 600; border: 1px solid var(--phos); background: transparent; color: var(--phos); border-radius: 0; }
 :root[data-style="terminal"] .style-pick { font-family: var(--body); font-size: 13px; color: var(--muted); }
@@ -61,26 +58,21 @@
 :root[data-style="terminal"] .tv-wrap { padding-top: 0; padding-bottom: 0; }
 :root[data-style="terminal"] .ant, :root[data-style="terminal"] .feet { display: none; }
 :root[data-style="terminal"] .tv { padding: 46px 18px 14px; }
-:root[data-style="terminal"] .deco { display: flex; position: absolute; top: 12px; left: 18px; right: 18px; height: 24px; align-items: center; gap: 14px; pointer-events: none; border-bottom: 1px dashed var(--dim); font: 400 22px/1 var(--display); color: var(--phos); }
+:root[data-style="terminal"] .deco { display: flex; position: absolute; top: 12px; left: 18px; right: 18px; height: 24px; align-items: center; gap: 14px; pointer-events: none; border-bottom: 1px solid var(--dim); font: 400 22px/1 var(--display); color: var(--phos); }
 :root[data-style="terminal"] .deco i { display: block; font-style: normal; flex: none; }
 :root[data-style="terminal"] .deco i:nth-child(1)::before { content: "GLITCH\2019N://LESSON"; letter-spacing: .06em; }
-:root[data-style="terminal"] .deco i:nth-child(2) { flex: 1; height: 8px; align-self: center; background: repeating-linear-gradient(90deg, var(--dim) 0 2px, transparent 2px 6px); opacity: .7; }
-:root[data-style="terminal"] .deco i:nth-child(3)::before { content: "\25A0  \25A1  \25A1"; color: var(--muted); }
-:root[data-style="terminal"] .is-playing .deco i:nth-child(3)::before { content: "\25B6"; color: var(--phos); animation: t-blink 1s steps(1) infinite; }
-:root[data-style="terminal"] .deco i:nth-child(n+4) { display: none; }
+:root[data-style="terminal"] .deco i:nth-child(n+2) { display: none; } /* just the label: no hatching or status squares that could pass for a timeline or lights */
 :root[data-style="terminal"] .screen { border: 2px solid var(--phos); border-radius: 0; box-shadow: 0 0 12px var(--halo); background: #000000; }
-:root[data-style="terminal"] .glass { background: repeating-linear-gradient(180deg, rgba(0, 0, 0, .12) 0 1px, rgba(0, 0, 0, 0) 1px 3px); box-shadow: inset 0 0 50px rgba(0, 0, 0, .55); }
 :root[data-style="terminal"] .big-play span { width: 86px; height: 86px; border: 2px solid var(--phos); border-radius: 0; background: rgba(2, 4, 2, .82); color: var(--phos); box-shadow: 0 0 18px var(--halo); }
 :root[data-style="terminal"] .big-play svg { filter: drop-shadow(0 0 6px var(--halo)); }
 :root[data-style="terminal"] .now-chip { background: rgba(2, 4, 2, .88); color: var(--phos); border: 1.5px solid var(--phos); border-radius: 0; font-family: var(--body); font-weight: 500; }
 :root[data-style="terminal"] .now-chip b { font-family: var(--display); font-size: 20px; font-weight: 400; }
 :root[data-style="terminal"] .scrub { margin-top: 16px; }
 :root[data-style="terminal"] .track { top: 8px; height: 14px; border: 1.5px solid var(--phos); border-radius: 0; background: transparent; }
-:root[data-style="terminal"] .track .fill { background: repeating-linear-gradient(90deg, var(--phos) 0 7px, transparent 7px 9px); box-shadow: 0 0 8px var(--halo); }
+:root[data-style="terminal"] .track .fill { background: var(--phos); box-shadow: 0 0 8px var(--halo); }
 :root[data-style="terminal"] .track .sep { width: 1px; background: var(--black); }
 :root[data-style="terminal"] .ticks i { background: var(--phos); opacity: .5; border-radius: 0; }
 :root[data-style="terminal"] .scrub .knob { top: 3px; width: 12px; height: 24px; margin-left: -6px; border: 0; border-radius: 0; background: var(--phos); box-shadow: 0 0 10px var(--halo); }
-:root[data-style="terminal"] .is-playing .scrub .knob { animation: t-blink 1.06s steps(1) infinite; }
 :root[data-style="terminal"] .scrub:focus-within .knob { box-shadow: 0 0 0 2px var(--black), 0 0 0 4px var(--phos); animation: none; }
 :root[data-style="terminal"] .hover-tip { background: var(--phos); color: var(--black); border-radius: 0; font-family: var(--body); text-shadow: none; }
 :root[data-style="terminal"] .hover-tip b { font-family: var(--display); font-size: 18px; color: var(--black); }
@@ -93,7 +85,6 @@
 :root[data-style="terminal"] #playBtn { background: var(--phos); color: var(--black); box-shadow: 0 0 12px var(--halo); }
 :root[data-style="terminal"] .ctl.dial .dial-face { display: none; }
 :root[data-style="terminal"] .time { font-family: var(--display); font-weight: 400; font-size: 26px; color: var(--phos); }
-:root[data-style="terminal"] .grille { opacity: .5; height: 18px; margin: 0 8px; border-radius: 0; background: repeating-linear-gradient(90deg, var(--phos) 0 2px, transparent 2px 5px), repeating-linear-gradient(180deg, transparent 0 2px, var(--black) 2px 4px); background-blend-mode: normal; }
 
 :root[data-style="terminal"] .steps { padding: 16px 12px 14px 16px; }
 :root[data-style="terminal"] .follow { border: 1.5px solid var(--phos); background: transparent; border-radius: 0; color: var(--phos); font-family: var(--body); font-weight: 600; }
@@ -139,15 +130,15 @@
 
 :root[data-style="terminal"] .prog-pct { font-family: var(--display); font-weight: 400; font-size: 28px; }
 :root[data-style="terminal"] .prog-bar { height: 22px; gap: 6px; margin-top: 10px; }
-:root[data-style="terminal"] .prog-seg { border: 1.5px solid var(--phos); border-radius: 0; background: transparent; background-image: repeating-linear-gradient(90deg, var(--dim) 0 1px, transparent 1px 9px); background-size: auto; background-position: 4px 0; }
-:root[data-style="terminal"] .prog-seg .f { background: repeating-linear-gradient(90deg, var(--phos) 0 7px, transparent 7px 9px); box-shadow: 0 0 8px var(--halo); }
+:root[data-style="terminal"] .prog-seg { border: 1.5px solid var(--phos); border-radius: 0; background: transparent; }
+:root[data-style="terminal"] .prog-seg .f { background: var(--phos); box-shadow: 0 0 8px var(--halo); }
 :root[data-style="terminal"] .prog-seg.cur { box-shadow: 0 0 0 1px var(--black), 0 0 0 3px var(--phos), 0 0 12px var(--halo); }
 :root[data-style="terminal"] .prog-note b { font-family: var(--display); font-weight: 400; font-size: 20px; }
 
 /* the map is a vector display */
 :root[data-style="terminal"] .mapbox { padding: 10px; }
 :root[data-style="terminal"] .map-inner, :root[data-style="terminal"] .mapscroll {
-  background: repeating-linear-gradient(0deg, color-mix(in srgb, var(--phos) 9%, transparent) 0 1px, transparent 1px 28px), repeating-linear-gradient(90deg, color-mix(in srgb, var(--phos) 9%, transparent) 0 1px, transparent 1px 28px), #000000;
+  background: #000000;
   border: 1px solid var(--dim); border-radius: 0;
 }
 :root[data-style="terminal"] .map-svg, :root[data-style="terminal"] #map { color: var(--phos); filter: drop-shadow(0 0 3px var(--halo)); }

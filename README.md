@@ -84,19 +84,27 @@ To add another language later, add its column to the two interface tables and a 
 
 Every page has a **Style** menu that changes the page's whole personality, not just its colours. The choice is remembered across pages, and a link can force one with `?style=treehouse` (for example).
 
-- **TV** (the default): the video sits in a chunky television with an antenna, feet, curved glass and a speed dial. While it plays, a power light glows and the antenna sways.
+- **TV** (the default): the video sits in a chunky television with an antenna, feet and a speed dial. While it plays, the antenna sways a little.
 - **Clean**: calm, simple and precise, in the spirit of Dieter Rams, and built on Universal Design for Learning: no motion, no decoration, a warm off-white page, a highly legible typeface (Atkinson Hyperlegible), large controls, and nothing shown by colour alone. A quiet place to learn.
-- **Gadget**: quiet, precise and tactile, after Dieter Rams's devices for Braun: warm greys, hairlines, round buttons and one orange accent. A radio-style tuning scale above the screen has a needle that moves through the lesson. (It was called "Rams" at first; old links with `?style=rams` still work.)
-- **Solar Punk**: a cozy retro-future workshop full of plants: cream 1970s consoles, a CRT monitor with a radar dial, LED readouts and a level meter that come alive while the video plays, steps on green-bar printout paper, a radar-screen map, and a rug on the floor.
-- **Treehouse**: a clubhouse in the leaves: wooden plank panels with nails, the screen hung from a branch by ropes with string lights, steps on paper notes. A little bird hops along the branch as the lesson plays.
-- **Quest**: a 1980s fantasy film at twilight: mountains, a castle and pines behind the title, parchment panels, the screen in a stone frame under an arch with flickering torches, a wax-seal play button, a lantern on the trail, and an old map.
-- **Skyline**: a dark style, a high-rise at dusk: a misty peak over a city of lit windows, dark glass panels warmed by lamplight (brighter while the video plays), progress shown as windows lighting up, and a burnt-orange sofa at the foot of the page.
-- **Daydream**: a bright cloud world: deep blue sky, the video seen through a stone gateway, a water-slide scrub bar with a little raft, orchard rows for progress, and a map of lakes and channels.
-- **Terminal**: a green-phosphor screen: glowing monospace text, scanlines, terminal windows, inverse-video highlights and a blinking cursor. The video itself is never tinted.
+- **Gadget**: quiet, precise and tactile, after Dieter Rams's devices for Braun: warm greys, hairlines, round buttons, one orange accent and a small "glitch'n" nameplate above the screen. (It was called "Rams" at first; old links with `?style=rams` still work.)
+- **Solar Punk**: a cozy retro-future workshop full of plants: cream 1970s consoles with an amber nameplate, a pothos trailing down the monitor, steps on cream paper, a dark green screen for the map, and a rug on the floor.
+- **Treehouse**: a clubhouse in the leaves: wooden plank panels with nails, the screen hung from a branch by ropes, a little bird perched on the branch, steps on paper notes.
+- **Quest**: a 1980s fantasy film at twilight: mountains, a castle and pines behind the title, parchment panels, the screen in a smooth stone frame under an arch between two torches, a wax-seal play button, a lantern for the playhead, and an old map.
+- **Skyline**: a dark style, a high-rise at dusk: a misty peak over a city of lit windows, dark glass panels warmed by lamplight, a warm progress bar, and a burnt-orange sofa at the foot of the page.
+- **Daydream**: a bright cloud world: deep blue sky, the video seen through a stone gateway, a calm blue stream for the timeline with a little raft for the playhead, and a meadow of lakes for the map.
+- **Terminal**: a green-phosphor screen: glowing monospace text, terminal windows, inverse-video highlights and faint scanlines in the background (never over the video, pictures or text).
+
+**Rules every style follows** (so a style can be playful without making the lesson harder to use):
+1. **Only real controls look like controls.** No pictures of buttons, knobs, dials, lights, meters, speaker grilles or scales.
+2. **One timeline, one progress bar.** Nothing else moves with the lesson or is marked with ticks, so nothing can be mistaken for them. Decorations don't use `--played`.
+3. **The video and the close-up pictures are shown as they are:** no tint, lines, glass or shading over them.
+4. **Fills are plain:** the timeline and progress bar fill with a solid colour, not stripes, dots or hatching.
+5. **Calm behind reading and the map:** plain surfaces behind text, the steps and the map; pictures stay at the edges of the page.
+6. **Little motion, and none near the controls:** an antenna may sway, but nothing blinks, flickers or bobs, and anything that moves stops for people who ask their device for reduced motion.
 
 **Where styles live:** TV is part of `player/player.css`. Each other style is one file in `styles/` (`clean.css`, `gadget.css`, `solarpunk.css` and so on) that styles both the lesson player and the home page. `styles/all.css` loads them all, along with their fonts.
 
-**Things a style can use:** the player adds the class `is-playing` to `.app` while the video plays, sets `--played` (0 to 1) on `.app` as it goes, and has a spare decoration slot `.deco` (five empty `<i>` elements) inside the TV. Moving decorations stop for people who ask their device for reduced motion. The drawings are SVG pictures written into the CSS; their sources are in `tools/style_art.py`.
+**Things a style can use:** the player adds the class `is-playing` to `.app` while the video plays, sets `--played` (0 to 1) on `.app` as it goes (for the player itself, not decorations; see rule 2), and has a spare decoration slot `.deco` (five empty `<i>` elements) inside the TV. The drawings are SVG pictures written into the CSS; the files in `styles/` are the ones to edit, and `tools/style_art.py` keeps the sources of the original drawings.
 
 **To add a style** (Cartoon, say):
 1. Copy a file in `styles/` to `styles/cartoon.css` and change `data-style="…"` throughout. Start with the colour and font tokens at the top, then restyle the parts.

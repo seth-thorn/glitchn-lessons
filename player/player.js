@@ -116,7 +116,7 @@
           <span class="divider" aria-hidden="true"></span>
           <button class="ctl" id="muteBtn" aria-label="${t('mute')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" id="volIcon"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor" stroke="none"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18.3 6.5a8 8 0 0 1 0 11"/></svg></button>
           <span class="time" id="time">0:00 / 0:00</span>
-          <span class="grow grille" aria-hidden="true"></span>
+          <span class="grow spacer" aria-hidden="true"></span>
           <button class="ctl" id="fsBtn" aria-label="${t('fullScreen')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button>
         </div>
         <span class="feet" aria-hidden="true"><i></i><i></i></span>

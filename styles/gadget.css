@@ -1,6 +1,6 @@
 /* Gadget style (was called "Rams"): quiet, precise and tactile, in the spirit of Dieter Rams's Braun devices.
    Grey-white housings, anthracite type and controls, one orange accent, a green indicator, round buttons,
-   perforated speaker grilles, hairline rules.
+   hairline rules.
    This file styles both the lesson player and the home page. */
 
 /* ---------- lesson player ---------- */
@@ -50,8 +50,6 @@
 :root[data-style="gadget"] .dial-face { width: 30px; height: 30px; border: 0; background: radial-gradient(circle at 50% 35%, #F7F7F4, #DADAD5); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12); }
 :root[data-style="gadget"] .dial-mark { background: var(--accent); width: 2px; margin-left: -1px; }
 :root[data-style="gadget"] .time { font-family: var(--body); font-weight: 500; color: var(--muted); }
-:root[data-style="gadget"] .grille { opacity: 1; height: 34px; margin: 0 6px; border-radius: 4px;
-  background: radial-gradient(circle, #A3A29C 1.7px, transparent 2.1px) 0 0 / 9px 9px; }
 :root[data-style="gadget"] .steps { padding: 16px 12px 14px 16px; }
 :root[data-style="gadget"] .follow { border: 1px solid var(--line); background: var(--white); font-weight: 500; }
 :root[data-style="gadget"] .follow i { border: 0; background: #C9C8C2; box-shadow: inset 0 1px 1px rgba(0, 0, 0, .2); }
@@ -134,6 +132,8 @@
 :root[data-style="gadget"] .mapscroll { background: var(--card); }
 :root[data-style="gadget"] #map .edge { stroke: #8F8E88; stroke-width: 1.5; }
 :root[data-style="gadget"] #map .node circle { fill: #FAFAF8; stroke: #262624; stroke-width: 1.5; }
+:root[data-style="gadget"] #map.map-svg .node.center circle { fill: #262624; }
+:root[data-style="gadget"] #map.map-svg .node.center text { fill: #FAFAF8; }
 :root[data-style="gadget"] #map .node.later circle { fill: transparent; stroke-dasharray: 4 3; }
 :root[data-style="gadget"] #map .node text { font-weight: 600; }
 :root[data-style="gadget"] #map .node .sub { font-family: var(--body); font-weight: 500; }
@@ -149,23 +149,14 @@
 :root[data-style="gadget"] .err { border: 1px solid var(--line); }
 @media (max-width: 699px) { :root[data-style="gadget"] .controls { gap: 6px; } :root[data-style="gadget"] .ctl.dial { padding: 0 10px 0 5px; } }
 
-/* ---------- alive: a radio-style tuning scale above the screen. Its orange needle travels with the lesson,
-   and a lamp lights green while the video plays (after Braun radios such as the T 1000) ---------- */
-:root[data-style="gadget"] .tv { padding-top: 54px; }
-:root[data-style="gadget"] .deco { display: flex; position: absolute; top: 18px; left: 20px; right: 20px; height: 22px; align-items: center; gap: 14px; pointer-events: none; }
-:root[data-style="gadget"] .deco i { position: relative; display: block; flex: none; font-style: normal; }
-:root[data-style="gadget"] .deco i:nth-child(1)::before { content: "glitch\2019n"; font: 600 15px/1 var(--display); letter-spacing: -.02em; color: var(--ink); }
-:root[data-style="gadget"] .deco i:nth-child(2) { flex: 1; height: 22px;
-  background:
-    repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 10%) 0 0 / 100% 12px no-repeat,
-    repeating-linear-gradient(90deg, #A3A29C 0 1px, transparent 1px 2%) 0 3px / 100% 6px no-repeat,
-    linear-gradient(var(--line), var(--line)) 0 16px / 100% 1px no-repeat; }
-:root[data-style="gadget"] .deco i:nth-child(2)::after { content: ""; position: absolute; top: -3px; bottom: 0; width: 2px; margin-left: -1px; left: calc(var(--played, 0) * 100%); background: var(--accent); border-radius: 1px; box-shadow: 0 0 0 1px rgba(250, 250, 248, .8); transition: left .3s linear; }
-:root[data-style="gadget"] .deco i:nth-child(3) { width: 9px; height: 9px; border-radius: 50%; background: #C9C8C2; box-shadow: inset 0 1px 1px rgba(0, 0, 0, .25); }
-:root[data-style="gadget"] .is-playing .deco i:nth-child(3) { background: var(--ok); box-shadow: 0 0 7px rgba(60, 154, 95, .8); }
-:root[data-style="gadget"] .deco i:nth-child(n+4) { display: none; }
+/* ---------- a small "glitch'n" nameplate above the screen, as on a Braun radio. It is only a name: no scale,
+   needle or lamp, so nothing here can be mistaken for the timeline or a control ---------- */
+:root[data-style="gadget"] .tv { padding-top: 46px; }
+:root[data-style="gadget"] .deco { display: block; position: absolute; top: 17px; left: 22px; pointer-events: none; }
+:root[data-style="gadget"] .deco i { display: none; }
+:root[data-style="gadget"] .deco i:first-child { display: block; font-style: normal; }
+:root[data-style="gadget"] .deco i:first-child::before { content: "glitch\2019n"; font: 600 15px/1 var(--display); letter-spacing: -.02em; color: var(--muted); }
 @media (max-width: 699px) {
-  :root[data-style="gadget"] .tv { padding-top: 46px; }
-  :root[data-style="gadget"] .deco { top: 14px; left: 14px; right: 14px; gap: 10px; }
+  :root[data-style="gadget"] .tv { padding-top: 40px; }
+  :root[data-style="gadget"] .deco { top: 14px; left: 16px; }
 }
-@media (prefers-reduced-motion: reduce) { :root[data-style="gadget"] .deco i::after { transition: none; } }

@@ -58,9 +58,9 @@
   background: linear-gradient(90deg, transparent, var(--sepia) 20% 80%, transparent) center / 100% 1.5px no-repeat, radial-gradient(circle, var(--seal) 0 2.5px, transparent 3px) center / 8px 6px no-repeat; }
 :root[data-style="quest"] .map-inner .panel-title::after { margin-left: auto; margin-right: auto; }
 
-/* the screen in a stone frame, crowned by an arch, with a torch on each side */
+/* the screen in a smooth stone frame (no brick seams behind the controls), crowned by an arch, with a torch on each side */
 :root[data-style="quest"] .tv-wrap { padding-top: 66px; padding-bottom: 0; }
-:root[data-style="quest"] .tv { padding: 18px 18px 12px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='64'%3E %3Crect width='160' height='64' fill='%2324253A'/%3E %3Cg%3E%3Crect x='1' y='1' width='50' height='30' rx='3' fill='%234E5068'/%3E%3Crect x='53' y='1' width='54' height='30' rx='3' fill='%2346485E'/%3E%3Crect x='109' y='1' width='50' height='30' rx='3' fill='%23525470'/%3E %3Crect x='-26' y='33' width='52' height='30' rx='3' fill='%234A4C64'/%3E%3Crect x='28' y='33' width='50' height='30' rx='3' fill='%23525470'/%3E%3Crect x='80' y='33' width='52' height='30' rx='3' fill='%2346485E'/%3E%3Crect x='134' y='33' width='52' height='30' rx='3' fill='%234E5068'/%3E%3C/g%3E %3Cg fill='%23FFFFFF' opacity='.05'%3E%3Crect x='4' y='3' width='40' height='3'/%3E%3Crect x='58' y='3' width='40' height='3'/%3E%3Crect x='32' y='35' width='40' height='3'/%3E%3Crect x='84' y='35' width='40' height='3'/%3E%3C/g%3E %3C/svg%3E") 0 0 / 160px 64px; border: 3px solid var(--stone-d); border-radius: 6px;
+:root[data-style="quest"] .tv { padding: 18px 18px 12px; background: #34364F; border: 3px solid var(--stone-d); border-radius: 6px;
   box-shadow: inset 0 0 30px rgba(0, 0, 0, .5), 0 26px 50px -18px rgba(0, 0, 0, .9); }
 :root[data-style="quest"] .ant { left: 10%; right: 10%; width: auto; }
 :root[data-style="quest"] .ant .rod, :root[data-style="quest"] .ant .base { display: none; }
@@ -69,9 +69,6 @@
 :root[data-style="quest"] .feet i { position: relative; width: 22px; height: 62px; border-radius: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 120'%3E %3Cpath d='M14 40L26 40L23 118L17 118Z' fill='%234A3222' stroke='%231E140C' stroke-width='2'/%3E %3Cpath d='M10 34H30L27 46H13Z' fill='%236B6B78' stroke='%231E140C' stroke-width='2'/%3E %3Cpath d='M12 52H28M12 60H28' stroke='%232A2B33' stroke-width='3'/%3E %3C/svg%3E") no-repeat center bottom / contain; }
 :root[data-style="quest"] .feet i::before { content: ""; position: absolute; left: -8px; right: -8px; bottom: 50px; height: 40px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 50'%3E %3Cpath d='M20 2C26 14 34 20 32 32C31 42 26 48 20 48C13 48 8 42 8 33C8 24 15 20 14 10C17 14 18 18 20 20C21 14 21 8 20 2Z' fill='%23F28A2A'/%3E %3Cpath d='M20 16C24 24 28 28 27 35C26 42 23 46 20 46C16 46 13 42 13 36C13 30 18 28 20 16Z' fill='%23FFC94D'/%3E %3Cpath d='M20 30C22 34 24 37 23 41C22 44 21 45 20 45C18 45 17 43 17 41C17 37 19 35 20 30Z' fill='%23FFF3C4'/%3E %3C/svg%3E") no-repeat center bottom / contain; transform-origin: 50% 100%; filter: drop-shadow(0 0 8px rgba(255, 160, 60, .9)); }
 :root[data-style="quest"] .feet i::after { content: ""; position: absolute; left: -50px; right: -50px; bottom: 30px; height: 110px; background: radial-gradient(ellipse at 50% 60%, rgba(255, 170, 70, .28), rgba(255, 170, 70, 0) 65%); pointer-events: none; }
-:root[data-style="quest"] .is-playing .feet i::before { animation: q-flicker .9s ease-in-out infinite alternate; }
-:root[data-style="quest"] .is-playing .feet i:last-child::before { animation-duration: 1.13s; }
-@keyframes q-flicker { 0% { transform: scale(1, 1) skewX(0); } 40% { transform: scale(.94, 1.08) skewX(-3deg); } 70% { transform: scale(1.05, .95) skewX(2deg); } 100% { transform: scale(.97, 1.04) skewX(-1deg); } }
 :root[data-style="quest"] .screen { border: 4px solid var(--stone-d); border-radius: 4px; box-shadow: 0 0 0 2px #6B6D88; }
 :root[data-style="quest"] .glass { background: radial-gradient(120% 90% at 50% 0%, rgba(255, 200, 120, .08), rgba(255, 200, 120, 0) 50%); box-shadow: inset 0 0 60px rgba(10, 10, 30, .55); }
 :root[data-style="quest"] .big-play span { width: 96px; height: 96px; border: 0; border-radius: 50%; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E %3Cpath d='M50 3C58 6 62 2 69 8C76 13 82 9 86 18C90 26 97 28 95 38C93 47 99 52 94 61C90 69 94 76 86 82C79 88 77 95 67 95C58 96 54 100 46 96C38 92 31 97 24 90C17 84 9 85 7 75C5 66 0 61 4 52C8 44 2 37 8 29C13 22 12 13 21 10C30 7 35 0 50 3Z' fill='%238E1F22'/%3E %3Ccircle cx='50' cy='50' r='34' fill='%23A8292C'/%3E%3Ccircle cx='50' cy='50' r='34' fill='none' stroke='%236E1416' stroke-width='3'/%3E %3Ccircle cx='50' cy='50' r='27' fill='none' stroke='%23C9474A' stroke-width='1.5' opacity='.7'/%3E %3Cpath d='M30 30C40 22 58 22 70 32' fill='none' stroke='%23E06A6C' stroke-width='3' stroke-linecap='round' opacity='.5'/%3E %3C/svg%3E") no-repeat center / contain; color: var(--cream); box-shadow: none; filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .55)); }
@@ -99,7 +96,6 @@
 :root[data-style="quest"] .dial-face { border: 2px solid #3A2A12; background: radial-gradient(circle at 40% 35%, #F2D892, #A07A3A); }
 :root[data-style="quest"] .dial-mark { background: #3A2A12; }
 :root[data-style="quest"] .time { font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: .06em; color: var(--cream); text-shadow: 0 1px 2px rgba(0, 0, 0, .6); }
-:root[data-style="quest"] .grille { opacity: .9; height: 26px; margin: 0 10px; border-radius: 2px; background: repeating-linear-gradient(90deg, var(--stone-d) 0 5px, transparent 5px 16px); }
 
 /* steps on parchment */
 :root[data-style="quest"] .steps { padding: 16px 12px 14px 18px; }
@@ -155,7 +151,7 @@
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E %3Cg fill='none' stroke='%235B3A1E' stroke-width='1.5' opacity='.85'%3E%3Ccircle cx='50' cy='50' r='34'/%3E%3Ccircle cx='50' cy='50' r='29'/%3E%3C/g%3E %3Cpath d='M50 6L56 44L94 50L56 56L50 94L44 56L6 50L44 44Z' fill='%235B3A1E' opacity='.85'/%3E %3Cpath d='M50 6L56 44L50 50ZM94 50L56 56L50 50ZM50 94L44 56L50 50ZM6 50L44 44L50 50Z' fill='%23C9A86A'/%3E %3Cpath d='M50 24L53 47L76 50L53 53L50 76L47 53L24 50L47 47Z' fill='%238E1F22' opacity='.8' transform='rotate(45 50 50)'/%3E %3C/svg%3E") right 8px bottom 8px / 74px 74px no-repeat, radial-gradient(ellipse at 50% 50%, #EADBB4, #D9C595 90%);
   border: 1.5px solid var(--sepia); border-radius: 3px; box-shadow: inset 0 0 0 4px #EADBB4, inset 0 0 0 5.5px var(--sepia), inset 0 0 30px rgba(120, 80, 30, .25);
 }
-:root[data-style="quest"] .map-svg .edge, :root[data-style="quest"] #map .edge { stroke: var(--sepia); stroke-width: 2; stroke-dasharray: 6 5; }
+:root[data-style="quest"] .map-svg .edge, :root[data-style="quest"] #map .edge { stroke: var(--sepia); stroke-width: 2; } /* solid: dashes mean "coming" */
 :root[data-style="quest"] .map-svg, :root[data-style="quest"] #map { color: var(--sepia); }
 :root[data-style="quest"] .map-svg .node circle, :root[data-style="quest"] #map .node circle { fill: #F4EAD0; stroke: var(--sepia); stroke-width: 2; }
 :root[data-style="quest"] #map.map-svg .node.center circle { fill: var(--seal); stroke: #5A1214; }

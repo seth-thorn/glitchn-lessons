@@ -1,7 +1,7 @@
 /* Solar Punk style: a cozy retro-future workshop, after Seth's reference (warm 1970s control consoles in rooms full of plants).
    Sage wall with a terracotta wainscot, a wooden floor with a Persian rug at the foot of the page, cream console panels
-   with screws, a CRT monitor with an instrument strip (radar, LED readout, lamps, level meter), keycap buttons,
-   amber LED readouts, green-bar printout paper for the steps, a radar screen for the map, plants growing over everything.
+   with screws, a CRT monitor with an amber nameplate, keycap buttons,
+   amber LED readouts, cream paper for the steps, a dark green screen for the map, plants growing over everything.
    Type: Righteous (1970s rounded) for headings, Nunito for reading, VT323 (terminal) for readouts.
    This file styles both the lesson player and the home page. */
 
@@ -72,39 +72,13 @@
 /* the TV is a CRT monitor in a console, with an instrument strip above the screen */
 :root[data-style="solarpunk"] .tv-wrap { padding-top: 22px; padding-bottom: 14px; }
 :root[data-style="solarpunk"] .ant { display: none; }
-:root[data-style="solarpunk"] .tv { padding: 72px 22px 16px; }
+:root[data-style="solarpunk"] .tv { padding: 66px 22px 16px; }
 :root[data-style="solarpunk"] .deco { display: flex; position: absolute; top: 16px; left: 22px; right: 22px; height: 44px; align-items: center; gap: 12px; pointer-events: none; }
-:root[data-style="solarpunk"] .deco i { position: relative; display: block; flex: none; }
-:root[data-style="solarpunk"] .deco i:nth-child(1) { width: 44px; height: 44px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E %3Ccircle cx='30' cy='30' r='28' fill='%23C8562F' stroke='%232B2622' stroke-width='2.5'/%3E %3Ccircle cx='30' cy='30' r='21' fill='%230E2A1C' stroke='%232B2622' stroke-width='2'/%3E %3Cg fill='none' stroke='%236EE59A' stroke-width='1' opacity='.75'%3E%3Ccircle cx='30' cy='30' r='15'/%3E%3Ccircle cx='30' cy='30' r='9'/%3E%3Cpath d='M30 10v40M10 30h40'/%3E%3C/g%3E %3Ccircle cx='36' cy='24' r='2' fill='%23B8FFC9'/%3E%3Ccircle cx='22' cy='36' r='1.5' fill='%23B8FFC9'/%3E %3Cg fill='%23F4EBD3'%3E%3Ccircle cx='30' cy='4.5' r='1.6'/%3E%3Ccircle cx='55.5' cy='30' r='1.6'/%3E%3Ccircle cx='30' cy='55.5' r='1.6'/%3E%3Ccircle cx='4.5' cy='30' r='1.6'/%3E%3C/g%3E %3C/svg%3E") no-repeat center / contain; }
-:root[data-style="solarpunk"] .deco i:nth-child(1)::after { content: ""; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M30 30L30 9A21 21 0 0 1 48 20Z' fill='%236EE59A' opacity='.45'/%3E%3Cpath d='M30 30L30 9' stroke='%23B8FFC9' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat center / contain; animation: sp-spin 3.2s linear infinite paused; }
-:root[data-style="solarpunk"] .deco i:nth-child(2) { height: 36px; padding: 0 12px; display: grid; place-items: center; background: var(--led-bg); border-radius: 5px; box-shadow: inset 0 2px 5px rgba(0, 0, 0, .8), 0 0 0 2px var(--ink); }
+/* only a nameplate: no lamps, meters, dials or knobs that could pass for controls */
+:root[data-style="solarpunk"] .deco i { display: none; }
+:root[data-style="solarpunk"] .deco i:nth-child(2) { position: relative; flex: none; height: 36px; padding: 0 12px; display: grid; place-items: center; background: var(--led-bg); border-radius: 5px; box-shadow: inset 0 2px 5px rgba(0, 0, 0, .8), 0 0 0 2px var(--ink); }
 :root[data-style="solarpunk"] .deco i:nth-child(2)::before { content: "GLITCH\2019N"; font: 400 28px/1 var(--term); letter-spacing: .12em; color: var(--amber); text-shadow: 0 0 8px rgba(255, 179, 71, .75); font-style: normal; }
-:root[data-style="solarpunk"] .deco i:nth-child(3) { width: 74px; height: 16px;
-  background: radial-gradient(circle, #FF5A3C 0 4px, #4A1F17 4.5px 6px, transparent 6.5px) 0 0 / 18.5px 16px repeat-x; filter: saturate(.35) brightness(.7); }
-:root[data-style="solarpunk"] .deco i:nth-child(3)::after { content: ""; position: absolute; inset: 0;
-  background: radial-gradient(circle, #FFB347 0 4px, transparent 4.5px) 18.5px 0 / 37px 16px repeat-x, radial-gradient(circle, #6EE59A 0 4px, transparent 4.5px) 55.5px 0 / 74px 16px no-repeat; }
-:root[data-style="solarpunk"] .deco i:nth-child(4) { flex: 1; min-width: 40px; height: 32px; border-radius: 5px; background: var(--led-bg); box-shadow: inset 0 2px 5px rgba(0, 0, 0, .8), 0 0 0 2px var(--ink); overflow: hidden; }
-:root[data-style="solarpunk"] .deco i:nth-child(4)::after { content: ""; position: absolute; left: 6px; right: 6px; top: 5px; bottom: 5px;
-  background: linear-gradient(0deg, var(--phos) 0 58%, var(--amber) 58% 82%, #FF5A3C 82%);
-  -webkit-mask: repeating-linear-gradient(90deg, #000 0 5px, transparent 5px 8px); mask: repeating-linear-gradient(90deg, #000 0 5px, transparent 5px 8px);
-  clip-path: polygon(0 100%, 0 70%, 10% 74%, 20% 60%, 30% 78%, 40% 66%, 50% 80%, 60% 72%, 70% 84%, 80% 76%, 90% 86%, 100% 80%, 100% 100%); opacity: .55; }
-:root[data-style="solarpunk"] .deco i:nth-child(5) { width: 64px; height: 30px;
-  background: radial-gradient(circle at 15px 15px, #F4C06A 0 2px, transparent 2.5px), radial-gradient(circle at 49px 15px, #F4C06A 0 2px, transparent 2.5px),
-    radial-gradient(circle at 15px 15px, #4A423A 0 9px, var(--ink) 9.5px 13px, transparent 13.5px), radial-gradient(circle at 49px 15px, #4A423A 0 9px, var(--ink) 9.5px 13px, transparent 13.5px); }
-/* while the video plays, the console comes alive */
-:root[data-style="solarpunk"] .is-playing .deco i:nth-child(1)::after { animation-play-state: running; }
-:root[data-style="solarpunk"] .is-playing .deco i:nth-child(3) { filter: none; }
-:root[data-style="solarpunk"] .is-playing .deco i:nth-child(3)::after { animation: sp-blink 1.1s steps(2, jump-none) infinite; }
-:root[data-style="solarpunk"] .is-playing .deco i:nth-child(4)::after { opacity: 1; animation: sp-vu .9s steps(3, jump-none) infinite alternate; }
-@keyframes sp-spin { to { transform: rotate(360deg); } }
-@keyframes sp-blink { 50% { opacity: .15; } }
-@keyframes sp-vu {
-  0%   { clip-path: polygon(0 100%, 0 40%, 10% 30%, 20% 52%, 30% 24%, 40% 46%, 50% 36%, 60% 58%, 70% 42%, 80% 64%, 90% 50%, 100% 70%, 100% 100%); }
-  50%  { clip-path: polygon(0 100%, 0 56%, 10% 44%, 20% 20%, 30% 50%, 40% 14%, 50% 44%, 60% 30%, 70% 60%, 80% 40%, 90% 66%, 100% 52%, 100% 100%); }
-  100% { clip-path: polygon(0 100%, 0 30%, 10% 54%, 20% 38%, 30% 62%, 40% 32%, 50% 22%, 60% 50%, 70% 28%, 80% 56%, 90% 38%, 100% 60%, 100% 100%); }
-}
 :root[data-style="solarpunk"] .screen { border: 10px solid var(--ink); border-radius: 24px / 20px; box-shadow: 0 0 0 3px #CBBF9F, 0 0 0 5px var(--ink); }
-:root[data-style="solarpunk"] .glass { background: radial-gradient(120% 80% at 20% 0%, rgba(255, 255, 255, .16), rgba(255, 255, 255, 0) 46%), repeating-linear-gradient(0deg, rgba(0, 30, 10, .07) 0 1px, rgba(0, 0, 0, 0) 1px 3px); box-shadow: inset 0 0 70px rgba(10, 30, 15, .5); }
 /* a pothos trails down the side of the monitor, and a monstera sits at its foot */
 :root[data-style="solarpunk"] .tv::after { content: ""; position: absolute; right: -40px; top: -18px; width: 82px; height: 160px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -6 100 186'%3E%3Cpath d='M20.0 0.0 L23.5 10.0 L26.3 20.0 L27.8 30.0 L27.8 40.0 L26.1 50.0 L23.2 60.0 L19.7 70.0 L16.2 80.0 L13.5 90.0 L12.1 100.0 L12.3 110.0 L14.1 120.0 L17.1 130.0 L20.6 140.0 L24.1 150.0' stroke='%232F5A2A' stroke-width='2' fill='none'/%3E%3Cpath d='M46.0 0.0 L43.4 10.0 L41.3 20.0 L40.1 30.0 L40.2 40.0 L41.4 50.0 L43.6 60.0 L46.2 70.0 L48.8 80.0 L50.9 90.0 L51.9 100.0 L51.8 110.0' stroke='%232F5A2A' stroke-width='2' fill='none'/%3E%3Cpath d='M70.0 0.0 L74.4 10.0 L77.9 20.0 L79.8 30.0 L79.7 40.0 L77.6 50.0 L74.0 60.0 L69.6 70.0 L65.3 80.0 L61.9 90.0 L60.1 100.0 L60.4 110.0 L62.6 120.0 L66.3 130.0 L70.8 140.0 L75.1 150.0 L78.4 160.0 L79.9 170.0' stroke='%232F5A2A' stroke-width='2' fill='none'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%237DB255' stroke='%2324461F' stroke-width='1.2' transform='translate(23.5 14.0) rotate(120) scale(1.10)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(26.3 24.0) rotate(240) scale(1.08)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(27.8 34.0) rotate(120) scale(1.05)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%237DB255' stroke='%2324461F' stroke-width='1.2' transform='translate(27.8 44.0) rotate(240) scale(1.03)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(26.1 54.0) rotate(120) scale(1.00)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(23.2 64.0) rotate(240) scale(0.98)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%237DB255' stroke='%2324461F' stroke-width='1.2' transform='translate(19.7 74.0) rotate(120) scale(0.95)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(16.2 84.0) rotate(240) scale(0.93)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(13.5 94.0) rotate(120) scale(0.90)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%237DB255' stroke='%2324461F' stroke-width='1.2' transform='translate(12.1 104.0) rotate(240) scale(0.88)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(12.3 114.0) rotate(120) scale(0.85)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(14.1 124.0) rotate(240) scale(0.83)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%237DB255' stroke='%2324461F' stroke-width='1.2' transform='translate(17.1 134.0) rotate(120) scale(0.80)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(20.6 144.0) rotate(240) scale(0.78)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(24.1 154.0) rotate(120) scale(0.75)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%237DB255' stroke='%2324461F' stroke-width='1.2' transform='translate(43.4 14.0) rotate(120) scale(1.10)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(41.3 24.0) rotate(240) scale(1.08)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(40.1 34.0) rotate(120) scale(1.05)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%237DB255' stroke='%2324461F' stroke-width='1.2' transform='translate(40.2 44.0) rotate(240) scale(1.03)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(41.4 54.0) rotate(120) scale(1.00)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(43.6 64.0) rotate(240) scale(0.98)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%237DB255' stroke='%2324461F' stroke-width='1.2' transform='translate(46.2 74.0) rotate(120) scale(0.95)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(48.8 84.0) rotate(240) scale(0.93)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(50.9 94.0) rotate(120) scale(0.90)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%237DB255' stroke='%2324461F' stroke-width='1.2' transform='translate(51.9 104.0) rotate(240) scale(0.88)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(51.8 114.0) rotate(120) scale(0.85)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%237DB255' stroke='%2324461F' stroke-width='1.2' transform='translate(74.4 14.0) rotate(120) scale(1.10)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(77.9 24.0) rotate(240) scale(1.08)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(79.8 34.0) rotate(120) scale(1.05)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%237DB255' stroke='%2324461F' stroke-width='1.2' transform='translate(79.7 44.0) rotate(240) scale(1.03)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(77.6 54.0) rotate(120) scale(1.00)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(74.0 64.0) rotate(240) scale(0.98)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%237DB255' stroke='%2324461F' stroke-width='1.2' transform='translate(69.6 74.0) rotate(120) scale(0.95)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(65.3 84.0) rotate(240) scale(0.93)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(61.9 94.0) rotate(120) scale(0.90)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%237DB255' stroke='%2324461F' stroke-width='1.2' transform='translate(60.1 104.0) rotate(240) scale(0.88)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(60.4 114.0) rotate(120) scale(0.85)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(62.6 124.0) rotate(240) scale(0.83)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%237DB255' stroke='%2324461F' stroke-width='1.2' transform='translate(66.3 134.0) rotate(120) scale(0.80)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(70.8 144.0) rotate(240) scale(0.78)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(75.1 154.0) rotate(120) scale(0.75)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%237DB255' stroke='%2324461F' stroke-width='1.2' transform='translate(78.4 164.0) rotate(240) scale(0.73)'/%3E%3Cpath d='M0 0C-8 -4 -10 -14 -4 -20C2 -24 10 -22 12 -14C14 -6 8 0 0 0Z' fill='%234E8F3F' stroke='%2324461F' stroke-width='1.2' transform='translate(79.9 174.0) rotate(120) scale(0.70)'/%3E%3C/svg%3E") no-repeat center top / contain; pointer-events: none; z-index: 3; transform-origin: 50% 0; }
 :root[data-style="solarpunk"] .is-playing .tv::after { animation: sp-sway 5s ease-in-out infinite alternate; }
@@ -116,7 +90,7 @@
 /* scrub bar: a lit slot with a fader cap */
 :root[data-style="solarpunk"] .scrub { margin-top: 16px; }
 :root[data-style="solarpunk"] .track { top: 9px; height: 12px; border: 0; border-radius: 6px; background: var(--led-bg); box-shadow: inset 0 2px 3px rgba(0, 0, 0, .7), 0 0 0 2px var(--ink); }
-:root[data-style="solarpunk"] .track .fill { background: repeating-linear-gradient(90deg, var(--phos) 0 5px, #3FB872 5px 7px); box-shadow: 0 0 10px rgba(110, 229, 154, .8); }
+:root[data-style="solarpunk"] .track .fill { background: var(--phos); box-shadow: 0 0 10px rgba(110, 229, 154, .8); }
 :root[data-style="solarpunk"] .track .sep { width: 2px; background: var(--led-bg); }
 :root[data-style="solarpunk"] .ticks i { background: var(--ink); opacity: .6; }
 :root[data-style="solarpunk"] .scrub .knob { top: 1px; width: 16px; height: 28px; margin-left: -8px; border-radius: 4px; background: linear-gradient(180deg, #F7F0DC 0 40%, var(--hot) 40% 60%, #E2D7BB 60%); border: 2px solid var(--ink); box-shadow: 0 2px 0 var(--ink); }
@@ -133,21 +107,16 @@
 :root[data-style="solarpunk"] #playBtn { background: linear-gradient(180deg, color-mix(in srgb, var(--hot) 80%, #FFFFFF), var(--hot)); color: #FFF4DE; }
 :root[data-style="solarpunk"] .dial-face { width: 28px; height: 28px; border: 2px solid var(--ink); background: radial-gradient(circle at 45% 38%, #5A5148, var(--ink)); }
 :root[data-style="solarpunk"] .dial-mark { background: var(--amber); }
-:root[data-style="solarpunk"] .grille { opacity: 1; height: 30px; margin: 0 6px; border-radius: 4px; background: repeating-linear-gradient(180deg, rgba(43, 38, 34, .5) 0 3px, transparent 3px 7px); }
 
-/* steps on green-bar printout paper, with tractor-feed holes */
+/* steps on plain cream paper */
 :root[data-style="solarpunk"] .steps { padding: 16px 14px 14px 16px; }
 :root[data-style="solarpunk"] .steps-head { padding-bottom: 12px; }
 :root[data-style="solarpunk"] .follow { border: 2px solid var(--ink); background: linear-gradient(180deg, #F7F0DC, #E2D7BB); border-radius: 8px; box-shadow: 0 3px 0 var(--ink); font-weight: 800; }
 :root[data-style="solarpunk"] .follow i { border: 2px solid var(--ink); background: #3A3530; }
 :root[data-style="solarpunk"] .follow[aria-pressed="true"] i { background: var(--phos); box-shadow: 0 0 8px var(--phos); }
 :root[data-style="solarpunk"] .step-list {
-  gap: 0; padding: 4px 24px 8px; border: 2px solid #B4A889; border-radius: 4px; scrollbar-color: var(--ink) transparent;
-  background:
-    radial-gradient(circle, rgba(43, 38, 34, .5) 0 3.5px, transparent 4px) 4px 4px / 12px 18px repeat-y,
-    radial-gradient(circle, rgba(43, 38, 34, .5) 0 3.5px, transparent 4px) right 4px top 4px / 12px 18px repeat-y,
-    repeating-linear-gradient(180deg, #DDEBD2 0 36px, #FBF8EE 36px 72px);
-  background-attachment: local;
+  gap: 0; padding: 4px 14px 8px; border: 2px solid #B4A889; border-radius: 4px; scrollbar-color: var(--ink) transparent;
+  background: #FBF8EE;
 }
 :root[data-style="solarpunk"] .step { background: transparent; border: 0; border-bottom: 2px dashed rgba(43, 38, 34, .22); border-radius: 0; }
 :root[data-style="solarpunk"] .step:last-child { border-bottom: 0; }
@@ -184,18 +153,18 @@
 :root[data-style="solarpunk"] .film button[aria-current="true"] { box-shadow: 0 0 0 3px var(--hot); }
 :root[data-style="solarpunk"] .film button span { font-family: var(--term); font-size: 14px; font-weight: 400; background: var(--led-bg); color: var(--amber); }
 
-/* progress: an LED bar meter */
+/* progress: a glowing green bar */
 :root[data-style="solarpunk"] .prog-bar { height: 20px; gap: 5px; margin-top: 12px; }
 :root[data-style="solarpunk"] .prog-seg { border: 2px solid var(--ink); border-radius: 4px; background: var(--led-bg); background-image: none; }
-:root[data-style="solarpunk"] .prog-seg .f { background: repeating-linear-gradient(90deg, var(--phos) 0 6px, #3FB872 6px 8px); box-shadow: 0 0 10px rgba(110, 229, 154, .7); }
+:root[data-style="solarpunk"] .prog-seg .f { background: var(--phos); box-shadow: 0 0 10px rgba(110, 229, 154, .7); }
 :root[data-style="solarpunk"] .prog-seg.cur { box-shadow: 0 0 0 3px var(--amber); }
 :root[data-style="solarpunk"] .prog-note b { font-family: var(--display); font-weight: 400; }
 :root[data-style="solarpunk"] .prog-note { font-weight: 700; }
 
-/* the map is a radar screen */
+/* the map is a dark green screen */
 :root[data-style="solarpunk"] .mapbox { padding: 14px; }
 :root[data-style="solarpunk"] .map-inner, :root[data-style="solarpunk"] .mapscroll {
-  background: repeating-radial-gradient(circle at 50% 55%, transparent 0 52px, rgba(110, 229, 154, .13) 52px 53.5px), radial-gradient(circle at 50% 45%, #14402E, var(--crt) 75%);
+  background: radial-gradient(circle at 50% 45%, #14402E, var(--crt) 75%);
   border: 8px solid var(--ink); border-radius: 18px / 15px; box-shadow: inset 0 0 40px rgba(0, 0, 0, .55);
 }
 :root[data-style="solarpunk"] .map-inner .panel-title { align-self: center; }
@@ -218,23 +187,19 @@
 :root[data-style="solarpunk"] .keys kbd { font-family: var(--body); font-weight: 800; border: 2px solid var(--ink); background: linear-gradient(180deg, #F7F0DC, #E2D7BB); box-shadow: 0 2px 0 var(--ink); }
 
 @media (max-width: 899px) {
-  :root[data-style="solarpunk"] .deco i:nth-child(5) { display: none; }
   :root[data-style="solarpunk"] .tv::after { right: -26px; width: 60px; height: 120px; }
 }
 @media (max-width: 699px) {
   :root[data-style="solarpunk"] { --floor: 200px; }
   :root[data-style="solarpunk"] .tv { padding: 60px 12px 8px; }
   :root[data-style="solarpunk"] .deco { top: 12px; left: 12px; right: 12px; height: 36px; gap: 8px; }
-  :root[data-style="solarpunk"] .deco i:nth-child(1) { width: 36px; height: 36px; }
   :root[data-style="solarpunk"] .deco i:nth-child(2) { height: 30px; padding: 0 8px; }
   :root[data-style="solarpunk"] .deco i:nth-child(2)::before { font-size: 22px; }
-  :root[data-style="solarpunk"] .deco i:nth-child(3) { display: none; }
   :root[data-style="solarpunk"] .screen { border-width: 7px; }
   :root[data-style="solarpunk"] .controls { gap: 6px; }
   :root[data-style="solarpunk"] .ctl { min-width: 40px; padding: 0 6px; }
   :root[data-style="solarpunk"] .time { font-size: 18px; padding: 3px 6px 1px; }
   :root[data-style="solarpunk"] .tv::after { right: -14px; top: -10px; width: 44px; height: 90px; }
-  :root[data-style="solarpunk"] .step-list { padding: 4px 20px 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
   :root[data-style="solarpunk"] .deco i::after, :root[data-style="solarpunk"] .tv::after { animation: none !important; }
@@ -255,10 +220,8 @@
 :root[data-style="solarpunk"] #map .node.later text { fill: var(--phos-hi); }
 :root[data-style="solarpunk"] .legend { font-weight: 700; }
 :root[data-style="solarpunk"] .legend i { border: 2px solid var(--ink); }
-:root[data-style="solarpunk"] .coming li { border: 2px solid #B4A889; border-radius: 4px; padding: 10px 26px;
-  background: radial-gradient(circle, rgba(43, 38, 34, .5) 0 3.5px, transparent 4px) 4px 4px / 12px 18px repeat-y,
-    radial-gradient(circle, rgba(43, 38, 34, .5) 0 3.5px, transparent 4px) right 4px top 4px / 12px 18px repeat-y,
-    repeating-linear-gradient(180deg, #DDEBD2 0 24px, #FBF8EE 24px 48px); }
+:root[data-style="solarpunk"] .coming li { border: 2px solid #B4A889; border-radius: 4px; padding: 10px 16px;
+  background: #FBF8EE; }
 :root[data-style="solarpunk"] .coming b { font-family: var(--display); font-weight: 400; font-size: 19px; }
 :root[data-style="solarpunk"] .coming span { color: #3A3F33; font-weight: 600; }
 :root[data-style="solarpunk"] .team { border-top: 2px dashed rgba(43, 38, 34, .5); color: #F6E9D0; font-weight: 700; }

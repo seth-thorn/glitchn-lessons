@@ -43,7 +43,7 @@
 :root[data-style="clean"] .grid { gap: 28px; }
 :root[data-style="clean"] .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; box-shadow: none; }
 :root[data-style="clean"] .panel-title { font-family: var(--body); font-weight: 700; font-stretch: 100%; font-size: 19px; letter-spacing: 0; }
-:root[data-style="clean"] .ant, :root[data-style="clean"] .feet, :root[data-style="clean"] .glass, :root[data-style="clean"] .grille, :root[data-style="clean"] .divider, :root[data-style="clean"] .now-chip, :root[data-style="clean"] .ticks { display: none; }
+:root[data-style="clean"] .ant, :root[data-style="clean"] .feet, :root[data-style="clean"] .glass, :root[data-style="clean"] .divider, :root[data-style="clean"] .now-chip, :root[data-style="clean"] .ticks { display: none; }
 :root[data-style="clean"] .tv-wrap { padding: 0; }
 :root[data-style="clean"] .tv { padding: 16px 16px 14px; }
 :root[data-style="clean"] .screen { border: 0; border-radius: 10px; background: #E9E7E1; }
