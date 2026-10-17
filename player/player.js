@@ -505,9 +505,9 @@
       const planned = n.status === 'planned';
       const fs = r >= 50 ? 13.5 : r >= 40 ? 11.5 : 10;
       const lines = wrap(n.title, r >= 50 ? 13 : r >= 40 ? 11 : 9).slice(0, 4);
-      const lh = fs * 1.12; const y0 = y - (lines.length - 1) * lh / 2 + (planned ? -5 : 0);
+      const lh = fs * 1.12; const y0 = y - (lines.length - 1) * lh / 2 + (planned && r >= 40 ? -5 : 0);
       let lbl = lines.map((l, i) => '<text x="' + x + '" y="' + (y0 + i * lh) + '" font-size="' + fs + '">' + esc(l) + '</text>').join('');
-      if (planned) lbl += '<text class="day" x="' + x + '" y="' + (y0 + lines.length * lh + 1) + '" font-size="10">' + esc(t('comingSmall')) + '</text>';
+      if (planned && r >= 40) lbl += '<text class="day" x="' + x + '" y="' + (y0 + lines.length * lh + 1) + '" font-size="10">' + esc(t('comingSmall')) + '</text>';
       return '<g class="node ' + cls + (planned ? ' later' : '') + '" tabindex="0" role="button" data-id="' + esc(n.slug) + '" aria-label="' + esc(n.title) + (planned ? esc(t('comingLater')) : '') + '"><circle cx="' + x + '" cy="' + y + '" r="' + r + '"/>' + lbl + '</g>';
     }
     function spread(n, cy, gap) { return Array.from({ length: n }, (_, i) => cy + (i - (n - 1) / 2) * gap); }

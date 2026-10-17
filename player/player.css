@@ -43,7 +43,9 @@ button { font: inherit; color: inherit; }
 .app { max-width: 1240px; margin: 0 auto; display: grid; gap: 22px; }
 
 /* ---------- Header ---------- */
-.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px 24px; }
+/* Header: title on the left, language and colour controls pinned top-right. The title wraps in its own column,
+   so a longer title (Spanish, say) never pushes the controls around. */
+.top { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 14px 28px; }
 .eyebrow { font-family: var(--mono); font-size: 12.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .draft-chip { font-family: var(--mono); letter-spacing: .04em; text-transform: none; font-size: 12px; border: 2px solid var(--ink); border-radius: 99px; padding: 1px 9px; color: var(--ink); background: var(--white); }
 h1 { font-family: var(--display); font-weight: 860; font-stretch: 112%; font-size: clamp(30px, 4.4vw, 50px); line-height: 1.02; letter-spacing: -.01em; margin: 6px 0 0; text-wrap: balance; }
@@ -202,25 +204,51 @@ h1 .sub { display: block; font-weight: 600; font-stretch: 100%; font-size: .44em
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 .err { padding: 24px; border: var(--bw) solid var(--ink); border-radius: var(--r-lg); background: var(--card); }
 
-/* ---------- Narrow ---------- */
-@media (max-width: 940px) {
-  .grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "tv" "prog" "steps" "stills" "map"; }
-  .steps-cell { min-height: 0; }
-  .steps { position: static; max-height: 520px; }
+/* ---------- Layouts ----------
+   1. Wide screens and landscape tablets (the default above): video and build steps side by side.
+   2. Portrait tablets and smaller windows: video across the top, progress under it,
+      then build steps beside the close-up stills, then the map.
+   3. Phones: one column.
+   Everything inside is fluid (percent widths, aspect ratios), so each layout stretches
+   smoothly between these points instead of snapping to fixed sizes. */
+@media (max-width: 1099px) and (orientation: portrait), (max-width: 899px) {
+  /* The header gets the full width for the title; the controls move to their own row above it, on the right,
+     so the header stays short and the build steps come into view sooner. */
+  .top { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .grid { grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); grid-template-areas: "tv tv" "steps stills" "prog prog" "map map"; gap: 20px; }
+  .tv-wrap { padding-top: 44px; }
   .side { display: contents; }
   .progress { grid-area: prog; }
   .mapbox { grid-area: map; }
-  .map-svg { min-height: 0; flex: none; }
+  .map-svg { min-height: 0; flex: none; max-height: 330px; }
+  .steps-cell { min-height: 420px; }
+  .stills { padding: 14px; }
+  .stills .arrow { display: none; }
+  .caption { font-size: 15px; }
 }
-@media (max-width: 560px) {
-  .stills { padding: 14px 12px 14px; }
-  .arrow { display: none; }
+@media (max-width: 699px) {
+  .grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "tv" "prog" "steps" "stills" "map"; }
+  .steps-cell { min-height: 0; }
+  .steps { position: static; max-height: min(520px, 70vh); }
+  .stills { padding: 14px 12px; }
   .tv { padding: 12px 12px 6px; }
   .time { font-size: 12.5px; }
   .ctl { min-width: 36px; padding: 0 5px; font-size: 16px; }
   .hint { font-size: 12px; }
   .lens { width: 150px; height: 150px; margin: -75px 0 0 -75px; }
   .now-chip { font-size: 12.5px; }
+}
+/* Touch screens (tablets, phones): larger targets for fingers. */
+@media (pointer: coarse) {
+  .lang { padding: 8px 16px; font-size: 15px; }
+  .skin { width: 40px; height: 36px; }
+  .ctl { height: 46px; min-width: 46px; }
+  .step-btn { padding: 14px; }
+  .sub { padding: 10px 8px; }
+  .follow { padding: 7px 14px 7px 10px; }
+  .zoom button { width: 42px; height: 36px; }
+  .film button { width: 86px; }
+  .back-btn { padding: 8px 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
@@ -231,12 +259,21 @@ body { margin: 0; }
 .home-link { color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--ink); font-weight: 600; }
 .home-link:hover { background: var(--card); }
 .map-svg .map-note { font-family: var(--body); font-weight: 700; font-size: 12px; fill: var(--on-panel); text-anchor: middle; dominant-baseline: middle; }
-/* ---------- language switch ---------- */
-.top-tools { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+/* ---------- language switch and colour skins (header, top-right) ---------- */
+.top-tools { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; padding-top: 2px; }
 .langs { display: inline-flex; border: var(--bw) solid var(--ink); border-radius: 99px; overflow: hidden; background: var(--white); }
 .lang { border: 0; background: none; padding: 4px 13px; font-family: var(--body); font-weight: 700; font-size: 14px; cursor: pointer; color: var(--ink); }
 .lang + .lang { border-left: 2.5px solid var(--ink); }
 .lang:hover { background: var(--card); }
 .lang[aria-pressed="true"] { background: var(--ink); color: var(--white); }
 .lang-note { background: var(--card); }
-@media (max-width: 560px) { .top-tools { align-items: flex-start; } }
+/* Portrait tablets, phones and small windows: the controls sit in one row above the title, on the right
+   (placed last in the file so it wins over the default column arrangement above). */
+@media (max-width: 1099px) and (orientation: portrait), (max-width: 899px) {
+  .top-tools { order: -1; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px 18px; }
+  .tv-wrap { padding-top: 40px; }
+  .steps-head { flex-wrap: wrap; row-gap: 8px; }
+  .steps .panel-title { font-size: 19px; }
+  .follow { white-space: nowrap; }
+  .hint { font-size: 12px; max-width: calc(100% - 150px); }
+}
