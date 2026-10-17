@@ -1,0 +1,212 @@
+/* Terminal style: a green-phosphor CRT. Black glass, glowing monospace text, scanlines and a soft vignette;
+   panels are terminal windows with double-line borders and [ BRACKETED ] titles; buttons are text keys that invert
+   when pressed; the current sub-step is shown in inverse video; the scrub bar and progress fill with blocks; a block
+   cursor blinks after the title. The video itself is never tinted, so wire colours stay true.
+   Type: VT323 (terminal display) for headings and readouts, IBM Plex Mono for reading.
+   The colour swatches change the phosphor: green (default), amber, cyan, blue-white, white, red. Styles the player and home page. */
+
+/* ---------- tokens ---------- */
+:root[data-style="terminal"], :root[data-style="terminal"][data-skin] {
+  --phos: #33FF66;
+  --ink: var(--phos); --page: #030603; --white: #050B06; --panel: #050B06; --card: #08140A; --deep: #000000; --on-panel: var(--phos);
+  --muted: color-mix(in srgb, var(--phos) 62%, #000000);
+  --dim: color-mix(in srgb, var(--phos) 32%, #000000);
+  --halo: color-mix(in srgb, var(--phos) 55%, transparent);
+  --black: #020402;
+  --display: "VT323", "Courier New", ui-monospace, monospace;
+  --body: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --bw: 2px; --r-lg: 0px; --r-md: 0px; --r-sm: 0px;
+  color-scheme: dark;
+}
+:root[data-style="terminal"][data-skin="navy"]   { --phos: #B4C8FF; }
+:root[data-style="terminal"][data-skin="sky"]    { --phos: #4FE6FF; }
+:root[data-style="terminal"][data-skin="green"]  { --phos: #E2F2E2; }
+:root[data-style="terminal"][data-skin="yellow"] { --phos: #FFB000; }
+:root[data-style="terminal"][data-skin="red"]    { --phos: #FF5A4E; }
+:root[data-style="terminal"] .skin[data-skin="navy"]   { --c: #B4C8FF !important; }
+:root[data-style="terminal"] .skin[data-skin="sky"]    { --c: #4FE6FF !important; }
+:root[data-style="terminal"] .skin[data-skin="coral"]  { --c: #33FF66 !important; }
+:root[data-style="terminal"] .skin[data-skin="green"]  { --c: #E2F2E2 !important; }
+:root[data-style="terminal"] .skin[data-skin="yellow"] { --c: #FFB000 !important; }
+:root[data-style="terminal"] .skin[data-skin="red"]    { --c: #FF5A4E !important; }
+
+/* ---------- the glass: black, a faint phosphor bloom, scanlines and a vignette over everything ---------- */
+:root[data-style="terminal"] { background: radial-gradient(ellipse at 50% 30%, color-mix(in srgb, var(--phos) 7%, #030603), #030603 70%); background-color: #030603; }
+:root[data-style="terminal"] body { background: transparent; color: var(--phos); font-weight: 500; text-shadow: 0 0 5px var(--halo); }
+:root[data-style="terminal"] body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 60;
+  background: repeating-linear-gradient(180deg, rgba(0, 0, 0, .22) 0 1px, rgba(0, 0, 0, 0) 1px 3px), radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0) 62%, rgba(0, 0, 0, .55)); }
+:root[data-style="terminal"] ::selection { background: var(--phos); color: var(--black); }
+:root[data-style="terminal"] :focus-visible { outline: 2px dashed var(--phos); outline-offset: 3px; }
+:root[data-style="terminal"] .eyebrow { font-family: var(--body); font-size: 13px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--muted); }
+:root[data-style="terminal"] .home-link { color: var(--phos); border-bottom: 0; font-weight: 600; }
+:root[data-style="terminal"] .home-link::before { content: "["; } :root[data-style="terminal"] .home-link::after { content: "]"; }
+:root[data-style="terminal"] .home-link:hover { background: var(--phos); color: var(--black); text-shadow: none; }
+:root[data-style="terminal"] h1 { font-family: var(--display); font-weight: 400; font-stretch: 100%; font-size: clamp(40px, 5.6vw, 66px); letter-spacing: .01em; line-height: .95; color: var(--phos); text-shadow: 0 0 8px var(--halo), 0 0 22px color-mix(in srgb, var(--phos) 30%, transparent); }
+:root[data-style="terminal"] h1::before { content: "> "; color: var(--muted); }
+/* the cursor waits after the last line of the title block */
+:root[data-style="terminal"] #title:not(:has(.sub))::after, :root[data-style="terminal"] #title .sub::after, :root[data-style="terminal"] main > header h1::after { content: ""; display: inline-block; width: .55em; height: 1em; margin-left: .3em; vertical-align: -.15em; background: var(--phos); box-shadow: 0 0 8px var(--halo); animation: t-blink 1.06s steps(1) infinite; }
+@keyframes t-blink { 50% { opacity: 0; } }
+:root[data-style="terminal"] h1 .sub { font-family: var(--body); font-weight: 500; font-size: .3em; line-height: 1.5; letter-spacing: 0; color: var(--muted); }
+:root[data-style="terminal"] .draft-chip, :root[data-style="terminal"] .chip { font-family: var(--body); letter-spacing: 0; font-weight: 600; border: 1px solid var(--phos); background: transparent; color: var(--phos); border-radius: 0; }
+:root[data-style="terminal"] .style-pick, :root[data-style="terminal"] .skins span { font-family: var(--body); font-size: 13px; color: var(--muted); }
+:root[data-style="terminal"] .langs, :root[data-style="terminal"] .style-pick select { border: 1.5px solid var(--phos); background: var(--black); color: var(--phos); border-radius: 0; }
+:root[data-style="terminal"] .style-pick select option { background: #000000; color: var(--phos); }
+:root[data-style="terminal"] .lang, :root[data-style="terminal"] .style-pick select { font-family: var(--body); font-weight: 600; color: var(--phos); }
+:root[data-style="terminal"] .lang + .lang { border-left: 1.5px solid var(--phos); }
+:root[data-style="terminal"] .lang:hover { background: var(--card); }
+:root[data-style="terminal"] .lang[aria-pressed="true"] { background: var(--phos); color: var(--black); text-shadow: none; }
+:root[data-style="terminal"] .skin { width: 22px; height: 22px; border: 1.5px solid var(--black); border-radius: 0; box-shadow: 0 0 8px color-mix(in srgb, var(--c) 55%, transparent); }
+:root[data-style="terminal"] .skin[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--black), 0 0 0 4px var(--phos), 0 0 12px var(--c); }
+@media (pointer: coarse) { :root[data-style="terminal"] .skin { width: 30px; height: 30px; } }
+:root[data-style="terminal"] .err { background: var(--black); border: 2px solid var(--phos); color: var(--phos); }
+:root[data-style="terminal"] .toast { background: var(--phos); color: var(--black); border-radius: 0; font-family: var(--body); text-shadow: none; box-shadow: 0 0 16px var(--halo); }
+
+/* ---------- lesson player: terminal windows ---------- */
+:root[data-style="terminal"] .panel, :root[data-style="terminal"] a.card, :root[data-style="terminal"] .mapwrap {
+  background: var(--panel); border: 4px double var(--phos); border-radius: 0; color: var(--phos);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--phos) 22%, transparent), inset 0 0 22px color-mix(in srgb, var(--phos) 8%, transparent);
+}
+:root[data-style="terminal"] .panel-title { font-family: var(--display); font-weight: 400; font-stretch: 100%; font-size: 26px; letter-spacing: .04em; text-transform: uppercase; color: var(--phos); }
+:root[data-style="terminal"] .panel-title::before { content: "[ "; color: var(--muted); }
+:root[data-style="terminal"] .panel-title::after { content: " ]"; color: var(--muted); }
+
+/* the monitor: a status line above the screen, the video untinted */
+:root[data-style="terminal"] .tv-wrap { padding-top: 0; padding-bottom: 0; }
+:root[data-style="terminal"] .ant, :root[data-style="terminal"] .feet { display: none; }
+:root[data-style="terminal"] .tv { padding: 46px 18px 14px; }
+:root[data-style="terminal"] .deco { display: flex; position: absolute; top: 12px; left: 18px; right: 18px; height: 24px; align-items: center; gap: 14px; pointer-events: none; border-bottom: 1px dashed var(--dim); font: 400 22px/1 var(--display); color: var(--phos); }
+:root[data-style="terminal"] .deco i { display: block; font-style: normal; flex: none; }
+:root[data-style="terminal"] .deco i:nth-child(1)::before { content: "GLITCH\2019N://LESSON"; letter-spacing: .06em; }
+:root[data-style="terminal"] .deco i:nth-child(2) { flex: 1; height: 8px; align-self: center; background: repeating-linear-gradient(90deg, var(--dim) 0 2px, transparent 2px 6px); opacity: .7; }
+:root[data-style="terminal"] .deco i:nth-child(3)::before { content: "\25A0  \25A1  \25A1"; color: var(--muted); }
+:root[data-style="terminal"] .is-playing .deco i:nth-child(3)::before { content: "\25B6"; color: var(--phos); animation: t-blink 1s steps(1) infinite; }
+:root[data-style="terminal"] .deco i:nth-child(n+4) { display: none; }
+:root[data-style="terminal"] .screen { border: 2px solid var(--phos); border-radius: 0; box-shadow: 0 0 12px var(--halo); background: #000000; }
+:root[data-style="terminal"] .glass { background: repeating-linear-gradient(180deg, rgba(0, 0, 0, .12) 0 1px, rgba(0, 0, 0, 0) 1px 3px); box-shadow: inset 0 0 50px rgba(0, 0, 0, .55); }
+:root[data-style="terminal"] .big-play span { width: 86px; height: 86px; border: 2px solid var(--phos); border-radius: 0; background: rgba(2, 4, 2, .82); color: var(--phos); box-shadow: 0 0 18px var(--halo); }
+:root[data-style="terminal"] .big-play svg { filter: drop-shadow(0 0 6px var(--halo)); }
+:root[data-style="terminal"] .now-chip { background: rgba(2, 4, 2, .88); color: var(--phos); border: 1.5px solid var(--phos); border-radius: 0; font-family: var(--body); font-weight: 500; }
+:root[data-style="terminal"] .now-chip b { font-family: var(--display); font-size: 20px; font-weight: 400; }
+:root[data-style="terminal"] .scrub { margin-top: 16px; }
+:root[data-style="terminal"] .track { top: 8px; height: 14px; border: 1.5px solid var(--phos); border-radius: 0; background: transparent; }
+:root[data-style="terminal"] .track .fill { background: repeating-linear-gradient(90deg, var(--phos) 0 7px, transparent 7px 9px); box-shadow: 0 0 8px var(--halo); }
+:root[data-style="terminal"] .track .sep { width: 1px; background: var(--black); }
+:root[data-style="terminal"] .ticks i { background: var(--phos); opacity: .5; border-radius: 0; }
+:root[data-style="terminal"] .scrub .knob { top: 3px; width: 12px; height: 24px; margin-left: -6px; border: 0; border-radius: 0; background: var(--phos); box-shadow: 0 0 10px var(--halo); }
+:root[data-style="terminal"] .is-playing .scrub .knob { animation: t-blink 1.06s steps(1) infinite; }
+:root[data-style="terminal"] .scrub:focus-within .knob { box-shadow: 0 0 0 2px var(--black), 0 0 0 4px var(--phos); animation: none; }
+:root[data-style="terminal"] .hover-tip { background: var(--phos); color: var(--black); border-radius: 0; font-family: var(--body); text-shadow: none; }
+:root[data-style="terminal"] .hover-tip b { font-family: var(--display); font-size: 18px; color: var(--black); }
+/* text keys that invert */
+:root[data-style="terminal"] .controls { border-top: 1px dashed var(--dim); margin-top: 10px; padding-top: 12px; gap: 10px; color: var(--phos); }
+:root[data-style="terminal"] .divider { display: none; }
+:root[data-style="terminal"] .ctl { height: 40px; min-width: 44px; padding: 0 10px; border: 1.5px solid var(--phos); border-radius: 0; background: transparent; color: var(--phos); font-family: var(--display); font-weight: 400; font-size: 24px; }
+:root[data-style="terminal"] .ctl:hover, :root[data-style="terminal"] .ctl:active { background: var(--phos); color: var(--black); text-shadow: none; }
+:root[data-style="terminal"] .ctl svg { width: 20px; height: 20px; filter: drop-shadow(0 0 4px var(--halo)); }
+:root[data-style="terminal"] #playBtn { background: var(--phos); color: var(--black); box-shadow: 0 0 12px var(--halo); }
+:root[data-style="terminal"] .ctl.dial .dial-face { display: none; }
+:root[data-style="terminal"] .time { font-family: var(--display); font-weight: 400; font-size: 26px; color: var(--phos); }
+:root[data-style="terminal"] .grille { opacity: .5; height: 18px; margin: 0 8px; border-radius: 0; background: repeating-linear-gradient(90deg, var(--phos) 0 2px, transparent 2px 5px), repeating-linear-gradient(180deg, transparent 0 2px, var(--black) 2px 4px); background-blend-mode: normal; }
+
+:root[data-style="terminal"] .steps { padding: 16px 12px 14px 16px; }
+:root[data-style="terminal"] .follow { border: 1.5px solid var(--phos); background: transparent; border-radius: 0; color: var(--phos); font-family: var(--body); font-weight: 600; }
+:root[data-style="terminal"] .follow i { border: 1.5px solid var(--phos); border-radius: 0; width: 13px; height: 13px; }
+:root[data-style="terminal"] .follow[aria-pressed="true"] i { background: var(--phos); box-shadow: 0 0 6px var(--halo); }
+:root[data-style="terminal"] .step-list { gap: 4px; scrollbar-color: var(--phos) transparent; }
+:root[data-style="terminal"] .step { background: transparent; border: 1px solid transparent; border-radius: 0; }
+:root[data-style="terminal"] .step.active { border-color: var(--dim); box-shadow: none; }
+:root[data-style="terminal"] .step-btn { padding: 10px 8px; border-radius: 0; }
+:root[data-style="terminal"] .step-btn:hover { background: var(--card); }
+:root[data-style="terminal"] .step-num { font-family: var(--display); font-weight: 400; font-size: 26px; line-height: .8; color: var(--muted); }
+:root[data-style="terminal"] .step-title { font-family: var(--display); font-weight: 400; font-size: 27px; line-height: .95; letter-spacing: .01em; }
+:root[data-style="terminal"] .step-meta { font-family: var(--display); font-size: 21px; color: var(--muted); }
+:root[data-style="terminal"] .step-meta .ok { color: var(--phos); font-weight: 400; }
+:root[data-style="terminal"] .sub { border-radius: 0; font-size: 14.5px; }
+:root[data-style="terminal"] .sub:hover { background: var(--card); }
+:root[data-style="terminal"] .sub .chk { border: 1.5px solid var(--phos); border-radius: 0; }
+:root[data-style="terminal"] .sub.watched .chk { background: var(--phos); }
+:root[data-style="terminal"] .sub.watched .chk svg { stroke: var(--black); }
+:root[data-style="terminal"] .sub .ts { font-family: var(--display); font-size: 21px; font-weight: 400; line-height: 1; color: var(--muted); }
+/* the current sub-step in inverse video */
+:root[data-style="terminal"] .sub.current { background: var(--phos); color: var(--black); text-shadow: none; box-shadow: 0 0 12px var(--halo); }
+:root[data-style="terminal"] .sub.current .ts { color: var(--black); }
+:root[data-style="terminal"] .sub.current .chk { border-color: var(--black); }
+:root[data-style="terminal"] .sub.current.watched .chk { background: var(--black); }
+:root[data-style="terminal"] .sub.current.watched .chk svg { stroke: var(--phos); }
+
+:root[data-style="terminal"] .viewport { border: 2px solid var(--phos); border-radius: 0; box-shadow: 0 0 10px var(--halo); background: #000000; }
+:root[data-style="terminal"] .lens { border: 2px solid var(--phos); box-shadow: 0 0 0 2px var(--black), 0 0 16px var(--halo); }
+:root[data-style="terminal"] .lens::after { background: var(--phos); border-radius: 0; }
+:root[data-style="terminal"] .hint, :root[data-style="terminal"] .zoom { background: rgba(2, 4, 2, .9); border: 1.5px solid var(--phos); border-radius: 0; color: var(--phos); font-family: var(--body); font-weight: 500; }
+:root[data-style="terminal"] .zoom button { color: var(--phos); }
+:root[data-style="terminal"] .zoom button:hover { background: var(--phos); color: var(--black); }
+:root[data-style="terminal"] .zoom output { font-family: var(--display); font-size: 20px; font-weight: 400; }
+:root[data-style="terminal"] .arrow { color: var(--phos); border-radius: 0; }
+:root[data-style="terminal"] .arrow:hover { background: var(--card); }
+:root[data-style="terminal"] .caption { background: transparent; border-radius: 0; font-family: var(--body); font-weight: 600; font-size: 15px; }
+:root[data-style="terminal"] .caption .tag { font-family: var(--display); font-size: 20px; font-weight: 400; letter-spacing: .03em; color: var(--muted); }
+:root[data-style="terminal"] .back-btn { border: 1.5px solid var(--phos); background: transparent; color: var(--phos); border-radius: 0; font-family: var(--body); }
+:root[data-style="terminal"] .film button { border: 1.5px solid var(--dim); border-radius: 0; background: #000000; opacity: .6; }
+:root[data-style="terminal"] .film button[aria-current="true"] { border-color: var(--phos); opacity: 1; box-shadow: 0 0 10px var(--halo); }
+:root[data-style="terminal"] .film button span { font-family: var(--display); font-size: 14px; background: var(--phos); color: var(--black); border-radius: 0; text-shadow: none; }
+
+:root[data-style="terminal"] .prog-pct { font-family: var(--display); font-weight: 400; font-size: 28px; }
+:root[data-style="terminal"] .prog-bar { height: 22px; gap: 6px; margin-top: 10px; }
+:root[data-style="terminal"] .prog-seg { border: 1.5px solid var(--phos); border-radius: 0; background: transparent; background-image: repeating-linear-gradient(90deg, var(--dim) 0 1px, transparent 1px 9px); background-size: auto; background-position: 4px 0; }
+:root[data-style="terminal"] .prog-seg .f { background: repeating-linear-gradient(90deg, var(--phos) 0 7px, transparent 7px 9px); box-shadow: 0 0 8px var(--halo); }
+:root[data-style="terminal"] .prog-seg.cur { box-shadow: 0 0 0 1px var(--black), 0 0 0 3px var(--phos), 0 0 12px var(--halo); }
+:root[data-style="terminal"] .prog-note b { font-family: var(--display); font-weight: 400; font-size: 20px; }
+
+/* the map is a vector display */
+:root[data-style="terminal"] .mapbox { padding: 10px; }
+:root[data-style="terminal"] .map-inner, :root[data-style="terminal"] .mapscroll {
+  background: repeating-linear-gradient(0deg, color-mix(in srgb, var(--phos) 9%, transparent) 0 1px, transparent 1px 28px), repeating-linear-gradient(90deg, color-mix(in srgb, var(--phos) 9%, transparent) 0 1px, transparent 1px 28px), #000000;
+  border: 1px solid var(--dim); border-radius: 0;
+}
+:root[data-style="terminal"] .map-svg, :root[data-style="terminal"] #map { color: var(--phos); filter: drop-shadow(0 0 3px var(--halo)); }
+:root[data-style="terminal"] .map-svg .edge, :root[data-style="terminal"] #map .edge { stroke: var(--phos); stroke-width: 1.5; opacity: 1; }
+:root[data-style="terminal"] .map-svg .node circle, :root[data-style="terminal"] #map .node circle { fill: #000000; stroke: var(--phos); stroke-width: 1.5; }
+:root[data-style="terminal"] .map-svg .node:hover circle, :root[data-style="terminal"] #map .node:hover circle { fill: var(--card); }
+:root[data-style="terminal"] #map.map-svg .node.center circle { fill: var(--phos); }
+:root[data-style="terminal"] #map.map-svg .node.center text { fill: var(--black); }
+:root[data-style="terminal"] .map-svg .node.later circle, :root[data-style="terminal"] #map .node.later circle { stroke: var(--muted); stroke-dasharray: 3 3; }
+:root[data-style="terminal"] .map-svg .node text, :root[data-style="terminal"] #map .node text { font-family: var(--body); font-weight: 600; fill: var(--phos); }
+:root[data-style="terminal"] .map-svg .node .day, :root[data-style="terminal"] #map .node .sub { font-family: var(--body); fill: var(--muted); }
+:root[data-style="terminal"] .map-svg .elabel rect, :root[data-style="terminal"] #map .elabel rect { fill: #000000; stroke: var(--phos); stroke-width: 1; }
+:root[data-style="terminal"] .map-svg .elabel text, :root[data-style="terminal"] #map .elabel text { font-family: var(--body); fill: var(--phos); }
+:root[data-style="terminal"] .map-svg .map-note { font-family: var(--body); fill: var(--muted); }
+:root[data-style="terminal"] .map-legend, :root[data-style="terminal"] .legend { color: var(--muted); }
+:root[data-style="terminal"] .map-legend i, :root[data-style="terminal"] .legend i { border: 1.5px solid var(--phos); background: #000000; }
+:root[data-style="terminal"] .map-legend i.dash, :root[data-style="terminal"] .legend i.dash { border-style: dashed; border-color: var(--muted); }
+:root[data-style="terminal"] .keys { color: var(--muted); }
+:root[data-style="terminal"] .keys kbd { font-family: var(--body); border: 1px solid var(--phos); border-radius: 0; background: transparent; color: var(--phos); }
+
+@media (max-width: 699px) {
+  :root[data-style="terminal"] .tv { padding: 40px 12px 8px; }
+  :root[data-style="terminal"] .deco { left: 12px; right: 12px; font-size: 18px; }
+  :root[data-style="terminal"] .controls { gap: 6px; }
+  :root[data-style="terminal"] .ctl { min-width: 40px; padding: 0 7px; font-size: 22px; }
+  :root[data-style="terminal"] .time { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root[data-style="terminal"] #title::after, :root[data-style="terminal"] #title .sub::after, :root[data-style="terminal"] main > header h1::after, :root[data-style="terminal"] .scrub .knob, :root[data-style="terminal"] .deco i::before { animation: none !important; }
+}
+
+/* ---------- home page ---------- */
+:root[data-style="terminal"] h2 { font-family: var(--display); font-weight: 400; font-stretch: 100%; font-size: 32px; letter-spacing: .03em; text-transform: uppercase; color: var(--phos); }
+:root[data-style="terminal"] h2::before { content: "## "; color: var(--muted); }
+:root[data-style="terminal"] .mapwrap h2::before { content: "[ "; } :root[data-style="terminal"] .mapwrap h2::after { content: " ]"; color: var(--muted); }
+:root[data-style="terminal"] .intro { color: var(--phos); font-size: 16px; }
+:root[data-style="terminal"] a.card { color: var(--phos); }
+:root[data-style="terminal"] a.card:hover { transform: none; background: var(--card); box-shadow: 0 0 22px var(--halo); }
+:root[data-style="terminal"] .card img { border: 0; border-bottom: 2px solid var(--phos); }
+:root[data-style="terminal"] .card .body { color: var(--phos); }
+:root[data-style="terminal"] .card b { font-family: var(--display); font-weight: 400; font-stretch: 100%; font-size: 30px; line-height: .95; }
+:root[data-style="terminal"] .card .meta { font-family: var(--body); font-weight: 500; color: var(--muted); }
+:root[data-style="terminal"] .mapwrap { padding: 16px; }
+:root[data-style="terminal"] .coming li { background: transparent; border: 1.5px dashed var(--dim); border-radius: 0; color: var(--phos); }
+:root[data-style="terminal"] .coming b { font-family: var(--display); font-weight: 400; font-size: 26px; }
+:root[data-style="terminal"] .coming span { color: var(--muted); font-size: 14px; }
+:root[data-style="terminal"] .team { border-top: 1px dashed var(--dim); color: var(--muted); }
+:root[data-style="terminal"] .team a { color: var(--phos); }

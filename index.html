@@ -131,12 +131,12 @@ header > div { min-width: 0; }
   /* ---------- language: ?lang= in the address, then the visitor's last choice, then the browser ---------- */
   const LANGS = { en: 'English', es: 'Español' };
   const UI = {
-    en: { style: 'Style', style_tv: 'TV', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', lessons: 'Lessons', intro: 'Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.',
+    en: { style: 'Style', style_tv: 'TV', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', lessons: 'Lessons', intro: 'Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.',
       startBuilding: 'Start building', loading: 'Loading lessons…', map: 'Map of lessons', mapAria: 'How the lessons connect', ready: 'Ready to build', coming: 'Coming', arrows: 'Arrows point to where a lesson leads.',
       language: 'Language', steps: 'steps', subSteps: 'sub-steps', draft: 'Draft', comingSmall: 'coming', notReady: '“{t}” isn’t ready yet.', none: 'No lessons yet.',
       listError: '<b>The lesson list did not load.</b> It lives in lessons/index.json; run tools/build_index.py to make it.', title: "Glitch'n Lessons", machine: '',
       'kind_variation': 'variation', 'kind_related': 'related', 'kind_next day': 'next day', 'kind_revisited': 'revisited' },
-    es: { style: 'Estilo', style_tv: 'Tele', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', lessons: 'Lecciones', intro: 'Arma circuitos de sonido en una protoboard, un pequeño paso a la vez. Cada lección muestra un video del armado junto a instrucciones paso a paso, con fotos de cerca que puedes ampliar y un mapa de a dónde ir después.',
+    es: { style: 'Estilo', style_tv: 'Tele', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', lessons: 'Lecciones', intro: 'Arma circuitos de sonido en una protoboard, un pequeño paso a la vez. Cada lección muestra un video del armado junto a instrucciones paso a paso, con fotos de cerca que puedes ampliar y un mapa de a dónde ir después.',
       startBuilding: 'Empieza a armar', loading: 'Cargando lecciones…', map: 'Mapa de lecciones', mapAria: 'Cómo se conectan las lecciones', ready: 'Lista para armar', coming: 'Próximamente', arrows: 'Las flechas apuntan hacia donde lleva cada lección.',
       language: 'Idioma', steps: 'pasos', subSteps: 'subpasos', draft: 'Borrador', comingSmall: 'próximamente', notReady: '“{t}” todavía no está lista.', none: 'Todavía no hay lecciones.',
       listError: '<b>No se pudo cargar la lista de lecciones.</b>', title: 'Lecciones de Glitch’n', machine: 'Traducción automática',
@@ -150,7 +150,7 @@ header > div { min-width: 0; }
   const LANG = pickLang();
   // Styles: same names and storage as the lesson player, so a choice made anywhere applies everywhere.
   // To add a style: add its name here and in player/player.js, its menu name (style_<name>) to UI, and its CSS file in /styles.
-  const STYLES = ['tv', 'gadget', 'solarpunk', 'treehouse'];
+  const STYLES = ['tv', 'gadget', 'solarpunk', 'treehouse', 'quest', 'skyline', 'daydream', 'terminal'];
   const OLD_STYLE_NAMES = { rams: 'gadget' }; // earlier names, so old links and saved choices still work
   const okStyle = (v) => { v = OLD_STYLE_NAMES[v] || v; return STYLES.includes(v) ? v : null; };
   let STYLE = (() => { const q = okStyle(new URLSearchParams(location.search).get('style')); if (q) return q; try { const v = okStyle(JSON.parse(localStorage.getItem('glitchn-style'))); if (v) return v; } catch (e) {} return 'tv'; })();

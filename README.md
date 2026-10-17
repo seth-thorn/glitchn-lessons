@@ -63,8 +63,12 @@ Every page has a **Style** menu that changes the page's whole personality, not j
 - **Gadget**: quiet, precise and tactile, after Dieter Rams's devices for Braun: warm greys, hairlines, round buttons and one orange accent. A radio-style tuning scale above the screen has a needle that moves through the lesson. (It was called "Rams" at first; old links with `?style=rams` still work.)
 - **Solar Punk**: a cozy retro-future workshop full of plants: cream 1970s consoles, a CRT monitor with a radar dial, LED readouts and a level meter that come alive while the video plays, steps on green-bar printout paper, a radar-screen map, and a rug on the floor.
 - **Treehouse**: a clubhouse in the leaves: wooden plank panels with nails, the screen hung from a branch by ropes with string lights, steps on paper notes. A little bird hops along the branch as the lesson plays.
+- **Quest**: a 1980s fantasy film at twilight: mountains, a castle and pines behind the title, parchment panels, the screen in a stone frame under an arch with flickering torches, a wax-seal play button, a lantern on the trail, and an old map.
+- **Skyline**: a dark style, a high-rise at dusk: a misty peak over a city of lit windows, dark glass panels warmed by lamplight (brighter while the video plays), progress shown as windows lighting up, and a burnt-orange sofa at the foot of the page.
+- **Daydream**: a bright cloud world: deep blue sky, the video seen through a stone gateway, a water-slide scrub bar with a little raft, orchard rows for progress, and a map of lakes and channels.
+- **Terminal**: a green-phosphor screen: glowing monospace text, scanlines, terminal windows, inverse-video highlights and a blinking cursor. The colour swatches change the phosphor (green, amber, cyan and more). The video itself is never tinted.
 
-The colour swatches work in every style: in TV they paint the cabinet, in Gadget and Solar Punk they change the accent, and in Treehouse they paint the wood.
+The colour swatches work in every style: in TV they paint the cabinet, in Treehouse they paint the wood, in Terminal they change the phosphor colour, and in the others they change the accent or light colour.
 
 **Where styles live:** TV is part of `player/player.css`. Each other style is one file in `styles/` (`gadget.css`, `solarpunk.css`, `treehouse.css`) that styles both the lesson player and the home page. `styles/all.css` loads them all, along with their fonts.
 

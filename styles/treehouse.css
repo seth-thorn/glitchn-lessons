@@ -164,7 +164,7 @@
 :root[data-style="treehouse"] .map-legend { color: var(--ink); }
 :root[data-style="treehouse"] .map-svg .edge, :root[data-style="treehouse"] #map .edge { stroke-width: 2.5; }
 :root[data-style="treehouse"] .map-svg .node circle, :root[data-style="treehouse"] #map .node circle { fill: #FFFFFF; stroke-width: 3; }
-:root[data-style="treehouse"] .map-svg .node.center circle { fill: var(--hi); }
+:root[data-style="treehouse"] #map.map-svg .node.center circle { fill: var(--hi); }
 :root[data-style="treehouse"] .map-svg .node.later circle, :root[data-style="treehouse"] #map .node.later circle { fill: var(--paper); }
 :root[data-style="treehouse"] .map-svg .node text, :root[data-style="treehouse"] #map .node text { font-family: var(--body); font-weight: 700; }
 :root[data-style="treehouse"] .map-svg .node .day, :root[data-style="treehouse"] #map .node .sub { font-family: var(--body); }

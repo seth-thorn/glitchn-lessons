@@ -218,10 +218,10 @@
 :root[data-style="solarpunk"] .map-svg, :root[data-style="solarpunk"] #map { color: var(--phos); }
 :root[data-style="solarpunk"] .map-svg .node circle, :root[data-style="solarpunk"] #map .node circle { fill: var(--crt); stroke: var(--phos); stroke-width: 2; }
 :root[data-style="solarpunk"] .map-svg .node:hover circle, :root[data-style="solarpunk"] #map .node:hover circle { fill: #1C5A40; }
-:root[data-style="solarpunk"] .map-svg .node.center circle { fill: var(--amber); stroke: var(--led-bg); }
+:root[data-style="solarpunk"] #map.map-svg .node.center circle { fill: var(--amber); stroke: var(--led-bg); }
 :root[data-style="solarpunk"] .map-svg .node.later circle, :root[data-style="solarpunk"] #map .node.later circle { fill: var(--crt); stroke-dasharray: 5 4; opacity: .85; }
 :root[data-style="solarpunk"] .map-svg .node text, :root[data-style="solarpunk"] #map .node text { font-family: var(--body); font-weight: 800; fill: var(--phos-hi); }
-:root[data-style="solarpunk"] .map-svg .node.center text { fill: var(--led-bg); }
+:root[data-style="solarpunk"] #map.map-svg .node.center text { fill: var(--led-bg); }
 :root[data-style="solarpunk"] .map-svg .node .day, :root[data-style="solarpunk"] #map .node .sub { font-family: var(--body); font-weight: 700; fill: var(--phos); }
 :root[data-style="solarpunk"] .map-svg .elabel rect, :root[data-style="solarpunk"] #map .elabel rect { fill: var(--crt); stroke: var(--phos); stroke-width: 1.5; }
 :root[data-style="solarpunk"] .map-svg .elabel text, :root[data-style="solarpunk"] #map .elabel text { font-family: var(--body); font-weight: 700; fill: var(--phos-hi); }
