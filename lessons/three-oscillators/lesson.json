@@ -6,6 +6,35 @@
  "status": "draft",
  "origin": "Five-day course, Day 5",
  "links": [],
+ "requires": [
+  "blink-to-drum-machine"
+ ],
+ "concepts": [
+  "oscillator",
+  "mixing",
+  "filter",
+  "voltage-starving",
+  "noise"
+ ],
+ "sounds": [
+  "tones",
+  "glitches",
+  "noise"
+ ],
+ "oscillators": 3,
+ "parts": {
+  "40106": 1,
+  "pot": 5,
+  "diode": 3,
+  "c_0u1": 1,
+  "c_1u": 2,
+  "c_100u": 1,
+  "jack": 1,
+  "cable": 1,
+  "battery": 1,
+  "jumpers": 15,
+  "breadboard": 1
+ },
  "segments": [
   {
    "src": "video/part-1.mp4",
@@ -169,7 +198,7 @@
     },
     {
      "t": 30.0,
-     "text": "Add a short yellow jumper to pick up the combined signal, and touch the probe to it.",
+     "text": "Touch the probe to the point where the three diodes meet to hear the combined signal.",
      "still": "stills/5-2-5.jpg",
      "stillT": 48.0
     },
@@ -273,7 +302,7 @@
    "subs": [
     {
      "t": 0.0,
-     "text": "Remove the three diodes, then turn the knobs for strange, unstable sounds.",
+     "text": "Remove the three diodes. The oscillators are no longer connected, yet turning one knob still changes the others: parts of a circuit affect each other even when disconnected.",
      "still": "stills/5-6-2.jpg",
      "stillT": 40.0
     }

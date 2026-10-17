@@ -11,6 +11,38 @@
    "kind": "next"
   }
  ],
+ "startHere": true,
+ "requires": [],
+ "concepts": [
+  "oscillator",
+  "light-sensing",
+  "filter",
+  "counter"
+ ],
+ "sounds": [
+  "lights",
+  "clicks",
+  "rhythms"
+ ],
+ "oscillators": 1,
+ "parts": {
+  "40106": 1,
+  "4040": 1,
+  "pot": 2,
+  "photocell": 1,
+  "button": 1,
+  "led": 3,
+  "diode": 2,
+  "r_1k": 1,
+  "r_10k": 1,
+  "c_0u1": 2,
+  "c_100u": 1,
+  "jack": 1,
+  "cable": 1,
+  "battery": 1,
+  "jumpers": 13,
+  "breadboard": 1
+ },
  "segments": [
   {
    "src": "video/part-1.mp4",

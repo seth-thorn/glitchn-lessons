@@ -52,12 +52,12 @@
   "Add a short grey jumper in a new place.": "Agrega un puente gris corto en otro lugar.",
   "Put the audio jack back in the same place and plug in the cable.": "Vuelve a poner el conector de audio en el mismo lugar y conecta el cable.",
   "Add a small capacitor between the output and the jack.": "Agrega un capacitor pequeño entre la salida y el conector.",
-  "Add a resistor to ground below it. This tiny filter makes the sound thin and delicate: microsound.": "Agrega una resistencia a tierra debajo. Este filtro diminuto hace que el sonido sea fino y delicado: microsonido.",
+  "Add a resistor to ground below it. With the capacitor it makes a high-pass filter, which lets only the highest sounds through: thin, delicate microsound.": "Agrega una resistencia a tierra debajo. Con el capacitor forma un filtro pasaaltos, que solo deja pasar los sonidos más agudos: un microsonido fino y delicado.",
   "Glitch as musical structure": "El glitch como estructura musical",
   "Unplug the battery's red (+) wire.": "Desconecta el cable rojo (+) de la batería.",
   "Add a short jumper from the + rail at the right end.": "Agrega un puente corto desde el riel + en el extremo derecho.",
   "Add a trimmer there and plug the red wire into it, so all the power passes through the knob.": "Agrega ahí un trimmer y conecta el cable rojo a él, para que toda la energía pase por la perilla.",
   "Turn the trimmer down: the drummer slows, stutters and glitches.": "Baja el trimmer: la caja de ritmos se vuelve lenta, tartamudea y falla.",
-  "Add a large capacitor on the power rail. It stores a little energy, so the glitches stretch out into phrases.": "Agrega un capacitor grande en el riel de alimentación. Guarda un poco de energía, así que las fallas se alargan y forman frases."
+  "Add a large capacitor on the power rail. It stores a little energy, so the drummer alternates between normal and starved phases: glitches become musical structure.": "Agrega un capacitor grande en el riel de alimentación. Guarda un poco de energía, así que la caja de ritmos alterna entre fases normales y fases sin energía: las fallas se vuelven estructura musical."
  }
 }

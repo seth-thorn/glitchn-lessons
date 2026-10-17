@@ -79,6 +79,28 @@ header > div { min-width: 0; }
 .toast { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: var(--ink); color: var(--white); padding: 10px 16px; border-radius: 10px; font-weight: 700; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; max-width: calc(100% - 32px); text-align: center; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+/* filters and card badges: built from the colour tokens, so every style picks them up */
+.filters { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; margin: 0 0 18px; padding: 12px 16px; background: var(--card); color: var(--ink); border: var(--bw) solid var(--ink); border-radius: 16px; font-family: var(--body); }
+.fgroup { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.fname { font-size: 13px; color: var(--muted); margin-right: 2px; }
+.filter { font: inherit; font-size: 13.5px; font-weight: 600; padding: 5px 12px; border-radius: 99px; border: 1.5px solid color-mix(in srgb, var(--ink) 40%, transparent); background: transparent; color: var(--ink); cursor: pointer; min-height: 34px; }
+.filter:hover { background: color-mix(in srgb, var(--ink) 8%, transparent); }
+.filter[aria-pressed="true"] { background: var(--ink); color: var(--card); border-color: var(--ink); }
+.filter.clear { border-style: dashed; }
+.fnone { flex-basis: 100%; margin: 0; color: var(--muted); }
+@media (pointer: coarse) { .filter { min-height: 44px; padding: 8px 14px; } }
+.ftoggle { display: none; }
+.ftoggle::after { content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 9px; border: solid currentColor; border-width: 0 2px 2px 0; transform: translateY(-2px) rotate(45deg); }
+.filters.open .ftoggle::after { transform: translateY(1px) rotate(-135deg); }
+/* on a phone the filters fold away behind one button, so the lessons come first */
+@media (max-width: 600px) { .ftoggle { display: inline-flex; align-items: center; } .filters:not(.open) .fgroup { display: none; } .filters { gap: 10px; } }
+.badges { display: flex; flex-wrap: wrap; gap: 5px; }
+.badge { font-family: var(--body); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 99px; border: 1.5px solid color-mix(in srgb, currentColor 45%, transparent); line-height: 1.35; }
+.badge.start { background: var(--ink); color: var(--card); border-color: var(--ink); }
+.badge.level::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 5px; border-radius: 50%; background: currentColor; vertical-align: 0; }
+.badge.level-medium::before { border-radius: 1px; transform: rotate(45deg); width: 7px; height: 7px; }
+.badge.level-hard::before { border-radius: 0; width: 0; height: 0; background: none; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-bottom: 8px solid currentColor; }
+a.card[hidden] { display: none; }
 
 </style>
 <link rel="stylesheet" href="styles/all.css">
@@ -99,6 +121,7 @@ header > div { min-width: 0; }
 
   <section aria-labelledby="h-lessons">
     <h2 id="h-lessons" data-i18n="startBuilding">Start building</h2>
+    <div class="filters" id="filters" hidden></div>
     <div class="cards" id="cards"><p data-i18n="loading">Loading lessons…</p></div>
   </section>
 
@@ -126,12 +149,12 @@ header > div { min-width: 0; }
   const LANGS = { en: 'English', es: 'Español' };
   const UI = {
     en: { style: 'Style', style_tv: 'TV', style_clean: 'Clean', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', lessons: 'Lessons', intro: 'Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.',
-      startBuilding: 'Start building', loading: 'Loading lessons…', map: 'Map of lessons', mapAria: 'How the lessons connect', ready: 'Ready to build', coming: 'Coming', arrows: 'Arrows point to where a lesson leads.',
+      startBuilding: 'Start building', fDifficulty: 'Difficulty', fChips: 'Chips', fOsc: 'Oscillators', fConcepts: 'Concepts', fClear: 'Show all', fToggle: 'Filter lessons', fNone: 'No lessons match these filters.', startHere: 'Start here', requires: 'Requires', oscN: '{n} osc.', loading: 'Loading lessons…', map: 'Map of lessons', mapAria: 'How the lessons connect', ready: 'Ready to build', coming: 'Coming', arrows: 'Arrows point to where a lesson leads.',
       language: 'Language', steps: 'steps', subSteps: 'sub-steps', draft: 'Draft', comingSmall: 'coming', notReady: '“{t}” isn’t ready yet.', none: 'No lessons yet.',
       listError: '<b>The lesson list did not load.</b> It lives in lessons/index.json; run tools/build_index.py to make it.', title: "Glitch'n Lessons", machine: '',
       'kind_variation': 'variation', 'kind_related': 'related', 'kind_next day': 'next day', 'kind_revisited': 'revisited' },
     es: { style: 'Estilo', style_tv: 'Tele', style_clean: 'Limpio', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', lessons: 'Lecciones', intro: 'Arma circuitos de sonido en una protoboard, un pequeño paso a la vez. Cada lección muestra un video del armado junto a instrucciones paso a paso, con fotos de cerca que puedes ampliar y un mapa de a dónde ir después.',
-      startBuilding: 'Empieza a armar', loading: 'Cargando lecciones…', map: 'Mapa de lecciones', mapAria: 'Cómo se conectan las lecciones', ready: 'Lista para armar', coming: 'Próximamente', arrows: 'Las flechas apuntan hacia donde lleva cada lección.',
+      startBuilding: 'Empieza a armar', fDifficulty: 'Dificultad', fChips: 'Chips', fOsc: 'Osciladores', fConcepts: 'Conceptos', fClear: 'Mostrar todas', fToggle: 'Filtrar lecciones', fNone: 'Ninguna lección coincide con estos filtros.', startHere: 'Empieza aquí', requires: 'Requiere', oscN: '{n} osc.', loading: 'Cargando lecciones…', map: 'Mapa de lecciones', mapAria: 'Cómo se conectan las lecciones', ready: 'Lista para armar', coming: 'Próximamente', arrows: 'Las flechas apuntan hacia donde lleva cada lección.',
       language: 'Idioma', steps: 'pasos', subSteps: 'subpasos', draft: 'Borrador', comingSmall: 'próximamente', notReady: '“{t}” todavía no está lista.', none: 'Todavía no hay lecciones.',
       listError: '<b>No se pudo cargar la lista de lecciones.</b>', title: 'Lecciones de Glitch’n', machine: 'Traducción automática',
       'kind_variation': 'variación', 'kind_related': 'relacionada', 'kind_next day': 'día siguiente', 'kind_revisited': 'repaso' }
@@ -178,11 +201,63 @@ header > div { min-width: 0; }
       '<a class="card" href="' + lessonHref(l.slug) + '">' +
         (l.thumb ? '<img src="lessons/' + esc(l.thumb) + '" alt="" loading="lazy">' : '') +
         '<div class="body"><b>' + esc(loc(l, 'title')) + '</b><span>' + esc(loc(l, 'summary')) + '</span>' +
+        badges(l, IDX) +
         '<span class="meta">' + fmt(l.duration) + ' · ' + l.steps + ' ' + t('steps') + ' · ' + l.subSteps + ' ' + t('subSteps') + (l.status === 'draft' ? ' <span class="chip">' + t('draft') + '</span>' : '') + (LANG !== 'en' && l.i18n && l.i18n[LANG] ? ' <span class="chip">' + t('machine') + '</span>' : '') + '</span></div>' +
       '</a>')).join('') : '<p>' + t('none') + '</p>';
+    buildFilters(ready, IDX);
     $('comingSec').hidden = !planned.length;
     $('coming').innerHTML = planned.map((p) => '<li><b>' + esc(loc(p, 'title')) + '</b><span>' + esc(loc(p, 'summary')) + '</span></li>').join('');
     drawMap(ready, planned);
+  }
+
+  /* ---------- descriptors on cards, and filters (difficulty, chips, oscillators, concepts) ---------- */
+  const catLabel = (IDX, kind, k) => { const e = ((IDX && IDX.catalog) || {})[kind] && IDX.catalog[kind][k]; return e ? (e[LANG] || e.en) : k; };
+  function badges(l, IDX) {
+    if (!l.difficulty) return '';
+    const titleOf = (s) => { const x = (IDX.lessons || []).find((y) => y.slug === s); return x ? loc(x, 'title') : s; };
+    const b = ['<span class="badge level level-' + l.difficulty.level + '" title="' + esc(l.difficulty.why) + '">' + esc(catLabel(IDX, 'difficulty', l.difficulty.level)) + '</span>'];
+    if (l.startHere) b.push('<span class="badge start">' + esc(t('startHere')) + '</span>');
+    (l.requires || []).forEach((r) => b.push('<span class="badge req">' + esc(t('requires')) + ': ' + esc(titleOf(r)) + '</span>'));
+    (l.chips || []).forEach((c) => b.push('<span class="badge">' + esc(c) + '</span>'));
+    if (l.oscillators) b.push('<span class="badge">' + esc(t('oscN', { n: l.oscillators })) + '</span>');
+    return '<span class="badges">' + b.join('') + '</span>';
+  }
+  function buildFilters(ready, IDX) {
+    const rated = ready.filter((l) => l.difficulty);
+    if (rated.length < 2) return;
+    const uniq = (arr) => [...new Set(arr)];
+    const groups = [
+      ['difficulty', t('fDifficulty'), ['easy', 'medium', 'hard'].filter((v) => rated.some((l) => l.difficulty.level === v)), (v) => catLabel(IDX, 'difficulty', v), (l, v) => l.difficulty.level === v],
+      ['chips', t('fChips'), uniq(rated.flatMap((l) => l.chips || [])), (v) => v, (l, v) => (l.chips || []).includes(v)],
+      ['osc', t('fOsc'), uniq(rated.map((l) => l.oscillators)).sort(), (v) => String(v), (l, v) => l.oscillators === v],
+      ['concepts', t('fConcepts'), uniq(rated.flatMap((l) => l.concepts || [])), (v) => catLabel(IDX, 'concepts', v), (l, v) => (l.concepts || []).includes(v)]
+    ];
+    const on = {}; // group -> Set of chosen values (any of them matches; every group must match)
+    const box = $('filters');
+    box.innerHTML = '<button class="filter ftoggle" id="fToggle" aria-expanded="false" aria-controls="filters">' + esc(t('fToggle')) + '</button>' + groups.map(([g, name, vals, lab], gi) => '<div class="fgroup" role="group" aria-label="' + esc(name) + '"><span class="fname">' + esc(name) + '</span>' +
+      vals.map((v, vi) => '<button class="filter" aria-pressed="false" data-g="' + gi + '" data-v="' + vi + '">' + esc(lab(v)) + '</button>').join('') + '</div>').join('') +
+      '<button class="filter clear" id="fClear" hidden>' + esc(t('fClear')) + '</button><p class="fnone" id="fNone" hidden>' + esc(t('fNone')) + '</p>';
+    box.hidden = false;
+    const cards = [...$('cards').querySelectorAll('a.card')];
+    function apply() {
+      let shown = 0;
+      ready.forEach((l, i) => {
+        const ok = groups.every(([g, , vals, , test], gi) => !on[gi] || !on[gi].size || [...on[gi]].some((vi) => l.difficulty && test(l, vals[vi])));
+        if (cards[i]) cards[i].hidden = !ok; if (ok) shown++;
+      });
+      $('fNone').hidden = shown > 0;
+      const n = Object.values(on).reduce((a, x) => a + x.size, 0);
+      $('fClear').hidden = !n;
+      $('fToggle').textContent = t('fToggle') + (n ? ' (' + n + ')' : '');
+    }
+    box.addEventListener('click', (e) => {
+      const b = e.target.closest('.filter'); if (!b) return;
+      if (b.id === 'fToggle') { const open = box.classList.toggle('open'); b.setAttribute('aria-expanded', String(open)); return; }
+      if (b.id === 'fClear') { Object.values(on).forEach((x) => x.clear()); box.querySelectorAll('.filter[aria-pressed]').forEach((x) => x.setAttribute('aria-pressed', 'false')); apply(); return; }
+      const gi = +b.dataset.g, vi = +b.dataset.v; on[gi] = on[gi] || new Set();
+      if (on[gi].has(vi)) on[gi].delete(vi); else on[gi].add(vi);
+      b.setAttribute('aria-pressed', String(on[gi].has(vi))); apply();
+    });
   }
 
   function wrap(text, max) {

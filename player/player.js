@@ -28,7 +28,7 @@
       keyPlay: 'play / pause', keySeconds: '5 seconds', keySub: 'previous / next sub-step', keyMute: 'mute',
       startingPoint: 'Starting point', finishedResult: 'Finished result of {n}', beforeStep: 'Before step {n}: ', boardAt: 'Breadboard at {n}: {t}',
       done: 'done ✓', watched: 'Watched {x} of {y} sub-steps', stepOf: 'Step <b>{n}</b> of {m} · {t}', goToStep: 'Go to step {n}: {t}', of: '{a} of {b}',
-      startHere: 'Start here', moreSoon: 'More soon', youAreHere: 'You’re in this lesson.', notReady: '“{t}” isn’t ready yet.',
+      startHere: 'Start here', requires: 'Requires', partsList: 'Parts list', partsNote: 'Everything this lesson uses, at most at once.', kitPart: 'Kit part', oscillators1: '1 oscillator', oscillatorsN: '{n} oscillators', learn: 'You’ll learn', difficulty: 'Difficulty', moreSoon: 'More soon', youAreHere: 'You’re in this lesson.', notReady: '“{t}” isn’t ready yet.',
       noFullScreen: 'Full screen is not available here.', videoError: 'This video could not load. Check that {f} is next to the page.',
       notFound: 'Lesson not found', notFoundBody: '<b>The lesson file did not load.</b> Each lesson folder needs a lesson.json beside its page.',
       untranslated: '', machine: '',
@@ -45,7 +45,7 @@
       keyPlay: 'reproducir / pausar', keySeconds: '5 segundos', keySub: 'subpaso anterior / siguiente', keyMute: 'silenciar',
       startingPoint: 'Punto de partida', finishedResult: 'Resultado terminado de {n}', beforeStep: 'Antes del paso {n}: ', boardAt: 'Protoboard en {n}: {t}',
       done: 'listo ✓', watched: 'Viste {x} de {y} subpasos', stepOf: 'Paso <b>{n}</b> de {m} · {t}', goToStep: 'Ir al paso {n}: {t}', of: '{a} de {b}',
-      startHere: 'Empieza aquí', moreSoon: 'Pronto habrá más', youAreHere: 'Ya estás en esta lección.', notReady: '“{t}” todavía no está lista.',
+      startHere: 'Empieza aquí', requires: 'Requiere', partsList: 'Lista de piezas', partsNote: 'Todo lo que usa esta lección, como máximo a la vez.', kitPart: 'Pieza del kit', oscillators1: '1 oscilador', oscillatorsN: '{n} osciladores', learn: 'Aprenderás', difficulty: 'Dificultad', moreSoon: 'Pronto habrá más', youAreHere: 'Ya estás en esta lección.', notReady: '“{t}” todavía no está lista.',
       noFullScreen: 'La pantalla completa no está disponible aquí.', videoError: 'Este video no se pudo cargar ({f}).',
       notFound: 'No se encontró la lección', notFoundBody: '<b>No se pudo cargar el archivo de la lección.</b> Cada carpeta de lección necesita un lesson.json junto a su página.',
       untranslated: 'Esta lección todavía no está traducida. Se muestra en inglés.', machine: 'Traducción automática',
@@ -82,6 +82,7 @@
     <div>
       <div class="eyebrow"><a class="home-link" id="homeLink" href="../../index.html">${t('allLessons')}</a><span>${t('lessonEyebrow')}</span><span class="draft-chip" id="draftChip" title="${t('draftTitle')}" hidden>${t('draft')}</span><span class="draft-chip lang-note" id="langNote" hidden></span></div>
       <h1 id="title">${t('loading')}</h1>
+      <div class="facts" id="facts" hidden></div>
     </div>
     <div class="top-tools">
     <label class="style-pick"><span>${t('style')}</span><select id="styleSel">${STYLES.map((k) => '<option value="' + k + '"' + (k === STYLE ? ' selected' : '') + '>' + t('style_' + k) + '</option>').join('')}</select></label>
@@ -170,6 +171,12 @@
     </div>
   </div>
 
+  <section class="parts panel" id="partsPanel" aria-labelledby="partsTitle" hidden>
+    <h2 class="panel-title" id="partsTitle">${t('partsList')}</h2>
+    <p class="parts-note">${t('partsNote')}</p>
+    <div class="parts-groups" id="partsBody"></div>
+  </section>
+
   <div class="keys"><span><kbd>Space</kbd>${t('keyPlay')}</span><span><kbd>←</kbd><kbd>→</kbd>${t('keySeconds')}</span><span><kbd>[</kbd><kbd>]</kbd>${t('keySub')}</span><span><kbd>M</kbd>${t('keyMute')}</span></div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -224,6 +231,34 @@
     return L;
   }
 
+  /* ---------- descriptors: difficulty, start here / requires, chips, and the parts list (from lessons/index.json) ---------- */
+  function renderFacts(me, IDX) {
+    if (!me || !me.parts) return;
+    const cat = (IDX && IDX.catalog) || {};
+    const label = (kind, k) => { const e = (cat[kind] || {})[k]; return e ? (e[LANG] || e.en) : k; };
+    const titleOf = (s) => { const x = (IDX.lessons || []).find((l) => l.slug === s); return x ? ((x.i18n && x.i18n[LANG] && x.i18n[LANG].title) || x.title) : s; };
+    const keep = new URLSearchParams(location.search).get('lang') ? '?lang=' + LANG : '';
+    const bits = [];
+    if (me.difficulty) bits.push('<span class="fact level level-' + me.difficulty.level + '" title="' + esc(me.difficulty.why) + '">' + esc(t('difficulty')) + ': <b>' + esc(label('difficulty', me.difficulty.level)) + '</b></span>');
+    if (me.startHere) bits.push('<span class="fact start">' + esc(t('startHere')) + '</span>');
+    (me.requires || []).forEach((r) => bits.push('<span class="fact req">' + esc(t('requires')) + ': <a href="' + esc(lessonHref(r)) + keep + '">' + esc(titleOf(r)) + '</a></span>'));
+    (me.chips || []).forEach((c) => bits.push('<span class="fact chip-fact">' + esc(c) + '</span>'));
+    if (me.oscillators) bits.push('<span class="fact">' + esc(me.oscillators === 1 ? t('oscillators1') : t('oscillatorsN', { n: me.oscillators })) + '</span>');
+    if ((me.concepts || []).length) bits.push('<span class="fact learn">' + esc(t('learn')) + ': ' + me.concepts.map((c) => esc(label('concepts', c))).join(', ') + '</span>');
+    $('facts').innerHTML = bits.join('');
+    $('facts').hidden = false;
+    // parts list, grouped as in the kit
+    const groups = {};
+    const kitOrder = cat.partOrder || Object.keys(cat.parts || {}); // a list: number-like keys such as "40106" lose their order in an object
+    Object.entries(me.parts).sort((x, y) => (kitOrder.indexOf(x[0]) + 1 || 999) - (kitOrder.indexOf(y[0]) + 1 || 999)).forEach(([k, q]) => { const g = ((cat.parts || {})[k] || {}).group || 'other'; (groups[g] = groups[g] || []).push([k, q]); });
+    const order = Object.keys(cat.groups || {}).concat(['other']);
+    $('partsBody').innerHTML = order.filter((g) => groups[g]).map((g) => (
+      '<div class="parts-group"><h3>' + esc(label('groups', g)) + '</h3><ul>' +
+      groups[g].map(([k, q]) => { const e = (cat.parts || {})[k] || {}; return '<li><b class="qty">' + esc(q) + '</b><span class="pname">' + esc(e[LANG] || e.en || k) + (e.id ? '<small>' + esc(e.id) + '</small>' : '') + '</span></li>'; }).join('') +
+      '</ul></div>')).join('');
+    $('partsPanel').hidden = false;
+  }
+
   function start(L, IDX) {
     /* ---------- media paths are relative to lesson.json ---------- */
     const abs = (p) => (p ? new URL(p, lessonAbs).href : p);
@@ -255,6 +290,7 @@
     $('title').innerHTML = esc(L.title) + ((L.summary || L.subtitle) ? '<span class="sub">' + esc(L.summary || L.subtitle) + '</span>' : '');
     document.title = L.title + " · Glitch'n";
     $('draftChip').hidden = L.status !== 'draft';
+    renderFacts(IDX && (IDX.lessons || []).find((x) => x.slug === slug), IDX);
 
     /* ---------- state ---------- */
     const watchKey = 'glitchn-watched-' + slug;

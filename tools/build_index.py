@@ -12,6 +12,10 @@ What it does
 - Writes lessons/index.json: every lesson's title, summary, links, length and thumbnail,
   plus the planned lessons from lessons/planned.json. The home page and the
   "What's next?" map read this file.
+- Copies each lesson's descriptors into the index: the lessons it requires, its concepts and
+  sounds, its parts list (BOM), its chips and oscillators, and an Easy/Medium/Hard rating from
+  tools/difficulty.py. Part, concept and sound names come from lessons/catalog.json, and any
+  key that isn't in the catalog is reported.
 - Reads each lesson's translations (lesson.<lang>.json, e.g. lesson.es.json) so the home page
   and maps can show translated titles, and reports lines that have no translation yet
   (for example after the English text was edited). Untranslated lines show in English.
@@ -20,6 +24,9 @@ Lesson addresses (the folder name, called the slug) are permanent once published
 because Circle lessons and bookmarks point at them. Rename a title freely; never rename a folder.
 """
 import json, pathlib, html, datetime, sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import difficulty  # noqa: E402  (tools/difficulty.py: the Easy/Medium/Hard formula)
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 LESSONS = ROOT / "lessons"
@@ -50,6 +57,8 @@ def lesson_page(title):
 
 def main():
     lessons, problems, translations = [], [], {}
+    catalog_file = LESSONS / "catalog.json"
+    catalog = json.loads(catalog_file.read_text()) if catalog_file.exists() else {}
     for f in sorted(LESSONS.glob("*/lesson.json")):
         slug = f.parent.name
         try:
@@ -83,6 +92,24 @@ def main():
             "thumb": thumb,
             "links": L.get("links", []),
         })
+        if "parts" in L:
+            d = difficulty.rate(L)
+            lessons[-1].update({
+                "requires": L.get("requires", []),
+                "startHere": bool(L.get("startHere")),
+                "concepts": L.get("concepts", []),
+                "sounds": L.get("sounds", []),
+                "parts": L.get("parts", {}),
+                "chips": [c for c in difficulty.CHIPS if L.get("parts", {}).get(c)],
+                "oscillators": d["counts"]["oscillators"],
+                "difficulty": {"level": d["level"], "points": d["points"], "why": d["why"]},
+            })
+            for kind, keys in (("parts", L.get("parts", {}).keys()), ("concepts", L.get("concepts", [])), ("sounds", L.get("sounds", []))):
+                for k in keys:
+                    if catalog and k not in catalog.get(kind, {}):
+                        problems.append(f"{slug}: {kind[:-1]} '{k}' isn't in lessons/catalog.json")
+        else:
+            problems.append(f"{slug}: no parts list yet, so no descriptors or difficulty")
         i18n = {}
         english = [L.get("title"), L.get("summary")] + [st.get("title") for st in steps] + [sb.get("text") for st in steps for sb in st.get("subs", [])]
         english = [x for x in english if x]
@@ -108,6 +135,10 @@ def main():
     planned = [p for p in planned if p["slug"] not in known]  # a planned lesson that now exists drops off the list
 
     slugs = known | {p["slug"] for p in planned}
+    for item in lessons:
+        for r in item.get("requires", []):
+            if r not in known:
+                problems.append(f"{item['slug']}: requires '{r}', which isn't a lesson")
     for item in lessons + planned:
         for link in item.get("links", []):
             if link.get("to") not in slugs:
@@ -118,8 +149,9 @@ def main():
         "generated": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
         "lessons": lessons,
         "planned": planned,
+        "catalog": dict(catalog, partOrder=list(catalog.get("parts", {}))),  # JavaScript sorts keys like "40106" as numbers, so the kit order travels as a list
     }
-    (LESSONS / "index.json").write_text(json.dumps(index, indent=1) + "\n")
+    (LESSONS / "index.json").write_text(json.dumps(index, indent=1, ensure_ascii=False) + "\n")
     print(f"lessons/index.json: {len(lessons)} lessons, {len(planned)} planned"
           + "".join(f"; {n} with {lang} translation" for lang, n in sorted(translations.items())))
     for x in lessons:

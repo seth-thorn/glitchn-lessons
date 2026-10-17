@@ -1,0 +1,65 @@
+{
+ "format": "glitchn-catalog/1",
+ "note": "Shared vocabulary for lessons: parts (from the kit list at glitchn.net/course), concepts and sounds. Lessons refer to these by key. Edit by hand; tools/build_index.py copies it into lessons/index.json.",
+ "parts": {
+  "40106":   {"group": "chip",      "en": "40106 chip (hex Schmitt trigger)", "es": "Chip 40106 (Schmitt trigger séxtuple)", "id": "TI CD40106BE"},
+  "4040":    {"group": "chip",      "en": "4040 chip (12-stage counter)",      "es": "Chip 4040 (contador de 12 etapas)",     "id": "TI CD4040BE"},
+  "4021":    {"group": "chip",      "en": "4021 chip (8-stage shift register)", "es": "Chip 4021 (registro de desplazamiento de 8 etapas)", "id": "TI CD4021BE"},
+  "4051":    {"group": "chip",      "en": "4051 chip (8-channel multiplexer)",  "es": "Chip 4051 (multiplexor de 8 canales)", "id": "TI CD4051BE"},
+  "pot":     {"group": "control",   "en": "Potentiometer (knob)",   "es": "Potenciómetro (perilla)", "id": "Adafruit #356"},
+  "photocell": {"group": "control", "en": "Photocell",              "es": "Fotocelda",               "id": "Adafruit #161"},
+  "button":  {"group": "control",   "en": "Button",                 "es": "Botón",                   "id": "Adafruit #1009"},
+  "led":     {"group": "output",    "en": "LED",                    "es": "LED",                     "id": "Adafruit #4202"},
+  "diode":   {"group": "passive",   "en": "Diode",                  "es": "Diodo",                   "id": "Adafruit #1641"},
+  "r_1k":    {"group": "passive",   "en": "1K resistor (red stripe)",    "es": "Resistencia de 1K (franja roja)",    "id": "Adafruit #4294"},
+  "r_10k":   {"group": "passive",   "en": "10K resistor (orange stripe)", "es": "Resistencia de 10K (franja naranja)", "id": "Adafruit #2784"},
+  "r_4k7":   {"group": "passive",   "en": "4.7K resistor",          "es": "Resistencia de 4.7K",     "id": "given in class"},
+  "r_22k":   {"group": "passive",   "en": "22K resistor",           "es": "Resistencia de 22K",      "id": "given in class"},
+  "r_other": {"group": "passive",   "en": "Other resistor (assorted)", "es": "Otra resistencia (surtidas)", "id": "given in class"},
+  "c_0u1":   {"group": "passive",   "en": "0.1 µF capacitor (tiny, yellowish)", "es": "Capacitor de 0.1 µF (pequeño, amarillento)", "id": "Adafruit #753"},
+  "c_68p":   {"group": "passive",   "en": "68 pF capacitor",        "es": "Capacitor de 68 pF",      "id": "given in class"},
+  "c_1u":    {"group": "passive",   "en": "1 µF capacitor (can)",   "es": "Capacitor de 1 µF (lata)", "id": "Rubycon 50NXA1MEFC5X11"},
+  "c_10u":   {"group": "passive",   "en": "10 µF capacitor (can)",  "es": "Capacitor de 10 µF (lata)", "id": "Adafruit #2195"},
+  "c_100u":  {"group": "passive",   "en": "100 µF capacitor (can)", "es": "Capacitor de 100 µF (lata)", "id": "Adafruit #2193"},
+  "jack":    {"group": "connect",   "en": "Stereo audio jack",      "es": "Conector de audio estéreo", "id": "Adafruit #1699"},
+  "cable":   {"group": "connect",   "en": "Stereo audio cable and a speaker", "es": "Cable de audio estéreo y un parlante", "id": "e.g. JBL Go2"},
+  "battery": {"group": "connect",   "en": "9 V battery and battery clip", "es": "Batería de 9 V y su conector", "id": "RP Electronics MB-921"},
+  "radio":   {"group": "connect",   "en": "AM radio",               "es": "Radio AM",                "id": "given in class"},
+  "jumpers": {"group": "connect",   "en": "Jumper wires (pre-cut, short and long)", "es": "Cables puente (precortados, cortos y largos)", "id": "AUSTOR assortment"},
+  "breadboard": {"group": "connect", "en": "Breadboard",            "es": "Protoboard",              "id": "Elenco"}
+ },
+ "groups": {
+  "chip":    {"en": "Chips",               "es": "Chips"},
+  "control": {"en": "Knobs and sensors",   "es": "Perillas y sensores"},
+  "output":  {"en": "Lights",              "es": "Luces"},
+  "passive": {"en": "Small parts",         "es": "Piezas pequeñas"},
+  "connect": {"en": "Power, sound and wiring", "es": "Energía, sonido y cables"}
+ },
+ "concepts": {
+  "oscillator":      {"en": "Oscillators",       "es": "Osciladores"},
+  "light-sensing":   {"en": "Light sensing",     "es": "Sensores de luz"},
+  "counter":         {"en": "Counters (4040)",   "es": "Contadores (4040)"},
+  "shift-register":  {"en": "Shift registers (4021)", "es": "Registros de desplazamiento (4021)"},
+  "multiplexer":     {"en": "Multiplexers (4051)", "es": "Multiplexores (4051)"},
+  "mixing":          {"en": "Mixing signals",    "es": "Mezclar señales"},
+  "filter":          {"en": "Filters",           "es": "Filtros"},
+  "radio":           {"en": "Radio waves",       "es": "Ondas de radio"},
+  "voltage-starving":{"en": "Voltage starving",  "es": "Quitar voltaje"},
+  "randomness":      {"en": "Randomness",        "es": "Azar"},
+  "noise":           {"en": "Noise",             "es": "Ruido"}
+ },
+ "sounds": {
+  "lights":   {"en": "Light patterns", "es": "Patrones de luz"},
+  "clicks":   {"en": "Clicks",         "es": "Clics"},
+  "tones":    {"en": "Tones",          "es": "Tonos"},
+  "rhythms":  {"en": "Rhythms",        "es": "Ritmos"},
+  "radio":    {"en": "Radio",          "es": "Radio"},
+  "glitches": {"en": "Glitches",       "es": "Fallas"},
+  "noise":    {"en": "Noise",          "es": "Ruido"}
+ },
+ "difficulty": {
+  "easy":   {"en": "Easy",   "es": "Fácil"},
+  "medium": {"en": "Medium", "es": "Intermedio"},
+  "hard":   {"en": "Hard",   "es": "Difícil"}
+ }
+}

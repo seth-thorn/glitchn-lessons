@@ -11,6 +11,40 @@
    "kind": "next"
   }
  ],
+ "requires": [
+  "blink-to-drum-machine"
+ ],
+ "concepts": [
+  "shift-register",
+  "randomness",
+  "light-sensing",
+  "filter",
+  "voltage-starving"
+ ],
+ "sounds": [
+  "lights",
+  "rhythms",
+  "glitches"
+ ],
+ "oscillators": 2,
+ "parts": {
+  "40106": 1,
+  "4021": 1,
+  "pot": 2,
+  "photocell": 1,
+  "led": 3,
+  "diode": 2,
+  "r_1k": 1,
+  "r_10k": 1,
+  "c_0u1": 3,
+  "c_1u": 1,
+  "c_100u": 2,
+  "jack": 1,
+  "cable": 1,
+  "battery": 1,
+  "jumpers": 16,
+  "breadboard": 1
+ },
  "segments": [
   {
    "src": "video/part-1.mp4",
@@ -324,7 +358,7 @@
     },
     {
      "t": 33.0,
-     "text": "Add a resistor to ground below it. This tiny filter makes the sound thin and delicate: microsound.",
+     "text": "Add a resistor to ground below it. With the capacitor it makes a high-pass filter, which lets only the highest sounds through: thin, delicate microsound.",
      "still": "stills/3-6-7.jpg",
      "stillT": 39.0
     }
@@ -362,7 +396,7 @@
     },
     {
      "t": 39.0,
-     "text": "Add a large capacitor on the power rail. It stores a little energy, so the glitches stretch out into phrases.",
+     "text": "Add a large capacitor on the power rail. It stores a little energy, so the drummer alternates between normal and starved phases: glitches become musical structure.",
      "still": "stills/3-7-6.jpg",
      "stillT": 57.0
     }

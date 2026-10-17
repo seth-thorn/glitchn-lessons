@@ -11,6 +11,42 @@
    "kind": "next"
   }
  ],
+ "requires": [
+  "blink-to-drum-machine"
+ ],
+ "concepts": [
+  "oscillator",
+  "mixing",
+  "radio",
+  "counter",
+  "voltage-starving"
+ ],
+ "sounds": [
+  "clicks",
+  "tones",
+  "radio",
+  "rhythms",
+  "glitches"
+ ],
+ "oscillators": 2,
+ "parts": {
+  "40106": 1,
+  "4040": 1,
+  "pot": 3,
+  "led": 1,
+  "diode": 2,
+  "r_10k": 2,
+  "c_0u1": 2,
+  "c_68p": 1,
+  "c_1u": 2,
+  "c_100u": 2,
+  "jack": 1,
+  "cable": 1,
+  "battery": 1,
+  "radio": 1,
+  "jumpers": 15,
+  "breadboard": 1
+ },
  "segments": [
   {
    "src": "video/part-1.mp4",
@@ -200,25 +236,25 @@
     },
     {
      "t": 21.0,
-     "text": "Connect a long, thin wire to the oscillator's output. It works as an antenna.",
+     "text": "Add a diode from the upper oscillator's output to the lower oscillator. The upper oscillator will switch the lower one on and off.",
      "still": "stills/2-4-5.jpg",
      "stillT": 33.0
     },
     {
      "t": 33.0,
-     "text": "Lay the antenna wire along the board.",
+     "text": "Adjust the diode so its legs sit firmly in the right rows.",
      "still": "stills/2-4-6.jpg",
      "stillT": 39.0
     },
     {
      "t": 39.0,
-     "text": "Swap the lower capacitor for a tiny one, so the oscillator runs at radio frequency.",
+     "text": "Swap the lower capacitor for the tiny 68 pF one, so the lower oscillator runs at radio frequency.",
      "still": "stills/2-4-7.jpg",
      "stillT": 42.0
     },
     {
      "t": 42.0,
-     "text": "Hold an AM radio near the board and turn the trimmer until you hear it on the radio.",
+     "text": "Hold an AM radio near the board and turn the trimmer until you hear the upper oscillator's tone on the radio.",
      "still": "stills/2-4-8.jpg",
      "stillT": 51.0
     }
@@ -232,7 +268,7 @@
    "subs": [
     {
      "t": 0.0,
-     "text": "Put the radio away and remove the antenna and the small capacitors.",
+     "text": "Put the radio away and remove the diode and the small capacitors.",
      "still": "stills/2-5-2.jpg",
      "stillT": 12.0
     },

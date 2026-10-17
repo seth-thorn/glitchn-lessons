@@ -326,3 +326,25 @@ body { margin: 0; }
 /* The lesson subtitle sits inside the title as <span class="sub">, which shares its class name with the build sub-steps.
    Keep sub-step styling (padding, hover backgrounds) off it in every style. */
 :root[data-style] h1 .sub, :root[data-style] h1 .sub:hover { padding: 0; background: none; box-shadow: none; border-radius: 0; }
+
+/* ---------- lesson facts (difficulty, start here / requires, chips, concepts) and the parts list ----------
+   Built only from each style's colour and font tokens, so every style picks them up. */
+.facts { display: flex; flex-wrap: wrap; gap: 6px 8px; margin-top: 12px; font-family: var(--body); font-size: 13.5px; line-height: 1.3; }
+.fact { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 99px; border: 1.5px solid color-mix(in srgb, var(--ink) 35%, transparent); color: var(--ink); background: color-mix(in srgb, var(--card) 90%, transparent); }
+.fact b { font-weight: 700; }
+.fact a { color: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+.fact.start { background: var(--ink); color: var(--card); border-color: var(--ink); font-weight: 700; }
+.fact.level::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: currentColor; opacity: .85; }
+.fact.level-medium::before { border-radius: 2px; transform: rotate(45deg); width: 8px; height: 8px; }
+.fact.level-hard::before { border-radius: 0; width: 0; height: 0; background: none; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 9px solid currentColor; }
+.fact.learn { border-style: dashed; }
+.parts { padding: 18px 20px 20px; color: var(--on-panel); }
+.parts-note { margin: 4px 0 14px; font-size: 14px; opacity: .85; }
+.parts-groups { columns: 4 230px; column-gap: 12px; }
+.parts-group { background: var(--card); color: var(--ink); border-radius: var(--r-md); padding: 12px 14px; margin: 0 0 12px; break-inside: avoid; }
+.parts-group h3 { margin: 0 0 8px; font-family: var(--display); font-size: 15px; font-weight: 700; }
+.parts-group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.parts-group li { display: grid; grid-template-columns: 2.2em minmax(0, 1fr); gap: 6px; align-items: baseline; font-size: 14.5px; line-height: 1.3; }
+.parts-group .qty { font-family: var(--display); font-size: 16px; text-align: right; }
+.parts-group .qty::after { content: "×"; font-size: .75em; opacity: .6; margin-left: 1px; }
+.parts-group small { display: block; font-size: 11.5px; opacity: .65; margin-top: 1px; }

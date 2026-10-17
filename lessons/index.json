@@ -1,6 +1,6 @@
 {
  "format": "glitchn-index/1",
- "generated": "2026-10-17T03:32:50+00:00",
+ "generated": "2026-10-17T17:59:53+00:00",
  "lessons": [
   {
    "slug": "blink-to-drum-machine",
@@ -17,10 +17,51 @@
      "kind": "next"
     }
    ],
+   "requires": [],
+   "startHere": true,
+   "concepts": [
+    "oscillator",
+    "light-sensing",
+    "filter",
+    "counter"
+   ],
+   "sounds": [
+    "lights",
+    "clicks",
+    "rhythms"
+   ],
+   "parts": {
+    "40106": 1,
+    "4040": 1,
+    "pot": 2,
+    "photocell": 1,
+    "button": 1,
+    "led": 3,
+    "diode": 2,
+    "r_1k": 1,
+    "r_10k": 1,
+    "c_0u1": 2,
+    "c_100u": 1,
+    "jack": 1,
+    "cable": 1,
+    "battery": 1,
+    "jumpers": 13,
+    "breadboard": 1
+   },
+   "chips": [
+    "40106",
+    "4040"
+   ],
+   "oscillators": 1,
+   "difficulty": {
+    "level": "easy",
+    "points": 10.5,
+    "why": "2 chips, 13 jumpers, 1 oscillator → 10.5 points"
+   },
    "i18n": {
     "es": {
      "title": "Del parpadeo a la caja de ritmos",
-     "summary": "Construye un oscilador que hace parpadear un LED y convi\u00e9rtelo, paso a paso, en una caja de ritmos."
+     "summary": "Construye un oscilador que hace parpadear un LED y conviértelo, paso a paso, en una caja de ritmos."
     }
    }
   },
@@ -39,10 +80,56 @@
      "kind": "next"
     }
    ],
+   "requires": [
+    "blink-to-drum-machine"
+   ],
+   "startHere": false,
+   "concepts": [
+    "oscillator",
+    "mixing",
+    "radio",
+    "counter",
+    "voltage-starving"
+   ],
+   "sounds": [
+    "clicks",
+    "tones",
+    "radio",
+    "rhythms",
+    "glitches"
+   ],
+   "parts": {
+    "40106": 1,
+    "4040": 1,
+    "pot": 3,
+    "led": 1,
+    "diode": 2,
+    "r_10k": 2,
+    "c_0u1": 2,
+    "c_68p": 1,
+    "c_1u": 2,
+    "c_100u": 2,
+    "jack": 1,
+    "cable": 1,
+    "battery": 1,
+    "radio": 1,
+    "jumpers": 15,
+    "breadboard": 1
+   },
+   "chips": [
+    "40106",
+    "4040"
+   ],
+   "oscillators": 2,
+   "difficulty": {
+    "level": "medium",
+    "points": 13.5,
+    "why": "2 chips, 15 jumpers, 2 oscillators → 13.5 points"
+   },
    "i18n": {
     "es": {
      "title": "Dos osciladores, una radio y un reinicio",
-     "summary": "Arma osciladores lentos y r\u00e1pidos, env\u00eda un tono a una radio AM, reconstruye la caja de ritmos con el 4040 con un reinicio y qu\u00edtale energ\u00eda para crear fallas."
+     "summary": "Arma osciladores lentos y rápidos, envía un tono a una radio AM, reconstruye la caja de ritmos con el 4040 con un reinicio y quítale energía para crear fallas."
     }
    }
   },
@@ -61,10 +148,54 @@
      "kind": "next"
     }
    ],
+   "requires": [
+    "blink-to-drum-machine"
+   ],
+   "startHere": false,
+   "concepts": [
+    "shift-register",
+    "randomness",
+    "light-sensing",
+    "filter",
+    "voltage-starving"
+   ],
+   "sounds": [
+    "lights",
+    "rhythms",
+    "glitches"
+   ],
+   "parts": {
+    "40106": 1,
+    "4021": 1,
+    "pot": 2,
+    "photocell": 1,
+    "led": 3,
+    "diode": 2,
+    "r_1k": 1,
+    "r_10k": 1,
+    "c_0u1": 3,
+    "c_1u": 1,
+    "c_100u": 2,
+    "jack": 1,
+    "cable": 1,
+    "battery": 1,
+    "jumpers": 16,
+    "breadboard": 1
+   },
+   "chips": [
+    "40106",
+    "4021"
+   ],
+   "oscillators": 2,
+   "difficulty": {
+    "level": "medium",
+    "points": 14.0,
+    "why": "2 chips, 16 jumpers, 2 oscillators → 14 points"
+   },
    "i18n": {
     "es": {
      "title": "Ritmos al azar con el 4021",
-     "summary": "Usa un oscilador lento y uno r\u00e1pido para controlar el registro de desplazamiento 4021: patrones de luz al azar, ritmos que se repiten y que cambian, microsonido y fallas como estructura musical."
+     "summary": "Usa un oscilador lento y uno rápido para controlar el registro de desplazamiento 4021: patrones de luz al azar, ritmos que se repiten y que cambian, microsonido y fallas como estructura musical."
     }
    }
   },
@@ -83,10 +214,52 @@
      "kind": "next"
     }
    ],
+   "requires": [
+    "blink-to-drum-machine"
+   ],
+   "startHere": false,
+   "concepts": [
+    "multiplexer",
+    "oscillator",
+    "filter"
+   ],
+   "sounds": [
+    "lights",
+    "clicks",
+    "tones"
+   ],
+   "parts": {
+    "40106": 1,
+    "4051": 1,
+    "pot": 4,
+    "led": 4,
+    "r_1k": 2,
+    "r_10k": 1,
+    "r_4k7": 1,
+    "r_22k": 1,
+    "c_0u1": 2,
+    "c_1u": 1,
+    "c_100u": 3,
+    "jack": 1,
+    "cable": 1,
+    "battery": 1,
+    "jumpers": 23,
+    "breadboard": 1
+   },
+   "chips": [
+    "40106",
+    "4051"
+   ],
+   "oscillators": 3,
+   "difficulty": {
+    "level": "hard",
+    "points": 19.5,
+    "why": "2 chips, 23 jumpers, 3 oscillators → 19.5 points"
+   },
    "i18n": {
     "es": {
      "title": "Recorrer sonidos con el 4051",
-     "summary": "Deja que dos osciladores lentos controlen el selector 4051: primero para recorrer unos LED y despu\u00e9s para pasar un tercer oscilador por distintos filtros."
+     "summary": "Deja que dos osciladores lentos controlen el selector 4051: primero para recorrer unos LED y después para pasar un tercer oscilador por distintos filtros."
     }
    }
   },
@@ -100,13 +273,346 @@
    "subSteps": 33,
    "thumb": "three-oscillators/thumbs/5-6-2.jpg",
    "links": [],
+   "requires": [
+    "blink-to-drum-machine"
+   ],
+   "startHere": false,
+   "concepts": [
+    "oscillator",
+    "mixing",
+    "filter",
+    "voltage-starving",
+    "noise"
+   ],
+   "sounds": [
+    "tones",
+    "glitches",
+    "noise"
+   ],
+   "parts": {
+    "40106": 1,
+    "pot": 5,
+    "diode": 3,
+    "c_0u1": 1,
+    "c_1u": 2,
+    "c_100u": 1,
+    "jack": 1,
+    "cable": 1,
+    "battery": 1,
+    "jumpers": 15,
+    "breadboard": 1
+   },
+   "chips": [
+    "40106"
+   ],
+   "oscillators": 3,
+   "difficulty": {
+    "level": "medium",
+    "points": 11.5,
+    "why": "1 chip, 15 jumpers, 3 oscillators → 11.5 points"
+   },
    "i18n": {
     "es": {
-     "title": "Tres osciladores y cosas extra\u00f1as",
-     "summary": "Arma tres osciladores, \u00fanelos con una red de diodos, dales forma con un filtro pasaaltos ajustable y explora la falta de voltaje, la est\u00e1tica y sonidos extra\u00f1os."
+     "title": "Tres osciladores y cosas extrañas",
+     "summary": "Arma tres osciladores, únelos con una red de diodos, dales forma con un filtro pasaaltos ajustable y explora la falta de voltaje, la estática y sonidos extraños."
     }
    }
   }
  ],
- "planned": []
+ "planned": [],
+ "catalog": {
+  "format": "glitchn-catalog/1",
+  "note": "Shared vocabulary for lessons: parts (from the kit list at glitchn.net/course), concepts and sounds. Lessons refer to these by key. Edit by hand; tools/build_index.py copies it into lessons/index.json.",
+  "parts": {
+   "40106": {
+    "group": "chip",
+    "en": "40106 chip (hex Schmitt trigger)",
+    "es": "Chip 40106 (Schmitt trigger séxtuple)",
+    "id": "TI CD40106BE"
+   },
+   "4040": {
+    "group": "chip",
+    "en": "4040 chip (12-stage counter)",
+    "es": "Chip 4040 (contador de 12 etapas)",
+    "id": "TI CD4040BE"
+   },
+   "4021": {
+    "group": "chip",
+    "en": "4021 chip (8-stage shift register)",
+    "es": "Chip 4021 (registro de desplazamiento de 8 etapas)",
+    "id": "TI CD4021BE"
+   },
+   "4051": {
+    "group": "chip",
+    "en": "4051 chip (8-channel multiplexer)",
+    "es": "Chip 4051 (multiplexor de 8 canales)",
+    "id": "TI CD4051BE"
+   },
+   "pot": {
+    "group": "control",
+    "en": "Potentiometer (knob)",
+    "es": "Potenciómetro (perilla)",
+    "id": "Adafruit #356"
+   },
+   "photocell": {
+    "group": "control",
+    "en": "Photocell",
+    "es": "Fotocelda",
+    "id": "Adafruit #161"
+   },
+   "button": {
+    "group": "control",
+    "en": "Button",
+    "es": "Botón",
+    "id": "Adafruit #1009"
+   },
+   "led": {
+    "group": "output",
+    "en": "LED",
+    "es": "LED",
+    "id": "Adafruit #4202"
+   },
+   "diode": {
+    "group": "passive",
+    "en": "Diode",
+    "es": "Diodo",
+    "id": "Adafruit #1641"
+   },
+   "r_1k": {
+    "group": "passive",
+    "en": "1K resistor (red stripe)",
+    "es": "Resistencia de 1K (franja roja)",
+    "id": "Adafruit #4294"
+   },
+   "r_10k": {
+    "group": "passive",
+    "en": "10K resistor (orange stripe)",
+    "es": "Resistencia de 10K (franja naranja)",
+    "id": "Adafruit #2784"
+   },
+   "r_4k7": {
+    "group": "passive",
+    "en": "4.7K resistor",
+    "es": "Resistencia de 4.7K",
+    "id": "given in class"
+   },
+   "r_22k": {
+    "group": "passive",
+    "en": "22K resistor",
+    "es": "Resistencia de 22K",
+    "id": "given in class"
+   },
+   "r_other": {
+    "group": "passive",
+    "en": "Other resistor (assorted)",
+    "es": "Otra resistencia (surtidas)",
+    "id": "given in class"
+   },
+   "c_0u1": {
+    "group": "passive",
+    "en": "0.1 µF capacitor (tiny, yellowish)",
+    "es": "Capacitor de 0.1 µF (pequeño, amarillento)",
+    "id": "Adafruit #753"
+   },
+   "c_68p": {
+    "group": "passive",
+    "en": "68 pF capacitor",
+    "es": "Capacitor de 68 pF",
+    "id": "given in class"
+   },
+   "c_1u": {
+    "group": "passive",
+    "en": "1 µF capacitor (can)",
+    "es": "Capacitor de 1 µF (lata)",
+    "id": "Rubycon 50NXA1MEFC5X11"
+   },
+   "c_10u": {
+    "group": "passive",
+    "en": "10 µF capacitor (can)",
+    "es": "Capacitor de 10 µF (lata)",
+    "id": "Adafruit #2195"
+   },
+   "c_100u": {
+    "group": "passive",
+    "en": "100 µF capacitor (can)",
+    "es": "Capacitor de 100 µF (lata)",
+    "id": "Adafruit #2193"
+   },
+   "jack": {
+    "group": "connect",
+    "en": "Stereo audio jack",
+    "es": "Conector de audio estéreo",
+    "id": "Adafruit #1699"
+   },
+   "cable": {
+    "group": "connect",
+    "en": "Stereo audio cable and a speaker",
+    "es": "Cable de audio estéreo y un parlante",
+    "id": "e.g. JBL Go2"
+   },
+   "battery": {
+    "group": "connect",
+    "en": "9 V battery and battery clip",
+    "es": "Batería de 9 V y su conector",
+    "id": "RP Electronics MB-921"
+   },
+   "radio": {
+    "group": "connect",
+    "en": "AM radio",
+    "es": "Radio AM",
+    "id": "given in class"
+   },
+   "jumpers": {
+    "group": "connect",
+    "en": "Jumper wires (pre-cut, short and long)",
+    "es": "Cables puente (precortados, cortos y largos)",
+    "id": "AUSTOR assortment"
+   },
+   "breadboard": {
+    "group": "connect",
+    "en": "Breadboard",
+    "es": "Protoboard",
+    "id": "Elenco"
+   }
+  },
+  "groups": {
+   "chip": {
+    "en": "Chips",
+    "es": "Chips"
+   },
+   "control": {
+    "en": "Knobs and sensors",
+    "es": "Perillas y sensores"
+   },
+   "output": {
+    "en": "Lights",
+    "es": "Luces"
+   },
+   "passive": {
+    "en": "Small parts",
+    "es": "Piezas pequeñas"
+   },
+   "connect": {
+    "en": "Power, sound and wiring",
+    "es": "Energía, sonido y cables"
+   }
+  },
+  "concepts": {
+   "oscillator": {
+    "en": "Oscillators",
+    "es": "Osciladores"
+   },
+   "light-sensing": {
+    "en": "Light sensing",
+    "es": "Sensores de luz"
+   },
+   "counter": {
+    "en": "Counters (4040)",
+    "es": "Contadores (4040)"
+   },
+   "shift-register": {
+    "en": "Shift registers (4021)",
+    "es": "Registros de desplazamiento (4021)"
+   },
+   "multiplexer": {
+    "en": "Multiplexers (4051)",
+    "es": "Multiplexores (4051)"
+   },
+   "mixing": {
+    "en": "Mixing signals",
+    "es": "Mezclar señales"
+   },
+   "filter": {
+    "en": "Filters",
+    "es": "Filtros"
+   },
+   "radio": {
+    "en": "Radio waves",
+    "es": "Ondas de radio"
+   },
+   "voltage-starving": {
+    "en": "Voltage starving",
+    "es": "Quitar voltaje"
+   },
+   "randomness": {
+    "en": "Randomness",
+    "es": "Azar"
+   },
+   "noise": {
+    "en": "Noise",
+    "es": "Ruido"
+   }
+  },
+  "sounds": {
+   "lights": {
+    "en": "Light patterns",
+    "es": "Patrones de luz"
+   },
+   "clicks": {
+    "en": "Clicks",
+    "es": "Clics"
+   },
+   "tones": {
+    "en": "Tones",
+    "es": "Tonos"
+   },
+   "rhythms": {
+    "en": "Rhythms",
+    "es": "Ritmos"
+   },
+   "radio": {
+    "en": "Radio",
+    "es": "Radio"
+   },
+   "glitches": {
+    "en": "Glitches",
+    "es": "Fallas"
+   },
+   "noise": {
+    "en": "Noise",
+    "es": "Ruido"
+   }
+  },
+  "difficulty": {
+   "easy": {
+    "en": "Easy",
+    "es": "Fácil"
+   },
+   "medium": {
+    "en": "Medium",
+    "es": "Intermedio"
+   },
+   "hard": {
+    "en": "Hard",
+    "es": "Difícil"
+   }
+  },
+  "partOrder": [
+   "40106",
+   "4040",
+   "4021",
+   "4051",
+   "pot",
+   "photocell",
+   "button",
+   "led",
+   "diode",
+   "r_1k",
+   "r_10k",
+   "r_4k7",
+   "r_22k",
+   "r_other",
+   "c_0u1",
+   "c_68p",
+   "c_1u",
+   "c_10u",
+   "c_100u",
+   "jack",
+   "cable",
+   "battery",
+   "radio",
+   "jumpers",
+   "breadboard"
+  ]
+ }
 }

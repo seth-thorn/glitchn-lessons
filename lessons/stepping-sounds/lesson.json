@@ -11,6 +11,38 @@
    "kind": "next"
   }
  ],
+ "requires": [
+  "blink-to-drum-machine"
+ ],
+ "concepts": [
+  "multiplexer",
+  "oscillator",
+  "filter"
+ ],
+ "sounds": [
+  "lights",
+  "clicks",
+  "tones"
+ ],
+ "oscillators": 3,
+ "parts": {
+  "40106": 1,
+  "4051": 1,
+  "pot": 4,
+  "led": 4,
+  "r_1k": 2,
+  "r_10k": 1,
+  "r_4k7": 1,
+  "r_22k": 1,
+  "c_0u1": 2,
+  "c_1u": 1,
+  "c_100u": 3,
+  "jack": 1,
+  "cable": 1,
+  "battery": 1,
+  "jumpers": 23,
+  "breadboard": 1
+ },
  "segments": [
   {
    "src": "video/part-1.mp4",

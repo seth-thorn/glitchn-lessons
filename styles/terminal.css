@@ -196,3 +196,4 @@
 :root[data-style="terminal"] .coming span { color: var(--muted); font-size: 14px; }
 :root[data-style="terminal"] .team { border-top: 1px dashed var(--dim); color: var(--muted); }
 :root[data-style="terminal"] .team a { color: var(--phos); }
+:root[data-style="terminal"] .parts-group h3 { font-weight: 400; font-size: 21px; letter-spacing: .03em; color: var(--phos); }

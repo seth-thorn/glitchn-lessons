@@ -30,7 +30,7 @@
   "Add a diode from the first oscillator's output to a shared point by the chip.": "Agrega un diodo desde la salida del primer oscilador hasta un punto común junto al chip.",
   "Add a diode from the second oscillator to the same point.": "Agrega un diodo desde el segundo oscilador hasta el mismo punto.",
   "Add a diode from the third oscillator: all three are now combined.": "Agrega un diodo desde el tercer oscilador: ahora los tres están combinados.",
-  "Add a short yellow jumper to pick up the combined signal, and touch the probe to it.": "Agrega un puente amarillo corto para tomar la señal combinada y tócalo con la sonda.",
+  "Touch the probe to the point where the three diodes meet to hear the combined signal.": "Toca con la sonda el punto donde se juntan los tres diodos para oír la señal combinada.",
   "Listen to all three oscillators at once.": "Escucha los tres osciladores a la vez.",
   "Adjustable high-pass filter": "Filtro pasaaltos ajustable",
   "Run an orange wire from the diode network to the upper half of the board.": "Lleva un cable naranja desde la red de diodos hasta la mitad superior de la protoboard.",
@@ -46,6 +46,6 @@
   "Static": "Estática",
   "Pull out the third oscillator's small capacitor (the one below the bottom rail). Without it the oscillator runs wild and the circuit makes static.": "Saca el capacitor pequeño del tercer oscilador (el que está debajo del riel inferior). Sin él, el oscilador se descontrola y el circuito produce estática.",
   "Strange things": "Cosas extrañas",
-  "Remove the three diodes, then turn the knobs for strange, unstable sounds.": "Quita los tres diodos y gira las perillas para oír sonidos extraños e inestables."
+  "Remove the three diodes. The oscillators are no longer connected, yet turning one knob still changes the others: parts of a circuit affect each other even when disconnected.": "Quita los tres diodos. Los osciladores ya no están conectados, pero girar una perilla todavía cambia a los otros: las partes de un circuito se afectan entre sí aunque estén desconectadas."
  }
 }

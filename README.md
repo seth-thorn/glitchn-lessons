@@ -14,6 +14,7 @@ player/player.js, .css     the one lesson player every lesson page uses
 lessons/
   index.json               the list of lessons (made by tools/build_index.py; don't edit by hand)
   planned.json             lessons that are coming (edit by hand)
+  catalog.json             names for parts, concepts and sounds that lessons refer to (edit by hand)
   <lesson-address>/        one folder per lesson
     index.html             the lesson page (made by the editor or build_index.py)
     lesson.json            steps, sub-steps, timestamps, and links to other lessons
@@ -45,6 +46,26 @@ Each lesson lists where it leads in its own `lesson.json`:
 
 `kind` is `next`, `variation` or `related` (any short word works and shows on the map). The home page and each lesson's "What's next?" panel draw the map from these links, so connecting a new lesson means editing only that lesson, or the lesson that should point to it.
 
+## What a lesson needs, teaches and asks of you
+
+Each `lesson.json` also describes the lesson, so the home page can label and filter the lessons and each lesson page can show a parts list:
+
+```json
+"startHere": true,
+"requires": [],
+"concepts": ["oscillator", "light-sensing", "filter", "counter"],
+"sounds": ["lights", "clicks", "rhythms"],
+"oscillators": 1,
+"parts": { "40106": 1, "4040": 1, "pot": 2, "led": 3, "jumpers": 13, "breadboard": 1 }
+```
+
+- **`startHere`** marks the foundation lesson. **`requires`** lists lessons to finish first (today every lesson requires "From Blink to Drum Machine", since every lesson builds on its oscillator). A future custom-course builder can use these to keep any order of lessons sensible.
+- **`parts`** is the lesson's parts list: the most of each part on the board at once. The keys, names (English and Spanish) and kit part numbers live in **`lessons/catalog.json`**, taken from the kit list at the bottom of [glitchn.net/course](https://www.glitchn.net/course). Add a part there first, then use its key in lessons.
+- **`concepts`** and **`sounds`** also use keys from `catalog.json`.
+- **Difficulty** (Easy, Medium, Hard) is worked out from the chips, jumper wires and oscillators by **`tools/difficulty.py`**, where the formula, its weights and how they were chosen are written out. Run `python3 tools/difficulty.py` to see every lesson's rating and the arithmetic. To overrule the formula for one lesson, add `"difficulty": {"level": "medium", "why": "short reason"}` to its `lesson.json`.
+
+`tools/build_index.py` checks every key against the catalog and every `requires` against the real lessons, and copies the catalog and the ratings into `lessons/index.json`.
+
 ## Spanish (and other languages)
 
 Visitors can switch between **English** and **Español** on every page. The choice is remembered, Spanish-language browsers start in Spanish, and a link can force a language with `?lang=es` (useful when embedding a lesson in Spanish).
@@ -71,7 +92,7 @@ Every page has a **Style** menu that changes the page's whole personality, not j
 - **Daydream**: a bright cloud world: deep blue sky, the video seen through a stone gateway, a water-slide scrub bar with a little raft, orchard rows for progress, and a map of lakes and channels.
 - **Terminal**: a green-phosphor screen: glowing monospace text, scanlines, terminal windows, inverse-video highlights and a blinking cursor. The video itself is never tinted.
 
-**Where styles live:** TV is part of `player/player.css`. Each other style is one file in `styles/` (`gadget.css`, `solarpunk.css`, `treehouse.css`) that styles both the lesson player and the home page. `styles/all.css` loads them all, along with their fonts.
+**Where styles live:** TV is part of `player/player.css`. Each other style is one file in `styles/` (`clean.css`, `gadget.css`, `solarpunk.css` and so on) that styles both the lesson player and the home page. `styles/all.css` loads them all, along with their fonts.
 
 **Things a style can use:** the player adds the class `is-playing` to `.app` while the video plays, sets `--played` (0 to 1) on `.app` as it goes, and has a spare decoration slot `.deco` (five empty `<i>` elements) inside the TV. Moving decorations stop for people who ask their device for reduced motion. The drawings are SVG pictures written into the CSS; their sources are in `tools/style_art.py`.
 
@@ -82,6 +103,6 @@ Every page has a **Style** menu that changes the page's whole personality, not j
 
 ## Status
 
-The first lesson's step text and the links are drafts for the Glitch'n team to review. Days 2–5 of the original five-day course are listed as planned lessons.
+All five lessons from the original five-day course are up, as drafts for the Glitch'n team to review: step text, parts lists and difficulty ratings included.
 
 The site is plain HTML with no build step, published with GitHub Pages from the `main` branch.
