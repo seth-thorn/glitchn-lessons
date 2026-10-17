@@ -85,44 +85,8 @@ header > div { min-width: 0; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
-/* ---------- Rams style (see player/player.css for the full description) ---------- */
-:root[data-style="rams"], :root[data-style="rams"][data-skin] {
-  --ink: #262624; --page: #E2E2DE; --muted: #76756F; --white: #FAFAF8; --panel: #F4F4F1; --card: #EAEAE6; --on-panel: #262624;
-  --line: #CDCCC6; --accent: #F05A28; --bw: 1px;
-  --display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif; --body: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif; --mono: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-:root[data-style="rams"][data-skin="navy"] { --accent: #2F5AA8; } :root[data-style="rams"][data-skin="sky"] { --accent: #2A8DC2; }
-:root[data-style="rams"][data-skin="green"] { --accent: #3C9A5F; } :root[data-style="rams"][data-skin="yellow"] { --accent: #E0A30C; }
-:root[data-style="rams"][data-skin="red"] { --accent: #D2362B; }
-:root[data-style="rams"] body { font-weight: 400; }
-:root[data-style="rams"] :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-:root[data-style="rams"] .eyebrow { font-family: var(--body); font-size: 13px; font-weight: 500; letter-spacing: 0; text-transform: none; }
-:root[data-style="rams"] h1 { font-weight: 600; font-stretch: 100%; letter-spacing: -.03em; }
-:root[data-style="rams"] h2 { font-weight: 600; font-stretch: 100%; font-size: 20px; letter-spacing: -.01em; }
-:root[data-style="rams"] a.card { border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(180deg, #FBFBF9, #F0F0EC); box-shadow: inset 0 1px 0 #FFFFFF, 0 22px 44px -32px rgba(38, 38, 36, .55); }
-:root[data-style="rams"] a.card:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 #FFFFFF, 0 26px 48px -30px rgba(38, 38, 36, .6); }
-:root[data-style="rams"] .card img { border-bottom: 1px solid var(--line); }
-:root[data-style="rams"] .card b { font-weight: 600; font-stretch: 100%; letter-spacing: -.01em; }
-:root[data-style="rams"] .card .meta { font-family: var(--body); font-weight: 500; color: var(--muted); }
-:root[data-style="rams"] .chip { border: 1px solid var(--line); background: transparent; color: var(--muted); }
-:root[data-style="rams"] .mapwrap { border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(180deg, #FBFBF9, #F0F0EC); }
-:root[data-style="rams"] .mapscroll { background: var(--card); }
-:root[data-style="rams"] #map .edge { stroke: #8F8E88; stroke-width: 1.5; }
-:root[data-style="rams"] #map .node circle { fill: #FAFAF8; stroke: #262624; stroke-width: 1.5; }
-:root[data-style="rams"] #map .node.later circle { fill: transparent; stroke-dasharray: 4 3; }
-:root[data-style="rams"] #map .node text { font-weight: 600; }
-:root[data-style="rams"] #map .node .sub { font-family: var(--body); font-weight: 500; }
-:root[data-style="rams"] #map .elabel rect { stroke: var(--line); stroke-width: 1; }
-:root[data-style="rams"] .legend i { border-width: 1px; }
-:root[data-style="rams"] .coming li { border: 1px dashed #B5B4AE; background: transparent; }
-:root[data-style="rams"] .coming b { font-weight: 600; }
-:root[data-style="rams"] .team { border-top: 1px solid var(--line); }
-:root[data-style="rams"] .langs, :root[data-style="rams"] .style-pick select { border: 1px solid var(--line); }
-:root[data-style="rams"] .lang + .lang { border-left: 1px solid var(--line); }
-:root[data-style="rams"] .lang, :root[data-style="rams"] .style-pick select { font-weight: 500; }
-:root[data-style="rams"] .style-pick { font-family: var(--body); font-size: 13px; }
-:root[data-style="rams"] .err { border: 1px solid var(--line); }
 </style>
+<link rel="stylesheet" href="styles/all.css">
 </head>
 <body>
 <main>
@@ -167,12 +131,12 @@ header > div { min-width: 0; }
   /* ---------- language: ?lang= in the address, then the visitor's last choice, then the browser ---------- */
   const LANGS = { en: 'English', es: 'Español' };
   const UI = {
-    en: { style: 'Style', style_tv: 'TV', style_rams: 'Rams', lessons: 'Lessons', intro: 'Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.',
+    en: { style: 'Style', style_tv: 'TV', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', lessons: 'Lessons', intro: 'Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.',
       startBuilding: 'Start building', loading: 'Loading lessons…', map: 'Map of lessons', mapAria: 'How the lessons connect', ready: 'Ready to build', coming: 'Coming', arrows: 'Arrows point to where a lesson leads.',
       language: 'Language', steps: 'steps', subSteps: 'sub-steps', draft: 'Draft', comingSmall: 'coming', notReady: '“{t}” isn’t ready yet.', none: 'No lessons yet.',
       listError: '<b>The lesson list did not load.</b> It lives in lessons/index.json; run tools/build_index.py to make it.', title: "Glitch'n Lessons", machine: '',
       'kind_variation': 'variation', 'kind_related': 'related', 'kind_next day': 'next day', 'kind_revisited': 'revisited' },
-    es: { style: 'Estilo', style_tv: 'Tele', style_rams: 'Rams', lessons: 'Lecciones', intro: 'Arma circuitos de sonido en una protoboard, un pequeño paso a la vez. Cada lección muestra un video del armado junto a instrucciones paso a paso, con fotos de cerca que puedes ampliar y un mapa de a dónde ir después.',
+    es: { style: 'Estilo', style_tv: 'Tele', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', lessons: 'Lecciones', intro: 'Arma circuitos de sonido en una protoboard, un pequeño paso a la vez. Cada lección muestra un video del armado junto a instrucciones paso a paso, con fotos de cerca que puedes ampliar y un mapa de a dónde ir después.',
       startBuilding: 'Empieza a armar', loading: 'Cargando lecciones…', map: 'Mapa de lecciones', mapAria: 'Cómo se conectan las lecciones', ready: 'Lista para armar', coming: 'Próximamente', arrows: 'Las flechas apuntan hacia donde lleva cada lección.',
       language: 'Idioma', steps: 'pasos', subSteps: 'subpasos', draft: 'Borrador', comingSmall: 'próximamente', notReady: '“{t}” todavía no está lista.', none: 'Todavía no hay lecciones.',
       listError: '<b>No se pudo cargar la lista de lecciones.</b>', title: 'Lecciones de Glitch’n', machine: 'Traducción automática',
@@ -185,8 +149,11 @@ header > div { min-width: 0; }
   }
   const LANG = pickLang();
   // Styles: same names and storage as the lesson player, so a choice made anywhere applies everywhere.
-  const STYLES = ['tv', 'rams'];
-  let STYLE = (() => { const q = new URLSearchParams(location.search).get('style'); if (q && STYLES.includes(q)) return q; try { const v = JSON.parse(localStorage.getItem('glitchn-style')); if (STYLES.includes(v)) return v; } catch (e) {} return 'tv'; })();
+  // To add a style: add its name here and in player/player.js, its menu name (style_<name>) to UI, and its CSS file in /styles.
+  const STYLES = ['tv', 'gadget', 'solarpunk', 'treehouse'];
+  const OLD_STYLE_NAMES = { rams: 'gadget' }; // earlier names, so old links and saved choices still work
+  const okStyle = (v) => { v = OLD_STYLE_NAMES[v] || v; return STYLES.includes(v) ? v : null; };
+  let STYLE = (() => { const q = okStyle(new URLSearchParams(location.search).get('style')); if (q) return q; try { const v = okStyle(JSON.parse(localStorage.getItem('glitchn-style'))); if (v) return v; } catch (e) {} return 'tv'; })();
   document.documentElement.dataset.style = STYLE;
   const t = (k, v) => String(UI[LANG][k] ?? UI.en[k] ?? k).replace(/\{(\w+)\}/g, (_, n) => (v && v[n] != null ? v[n] : ''));
   const keepLang = new URLSearchParams(location.search).get('lang') ? '?lang=' + LANG : '';

@@ -1,0 +1,202 @@
+/* Treehouse style: a clubhouse up in the leaves. Wooden plank panels with nails, the TV hung from a branch
+   by two ropes, steps on paper notes, a highlighter for the current sub-step.
+   Type: Gluten (chunky, hand-made) for headings, Andika (made for new readers) for reading.
+   The colour swatches paint the wood. This file styles both the lesson player and the home page. */
+
+/* ---------- tokens ---------- */
+:root[data-style="treehouse"], :root[data-style="treehouse"][data-skin] {
+  --ink: #3A2414; --page: #D5E8C3; --muted: #6B533D; --white: #FFF8E6;
+  --paper: #FFF6DF; --card: #FFF6DF; --deep: #3A2414;
+  --wood: #C88A4E; --on-panel: #FFF8E6; --wood-shadow: rgba(58, 36, 20, .55);
+  --leaf: #5E9440; --accent: #D9573B; --hi: #FFE07A;
+  --display: "Gluten", "Chalkboard SE", "Comic Sans MS", cursive;
+  --body: "Andika", "Trebuchet MS", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Andika", "Trebuchet MS", "Helvetica Neue", Arial, sans-serif;
+  --bw: 3px; --r-lg: 14px; --r-md: 10px; --r-sm: 8px;
+}
+:root[data-style="treehouse"][data-skin="navy"]   { --wood: #5D74A8; }
+:root[data-style="treehouse"][data-skin="sky"]    { --wood: #5FA6C0; }
+:root[data-style="treehouse"][data-skin="green"]  { --wood: #739A50; }
+:root[data-style="treehouse"][data-skin="yellow"] { --wood: #D3A23C; }
+:root[data-style="treehouse"][data-skin="red"]    { --wood: #B5553A; }
+:root[data-style="treehouse"] .skin[data-skin="navy"]   { --c: #5D74A8 !important; }
+:root[data-style="treehouse"] .skin[data-skin="sky"]    { --c: #5FA6C0 !important; }
+:root[data-style="treehouse"] .skin[data-skin="coral"]  { --c: #C88A4E !important; }
+:root[data-style="treehouse"] .skin[data-skin="green"]  { --c: #739A50 !important; }
+:root[data-style="treehouse"] .skin[data-skin="yellow"] { --c: #D3A23C !important; }
+:root[data-style="treehouse"] .skin[data-skin="red"]    { --c: #B5553A !important; }
+
+/* ---------- shared: page, header, switches ---------- */
+/* dappled light through the leaves */
+:root[data-style="treehouse"] {
+  background:
+    radial-gradient(circle at 30% 30%, rgba(94, 148, 64, .11) 0 46px, transparent 47px) 0 0 / 230px 190px,
+    radial-gradient(circle at 70% 75%, rgba(94, 148, 64, .08) 0 64px, transparent 65px) 0 0 / 290px 260px,
+    radial-gradient(circle at 50% 50%, rgba(255, 246, 200, .4) 0 22px, transparent 23px) 60px 40px / 170px 210px,
+    #D5E8C3;
+}
+:root[data-style="treehouse"] body { background: transparent; font-size: 16.5px; }
+:root[data-style="treehouse"] :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+:root[data-style="treehouse"] .eyebrow { font-family: var(--body); font-size: 14.5px; font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--muted); }
+:root[data-style="treehouse"] h1 { font-family: var(--display); font-weight: 600; font-stretch: 100%; letter-spacing: 0; line-height: 1.05; }
+:root[data-style="treehouse"] h1 .sub { font-family: var(--body); font-weight: 400; }
+:root[data-style="treehouse"] .draft-chip, :root[data-style="treehouse"] .chip { font-family: var(--body); letter-spacing: 0; border: 2px solid var(--ink); background: var(--paper); color: var(--ink); font-weight: 700; transform: rotate(-2deg); }
+:root[data-style="treehouse"] .home-link { font-weight: 700; border-bottom: 2.5px solid var(--ink); }
+:root[data-style="treehouse"] .home-link:hover { background: var(--hi); }
+:root[data-style="treehouse"] .style-pick, :root[data-style="treehouse"] .skins span { font-family: var(--body); font-size: 14px; font-weight: 700; color: var(--muted); }
+:root[data-style="treehouse"] .langs, :root[data-style="treehouse"] .style-pick select { border: 2.5px solid var(--ink); background: var(--paper); box-shadow: 0 3px 0 var(--ink); }
+:root[data-style="treehouse"] .lang, :root[data-style="treehouse"] .style-pick select { font-family: var(--body); font-weight: 700; }
+:root[data-style="treehouse"] .lang + .lang { border-left: 2.5px solid var(--ink); }
+:root[data-style="treehouse"] .lang:hover { background: var(--hi); }
+:root[data-style="treehouse"] .lang[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+/* swatches are dabs of paint */
+:root[data-style="treehouse"] .skin { width: 30px; height: 28px; border: 2.5px solid var(--ink); border-radius: 55% 45% 50% 40% / 50% 55% 45% 50%; }
+:root[data-style="treehouse"] .skin:nth-child(odd) { transform: rotate(8deg); }
+:root[data-style="treehouse"] .skin[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--paper), 0 0 0 5.5px var(--ink); }
+@media (pointer: coarse) { :root[data-style="treehouse"] .skin { width: 38px; height: 34px; } }
+:root[data-style="treehouse"] .err { background: var(--paper); }
+:root[data-style="treehouse"] .toast { background: var(--ink); color: var(--paper); }
+
+/* ---------- lesson player ---------- */
+/* wooden planks with a nail in each corner */
+:root[data-style="treehouse"] .panel, :root[data-style="treehouse"] a.card, :root[data-style="treehouse"] .mapwrap {
+  --nail: radial-gradient(circle, #4A3020 0 2.6px, rgba(255, 240, 210, .45) 3px, transparent 3.8px);
+  background:
+    var(--nail) 7px 7px / 12px 12px no-repeat, var(--nail) calc(100% - 7px) 7px / 12px 12px no-repeat,
+    var(--nail) 7px calc(100% - 7px) / 12px 12px no-repeat, var(--nail) calc(100% - 7px) calc(100% - 7px) / 12px 12px no-repeat,
+    repeating-linear-gradient(180deg, transparent 0 38px, var(--wood-shadow) 38px 40px),
+    repeating-linear-gradient(176deg, rgba(255, 255, 255, .07) 0 2px, transparent 2px 9px),
+    linear-gradient(90deg, rgba(0, 0, 0, .07), rgba(255, 255, 255, .06) 35%, rgba(0, 0, 0, .05) 70%, rgba(255, 255, 255, .05)),
+    var(--wood);
+  border: 3px solid var(--ink); border-radius: 12px;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, .25), 0 6px 0 var(--ink);
+}
+:root[data-style="treehouse"] .panel-title { font-family: var(--display); font-weight: 700; font-stretch: 100%; font-size: 24px; color: var(--on-panel); text-shadow: 0 2px 0 var(--wood-shadow); }
+
+/* the TV hangs from a branch on two ropes */
+:root[data-style="treehouse"] .tv-wrap { padding-top: 76px; padding-bottom: 6px; }
+:root[data-style="treehouse"] .ant { left: 16%; right: 16%; width: auto; }
+:root[data-style="treehouse"] .ant .base, :root[data-style="treehouse"] .ant .rod::after, :root[data-style="treehouse"] .feet, :root[data-style="treehouse"] .glass { display: none; }
+:root[data-style="treehouse"] .ant .rod { width: 7px; height: 68px; bottom: -6px; border-radius: 4px; transform: none;
+  background: repeating-linear-gradient(-40deg, #E2C28A 0 4px, #A57E48 4px 7px); box-shadow: 0 0 0 1.5px var(--ink); }
+:root[data-style="treehouse"] .ant .rod.l { left: 0; }
+:root[data-style="treehouse"] .ant .rod.r { left: auto; right: 0; }
+:root[data-style="treehouse"] .ant::before { content: ""; position: absolute; left: -16%; right: -16%; bottom: 56px; height: 18px; border-radius: 10px 14px 8px 12px;
+  background: linear-gradient(180deg, #8A5A2E, #6B4426); border: 2.5px solid var(--ink); }
+:root[data-style="treehouse"] .ant::after { content: ""; position: absolute; left: -24%; right: -24%; bottom: 46px; height: 46px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 50'%3E %3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%2373B04A' transform='translate(8 26) rotate(-150) scale(1.3)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%234E8A33' transform='translate(20 30) rotate(160) scale(1.2)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%2373B04A' transform='translate(14 22) rotate(-110) scale(1.25)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%234E8A33' transform='translate(34 24) rotate(-60) scale(1.1)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%2373B04A' transform='translate(30 30) rotate(120) scale(1.2)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%234E8A33' transform='translate(96 26) rotate(-30) scale(1.3)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%2373B04A' transform='translate(84 30) rotate(20) scale(1.2)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%234E8A33' transform='translate(104 22) rotate(-70) scale(1.2)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%2373B04A' transform='translate(88 24) rotate(-120) scale(1.1)'/%3E %3C/svg%3E") no-repeat left center / auto 100%, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 50'%3E %3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%2373B04A' transform='translate(8 26) rotate(-150) scale(1.3)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%234E8A33' transform='translate(20 30) rotate(160) scale(1.2)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%2373B04A' transform='translate(14 22) rotate(-110) scale(1.25)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%234E8A33' transform='translate(34 24) rotate(-60) scale(1.1)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%2373B04A' transform='translate(30 30) rotate(120) scale(1.2)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%234E8A33' transform='translate(96 26) rotate(-30) scale(1.3)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%2373B04A' transform='translate(84 30) rotate(20) scale(1.2)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%234E8A33' transform='translate(104 22) rotate(-70) scale(1.2)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%2373B04A' transform='translate(88 24) rotate(-120) scale(1.1)'/%3E %3C/svg%3E") no-repeat right center / auto 100%; }
+:root[data-style="treehouse"] .tv { padding: 20px 20px 14px; }
+:root[data-style="treehouse"] .screen { border: 6px solid var(--ink); border-radius: 10px; }
+:root[data-style="treehouse"] .big-play span { background: var(--accent); color: var(--paper); border: 3px solid var(--ink); box-shadow: 0 5px 0 var(--ink); }
+:root[data-style="treehouse"] .now-chip { background: var(--paper); border: 2px solid var(--ink); border-radius: 4px; transform: rotate(-1deg); }
+:root[data-style="treehouse"] .now-chip b { font-family: var(--body); color: var(--accent); }
+:root[data-style="treehouse"] .track { border: 2.5px solid var(--ink); background: var(--paper); }
+:root[data-style="treehouse"] .track .fill { background: var(--leaf); }
+:root[data-style="treehouse"] .ticks i { background: var(--on-panel); opacity: .8; }
+:root[data-style="treehouse"] .scrub .knob { background: var(--accent); border: 3px solid var(--ink); }
+:root[data-style="treehouse"] .scrub:focus-within .knob { box-shadow: 0 0 0 3px var(--paper), 0 0 0 6px var(--ink); }
+:root[data-style="treehouse"] .hover-tip b { font-family: var(--body); color: var(--hi); }
+:root[data-style="treehouse"] .controls { border-top: 3px dashed rgba(58, 36, 20, .55); margin-top: 10px; padding-top: 12px; gap: 8px; color: var(--ink); }
+:root[data-style="treehouse"] .divider { display: none; }
+:root[data-style="treehouse"] .ctl { height: 44px; min-width: 44px; background: var(--paper); border: 2.5px solid var(--ink); border-radius: 10px; box-shadow: 0 3px 0 var(--ink); font-family: var(--body); font-weight: 700; font-size: 15px; }
+:root[data-style="treehouse"] .ctl:hover { background: var(--hi); }
+:root[data-style="treehouse"] .ctl:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
+:root[data-style="treehouse"] .ctl svg { width: 22px; height: 22px; }
+:root[data-style="treehouse"] #playBtn { background: var(--accent); color: var(--paper); }
+:root[data-style="treehouse"] .dial-face { background: radial-gradient(circle at 45% 40%, #E9C48C, #B9864E); border: 2.5px solid var(--ink); }
+:root[data-style="treehouse"] .time { font-family: var(--body); font-weight: 700; color: var(--ink); }
+:root[data-style="treehouse"] .grille { opacity: 1; height: 22px; margin: 0 8px; border-radius: 4px;
+  background: repeating-linear-gradient(90deg, rgba(58, 36, 20, .6) 0 5px, transparent 5px 12px); }
+:root[data-style="treehouse"] .arrow { color: var(--on-panel); }
+:root[data-style="treehouse"] .arrow:hover { background: rgba(0, 0, 0, .12); }
+
+/* steps on paper notes */
+:root[data-style="treehouse"] .steps-head { color: var(--on-panel); }
+:root[data-style="treehouse"] .follow { border: 2.5px solid var(--ink); background: var(--paper); box-shadow: 0 3px 0 var(--ink); }
+:root[data-style="treehouse"] .follow[aria-pressed="true"] i { background: var(--leaf); }
+:root[data-style="treehouse"] .step-list { gap: 12px; padding-top: 8px; scrollbar-color: var(--ink) transparent; }
+:root[data-style="treehouse"] .step { position: relative; background: var(--paper); border: 2.5px solid var(--ink); border-radius: 4px; box-shadow: 0 3px 0 var(--wood-shadow); }
+:root[data-style="treehouse"] .step:nth-child(odd) { transform: rotate(-.6deg); }
+:root[data-style="treehouse"] .step:nth-child(even) { transform: rotate(.5deg); }
+:root[data-style="treehouse"] .step.active { transform: none; box-shadow: 0 4px 0 var(--ink); }
+:root[data-style="treehouse"] .step.active::before { content: ""; position: absolute; left: 50%; top: -9px; width: 70px; height: 18px; margin-left: -35px; background: rgba(255, 233, 160, .85); border: 1px solid rgba(58, 36, 20, .2); transform: rotate(-3deg); pointer-events: none; }
+:root[data-style="treehouse"] .step-num { font-family: var(--display); font-weight: 700; }
+:root[data-style="treehouse"] .step-title { font-family: var(--body); font-weight: 700; font-size: 18px; }
+:root[data-style="treehouse"] .step-meta { font-family: var(--body); font-weight: 700; }
+:root[data-style="treehouse"] .step-meta .ok { color: var(--leaf); }
+:root[data-style="treehouse"] .sub { font-size: 15.5px; }
+:root[data-style="treehouse"] .sub .chk { border: 2.5px solid var(--ink); border-radius: 4px; }
+:root[data-style="treehouse"] .sub.watched .chk { background: var(--leaf); }
+:root[data-style="treehouse"] .sub.watched .chk svg { stroke: var(--paper); }
+:root[data-style="treehouse"] .sub .ts { font-family: var(--body); font-weight: 700; }
+:root[data-style="treehouse"] .sub.current { background: linear-gradient(176deg, transparent 6%, var(--hi) 8%, var(--hi) 90%, transparent 93%); color: var(--ink); }
+:root[data-style="treehouse"] .sub.current .ts { color: var(--accent); }
+:root[data-style="treehouse"] .sub.current .chk { border-color: var(--ink); }
+:root[data-style="treehouse"] .sub.current.watched .chk { background: var(--leaf); }
+:root[data-style="treehouse"] .sub.current.watched .chk svg { stroke: var(--paper); }
+
+/* close-ups pinned up like photos */
+:root[data-style="treehouse"] .viewport { border: 6px solid var(--paper); border-radius: 3px; box-shadow: 0 0 0 2.5px var(--ink), 0 5px 0 2.5px var(--wood-shadow); }
+:root[data-style="treehouse"] .hint, :root[data-style="treehouse"] .zoom { background: var(--paper); border: 2px solid var(--ink); }
+:root[data-style="treehouse"] .zoom output { font-family: var(--body); font-weight: 700; }
+:root[data-style="treehouse"] .zoom button:hover { background: var(--hi); }
+:root[data-style="treehouse"] .lens { border-color: #6B4426; box-shadow: 0 0 0 3px var(--paper), 0 10px 24px rgba(0, 0, 0, .35); }
+:root[data-style="treehouse"] .lens::after { background: #6B4426; }
+:root[data-style="treehouse"] .caption { background: var(--paper); border: 2.5px solid var(--ink); border-radius: 4px; transform: rotate(-.8deg); font-weight: 700; }
+:root[data-style="treehouse"] .caption .tag { font-family: var(--body); letter-spacing: 0; }
+:root[data-style="treehouse"] .back-btn { border: 2.5px solid var(--ink); background: var(--paper); box-shadow: 0 3px 0 var(--ink); }
+:root[data-style="treehouse"] .film button { border: 2.5px solid var(--ink); border-radius: 3px; background: var(--paper); }
+:root[data-style="treehouse"] .film button[aria-current="true"] { box-shadow: 0 0 0 3px var(--hi); }
+:root[data-style="treehouse"] .film button span { font-family: var(--body); font-weight: 700; }
+
+:root[data-style="treehouse"] .progress { color: var(--ink); }
+:root[data-style="treehouse"] .prog-note { font-weight: 700; }
+:root[data-style="treehouse"] .prog-pct { font-family: var(--body); font-weight: 700; color: var(--on-panel); text-shadow: 0 1px 0 var(--wood-shadow); }
+:root[data-style="treehouse"] .prog-seg { background-color: var(--paper); background-image: none; border: 2.5px solid var(--ink); border-radius: 5px; }
+:root[data-style="treehouse"] .prog-seg .f { background: var(--leaf); }
+:root[data-style="treehouse"] .prog-seg.cur { box-shadow: 0 0 0 3px var(--hi); }
+:root[data-style="treehouse"] .prog-note b { font-family: var(--display); }
+
+/* the map is drawn on paper */
+:root[data-style="treehouse"] .mapbox { padding: 14px; }
+:root[data-style="treehouse"] .map-inner { background: var(--paper); border: 2.5px solid var(--ink); border-radius: 4px; transform: rotate(-.4deg); }
+:root[data-style="treehouse"] .map-inner .panel-title { color: var(--ink); text-shadow: none; }
+:root[data-style="treehouse"] .map-legend { color: var(--ink); }
+:root[data-style="treehouse"] .map-svg .edge, :root[data-style="treehouse"] #map .edge { stroke-width: 2.5; }
+:root[data-style="treehouse"] .map-svg .node circle, :root[data-style="treehouse"] #map .node circle { fill: #FFFFFF; stroke-width: 3; }
+:root[data-style="treehouse"] .map-svg .node.center circle { fill: var(--hi); }
+:root[data-style="treehouse"] .map-svg .node.later circle, :root[data-style="treehouse"] #map .node.later circle { fill: var(--paper); }
+:root[data-style="treehouse"] .map-svg .node text, :root[data-style="treehouse"] #map .node text { font-family: var(--body); font-weight: 700; }
+:root[data-style="treehouse"] .map-svg .node .day, :root[data-style="treehouse"] #map .node .sub { font-family: var(--body); }
+:root[data-style="treehouse"] .map-svg .elabel text, :root[data-style="treehouse"] #map .elabel text { font-family: var(--body); font-weight: 700; }
+:root[data-style="treehouse"] .map-svg .map-note { font-family: var(--body); fill: var(--ink); }
+:root[data-style="treehouse"] .map-legend i { background: #FFFFFF; }
+:root[data-style="treehouse"] .keys { color: var(--muted); }
+:root[data-style="treehouse"] .keys kbd { font-family: var(--body); font-weight: 700; background: var(--paper); }
+@media (max-width: 699px) {
+  :root[data-style="treehouse"] .tv-wrap { padding-top: 66px; }
+  :root[data-style="treehouse"] .ant .rod { height: 58px; }
+  :root[data-style="treehouse"] .ant::before { bottom: 46px; }
+  :root[data-style="treehouse"] .ant::after { bottom: 36px; height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) { :root[data-style="treehouse"] .ctl:active { transform: none; } }
+
+/* ---------- home page ---------- */
+:root[data-style="treehouse"] h2 { font-family: var(--display); font-weight: 700; font-stretch: 100%; font-size: 27px; }
+:root[data-style="treehouse"] .intro { font-size: 18.5px; }
+:root[data-style="treehouse"] a.card { color: var(--ink); }
+:root[data-style="treehouse"] a.card:hover { transform: translateY(-2px) rotate(-.4deg); box-shadow: inset 0 2px 0 rgba(255, 255, 255, .25), 0 8px 0 var(--ink); }
+:root[data-style="treehouse"] .card img { border: 5px solid var(--paper); border-bottom-width: 5px; margin: 14px 14px 0; width: calc(100% - 28px); border-radius: 3px; box-shadow: 0 0 0 2.5px var(--ink); }
+:root[data-style="treehouse"] .card .body { margin: 12px 14px 14px; background: var(--paper); border: 2.5px solid var(--ink); border-radius: 4px; color: var(--ink); }
+:root[data-style="treehouse"] .card b { font-family: var(--display); font-weight: 700; font-stretch: 100%; font-size: 23px; }
+:root[data-style="treehouse"] .card .meta { font-family: var(--body); font-weight: 700; color: var(--muted); }
+:root[data-style="treehouse"] .mapwrap h2 { color: var(--on-panel); text-shadow: 0 2px 0 var(--wood-shadow); }
+:root[data-style="treehouse"] .mapscroll { background: var(--paper); border: 2.5px solid var(--ink); border-radius: 4px; }
+:root[data-style="treehouse"] .legend { color: var(--ink); font-weight: 700; }
+:root[data-style="treehouse"] .coming li { background: var(--paper); border: 2.5px dashed var(--ink); border-radius: 4px; }
+:root[data-style="treehouse"] .coming li:nth-child(odd) { transform: rotate(-.4deg); }
+:root[data-style="treehouse"] .coming li:nth-child(even) { transform: rotate(.3deg); }
+:root[data-style="treehouse"] .coming b { font-family: var(--display); font-weight: 700; font-size: 19px; }
+:root[data-style="treehouse"] .team { border-top: 3px dashed var(--ink); }
+:root[data-style="treehouse"] .mapwrap { padding: 18px 20px 20px; }
+@media (max-width: 699px) { :root[data-style="treehouse"] .controls { gap: 5px; } :root[data-style="treehouse"] .ctl { min-width: 40px; padding: 0 5px; } :root[data-style="treehouse"] .ctl.dial { gap: 5px; } }

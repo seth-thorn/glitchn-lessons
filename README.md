@@ -57,17 +57,21 @@ To add another language later, add its column to the two interface tables and a 
 
 ## Styles
 
-Every page has a **Style** menu that changes the page's whole personality, not just its colours. The choice is remembered, and a link can force one with `?style=rams`.
+Every page has a **Style** menu that changes the page's whole personality, not just its colours. The choice is remembered across pages, and a link can force one with `?style=treehouse` (for example).
 
-- **TV** (the default): the lesson video sits in a chunky television with an antenna, feet, curved glass and a speed dial.
-- **Rams**: quiet, precise and tactile, after Dieter Rams's work at Braun: warm greys, hairlines, round buttons and one orange accent.
+- **TV** (the default): the video sits in a chunky television with an antenna, feet, curved glass and a speed dial.
+- **Gadget**: quiet, precise and tactile, after Dieter Rams's devices for Braun: warm greys, hairlines, round buttons and one orange accent. (It was called "Rams" at first; old links with `?style=rams` still work.)
+- **Solar Punk**: a hopeful green future: sunlit sky, frosted-glass panels with leaf-shaped corners, a solar panel on the screen and a vine growing over it.
+- **Treehouse**: a clubhouse in the leaves: wooden plank panels with nails, the screen hung from a branch by ropes, steps on paper notes.
 
-The colour swatches still work in both styles: in TV they paint the cabinet, in Rams they change the accent.
+The colour swatches work in every style: in TV they paint the cabinet, in Gadget and Solar Punk they change the accent, and in Treehouse they paint the wood.
 
-To add a style (Solar Punk, Treehouse, Cartoon…):
-1. Add its short name to the `STYLES` list in `player/player.js` and in `index.html`.
-2. Add its menu name to the interface tables (`style_<name>`, in English and Spanish) in both files.
-3. Add a block of CSS rules that start with `:root[data-style="<name>"]` to `player/player.css` (and to the style block in `index.html` for the home page). The Rams block is a good model: it changes the colour tokens first, then restyles each part.
+**Where styles live:** TV is part of `player/player.css`. Each other style is one file in `styles/` (`gadget.css`, `solarpunk.css`, `treehouse.css`) that styles both the lesson player and the home page. `styles/all.css` loads them all, along with their fonts.
+
+**To add a style** (Cartoon, say):
+1. Copy a file in `styles/` to `styles/cartoon.css` and change `data-style="…"` throughout. Start with the colour and font tokens at the top, then restyle the parts.
+2. Add `@import url("cartoon.css");` to `styles/all.css`, and add any new fonts to its first line.
+3. Add `'cartoon'` to the `STYLES` list in `player/player.js` and in `index.html`, and its menu name (`style_cartoon`) to the English and Spanish word lists in both files.
 
 ## Status
 

@@ -1,0 +1,175 @@
+/* Solar Punk style: a hopeful, green future. Sunlit sky, frosted-glass panels with leaf-shaped corners,
+   a solar panel where the antenna was, a vine growing over the screen, a sun for the playhead.
+   Type: Federo (art-nouveau capitals) for headings, Nunito (round, friendly) for reading.
+   The colour swatches change the sun colour (the accent). This file styles both the lesson player and the home page. */
+
+/* ---------- tokens ---------- */
+:root[data-style="solarpunk"], :root[data-style="solarpunk"][data-skin] {
+  --ink: #173A33; --page: #E9F4EA; --muted: #4D6A61; --white: #FFFFFF;
+  --panel: rgba(255, 255, 255, .62); --card: #F2F8F1; --deep: #173A33; --on-panel: #173A33;
+  --teal: #2E7D6B; --leaf: #3E9B57; --sun: #F2B41C; --line: rgba(46, 125, 107, .38); --glow: rgba(242, 180, 28, .3);
+  --display: "Federo", "Copperplate", Georgia, serif;
+  --body: "Nunito", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Nunito", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  --bw: 1.5px; --r-lg: 34px; --r-md: 22px; --r-sm: 12px;
+  --leafy: 34px 10px 34px 10px;
+}
+:root[data-style="solarpunk"][data-skin="navy"]   { --sun: #3B6FB6; --glow: rgba(59, 111, 182, .28); }
+:root[data-style="solarpunk"][data-skin="sky"]    { --sun: #2BA3C7; --glow: rgba(43, 163, 199, .28); }
+:root[data-style="solarpunk"][data-skin="green"]  { --sun: #3E9B57; --glow: rgba(62, 155, 87, .28); }
+:root[data-style="solarpunk"][data-skin="yellow"] { --sun: #E8C23A; --glow: rgba(232, 194, 58, .32); }
+:root[data-style="solarpunk"][data-skin="red"]    { --sun: #E06A3B; --glow: rgba(224, 106, 59, .28); }
+:root[data-style="solarpunk"] .skin[data-skin="navy"]   { --c: #3B6FB6 !important; }
+:root[data-style="solarpunk"] .skin[data-skin="sky"]    { --c: #2BA3C7 !important; }
+:root[data-style="solarpunk"] .skin[data-skin="coral"]  { --c: #F2B41C !important; }
+:root[data-style="solarpunk"] .skin[data-skin="green"]  { --c: #3E9B57 !important; }
+:root[data-style="solarpunk"] .skin[data-skin="yellow"] { --c: #E8C23A !important; }
+:root[data-style="solarpunk"] .skin[data-skin="red"]    { --c: #E06A3B !important; }
+
+/* ---------- shared: page, header, switches ---------- */
+:root[data-style="solarpunk"] {
+  background: radial-gradient(1100px 520px at 88% -160px, rgba(255, 216, 110, .55), rgba(255, 216, 110, 0) 70%),
+              linear-gradient(180deg, #D8EFE8 0, #EDF5E6 520px, #EEF4E4 100%);
+  background-color: #EEF4E4;
+}
+:root[data-style="solarpunk"] body { background: transparent; font-weight: 500; }
+:root[data-style="solarpunk"] :focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+:root[data-style="solarpunk"] .eyebrow { font-family: var(--body); font-size: 14px; font-weight: 700; letter-spacing: .02em; text-transform: none; color: var(--teal); }
+:root[data-style="solarpunk"] h1 { font-family: var(--display); font-weight: 400; font-stretch: 100%; letter-spacing: .01em; line-height: 1.05; }
+:root[data-style="solarpunk"] h1 .sub { font-family: var(--body); font-weight: 600; }
+:root[data-style="solarpunk"] .draft-chip, :root[data-style="solarpunk"] .chip { font-family: var(--body); letter-spacing: 0; border: 1.5px solid var(--line); background: rgba(255, 255, 255, .7); color: var(--teal); font-weight: 700; }
+:root[data-style="solarpunk"] .home-link { border-bottom: 1.5px solid var(--teal); font-weight: 700; color: var(--teal); }
+:root[data-style="solarpunk"] .home-link:hover { background: rgba(255, 255, 255, .6); }
+:root[data-style="solarpunk"] .style-pick, :root[data-style="solarpunk"] .skins span { font-family: var(--body); font-size: 13.5px; font-weight: 700; color: var(--teal); }
+:root[data-style="solarpunk"] .langs, :root[data-style="solarpunk"] .style-pick select { border: 1.5px solid var(--line); background: rgba(255, 255, 255, .8); }
+:root[data-style="solarpunk"] .lang, :root[data-style="solarpunk"] .style-pick select { font-family: var(--body); font-weight: 700; }
+:root[data-style="solarpunk"] .lang + .lang { border-left: 1.5px solid var(--line); }
+:root[data-style="solarpunk"] .lang:hover { background: #E2F1E3; }
+:root[data-style="solarpunk"] .lang[aria-pressed="true"] { background: var(--teal); color: #FFFFFF; }
+/* swatches are leaves */
+:root[data-style="solarpunk"] .skin { width: 28px; height: 28px; border: 1.5px solid var(--ink); border-radius: 100% 0; }
+:root[data-style="solarpunk"] .skin[aria-pressed="true"] { box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 4.5px var(--teal); }
+@media (pointer: coarse) { :root[data-style="solarpunk"] .skin { width: 36px; height: 36px; } }
+:root[data-style="solarpunk"] .err { border: 1.5px solid var(--line); border-radius: var(--leafy); background: rgba(255, 255, 255, .7); }
+:root[data-style="solarpunk"] .toast { background: var(--teal); border-radius: 18px 6px 18px 6px; }
+
+/* ---------- lesson player ---------- */
+:root[data-style="solarpunk"] .panel {
+  background: var(--panel); -webkit-backdrop-filter: blur(10px) saturate(1.2); backdrop-filter: blur(10px) saturate(1.2);
+  border: 1.5px solid var(--line); border-radius: var(--leafy);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 22px 44px -30px rgba(23, 58, 51, .5);
+}
+:root[data-style="solarpunk"] .panel-title { font-family: var(--display); font-weight: 400; font-stretch: 100%; font-size: 23px; letter-spacing: .01em; }
+
+/* the TV becomes a solar-powered screen: a panel on a stem, and a vine over the frame */
+:root[data-style="solarpunk"] .tv-wrap { padding-top: 78px; padding-bottom: 0; }
+:root[data-style="solarpunk"] .ant .rod, :root[data-style="solarpunk"] .ant .base, :root[data-style="solarpunk"] .feet { display: none; }
+:root[data-style="solarpunk"] .ant::before { content: ""; position: absolute; left: -80px; bottom: -2px; width: 160px; height: 84px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 84'%3E %3Cpath d='M80 84V44' stroke='%232E7D6B' stroke-width='5' stroke-linecap='round'/%3E %3Cpath d='M80 70C70 70 62 64 58 56' fill='none' stroke='%232E7D6B' stroke-width='3' stroke-linecap='round'/%3E %3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%236CC07A' transform='translate(58 56) rotate(-150) scale(1.1)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%233E9B57' transform='translate(80 62) rotate(-20) scale(1.15)'/%3E %3Cg transform='translate(80 26) skewX(-12)'%3E %3Crect x='-62' y='-22' width='124' height='40' rx='4' fill='%231F4E79' stroke='%23173A33' stroke-width='3'/%3E %3Cg stroke='%239FC7EA' stroke-width='1.2' opacity='.9'%3E%3Cpath d='M-31 -22V18M0 -22V18M31 -22V18M-62 -2H62'/%3E%3C/g%3E %3Cpath d='M-56 -18L-38 -18L-52 14L-58 14Z' fill='%23FFFFFF' opacity='.18'/%3E %3C/g%3E %3Ccircle cx='150' cy='10' r='6' fill='%23F2B41C'/%3E %3Cg stroke='%23F2B41C' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M150 0v-4M160 10h4M157 3l3-3M157 17l3 3M143 3l-3-3'/%3E%3C/g%3E %3C/svg%3E") no-repeat center / contain; }
+:root[data-style="solarpunk"] .tv { padding: 20px 20px 14px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 26px 50px -30px rgba(23, 58, 51, .55); }
+:root[data-style="solarpunk"] .tv::after { content: ""; position: absolute; left: -12px; top: -16px; width: 190px; height: 130px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 190 130'%3E %3Cpath d='M10 128C8 96 6 62 20 40S58 10 96 12S150 20 186 12' fill='none' stroke='%232E7D6B' stroke-width='3' stroke-linecap='round'/%3E %3Cpath d='M60 15c-4 -8 -2 -14 6 -14' fill='none' stroke='%232E7D6B' stroke-width='2' stroke-linecap='round'/%3E %3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%236CC07A' transform='translate(9 112) rotate(-120) scale(1)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%233E9B57' transform='translate(8 92) rotate(-60) scale(1.05)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%236CC07A' transform='translate(11 72) rotate(-130) scale(1.1)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%233E9B57' transform='translate(14 52) rotate(-50) scale(1)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%236CC07A' transform='translate(26 32) rotate(-150) scale(1.05)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%233E9B57' transform='translate(36 24) rotate(-40) scale(1.1)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%236CC07A' transform='translate(58 14) rotate(-160) scale(1)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%233E9B57' transform='translate(78 12) rotate(-30) scale(1.05)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%236CC07A' transform='translate(102 13) rotate(170) scale(1)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%233E9B57' transform='translate(124 16) rotate(-20) scale(0.95)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%236CC07A' transform='translate(150 16) rotate(160) scale(0.9)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%233E9B57' transform='translate(172 13) rotate(-25) scale(0.8)'/%3E %3C/svg%3E") no-repeat left top / contain; pointer-events: none; z-index: 2; }
+:root[data-style="solarpunk"] .screen { border: 2px solid var(--ink); border-radius: 26px 8px 26px 8px; }
+:root[data-style="solarpunk"] .glass { background: radial-gradient(120% 80% at 85% 0%, rgba(255, 236, 170, .22), rgba(255, 236, 170, 0) 50%); box-shadow: inset 0 0 40px rgba(23, 58, 51, .25); }
+:root[data-style="solarpunk"] .big-play span { width: 80px; height: 80px; border: 0; background: var(--sun); color: var(--ink); box-shadow: 0 0 0 10px var(--glow), 0 12px 26px -10px rgba(0, 0, 0, .5); }
+:root[data-style="solarpunk"] .now-chip { border: 0; border-radius: 14px 4px 14px 4px; background: rgba(255, 255, 255, .92); font-weight: 700; }
+:root[data-style="solarpunk"] .now-chip b { font-family: var(--body); color: var(--teal); }
+/* the scrub bar is a green stem, and the playhead is a little sun */
+:root[data-style="solarpunk"] .scrub { margin-top: 16px; }
+:root[data-style="solarpunk"] .track { top: 12px; height: 7px; border: 0; border-radius: 4px; background: rgba(23, 58, 51, .14); overflow: visible; }
+:root[data-style="solarpunk"] .track .fill { border-radius: 4px; background: var(--leaf); }
+:root[data-style="solarpunk"] .track .sep { top: -2px; bottom: -2px; width: 2px; background: rgba(255, 255, 255, .95); }
+:root[data-style="solarpunk"] .ticks i { width: 2px; height: 6px; background: var(--teal); opacity: .5; }
+:root[data-style="solarpunk"] .scrub .knob { top: 5px; width: 22px; height: 22px; margin-left: -11px; border: 2px solid #FFFFFF; background: var(--sun); box-shadow: 0 0 0 5px var(--glow), 0 2px 5px rgba(0, 0, 0, .25); }
+:root[data-style="solarpunk"] .scrub:focus-within .knob { box-shadow: 0 0 0 5px var(--glow), 0 0 0 8px var(--teal); }
+:root[data-style="solarpunk"] .hover-tip { background: var(--ink); border-radius: 12px 4px 12px 4px; }
+:root[data-style="solarpunk"] .hover-tip b { font-family: var(--body); color: var(--sun); }
+:root[data-style="solarpunk"] .controls { border-top: 1.5px solid var(--line); margin-top: 10px; padding-top: 12px; gap: 10px; color: var(--ink); }
+:root[data-style="solarpunk"] .divider { display: none; }
+:root[data-style="solarpunk"] .ctl { width: 44px; min-width: 44px; height: 44px; padding: 0; border-radius: 50%; font-family: var(--body); font-weight: 800; font-size: 14px; background: rgba(255, 255, 255, .85); border: 1.5px solid var(--line); }
+:root[data-style="solarpunk"] .ctl:hover { background: #FFFFFF; border-color: var(--teal); }
+:root[data-style="solarpunk"] .ctl svg { width: 20px; height: 20px; }
+:root[data-style="solarpunk"] #playBtn { background: var(--sun); border-color: transparent; box-shadow: 0 0 0 4px var(--glow); }
+:root[data-style="solarpunk"] .ctl.dial { width: auto; border-radius: 22px; padding: 0 14px 0 6px; }
+:root[data-style="solarpunk"] .dial-face { width: 30px; height: 30px; border: 1.5px solid var(--ink); background: radial-gradient(circle at 50% 40%, #FFF3C4, var(--sun)); }
+:root[data-style="solarpunk"] .dial-mark { background: var(--ink); width: 2.5px; }
+:root[data-style="solarpunk"] .time { font-family: var(--body); font-weight: 700; color: var(--muted); }
+:root[data-style="solarpunk"] .grille { opacity: .8; height: 24px; margin: 0 6px; border-radius: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 24'%3E %3Cpath d='M0 12C8 4 16 4 24 12S40 20 48 12' fill='none' stroke='%232E7D6B' stroke-width='2'/%3E %3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%236CC07A' transform='translate(12 7) rotate(-140) scale(0.55)'/%3E%3Cpath d='M0 0C5 -7 16 -8 22 0C16 8 5 7 0 0Z' fill='%233E9B57' transform='translate(36 17) rotate(40) scale(0.55)'/%3E %3C/svg%3E") repeat-x left center / 48px 24px; }
+
+:root[data-style="solarpunk"] .steps { padding: 16px 12px 14px 16px; }
+:root[data-style="solarpunk"] .follow { border: 1.5px solid var(--line); background: rgba(255, 255, 255, .85); font-weight: 700; }
+:root[data-style="solarpunk"] .follow i { border: 1.5px solid var(--teal); }
+:root[data-style="solarpunk"] .follow[aria-pressed="true"] i { background: var(--leaf); border-color: var(--leaf); box-shadow: 0 0 6px rgba(62, 155, 87, .7); }
+:root[data-style="solarpunk"] .step-list { scrollbar-color: var(--line) transparent; }
+:root[data-style="solarpunk"] .step { background: rgba(255, 255, 255, .7); border: 1.5px solid transparent; border-radius: 20px 6px 20px 6px; }
+:root[data-style="solarpunk"] .step.active { border-color: var(--teal); box-shadow: 0 10px 22px -16px rgba(23, 58, 51, .6); background: rgba(255, 255, 255, .88); }
+:root[data-style="solarpunk"] .step-btn { border-radius: 18px 6px 18px 6px; }
+:root[data-style="solarpunk"] .step-num { font-family: var(--display); font-weight: 400; color: var(--teal); }
+:root[data-style="solarpunk"] .step-title { font-family: var(--body); font-weight: 800; font-size: 17.5px; }
+:root[data-style="solarpunk"] .step-meta { font-family: var(--body); font-weight: 700; color: var(--muted); }
+:root[data-style="solarpunk"] .step-meta .ok { color: var(--leaf); }
+:root[data-style="solarpunk"] .sub { font-weight: 500; }
+:root[data-style="solarpunk"] .sub .chk { border-radius: 50%; border: 2px solid var(--teal); }
+:root[data-style="solarpunk"] .sub.watched .chk { background: var(--leaf); border-color: var(--leaf); }
+:root[data-style="solarpunk"] .sub.watched .chk svg { stroke: #FFFFFF; }
+:root[data-style="solarpunk"] .sub .ts { font-family: var(--body); font-weight: 800; color: var(--teal); }
+:root[data-style="solarpunk"] .sub.current { background: #FFF2C6; color: var(--ink); border-radius: 14px 4px 14px 4px; box-shadow: inset 4px 0 0 var(--sun); }
+:root[data-style="solarpunk"] .sub.current .ts { color: var(--ink); }
+:root[data-style="solarpunk"] .sub.current .chk { border-color: var(--teal); }
+:root[data-style="solarpunk"] .sub.current.watched .chk { background: var(--leaf); border-color: var(--leaf); }
+:root[data-style="solarpunk"] .sub.current.watched .chk svg { stroke: #FFFFFF; }
+
+:root[data-style="solarpunk"] .viewport { border: 1.5px solid var(--teal); border-radius: 24px 8px 24px 8px; }
+:root[data-style="solarpunk"] .lens { border: 4px solid #FFFFFF; box-shadow: 0 0 0 2px var(--teal), 0 14px 28px rgba(0, 0, 0, .3); }
+:root[data-style="solarpunk"] .lens::after { background: #8C6A43; }
+:root[data-style="solarpunk"] .hint, :root[data-style="solarpunk"] .zoom { border: 1.5px solid var(--line); background: rgba(255, 255, 255, .92); font-weight: 700; }
+:root[data-style="solarpunk"] .zoom output { font-family: var(--body); font-weight: 800; }
+:root[data-style="solarpunk"] .zoom button:hover { background: #E2F1E3; }
+:root[data-style="solarpunk"] .arrow { color: var(--teal); }
+:root[data-style="solarpunk"] .caption { background: transparent; font-weight: 700; }
+:root[data-style="solarpunk"] .caption .tag { font-family: var(--body); letter-spacing: 0; color: var(--teal); font-weight: 700; }
+:root[data-style="solarpunk"] .back-btn { border: 1.5px solid var(--line); background: #FFFFFF; font-weight: 700; }
+:root[data-style="solarpunk"] .film button { border: 1.5px solid var(--line); border-radius: 10px 3px 10px 3px; }
+:root[data-style="solarpunk"] .film button[aria-current="true"] { border-color: var(--teal); box-shadow: 0 0 0 3px var(--sun); }
+:root[data-style="solarpunk"] .film button span { font-family: var(--body); font-weight: 800; background: var(--teal); }
+
+:root[data-style="solarpunk"] .prog-pct { font-family: var(--body); font-weight: 800; color: var(--teal); }
+:root[data-style="solarpunk"] .prog-bar { height: 12px; gap: 4px; margin-top: 14px; }
+:root[data-style="solarpunk"] .prog-seg { border: 0; border-radius: 99px; background: rgba(23, 58, 51, .12); background-image: none; }
+:root[data-style="solarpunk"] .prog-seg .f { background: var(--leaf); }
+:root[data-style="solarpunk"] .prog-seg.cur { box-shadow: 0 0 0 2.5px var(--sun); }
+:root[data-style="solarpunk"] .prog-note b { font-family: var(--body); font-weight: 800; }
+
+:root[data-style="solarpunk"] .mapbox { padding: 12px; }
+:root[data-style="solarpunk"] .map-inner { background: rgba(255, 255, 255, .55); border-radius: 26px 8px 26px 8px; }
+:root[data-style="solarpunk"] .map-svg .edge, :root[data-style="solarpunk"] #map .edge { stroke: var(--teal); stroke-width: 2; }
+:root[data-style="solarpunk"] .map-svg .node circle, :root[data-style="solarpunk"] #map .node circle { fill: #FFFFFF; stroke: var(--teal); stroke-width: 2; }
+:root[data-style="solarpunk"] .map-svg .node.center circle { fill: var(--sun); stroke: var(--ink); stroke-width: 2; }
+:root[data-style="solarpunk"] .map-svg .node.later circle, :root[data-style="solarpunk"] #map .node.later circle { fill: rgba(255, 255, 255, .4); stroke-dasharray: 5 4; }
+:root[data-style="solarpunk"] .map-svg .node text, :root[data-style="solarpunk"] #map .node text { font-family: var(--body); font-weight: 800; }
+:root[data-style="solarpunk"] .map-svg .node .day, :root[data-style="solarpunk"] #map .node .sub { font-family: var(--body); font-weight: 700; }
+:root[data-style="solarpunk"] .map-svg .elabel rect, :root[data-style="solarpunk"] #map .elabel rect { stroke: var(--line); stroke-width: 1.5; }
+:root[data-style="solarpunk"] .map-svg .elabel text, :root[data-style="solarpunk"] #map .elabel text { font-family: var(--body); font-weight: 700; }
+:root[data-style="solarpunk"] .map-svg .map-note { font-family: var(--body); font-weight: 700; fill: var(--teal); }
+:root[data-style="solarpunk"] .map-legend i, :root[data-style="solarpunk"] .legend i { border: 1.5px solid var(--teal); }
+:root[data-style="solarpunk"] .map-legend i.dash, :root[data-style="solarpunk"] .legend i.dash { border-style: dashed; }
+:root[data-style="solarpunk"] .keys { color: var(--muted); }
+:root[data-style="solarpunk"] .keys kbd { font-family: var(--body); font-weight: 800; border: 1.5px solid var(--line); background: rgba(255, 255, 255, .85); }
+@media (max-width: 699px) {
+  :root[data-style="solarpunk"] .tv-wrap { padding-top: 64px; }
+  :root[data-style="solarpunk"] .ant::before { left: -64px; width: 128px; height: 68px; }
+  :root[data-style="solarpunk"] .tv::after { width: 130px; height: 90px; }
+}
+
+/* ---------- home page ---------- */
+:root[data-style="solarpunk"] h2 { font-family: var(--display); font-weight: 400; font-stretch: 100%; font-size: 26px; letter-spacing: .01em; }
+:root[data-style="solarpunk"] a.card { background: var(--panel); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1.5px solid var(--line); border-radius: var(--leafy); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 22px 44px -30px rgba(23, 58, 51, .5); }
+:root[data-style="solarpunk"] a.card:hover { transform: translateY(-3px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), 0 0 0 3px var(--glow), 0 26px 48px -28px rgba(23, 58, 51, .55); }
+:root[data-style="solarpunk"] .card img { border-bottom: 1.5px solid var(--line); }
+:root[data-style="solarpunk"] .card b { font-family: var(--display); font-weight: 400; font-stretch: 100%; font-size: 23px; }
+:root[data-style="solarpunk"] .card .meta { font-family: var(--body); font-weight: 700; color: var(--muted); }
+:root[data-style="solarpunk"] .mapwrap { background: var(--panel); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1.5px solid var(--line); border-radius: var(--leafy); }
+:root[data-style="solarpunk"] .mapscroll { background: rgba(255, 255, 255, .5); border-radius: 24px 8px 24px 8px; }
+:root[data-style="solarpunk"] .coming li { border: 1.5px dashed var(--teal); border-radius: 20px 6px 20px 6px; background: rgba(255, 255, 255, .55); }
+:root[data-style="solarpunk"] .coming b { font-family: var(--body); font-weight: 800; }
+:root[data-style="solarpunk"] .team { border-top: 1.5px solid var(--line); }
+:root[data-style="solarpunk"] .team a { color: var(--teal); }
+@media (max-width: 699px) { :root[data-style="solarpunk"] .controls { gap: 6px; } :root[data-style="solarpunk"] .ctl.dial { padding: 0 10px 0 5px; } }

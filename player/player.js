@@ -18,7 +18,7 @@
   const LANGS = { en: 'English', es: 'Español' };
   const UI = {
     en: {
-      style: 'Style', style_tv: 'TV', style_rams: 'Rams', allLessons: '← All lessons', lessonEyebrow: "Glitch'n lesson", draft: 'Draft', draftTitle: 'Step text and links are drafts for the team to review',
+      style: 'Style', style_tv: 'TV', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', allLessons: '← All lessons', lessonEyebrow: "Glitch'n lesson", draft: 'Draft', draftTitle: 'Step text and links are drafts for the team to review',
       loading: 'Loading…', skin: 'Skin', skinGroup: 'Colour skin', language: 'Language',
       skin_navy: 'Navy skin', skin_sky: 'Sky skin', skin_coral: 'Coral skin', skin_green: 'Green skin', skin_yellow: 'Yellow skin', skin_red: 'Red skin',
       tutorialVideo: 'Tutorial video', play: 'Play', pause: 'Pause', mute: 'Mute', unmute: 'Unmute', speed: 'Playback speed', fullScreen: 'Full screen', seek: 'Seek through the lesson',
@@ -36,7 +36,7 @@
       kind_variation: 'variation', kind_related: 'related', 'kind_next day': 'next day', kind_revisited: 'revisited'
     },
     es: {
-      style: 'Estilo', style_tv: 'Tele', style_rams: 'Rams', allLessons: '← Todas las lecciones', lessonEyebrow: 'Lección de Glitch’n', draft: 'Borrador', draftTitle: 'El texto de los pasos y los enlaces son un borrador',
+      style: 'Estilo', style_tv: 'Tele', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', allLessons: '← Todas las lecciones', lessonEyebrow: 'Lección de Glitch’n', draft: 'Borrador', draftTitle: 'El texto de los pasos y los enlaces son un borrador',
       loading: 'Cargando…', skin: 'Color', skinGroup: 'Color de la interfaz', language: 'Idioma',
       skin_navy: 'Azul marino', skin_sky: 'Celeste', skin_coral: 'Coral', skin_green: 'Verde', skin_yellow: 'Amarillo', skin_red: 'Rojo',
       tutorialVideo: 'Video de la lección', play: 'Reproducir', pause: 'Pausar', mute: 'Silenciar', unmute: 'Activar sonido', speed: 'Velocidad de reproducción', fullScreen: 'Pantalla completa', seek: 'Avanzar o retroceder en la lección',
@@ -64,12 +64,15 @@
   document.documentElement.lang = LANG;
   const t = (k, v) => String(UI[LANG][k] ?? UI.en[k] ?? k).replace(/\{(\w+)\}/g, (_, n) => (v && v[n] != null ? v[n] : ''));
   /* ---------- styles: whole looks for the page (colours, type, shapes, the TV itself) ----------
-     Each style is CSS in player.css under :root[data-style="…"]. Choice order: ?style= in the address,
-     then the visitor's last choice, then TV. Add a style by adding it here and writing its CSS block. */
-  const STYLES = ['tv', 'rams'];
+     TV is the default, in player.css. Each other style is a file in /styles (see styles/all.css).
+     Choice order: ?style= in the address, then the visitor's last choice, then TV.
+     To add a style: add its name here and in index.html, its menu name (style_<name>) to UI, and its CSS file. */
+  const STYLES = ['tv', 'gadget', 'solarpunk', 'treehouse'];
+  const OLD_STYLE_NAMES = { rams: 'gadget' }; // earlier names, so old links and saved choices still work
   function pickStyle() {
-    const q = new URLSearchParams(location.search).get('style'); if (q && STYLES.includes(q)) return q;
-    try { const v = JSON.parse(localStorage.getItem('glitchn-style')); if (STYLES.includes(v)) return v; } catch (e) {}
+    const ok = (v) => { v = OLD_STYLE_NAMES[v] || v; return STYLES.includes(v) ? v : null; };
+    const q = ok(new URLSearchParams(location.search).get('style')); if (q) return q;
+    try { const v = ok(JSON.parse(localStorage.getItem('glitchn-style'))); if (v) return v; } catch (e) {}
     return 'tv';
   }
   let STYLE = pickStyle();
