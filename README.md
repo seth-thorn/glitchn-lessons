@@ -1,5 +1,7 @@
 # Glitch'n lessons
 
+**▶ Open the lessons: https://seth-thorn.github.io/glitchn-lessons/**
+
 The public lesson library for Glitch'n: build sound circuits on a breadboard, one small step at a time.
 
 Each **lesson** plays a build video beside step-by-step instructions, with close-up stills you can magnify, a progress bar, and a map of where to go next. Lessons link to each other, so the library can grow in any direction instead of following a fixed course.
