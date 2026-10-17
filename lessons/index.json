@@ -1,6 +1,6 @@
 {
  "format": "glitchn-index/1",
- "generated": "2026-10-17T01:34:49+00:00",
+ "generated": "2026-10-17T03:32:50+00:00",
  "lessons": [
   {
    "slug": "blink-to-drum-machine",
@@ -13,7 +13,7 @@
    "thumb": "blink-to-drum-machine/thumbs/1-7-8.jpg",
    "links": [
     {
-     "to": "day-2-material",
+     "to": "radio-and-reset",
      "kind": "next"
     }
    ],
@@ -23,79 +23,90 @@
      "summary": "Construye un oscilador que hace parpadear un LED y convi\u00e9rtelo, paso a paso, en una caja de ritmos."
     }
    }
-  }
- ],
- "planned": [
+  },
   {
-   "slug": "day-2-material",
-   "title": "Day 2 material",
-   "summary": "One slow oscillator, two slow oscillators, Blade Runner, Radio Amor, 4040 drummer, 4040 reset, voltage starving.",
-   "status": "planned",
-   "origin": "Five-day course, Day 2",
+   "slug": "radio-and-reset",
+   "title": "Two Oscillators, a Radio and a Reset",
+   "summary": "Make slow and fast oscillators, send a tone to an AM radio, rebuild the 4040 drummer with a reset, and starve it of power for glitches.",
+   "status": "draft",
+   "duration": 471.27,
+   "steps": 7,
+   "subSteps": 41,
+   "thumb": "radio-and-reset/thumbs/2-7-4.jpg",
    "links": [
     {
-     "to": "day-3-material",
+     "to": "random-rhythms",
      "kind": "next"
     }
    ],
    "i18n": {
     "es": {
-     "title": "Material del d\u00eda 2",
-     "summary": "Un oscilador lento, dos osciladores lentos, Blade Runner, Radio Amor, bater\u00eda con 4040, reinicio del 4040, voltage starving (bajo voltaje)."
+     "title": "Dos osciladores, una radio y un reinicio",
+     "summary": "Arma osciladores lentos y r\u00e1pidos, env\u00eda un tono a una radio AM, reconstruye la caja de ritmos con el 4040 con un reinicio y qu\u00edtale energ\u00eda para crear fallas."
     }
    }
   },
   {
-   "slug": "day-3-material",
-   "title": "Day 3 material",
-   "summary": "Slow and fast oscillators, the 4021 and LEDs, repetitive and generative 4021 drummers, microsound, glitch as musical structure.",
-   "status": "planned",
-   "origin": "Five-day course, Day 3",
+   "slug": "random-rhythms",
+   "title": "Random Rhythms with the 4021",
+   "summary": "Use a slow and a fast oscillator to drive the 4021 shift register: random light patterns, repeating and changing drum beats, microsound, and glitches as musical structure.",
+   "status": "draft",
+   "duration": 442.92,
+   "steps": 7,
+   "subSteps": 45,
+   "thumb": "random-rhythms/thumbs/3-7-6.jpg",
    "links": [
     {
-     "to": "day-4-material",
+     "to": "stepping-sounds",
      "kind": "next"
     }
    ],
    "i18n": {
     "es": {
-     "title": "Material del d\u00eda 3",
-     "summary": "Osciladores lentos y r\u00e1pidos, el 4021 y los LED, bater\u00edas repetitivas y generativas con 4021, microsonido, el glitch como estructura musical."
+     "title": "Ritmos al azar con el 4021",
+     "summary": "Usa un oscilador lento y uno r\u00e1pido para controlar el registro de desplazamiento 4021: patrones de luz al azar, ritmos que se repiten y que cambian, microsonido y fallas como estructura musical."
     }
    }
   },
   {
-   "slug": "day-4-material",
-   "title": "Day 4 material",
-   "summary": "Two slow oscillators, 4051 LEDs, a third oscillator, stepped low-pass clicks and tones, stepped band-pass tones.",
-   "status": "planned",
-   "origin": "Five-day course, Day 4",
+   "slug": "stepping-sounds",
+   "title": "Stepping Through Sounds with the 4051",
+   "summary": "Let two slow oscillators drive the 4051 selector: first to step through LEDs, then to step a third oscillator through different filters.",
+   "status": "draft",
+   "duration": 424.83,
+   "steps": 6,
+   "subSteps": 51,
+   "thumb": "stepping-sounds/thumbs/4-6-6.jpg",
    "links": [
     {
-     "to": "day-5-material",
+     "to": "three-oscillators",
      "kind": "next"
     }
    ],
    "i18n": {
     "es": {
-     "title": "Material del d\u00eda 4",
-     "summary": "Dos osciladores lentos, LED con el 4051, un tercer oscilador, clics y tonos con filtro pasabajos escalonado, tonos con filtro pasabanda escalonado."
+     "title": "Recorrer sonidos con el 4051",
+     "summary": "Deja que dos osciladores lentos controlen el selector 4051: primero para recorrer unos LED y despu\u00e9s para pasar un tercer oscilador por distintos filtros."
     }
    }
   },
   {
-   "slug": "day-5-material",
-   "title": "Day 5 material",
-   "summary": "Three oscillators, a diode network, an adjustable high-pass filter, voltage starving, static, strange things.",
-   "status": "planned",
-   "origin": "Five-day course, Day 5",
+   "slug": "three-oscillators",
+   "title": "Three Oscillators and Strange Things",
+   "summary": "Build three oscillators, join them with a diode network, shape them with an adjustable high-pass filter, then explore voltage starving, static and strange sounds.",
+   "status": "draft",
+   "duration": 339.83,
+   "steps": 6,
+   "subSteps": 33,
+   "thumb": "three-oscillators/thumbs/5-6-2.jpg",
    "links": [],
    "i18n": {
     "es": {
-     "title": "Material del d\u00eda 5",
-     "summary": "Tres osciladores, una red de diodos, un filtro pasaaltos ajustable, voltage starving (bajo voltaje), est\u00e1tica, cosas extra\u00f1as."
+     "title": "Tres osciladores y cosas extra\u00f1as",
+     "summary": "Arma tres osciladores, \u00fanelos con una red de diodos, dales forma con un filtro pasaaltos ajustable y explora la falta de voltaje, la est\u00e1tica y sonidos extra\u00f1os."
     }
    }
   }
- ]
+ ],
+ "planned": []
 }

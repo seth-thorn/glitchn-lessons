@@ -1,0 +1,396 @@
+{
+ "format": "glitchn-lesson/2",
+ "slug": "stepping-sounds",
+ "title": "Stepping Through Sounds with the 4051",
+ "summary": "Let two slow oscillators drive the 4051 selector: first to step through LEDs, then to step a third oscillator through different filters.",
+ "status": "draft",
+ "origin": "Five-day course, Day 4",
+ "links": [
+  {
+   "to": "three-oscillators",
+   "kind": "next"
+  }
+ ],
+ "segments": [
+  {
+   "src": "video/part-1.mp4",
+   "duration": 86.975
+  },
+  {
+   "src": "video/part-2.mp4",
+   "duration": 115.882
+  },
+  {
+   "src": "video/part-3.mp4",
+   "duration": 52.095
+  },
+  {
+   "src": "video/part-4.mp4",
+   "duration": 84.052
+  },
+  {
+   "src": "video/part-5.mp4",
+   "duration": 40.426
+  },
+  {
+   "src": "video/part-6.mp4",
+   "duration": 45.396
+  }
+ ],
+ "steps": [
+  {
+   "id": "s1",
+   "title": "Two slow oscillators",
+   "segment": 0,
+   "startStill": "stills/4-1-1.jpg",
+   "subs": [
+    {
+     "t": 0.0,
+     "text": "Connect the power rails on both sides with two jumpers at the right end of the breadboard.",
+     "still": "stills/4-1-2.jpg",
+     "stillT": 9.0
+    },
+    {
+     "t": 9.0,
+     "text": "Place the 40106 chip across the center gap, then add its power and ground jumpers.",
+     "still": "stills/4-1-3.jpg",
+     "stillT": 21.0
+    },
+    {
+     "t": 21.0,
+     "text": "Add two short red jumpers below the chip.",
+     "still": "stills/4-1-4.jpg",
+     "stillT": 30.0
+    },
+    {
+     "t": 30.0,
+     "text": "Add a trimmer next to the chip.",
+     "still": "stills/4-1-5.jpg",
+     "stillT": 36.0
+    },
+    {
+     "t": 36.0,
+     "text": "Add two short red jumpers above the chip.",
+     "still": "stills/4-1-6.jpg",
+     "stillT": 42.0
+    },
+    {
+     "t": 42.0,
+     "text": "Add a second trimmer at the top.",
+     "still": "stills/4-1-7.jpg",
+     "stillT": 45.0
+    },
+    {
+     "t": 45.0,
+     "text": "Add a large capacitor for each oscillator.",
+     "still": "stills/4-1-8.jpg",
+     "stillT": 51.0
+    },
+    {
+     "t": 51.0,
+     "text": "Add a resistor from each oscillator's output toward the middle.",
+     "still": "stills/4-1-9.jpg",
+     "stillT": 60.0
+    },
+    {
+     "t": 60.0,
+     "text": "Add a red LED and a green LED at the ends of the resistors.",
+     "still": "stills/4-1-10.jpg",
+     "stillT": 69.0
+    },
+    {
+     "t": 69.0,
+     "text": "Clip the battery connector onto the 9V battery.",
+     "still": "stills/4-1-11.jpg",
+     "stillT": 75.0
+    },
+    {
+     "t": 75.0,
+     "text": "Plug in the battery: the two LEDs blink at different speeds.",
+     "still": "stills/4-1-12.jpg",
+     "stillT": 81.0
+    }
+   ]
+  },
+  {
+   "id": "s2",
+   "title": "4051 LEDs",
+   "segment": 1,
+   "startStill": "stills/4-2-1.jpg",
+   "subs": [
+    {
+     "t": 0.0,
+     "text": "Unplug the battery.",
+     "still": "stills/4-2-2.jpg",
+     "stillT": 3.0
+    },
+    {
+     "t": 3.0,
+     "text": "Remove the two LEDs.",
+     "still": "stills/4-2-3.jpg",
+     "stillT": 6.0
+    },
+    {
+     "t": 6.0,
+     "text": "Remove the two resistors.",
+     "still": "stills/4-2-4.jpg",
+     "stillT": 9.0
+    },
+    {
+     "t": 9.0,
+     "text": "Place the 4051 chip in the middle and add its power and ground jumpers. The 4051 connects one of eight channels at a time.",
+     "still": "stills/4-2-5.jpg",
+     "stillT": 27.0
+    },
+    {
+     "t": 27.0,
+     "text": "Add one jumper above the 4051 and two more short jumpers below it, so three sit side by side.",
+     "still": "stills/4-2-6.jpg",
+     "stillT": 33.0
+    },
+    {
+     "t": 33.0,
+     "text": "Run a yellow wire from the first oscillator to one of the 4051's channel-select pins.",
+     "still": "stills/4-2-7.jpg",
+     "stillT": 45.0
+    },
+    {
+     "t": 45.0,
+     "text": "Run a second yellow wire from the other oscillator to the next select pin.",
+     "still": "stills/4-2-8.jpg",
+     "stillT": 63.0
+    },
+    {
+     "t": 63.0,
+     "text": "Add a red LED to the first channel.",
+     "still": "stills/4-2-9.jpg",
+     "stillT": 72.0
+    },
+    {
+     "t": 72.0,
+     "text": "Add three more LEDs to the next channels.",
+     "still": "stills/4-2-10.jpg",
+     "stillT": 87.0
+    },
+    {
+     "t": 87.0,
+     "text": "Plug the battery back in at the right end.",
+     "still": "stills/4-2-11.jpg",
+     "stillT": 99.0
+    },
+    {
+     "t": 99.0,
+     "text": "Add a resistor from the 4051's common pin to ground. Now one LED at a time lights up as the oscillators choose the channel.",
+     "still": "stills/4-2-12.jpg",
+     "stillT": 105.0
+    }
+   ]
+  },
+  {
+   "id": "s3",
+   "title": "Third oscillator",
+   "segment": 2,
+   "startStill": "stills/4-3-1.jpg",
+   "subs": [
+    {
+     "t": 0.0,
+     "text": "Remove the resistor at the bottom.",
+     "still": "stills/4-3-2.jpg",
+     "stillT": 3.0
+    },
+    {
+     "t": 3.0,
+     "text": "Add two short red jumpers at the bottom for a third oscillator.",
+     "still": "stills/4-3-3.jpg",
+     "stillT": 6.0
+    },
+    {
+     "t": 6.0,
+     "text": "Adjust the jumpers.",
+     "still": "stills/4-3-4.jpg",
+     "stillT": 12.0
+    },
+    {
+     "t": 12.0,
+     "text": "Add a third trimmer, a large capacitor and a short yellow jumper.",
+     "still": "stills/4-3-5.jpg",
+     "stillT": 18.0
+    },
+    {
+     "t": 18.0,
+     "text": "Add a resistor from the third oscillator's output to the 4051's common pin.",
+     "still": "stills/4-3-6.jpg",
+     "stillT": 27.0
+    },
+    {
+     "t": 27.0,
+     "text": "Take the resistor out to compare.",
+     "still": "stills/4-3-7.jpg",
+     "stillT": 39.0
+    },
+    {
+     "t": 39.0,
+     "text": "Put it back, then turn the new trimmer and watch how the lights change.",
+     "still": "stills/4-3-8.jpg",
+     "stillT": 45.0
+    }
+   ]
+  },
+  {
+   "id": "s4",
+   "title": "Stepped low-pass clicks",
+   "segment": 3,
+   "startStill": "stills/4-4-1.jpg",
+   "subs": [
+    {
+     "t": 0.0,
+     "text": "Remove the four LEDs.",
+     "still": "stills/4-4-2.jpg",
+     "stillT": 3.0
+    },
+    {
+     "t": 3.0,
+     "text": "Remove the resistor at the bottom.",
+     "still": "stills/4-4-3.jpg",
+     "stillT": 6.0
+    },
+    {
+     "t": 6.0,
+     "text": "Add a resistor from the first 4051 channel to a shared row.",
+     "still": "stills/4-4-4.jpg",
+     "stillT": 21.0
+    },
+    {
+     "t": 21.0,
+     "text": "Add a second resistor, a different value, from the next channel.",
+     "still": "stills/4-4-5.jpg",
+     "stillT": 27.0
+    },
+    {
+     "t": 27.0,
+     "text": "Add a third resistor.",
+     "still": "stills/4-4-6.jpg",
+     "stillT": 33.0
+    },
+    {
+     "t": 33.0,
+     "text": "Add a fourth resistor: a ladder of different resistances.",
+     "still": "stills/4-4-7.jpg",
+     "stillT": 45.0
+    },
+    {
+     "t": 45.0,
+     "text": "Add a jumper across the center gap from the shared row.",
+     "still": "stills/4-4-8.jpg",
+     "stillT": 48.0
+    },
+    {
+     "t": 48.0,
+     "text": "Add a small capacitor to ground. With the chosen resistor, it makes a low-pass filter.",
+     "still": "stills/4-4-9.jpg",
+     "stillT": 51.0
+    },
+    {
+     "t": 51.0,
+     "text": "Add a red jumper toward the audio jack.",
+     "still": "stills/4-4-10.jpg",
+     "stillT": 54.0
+    },
+    {
+     "t": 54.0,
+     "text": "Add a ground jumper from the top rail for the jack.",
+     "still": "stills/4-4-11.jpg",
+     "stillT": 60.0
+    },
+    {
+     "t": 60.0,
+     "text": "Insert the audio jack.",
+     "still": "stills/4-4-12.jpg",
+     "stillT": 63.0
+    },
+    {
+     "t": 63.0,
+     "text": "Plug in the audio cable.",
+     "still": "stills/4-4-13.jpg",
+     "stillT": 66.0
+    },
+    {
+     "t": 66.0,
+     "text": "Connect the third oscillator to the 4051's common pin. Each step sends its clicks through a different resistor, so they sound brighter or duller.",
+     "still": "stills/4-4-14.jpg",
+     "stillT": 78.0
+    }
+   ]
+  },
+  {
+   "id": "s5",
+   "title": "Stepped low-pass tones",
+   "segment": 4,
+   "startStill": "stills/4-5-1.jpg",
+   "subs": [
+    {
+     "t": 0.0,
+     "text": "Unplug the orange wire.",
+     "still": "stills/4-5-2.jpg",
+     "stillT": 3.0
+    },
+    {
+     "t": 3.0,
+     "text": "Remove the third oscillator's large capacitor.",
+     "still": "stills/4-5-3.jpg",
+     "stillT": 6.0
+    },
+    {
+     "t": 6.0,
+     "text": "Put a smaller capacitor in its place, so the third oscillator makes a tone.",
+     "still": "stills/4-5-4.jpg",
+     "stillT": 12.0
+    },
+    {
+     "t": 12.0,
+     "text": "Plug the orange wire back in and listen to the tone step through the filters.",
+     "still": "stills/4-5-5.jpg",
+     "stillT": 15.0
+    }
+   ]
+  },
+  {
+   "id": "s6",
+   "title": "Stepped band-pass tones",
+   "segment": 5,
+   "startStill": "stills/4-6-1.jpg",
+   "subs": [
+    {
+     "t": 0.0,
+     "text": "Unplug the orange wire.",
+     "still": "stills/4-6-2.jpg",
+     "stillT": 3.0
+    },
+    {
+     "t": 3.0,
+     "text": "Add a small capacitor after the third oscillator.",
+     "still": "stills/4-6-3.jpg",
+     "stillT": 12.0
+    },
+    {
+     "t": 12.0,
+     "text": "Add a fourth trimmer next to the 4051.",
+     "still": "stills/4-6-4.jpg",
+     "stillT": 15.0
+    },
+    {
+     "t": 15.0,
+     "text": "Add a short jumper below it.",
+     "still": "stills/4-6-5.jpg",
+     "stillT": 18.0
+    },
+    {
+     "t": 18.0,
+     "text": "Plug the orange wire back in, from the far side of the new capacitor to the 4051's common pin. The capacitor and trimmer cut the low sounds and the resistors cut the high ones: a band-pass filter. Turn the new trimmer to move the band.",
+     "still": "stills/4-6-6.jpg",
+     "stillT": 24.0
+    }
+   ]
+  }
+ ]
+}

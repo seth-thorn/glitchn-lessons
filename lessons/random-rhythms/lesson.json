@@ -1,0 +1,372 @@
+{
+ "format": "glitchn-lesson/2",
+ "slug": "random-rhythms",
+ "title": "Random Rhythms with the 4021",
+ "summary": "Use a slow and a fast oscillator to drive the 4021 shift register: random light patterns, repeating and changing drum beats, microsound, and glitches as musical structure.",
+ "status": "draft",
+ "origin": "Five-day course, Day 3",
+ "links": [
+  {
+   "to": "stepping-sounds",
+   "kind": "next"
+  }
+ ],
+ "segments": [
+  {
+   "src": "video/part-1.mp4",
+   "duration": 87.188
+  },
+  {
+   "src": "video/part-2.mp4",
+   "duration": 81.727
+  },
+  {
+   "src": "video/part-3.mp4",
+   "duration": 99.37
+  },
+  {
+   "src": "video/part-4.mp4",
+   "duration": 25.791
+  },
+  {
+   "src": "video/part-5.mp4",
+   "duration": 29.204
+  },
+  {
+   "src": "video/part-6.mp4",
+   "duration": 43.839
+  },
+  {
+   "src": "video/part-7.mp4",
+   "duration": 75.796
+  }
+ ],
+ "steps": [
+  {
+   "id": "s1",
+   "title": "Set up slow and fast oscillators",
+   "segment": 0,
+   "startStill": "stills/3-1-1.jpg",
+   "subs": [
+    {
+     "t": 0.0,
+     "text": "Connect the power rails on both sides with two jumpers at the right end of the breadboard.",
+     "still": "stills/3-1-2.jpg",
+     "stillT": 6.0
+    },
+    {
+     "t": 6.0,
+     "text": "Place the 40106 chip across the center gap, then add its power and ground jumpers.",
+     "still": "stills/3-1-3.jpg",
+     "stillT": 21.0
+    },
+    {
+     "t": 21.0,
+     "text": "Add a trimmer, two short red jumpers and a large capacitor: a slow oscillator.",
+     "still": "stills/3-1-4.jpg",
+     "stillT": 40.0
+    },
+    {
+     "t": 40.0,
+     "text": "Add a second trimmer and two red jumpers at the top.",
+     "still": "stills/3-1-5.jpg",
+     "stillT": 48.0
+    },
+    {
+     "t": 48.0,
+     "text": "Add a smaller-value capacitor on the top rail at the left (it may look the same size): a fast oscillator.",
+     "still": "stills/3-1-6.jpg",
+     "stillT": 51.0
+    },
+    {
+     "t": 51.0,
+     "text": "Add a ground jumper for the jack and a long wire with a free end to use as a probe.",
+     "still": "stills/3-1-7.jpg",
+     "stillT": 60.0
+    },
+    {
+     "t": 60.0,
+     "text": "Insert the audio jack and plug in the cable.",
+     "still": "stills/3-1-8.jpg",
+     "stillT": 63.0
+    },
+    {
+     "t": 63.0,
+     "text": "Clip the battery connector onto the 9V battery.",
+     "still": "stills/3-1-9.jpg",
+     "stillT": 66.0
+    },
+    {
+     "t": 66.0,
+     "text": "Plug the battery wires into the top power rail.",
+     "still": "stills/3-1-10.jpg",
+     "stillT": 75.0
+    },
+    {
+     "t": 75.0,
+     "text": "Touch the probe to the slow oscillator's output and listen.",
+     "still": "stills/3-1-11.jpg",
+     "stillT": 78.0
+    },
+    {
+     "t": 78.0,
+     "text": "Touch the probe to the fast oscillator's output and listen.",
+     "still": "stills/3-1-12.jpg",
+     "stillT": 81.0
+    },
+    {
+     "t": 81.0,
+     "text": "Both oscillators are ready.",
+     "still": "stills/3-1-13.jpg",
+     "stillT": 86.0
+    }
+   ]
+  },
+  {
+   "id": "s2",
+   "title": "The 4021 and LEDs",
+   "segment": 1,
+   "startStill": "stills/3-2-1.jpg",
+   "subs": [
+    {
+     "t": 0.0,
+     "text": "Remove the audio jack, its jumper and the probe.",
+     "still": "stills/3-2-2.jpg",
+     "stillT": 3.0
+    },
+    {
+     "t": 3.0,
+     "text": "Unplug the battery.",
+     "still": "stills/3-2-3.jpg",
+     "stillT": 6.0
+    },
+    {
+     "t": 6.0,
+     "text": "Place the 4021 chip in the middle and add its power and ground jumpers.",
+     "still": "stills/3-2-4.jpg",
+     "stillT": 21.0
+    },
+    {
+     "t": 21.0,
+     "text": "Add one more short jumper above the 4021.",
+     "still": "stills/3-2-5.jpg",
+     "stillT": 27.0
+    },
+    {
+     "t": 27.0,
+     "text": "Run a yellow wire from the slow oscillator to the 4021's clock input.",
+     "still": "stills/3-2-6.jpg",
+     "stillT": 39.0
+    },
+    {
+     "t": 39.0,
+     "text": "Run an orange wire from the fast oscillator to the 4021's data input. The 4021 samples it at each clock tick.",
+     "still": "stills/3-2-7.jpg",
+     "stillT": 48.0
+    },
+    {
+     "t": 48.0,
+     "text": "Plug the battery back in at the right end.",
+     "still": "stills/3-2-8.jpg",
+     "stillT": 54.0
+    },
+    {
+     "t": 54.0,
+     "text": "Add a yellow LED to one of the 4021's outputs.",
+     "still": "stills/3-2-9.jpg",
+     "stillT": 60.0
+    },
+    {
+     "t": 60.0,
+     "text": "Add a green LED to another output.",
+     "still": "stills/3-2-10.jpg",
+     "stillT": 66.0
+    },
+    {
+     "t": 66.0,
+     "text": "Add a red LED to a third output and watch the random patterns.",
+     "still": "stills/3-2-11.jpg",
+     "stillT": 72.0
+    }
+   ]
+  },
+  {
+   "id": "s3",
+   "title": "Repetitive 4021 drummer",
+   "segment": 2,
+   "startStill": "stills/3-3-1.jpg",
+   "subs": [
+    {
+     "t": 0.0,
+     "text": "Remove the three LEDs.",
+     "still": "stills/3-3-2.jpg",
+     "stillT": 3.0
+    },
+    {
+     "t": 3.0,
+     "text": "Add a ground jumper and a short yellow jumper for the audio jack.",
+     "still": "stills/3-3-3.jpg",
+     "stillT": 12.0
+    },
+    {
+     "t": 12.0,
+     "text": "Insert the audio jack and plug in the cable.",
+     "still": "stills/3-3-4.jpg",
+     "stillT": 24.0
+    },
+    {
+     "t": 24.0,
+     "text": "Add a diode from one 4021 output toward the jack.",
+     "still": "stills/3-3-5.jpg",
+     "stillT": 33.0
+    },
+    {
+     "t": 33.0,
+     "text": "Add a second diode from another output.",
+     "still": "stills/3-3-6.jpg",
+     "stillT": 42.0
+    },
+    {
+     "t": 42.0,
+     "text": "Add a resistor from the 4021's top output to the jack.",
+     "still": "stills/3-3-7.jpg",
+     "stillT": 48.0
+    },
+    {
+     "t": 48.0,
+     "text": "Add two small capacitors to ground, one at each diode, to shape the clicks into drum sounds. Then tune the trimmers until the beat repeats.",
+     "still": "stills/3-3-8.jpg",
+     "stillT": 72.0
+    }
+   ]
+  },
+  {
+   "id": "s4",
+   "title": "Microsound 1",
+   "segment": 3,
+   "startStill": "stills/3-4-1.jpg",
+   "subs": [
+    {
+     "t": 0.0,
+     "text": "Add another small capacitor at the output.",
+     "still": "stills/3-4-2.jpg",
+     "stillT": 3.0
+    },
+    {
+     "t": 3.0,
+     "text": "Try it, then take it out again.",
+     "still": "stills/3-4-3.jpg",
+     "stillT": 12.0
+    },
+    {
+     "t": 12.0,
+     "text": "Put a green LED in the same spot, from the output row to ground, and watch it flicker with the tiny sounds.",
+     "still": "stills/3-4-4.jpg",
+     "stillT": 17.0
+    }
+   ]
+  },
+  {
+   "id": "s5",
+   "title": "Generative 4021 drummer",
+   "segment": 4,
+   "startStill": "stills/3-5-1.jpg",
+   "subs": [
+    {
+     "t": 0.0,
+     "text": "Remove the fast oscillator's trimmer.",
+     "still": "stills/3-5-2.jpg",
+     "stillT": 11.0
+    },
+    {
+     "t": 11.0,
+     "text": "Put a photocell (light-dependent resistor) in its place. Move your hand over it and the pattern keeps changing.",
+     "still": "stills/3-5-3.jpg",
+     "stillT": 15.0
+    }
+   ]
+  },
+  {
+   "id": "s6",
+   "title": "Microsound 2",
+   "segment": 5,
+   "startStill": "stills/3-6-1.jpg",
+   "subs": [
+    {
+     "t": 0.0,
+     "text": "Unplug the audio cable and remove the jack.",
+     "still": "stills/3-6-2.jpg",
+     "stillT": 7.0
+    },
+    {
+     "t": 7.0,
+     "text": "Remove the short yellow jumper.",
+     "still": "stills/3-6-3.jpg",
+     "stillT": 10.0
+    },
+    {
+     "t": 10.0,
+     "text": "Add a short grey jumper in a new place.",
+     "still": "stills/3-6-4.jpg",
+     "stillT": 17.0
+    },
+    {
+     "t": 17.0,
+     "text": "Put the audio jack back in the same place and plug in the cable.",
+     "still": "stills/3-6-5.jpg",
+     "stillT": 24.0
+    },
+    {
+     "t": 24.0,
+     "text": "Add a small capacitor between the output and the jack.",
+     "still": "stills/3-6-6.jpg",
+     "stillT": 33.0
+    },
+    {
+     "t": 33.0,
+     "text": "Add a resistor to ground below it. This tiny filter makes the sound thin and delicate: microsound.",
+     "still": "stills/3-6-7.jpg",
+     "stillT": 39.0
+    }
+   ]
+  },
+  {
+   "id": "s7",
+   "title": "Glitch as musical structure",
+   "segment": 6,
+   "startStill": "stills/3-7-1.jpg",
+   "subs": [
+    {
+     "t": 0.0,
+     "text": "Unplug the battery's red (+) wire.",
+     "still": "stills/3-7-2.jpg",
+     "stillT": 18.0
+    },
+    {
+     "t": 18.0,
+     "text": "Add a short jumper from the + rail at the right end.",
+     "still": "stills/3-7-3.jpg",
+     "stillT": 24.0
+    },
+    {
+     "t": 24.0,
+     "text": "Add a trimmer there and plug the red wire into it, so all the power passes through the knob.",
+     "still": "stills/3-7-4.jpg",
+     "stillT": 30.0
+    },
+    {
+     "t": 30.0,
+     "text": "Turn the trimmer down: the drummer slows, stutters and glitches.",
+     "still": "stills/3-7-5.jpg",
+     "stillT": 39.0
+    },
+    {
+     "t": 39.0,
+     "text": "Add a large capacitor on the power rail. It stores a little energy, so the glitches stretch out into phrases.",
+     "still": "stills/3-7-6.jpg",
+     "stillT": 57.0
+    }
+   ]
+  }
+ ]
+}
