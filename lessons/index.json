@@ -1,6 +1,6 @@
 {
  "format": "glitchn-index/1",
- "generated": "2026-10-17T17:59:53+00:00",
+ "generated": "2026-10-17T19:15:16+00:00",
  "lessons": [
   {
    "slug": "blink-to-drum-machine",
@@ -11,6 +11,36 @@
    "steps": 7,
    "subSteps": 32,
    "thumb": "blink-to-drum-machine/thumbs/1-7-8.jpg",
+   "outline": [
+    {
+     "title": "Blink an LED",
+     "thumb": "blink-to-drum-machine/thumbs/1-1-7.jpg"
+    },
+    {
+     "title": "Make some clicks",
+     "thumb": "blink-to-drum-machine/thumbs/1-2-5.jpg"
+    },
+    {
+     "title": "Use a knob to control speed",
+     "thumb": "blink-to-drum-machine/thumbs/1-3-4.jpg"
+    },
+    {
+     "title": "Use a button as a gate",
+     "thumb": "blink-to-drum-machine/thumbs/1-4-4.jpg"
+    },
+    {
+     "title": "Add a filter",
+     "thumb": "blink-to-drum-machine/thumbs/1-5-4.jpg"
+    },
+    {
+     "title": "Light patterns",
+     "thumb": "blink-to-drum-machine/thumbs/1-6-7.jpg"
+    },
+    {
+     "title": "Drum machine",
+     "thumb": "blink-to-drum-machine/thumbs/1-7-8.jpg"
+    }
+   ],
    "links": [
     {
      "to": "radio-and-reset",
@@ -61,7 +91,16 @@
    "i18n": {
     "es": {
      "title": "Del parpadeo a la caja de ritmos",
-     "summary": "Construye un oscilador que hace parpadear un LED y conviértelo, paso a paso, en una caja de ritmos."
+     "summary": "Construye un oscilador que hace parpadear un LED y conviértelo, paso a paso, en una caja de ritmos.",
+     "outline": [
+      "Hacer parpadear un LED",
+      "Hacer unos clics",
+      "Controlar la velocidad con una perilla",
+      "Usar un botón como compuerta",
+      "Agregar un filtro",
+      "Patrones de luz",
+      "Caja de ritmos"
+     ]
     }
    }
   },
@@ -74,6 +113,36 @@
    "steps": 7,
    "subSteps": 41,
    "thumb": "radio-and-reset/thumbs/2-7-4.jpg",
+   "outline": [
+    {
+     "title": "One slow oscillator",
+     "thumb": "radio-and-reset/thumbs/2-1-11.jpg"
+    },
+    {
+     "title": "Two slow oscillators",
+     "thumb": "radio-and-reset/thumbs/2-2-7.jpg"
+    },
+    {
+     "title": "Two fast oscillators (Blade Runner)",
+     "thumb": "radio-and-reset/thumbs/2-3-3.jpg"
+    },
+    {
+     "title": "Radio Amor",
+     "thumb": "radio-and-reset/thumbs/2-4-8.jpg"
+    },
+    {
+     "title": "4040 drummer again",
+     "thumb": "radio-and-reset/thumbs/2-5-10.jpg"
+    },
+    {
+     "title": "4040 reset",
+     "thumb": "radio-and-reset/thumbs/2-6-5.jpg"
+    },
+    {
+     "title": "Voltage starving",
+     "thumb": "radio-and-reset/thumbs/2-7-4.jpg"
+    }
+   ],
    "links": [
     {
      "to": "random-rhythms",
@@ -129,7 +198,16 @@
    "i18n": {
     "es": {
      "title": "Dos osciladores, una radio y un reinicio",
-     "summary": "Arma osciladores lentos y rápidos, envía un tono a una radio AM, reconstruye la caja de ritmos con el 4040 con un reinicio y quítale energía para crear fallas."
+     "summary": "Arma osciladores lentos y rápidos, envía un tono a una radio AM, reconstruye la caja de ritmos con el 4040 con un reinicio y quítale energía para crear fallas.",
+     "outline": [
+      "Un oscilador lento",
+      "Dos osciladores lentos",
+      "Dos osciladores rápidos (Blade Runner)",
+      "Radio Amor",
+      "Otra vez la caja de ritmos con el 4040",
+      "Reinicio del 4040",
+      "Quitarle voltaje"
+     ]
     }
    }
   },
@@ -142,6 +220,36 @@
    "steps": 7,
    "subSteps": 45,
    "thumb": "random-rhythms/thumbs/3-7-6.jpg",
+   "outline": [
+    {
+     "title": "Set up slow and fast oscillators",
+     "thumb": "random-rhythms/thumbs/3-1-13.jpg"
+    },
+    {
+     "title": "The 4021 and LEDs",
+     "thumb": "random-rhythms/thumbs/3-2-11.jpg"
+    },
+    {
+     "title": "Repetitive 4021 drummer",
+     "thumb": "random-rhythms/thumbs/3-3-8.jpg"
+    },
+    {
+     "title": "Microsound 1",
+     "thumb": "random-rhythms/thumbs/3-4-4.jpg"
+    },
+    {
+     "title": "Generative 4021 drummer",
+     "thumb": "random-rhythms/thumbs/3-5-3.jpg"
+    },
+    {
+     "title": "Microsound 2",
+     "thumb": "random-rhythms/thumbs/3-6-7.jpg"
+    },
+    {
+     "title": "Glitch as musical structure",
+     "thumb": "random-rhythms/thumbs/3-7-6.jpg"
+    }
+   ],
    "links": [
     {
      "to": "stepping-sounds",
@@ -195,7 +303,16 @@
    "i18n": {
     "es": {
      "title": "Ritmos al azar con el 4021",
-     "summary": "Usa un oscilador lento y uno rápido para controlar el registro de desplazamiento 4021: patrones de luz al azar, ritmos que se repiten y que cambian, microsonido y fallas como estructura musical."
+     "summary": "Usa un oscilador lento y uno rápido para controlar el registro de desplazamiento 4021: patrones de luz al azar, ritmos que se repiten y que cambian, microsonido y fallas como estructura musical.",
+     "outline": [
+      "Preparar osciladores lento y rápido",
+      "El 4021 y los LED",
+      "Caja de ritmos repetitiva con el 4021",
+      "Microsonido 1",
+      "Caja de ritmos generativa con el 4021",
+      "Microsonido 2",
+      "El glitch como estructura musical"
+     ]
     }
    }
   },
@@ -208,6 +325,32 @@
    "steps": 6,
    "subSteps": 51,
    "thumb": "stepping-sounds/thumbs/4-6-6.jpg",
+   "outline": [
+    {
+     "title": "Two slow oscillators",
+     "thumb": "stepping-sounds/thumbs/4-1-12.jpg"
+    },
+    {
+     "title": "4051 LEDs",
+     "thumb": "stepping-sounds/thumbs/4-2-12.jpg"
+    },
+    {
+     "title": "Third oscillator",
+     "thumb": "stepping-sounds/thumbs/4-3-8.jpg"
+    },
+    {
+     "title": "Stepped low-pass clicks",
+     "thumb": "stepping-sounds/thumbs/4-4-14.jpg"
+    },
+    {
+     "title": "Stepped low-pass tones",
+     "thumb": "stepping-sounds/thumbs/4-5-5.jpg"
+    },
+    {
+     "title": "Stepped band-pass tones",
+     "thumb": "stepping-sounds/thumbs/4-6-6.jpg"
+    }
+   ],
    "links": [
     {
      "to": "three-oscillators",
@@ -259,7 +402,15 @@
    "i18n": {
     "es": {
      "title": "Recorrer sonidos con el 4051",
-     "summary": "Deja que dos osciladores lentos controlen el selector 4051: primero para recorrer unos LED y después para pasar un tercer oscilador por distintos filtros."
+     "summary": "Deja que dos osciladores lentos controlen el selector 4051: primero para recorrer unos LED y después para pasar un tercer oscilador por distintos filtros.",
+     "outline": [
+      "Dos osciladores lentos",
+      "LED con el 4051",
+      "Tercer oscilador",
+      "Clics con filtro pasabajos escalonado",
+      "Tonos con filtro pasabajos escalonado",
+      "Tonos con filtro pasabanda escalonado"
+     ]
     }
    }
   },
@@ -272,6 +423,32 @@
    "steps": 6,
    "subSteps": 33,
    "thumb": "three-oscillators/thumbs/5-6-2.jpg",
+   "outline": [
+    {
+     "title": "Three oscillators",
+     "thumb": "three-oscillators/thumbs/5-1-18.jpg"
+    },
+    {
+     "title": "Diode network",
+     "thumb": "three-oscillators/thumbs/5-2-6.jpg"
+    },
+    {
+     "title": "Adjustable high-pass filter",
+     "thumb": "three-oscillators/thumbs/5-3-6.jpg"
+    },
+    {
+     "title": "Voltage starving",
+     "thumb": "three-oscillators/thumbs/5-4-5.jpg"
+    },
+    {
+     "title": "Static",
+     "thumb": "three-oscillators/thumbs/5-5-2.jpg"
+    },
+    {
+     "title": "Strange things",
+     "thumb": "three-oscillators/thumbs/5-6-2.jpg"
+    }
+   ],
    "links": [],
    "requires": [
     "blink-to-drum-machine"
@@ -314,7 +491,15 @@
    "i18n": {
     "es": {
      "title": "Tres osciladores y cosas extrañas",
-     "summary": "Arma tres osciladores, únelos con una red de diodos, dales forma con un filtro pasaaltos ajustable y explora la falta de voltaje, la estática y sonidos extraños."
+     "summary": "Arma tres osciladores, únelos con una red de diodos, dales forma con un filtro pasaaltos ajustable y explora la falta de voltaje, la estática y sonidos extraños.",
+     "outline": [
+      "Tres osciladores",
+      "Red de diodos",
+      "Filtro pasaaltos ajustable",
+      "Quitarle voltaje",
+      "Estática",
+      "Cosas extrañas"
+     ]
     }
    }
   }

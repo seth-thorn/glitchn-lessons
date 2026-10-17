@@ -49,7 +49,7 @@
 :root[data-style="terminal"] .toast { background: var(--phos); color: var(--black); border-radius: 0; font-family: var(--body); text-shadow: none; box-shadow: 0 0 16px var(--halo); }
 
 /* ---------- lesson player: terminal windows ---------- */
-:root[data-style="terminal"] .panel, :root[data-style="terminal"] a.card, :root[data-style="terminal"] .mapwrap {
+:root[data-style="terminal"] .panel, :root[data-style="terminal"] .card, :root[data-style="terminal"] .mapwrap {
   background: var(--panel); border: 4px double var(--phos); border-radius: 0; color: var(--phos);
   box-shadow: 0 0 14px color-mix(in srgb, var(--phos) 22%, transparent), inset 0 0 22px color-mix(in srgb, var(--phos) 8%, transparent);
 }
@@ -184,8 +184,8 @@
 :root[data-style="terminal"] h2::before { content: "## "; color: var(--muted); }
 :root[data-style="terminal"] .mapwrap h2::before { content: "[ "; } :root[data-style="terminal"] .mapwrap h2::after { content: " ]"; color: var(--muted); }
 :root[data-style="terminal"] .intro { color: var(--phos); font-size: 16px; }
-:root[data-style="terminal"] a.card { color: var(--phos); }
-:root[data-style="terminal"] a.card:hover { transform: none; background: var(--card); box-shadow: 0 0 22px var(--halo); }
+:root[data-style="terminal"] .card { color: var(--phos); }
+:root[data-style="terminal"] .card:hover { transform: none; background: var(--card); box-shadow: 0 0 22px var(--halo); }
 :root[data-style="terminal"] .card img { border: 0; border-bottom: 2px solid var(--phos); }
 :root[data-style="terminal"] .card .body { color: var(--phos); }
 :root[data-style="terminal"] .card b { font-family: var(--display); font-weight: 400; font-stretch: 100%; font-size: 30px; line-height: .95; }

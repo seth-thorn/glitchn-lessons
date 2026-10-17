@@ -47,11 +47,11 @@
 :root[data-style="daydream"] .toast { background: #FFFFFF; color: var(--ink); box-shadow: 0 6px 20px rgba(15, 50, 120, .35); font-family: var(--display); }
 
 /* ---------- lesson player: cloud-white panels with puffy tops ---------- */
-:root[data-style="daydream"] .panel, :root[data-style="daydream"] a.card, :root[data-style="daydream"] .mapwrap {
+:root[data-style="daydream"] .panel, :root[data-style="daydream"] .card, :root[data-style="daydream"] .mapwrap {
   background: #FFFFFF; border: 0; border-radius: 26px; color: var(--ink);
   box-shadow: 0 12px 0 -4px var(--puff), 0 30px 44px -22px rgba(15, 50, 120, .55);
 }
-:root[data-style="daydream"] .progress, :root[data-style="daydream"] .mapbox, :root[data-style="daydream"] .mapwrap, :root[data-style="daydream"] a.card { position: relative; }
+:root[data-style="daydream"] .progress, :root[data-style="daydream"] .mapbox, :root[data-style="daydream"] .mapwrap, :root[data-style="daydream"] .card { position: relative; }
 :root[data-style="daydream"] .steps::before, :root[data-style="daydream"] .stills::before, :root[data-style="daydream"] .progress::before, :root[data-style="daydream"] .mapbox::before, :root[data-style="daydream"] .mapwrap::before {
   content: ""; position: absolute; left: 6%; width: 52%; top: -20px; height: 44px; pointer-events: none;
   background: radial-gradient(circle at 18% 100%, #FFFFFF 0 20px, transparent 21px), radial-gradient(circle at 42% 100%, #FFFFFF 0 30px, transparent 31px), radial-gradient(circle at 70% 100%, #FFFFFF 0 22px, transparent 23px), radial-gradient(circle at 90% 100%, #FFFFFF 0 14px, transparent 15px);
@@ -190,7 +190,7 @@
 :root[data-style="daydream"] h2 { font-family: var(--display); font-weight: 600; font-stretch: 100%; font-size: 27px; color: #FFFFFF; text-shadow: 0 2px 0 rgba(15, 50, 120, .3); }
 :root[data-style="daydream"] .mapwrap h2 { color: var(--ink); text-shadow: none; }
 :root[data-style="daydream"] .intro { color: #FFFFFF; font-weight: 400; text-shadow: 0 1px 10px rgba(15, 50, 120, .55); }
-:root[data-style="daydream"] a.card:hover { transform: translateY(-4px); box-shadow: 0 14px 0 -4px var(--puff), 0 34px 48px -20px rgba(15, 50, 120, .6); }
+:root[data-style="daydream"] .card:hover { transform: translateY(-4px); box-shadow: 0 14px 0 -4px var(--puff), 0 34px 48px -20px rgba(15, 50, 120, .6); }
 :root[data-style="daydream"] .card img { border: 0; border-radius: 18px; margin: 12px 12px 0; width: calc(100% - 24px); }
 :root[data-style="daydream"] .card .body { color: var(--ink); }
 :root[data-style="daydream"] .card b { font-family: var(--display); font-weight: 600; font-stretch: 100%; font-size: 22px; }

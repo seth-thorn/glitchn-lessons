@@ -90,8 +90,15 @@ def main():
             "steps": len(steps),
             "subSteps": subs,
             "thumb": thumb,
+            # the outline the home page unfolds: each step's title and the board as that step ends
+            "outline": [{"title": st.get("title", ""),
+                         "thumb": (slug + "/" + st["subs"][-1]["still"].replace("stills/", "thumbs/", 1)) if st.get("subs") and st["subs"][-1].get("still") else None}
+                        for st in steps],
             "links": L.get("links", []),
         })
+        for o in lessons[-1]["outline"]:
+            if o["thumb"] and not (LESSONS / o["thumb"]).exists():
+                problems.append(f"{slug}: missing step picture lessons/{o['thumb']}")
         if "parts" in L:
             d = difficulty.rate(L)
             lessons[-1].update({
@@ -121,6 +128,7 @@ def main():
                 problems.append(f"{tf}: not valid JSON ({e})")
                 continue
             i18n[lang] = {k: strings[v] for k, v in (("title", L.get("title")), ("summary", L.get("summary"))) if v in strings}
+            i18n[lang]["outline"] = [strings.get(st.get("title", ""), st.get("title", "")) for st in steps]
             missing = [x for x in english if x not in strings]
             translations[lang] = translations.get(lang, 0) + 1
             if missing:

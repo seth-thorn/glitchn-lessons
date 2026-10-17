@@ -124,8 +124,8 @@
 :root[data-style="gadget"] .eyebrow { font-family: var(--body); font-size: 13px; font-weight: 500; letter-spacing: 0; text-transform: none; }
 :root[data-style="gadget"] h1 { font-weight: 600; font-stretch: 100%; letter-spacing: -.03em; }
 :root[data-style="gadget"] h2 { font-weight: 600; font-stretch: 100%; font-size: 20px; letter-spacing: -.01em; }
-:root[data-style="gadget"] a.card { border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(180deg, #FBFBF9, #F0F0EC); box-shadow: inset 0 1px 0 #FFFFFF, 0 22px 44px -32px rgba(38, 38, 36, .55); }
-:root[data-style="gadget"] a.card:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 #FFFFFF, 0 26px 48px -30px rgba(38, 38, 36, .6); }
+:root[data-style="gadget"] .card { border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(180deg, #FBFBF9, #F0F0EC); box-shadow: inset 0 1px 0 #FFFFFF, 0 22px 44px -32px rgba(38, 38, 36, .55); }
+:root[data-style="gadget"] .card:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 #FFFFFF, 0 26px 48px -30px rgba(38, 38, 36, .6); }
 :root[data-style="gadget"] .card img { border-bottom: 1px solid var(--line); }
 :root[data-style="gadget"] .card b { font-weight: 600; font-stretch: 100%; letter-spacing: -.01em; }
 :root[data-style="gadget"] .card .meta { font-family: var(--body); font-weight: 500; color: var(--muted); }

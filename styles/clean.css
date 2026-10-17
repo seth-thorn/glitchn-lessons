@@ -166,8 +166,8 @@
 :root[data-style="clean"] main { gap: 36px; }
 :root[data-style="clean"] h2 { font-family: var(--body); font-weight: 700; font-stretch: 100%; font-size: 21px; letter-spacing: 0; }
 :root[data-style="clean"] .intro { color: var(--muted); font-size: 18px; line-height: 1.6; }
-:root[data-style="clean"] a.card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; box-shadow: none; }
-:root[data-style="clean"] a.card:hover { transform: none; border-color: var(--muted); box-shadow: none; }
+:root[data-style="clean"] .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; box-shadow: none; }
+:root[data-style="clean"] .card:hover { transform: none; border-color: var(--muted); box-shadow: none; }
 :root[data-style="clean"] .card img { border: 0; border-radius: 10px; margin: 12px 12px 0; width: calc(100% - 24px); background: #E9E7E1; }
 :root[data-style="clean"] .card .body { color: var(--ink); padding: 14px 16px 16px; }
 :root[data-style="clean"] .card b { font-family: var(--body); font-weight: 700; font-stretch: 100%; font-size: 19px; line-height: 1.3; }

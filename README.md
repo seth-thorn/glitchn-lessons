@@ -64,6 +64,8 @@ Each `lesson.json` also describes the lesson, so the home page can label and fil
 - **`concepts`** and **`sounds`** also use keys from `catalog.json`.
 - **Difficulty** (Easy, Medium, Hard) is worked out from the chips, jumper wires and oscillators by **`tools/difficulty.py`**, where the formula, its weights and how they were chosen are written out. Run `python3 tools/difficulty.py` to see every lesson's rating and the arithmetic. To overrule the formula for one lesson, add `"difficulty": {"level": "medium", "why": "short reason"}` to its `lesson.json`.
 
+On the home page, each lesson card can also unfold its steps ("See the 7 steps"): each step's title with a picture of the board as that step ends, linking straight to that step (`#step-3` at the end of a lesson's address opens it at step 3). `build_index.py` copies the step titles and pictures into `lessons/index.json`, and the pictures load only when someone opens the list.
+
 `tools/build_index.py` checks every key against the catalog and every `requires` against the real lessons, and copies the catalog and the ratings into `lessons/index.json`.
 
 ## Spanish (and other languages)

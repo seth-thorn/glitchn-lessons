@@ -43,7 +43,7 @@
 
 /* ---------- lesson player ---------- */
 /* wooden planks with a nail in each corner */
-:root[data-style="treehouse"] .panel, :root[data-style="treehouse"] a.card, :root[data-style="treehouse"] .mapwrap {
+:root[data-style="treehouse"] .panel, :root[data-style="treehouse"] .card, :root[data-style="treehouse"] .mapwrap {
   --nail: radial-gradient(circle, #4A3020 0 2.6px, rgba(255, 240, 210, .45) 3px, transparent 3.8px);
   background:
     var(--nail) 7px 7px / 12px 12px no-repeat, var(--nail) calc(100% - 7px) 7px / 12px 12px no-repeat,
@@ -168,8 +168,8 @@
 /* ---------- home page ---------- */
 :root[data-style="treehouse"] h2 { font-family: var(--display); font-weight: 700; font-stretch: 100%; font-size: 27px; }
 :root[data-style="treehouse"] .intro { font-size: 18.5px; }
-:root[data-style="treehouse"] a.card { color: var(--ink); }
-:root[data-style="treehouse"] a.card:hover { transform: translateY(-2px) rotate(-.4deg); box-shadow: inset 0 2px 0 rgba(255, 255, 255, .25), 0 8px 0 var(--ink); }
+:root[data-style="treehouse"] .card { color: var(--ink); }
+:root[data-style="treehouse"] .card:hover { transform: translateY(-2px) rotate(-.4deg); box-shadow: inset 0 2px 0 rgba(255, 255, 255, .25), 0 8px 0 var(--ink); }
 :root[data-style="treehouse"] .card img { border: 5px solid var(--paper); border-bottom-width: 5px; margin: 14px 14px 0; width: calc(100% - 28px); border-radius: 3px; box-shadow: 0 0 0 2.5px var(--ink); }
 :root[data-style="treehouse"] .card .body { margin: 12px 14px 14px; background: var(--paper); border: 2.5px solid var(--ink); border-radius: 4px; color: var(--ink); }
 :root[data-style="treehouse"] .card b { font-family: var(--display); font-weight: 700; font-stretch: 100%; font-size: 23px; }

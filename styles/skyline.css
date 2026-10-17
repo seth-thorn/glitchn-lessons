@@ -54,7 +54,7 @@
 :root[data-style="skyline"] .toast { background: #F4F7F6; color: var(--night); }
 
 /* ---------- lesson player: dark glass, warmed by a lamp ---------- */
-:root[data-style="skyline"] .panel, :root[data-style="skyline"] a.card, :root[data-style="skyline"] .mapwrap {
+:root[data-style="skyline"] .panel, :root[data-style="skyline"] .card, :root[data-style="skyline"] .mapwrap {
   background: radial-gradient(130% 90% at 0% 0%, rgba(243, 181, 98, var(--lamp)), rgba(243, 181, 98, 0) 60%), linear-gradient(180deg, rgba(38, 49, 50, .9), rgba(20, 27, 28, .94));
   -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
   border: 1px solid var(--line); border-radius: 16px; color: var(--ink);
@@ -192,7 +192,7 @@
 /* ---------- home page ---------- */
 :root[data-style="skyline"] h2 { font-family: var(--display); font-weight: 700; font-stretch: 100%; font-size: 24px; color: #F4F7F6; }
 :root[data-style="skyline"] .intro { color: #E4EBEA; font-weight: 500; text-shadow: 0 1px 10px rgba(10, 16, 17, .6); }
-:root[data-style="skyline"] a.card:hover { transform: translateY(-3px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 0 0 1px rgba(243, 181, 98, .5), 0 30px 60px -24px rgba(0, 0, 0, .9); }
+:root[data-style="skyline"] .card:hover { transform: translateY(-3px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 0 0 1px rgba(243, 181, 98, .5), 0 30px 60px -24px rgba(0, 0, 0, .9); }
 :root[data-style="skyline"] .card img { border: 0; border-radius: 10px; margin: 12px 12px 0; width: calc(100% - 24px); }
 :root[data-style="skyline"] .card .body { color: var(--ink); }
 :root[data-style="skyline"] .card b { font-family: var(--display); font-weight: 700; font-stretch: 100%; font-size: 20px; }

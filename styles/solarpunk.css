@@ -57,7 +57,7 @@
 }
 
 /* ---------- lesson player: console panels with a screw in each corner ---------- */
-:root[data-style="solarpunk"] .panel, :root[data-style="solarpunk"] a.card, :root[data-style="solarpunk"] .mapwrap {
+:root[data-style="solarpunk"] .panel, :root[data-style="solarpunk"] .card, :root[data-style="solarpunk"] .mapwrap {
   background:
     var(--screw) 5px 5px / 14px 14px no-repeat, var(--screw) calc(100% - 5px) 5px / 14px 14px no-repeat,
     var(--screw) 5px calc(100% - 5px) / 14px 14px no-repeat, var(--screw) calc(100% - 5px) calc(100% - 5px) / 14px 14px no-repeat,
@@ -244,8 +244,8 @@
 /* ---------- home page ---------- */
 :root[data-style="solarpunk"] h2 { font-family: var(--display); font-weight: 400; font-stretch: 100%; font-size: 27px; }
 :root[data-style="solarpunk"] .intro { font-weight: 700; color: #2F3428; }
-:root[data-style="solarpunk"] a.card { color: var(--ink); }
-:root[data-style="solarpunk"] a.card:hover { transform: translateY(-3px); box-shadow: inset 0 2px 0 #FFFAEC, inset 0 -6px 0 rgba(58, 40, 24, .12), 0 10px 0 -1px var(--ink), 0 26px 36px -18px rgba(30, 20, 10, .65); }
+:root[data-style="solarpunk"] .card { color: var(--ink); }
+:root[data-style="solarpunk"] .card:hover { transform: translateY(-3px); box-shadow: inset 0 2px 0 #FFFAEC, inset 0 -6px 0 rgba(58, 40, 24, .12), 0 10px 0 -1px var(--ink), 0 26px 36px -18px rgba(30, 20, 10, .65); }
 :root[data-style="solarpunk"] .card img { border: 8px solid var(--ink); border-radius: 16px / 13px; margin: 16px 16px 0; width: calc(100% - 32px); box-shadow: 0 0 0 3px #CBBF9F, 0 0 0 5px var(--ink); }
 :root[data-style="solarpunk"] .card .body { color: var(--ink); padding: 14px 18px 18px; }
 :root[data-style="solarpunk"] .card b { font-family: var(--display); font-weight: 400; font-stretch: 100%; font-size: 23px; }
