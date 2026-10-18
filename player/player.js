@@ -8,7 +8,7 @@
   const C = window.GLITCHN_PLAYER || {};
   const LESSON_URL = C.lesson || 'lesson.json';
   const INDEX_URL = C.index || '../index.json';
-  const HOME_URL = C.home || '../../index.html';
+  const HOME_URL = C.home || '../index.html';
   const lessonHref = (slug) => (C.lessonHref || '../{slug}/index.html').replace('{slug}', slug);
   /* ---------- language ----------
      Interface wording lives in UI below. Lesson text comes from lesson.json (English) and, for other
@@ -76,7 +76,7 @@
   /* ---------- styles: whole looks for the page (colours, type, shapes, the TV itself) ----------
      TV is the default, in player.css. Each other style is a file in /styles (see styles/all.css).
      Choice order: ?style= in the address, then the visitor's last choice, then TV.
-     To add a style: add its name here and in index.html, its menu name (style_<name>) to UI, and its CSS file. */
+     To add a style: add its name here and in lessons/index.html, its menu name (style_<name>) to UI, and its CSS file. */
   const STYLES = ['tv', 'clean', 'gadget', 'solarpunk', 'treehouse', 'quest', 'skyline', 'daydream', 'terminal'];
   const OLD_STYLE_NAMES = { rams: 'gadget' }; // earlier names, so old links and saved choices still work
   function pickStyle() {
@@ -92,7 +92,7 @@
   mount.innerHTML = `<div class="app" id="app">
   <header class="top">
     <div>
-      <div class="eyebrow"><a class="home-link" id="homeLink" href="../../index.html">${t('allLessons')}</a><span>${t('lessonEyebrow')}</span><span class="draft-chip" id="draftChip" title="${t('draftTitle')}" hidden>${t('draft')}</span><span class="draft-chip lang-note" id="langNote" hidden></span></div>
+      <div class="eyebrow"><a class="home-link" id="homeLink" href="../index.html">${t('allLessons')}</a><span>${t('lessonEyebrow')}</span><span class="draft-chip" id="draftChip" title="${t('draftTitle')}" hidden>${t('draft')}</span><span class="draft-chip lang-note" id="langNote" hidden></span></div>
       <h1 id="title">${t('loading')}</h1>
       <div class="facts" id="facts" hidden></div>
     </div>

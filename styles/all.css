@@ -1,6 +1,6 @@
 /* Every style except TV (the default, in player/player.css). Each page loads this one file after its own styles.
    To add a style: write styles/<name>.css (copy gadget.css as a model: tokens first, then the parts),
-   add its fonts to the first line, import it below, and add <name> to STYLES in player/player.js and index.html. */
+   add its fonts to the first line, import it below, and add <name> to STYLES in player/player.js and lessons/index.html. */
 @import url("https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..800;1,400..800&family=Andika:wght@400;700&family=Cinzel:wght@500..800&family=Fredoka:wght@400..700&family=Gluten:wght@500..800&family=Lexend:wght@300..700&family=Manrope:wght@400..800&family=Nunito:wght@400..900&family=Righteous&family=Syne:wght@500..800&family=VT323&display=swap");
 @import url("clean.css");
 @import url("gadget.css");

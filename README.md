@@ -1,17 +1,19 @@
 # Glitch'n lessons
 
-**▶ Open the lessons: https://seth-thorn.github.io/glitchn-lessons/**
+**▶ Open the site: https://seth-thorn.github.io/glitchn-lessons/** · the lessons: https://seth-thorn.github.io/glitchn-lessons/lessons/
 
-The public lesson library for Glitch'n: build sound circuits on a breadboard, one small step at a time.
+The public website for Glitch'n: a home page, and the lesson library for building sound circuits on a breadboard, one small step at a time. More of the old glitchn.net (the story of the project so far) will move here in steps.
 
 Each **lesson** plays a build video beside step-by-step instructions, with close-up stills you can magnify, a progress bar, and a map of where to go next. Lessons link to each other, so the library can grow in any direction instead of following a fixed course.
 
 ## How it's organised
 
 ```
-index.html                 home page: lesson cards, the map of all lessons, what's coming
+index.html                 the Glitch'n home page: what Glitch'n is, the way into the lessons, where it started
+home/                      the home page's drum-machine clip and its poster picture
 player/player.js, .css     the one lesson player every lesson page uses
 lessons/
+  index.html               the lesson library: lesson cards, the map of all lessons, what's coming
   index.json               the list of lessons (made by tools/build_index.py; don't edit by hand)
   planned.json             lessons that are coming (edit by hand)
   catalog.json             names for parts, concepts and sounds that lessons refer to (edit by hand)
@@ -44,11 +46,11 @@ Each lesson lists where it leads in its own `lesson.json`:
 "links": [ { "to": "another-lesson-address", "kind": "next" } ]
 ```
 
-`kind` is `next`, `variation` or `related` (any short word works and shows on the map). The home page and each lesson's "What's next?" panel draw the map from these links, so connecting a new lesson means editing only that lesson, or the lesson that should point to it.
+`kind` is `next`, `variation` or `related` (any short word works and shows on the map). The lesson library and each lesson's "What's next?" panel draw the map from these links, so connecting a new lesson means editing only that lesson, or the lesson that should point to it.
 
 ## What a lesson needs, teaches and asks of you
 
-Each `lesson.json` also describes the lesson, so the home page can label and filter the lessons and each lesson page can show a parts list:
+Each `lesson.json` also describes the lesson, so the lesson library can label and filter the lessons and each lesson page can show a parts list:
 
 ```json
 "startHere": true,
@@ -64,7 +66,7 @@ Each `lesson.json` also describes the lesson, so the home page can label and fil
 - **`concepts`** and **`sounds`** also use keys from `catalog.json`.
 - **Difficulty** (Easy, Medium, Hard) is worked out from the chips, jumper wires and oscillators by **`tools/difficulty.py`**, where the formula, its weights and how they were chosen are written out. Run `python3 tools/difficulty.py` to see every lesson's rating and the arithmetic. To overrule the formula for one lesson, add `"difficulty": {"level": "medium", "why": "short reason"}` to its `lesson.json`.
 
-On the home page, each lesson card can also unfold its steps ("See the 7 steps"): each step's title with a picture of the board as that step ends, linking straight to that step (`#step-3` at the end of a lesson's address opens it at step 3). `build_index.py` copies the step titles and pictures into `lessons/index.json`, and the pictures load only when someone opens the list.
+In the lesson library, each lesson card can also unfold its steps ("See the 7 steps"): each step's title with a picture of the board as that step ends, linking straight to that step (`#step-3` at the end of a lesson's address opens it at step 3). `build_index.py` copies the step titles and pictures into `lessons/index.json`, and the pictures load only when someone opens the list.
 
 `tools/build_index.py` checks every key against the catalog and every `requires` against the real lessons, and copies the catalog and the ratings into `lessons/index.json`.
 
@@ -81,7 +83,7 @@ Every page has a **Simple | Technical** switch next to the language buttons. **S
 
 Visitors can switch between **English** and **Español** on every page. The choice is remembered, Spanish-language browsers start in Spanish, and a link can force a language with `?lang=es` (useful when embedding a lesson in Spanish).
 
-- Interface wording (buttons, labels, messages) lives in `player/player.js` and `index.html`, in a small table with `en` and `es` entries.
+- Interface wording (buttons, labels, messages) lives in `player/player.js`, `lessons/index.html` and the home page `index.html`, each in a small table with `en` and `es` entries.
 - Each lesson's Spanish text lives beside it in `lesson.es.json`: a list of English lines with their translations. A line with no translation shows in English, so editing a lesson never breaks its Spanish version. `tools/build_index.py` lists lines that still need translating.
 - The step editor stays English-only. When a lesson is ready, ask Claude to write or update its `lesson.es.json`.
 - Spanish pages are marked "Traducción automática" (automatic translation) until a Spanish speaker reviews them. To mark a reviewed lesson, set `"reviewed": true` in its `lesson.es.json`.
@@ -111,14 +113,14 @@ Every page has a **Style** menu that changes the page's whole personality, not j
 5. **Calm behind reading and the map:** plain surfaces behind text, the steps and the map; pictures stay at the edges of the page, and nothing extra fills the foot of the page.
 6. **Little motion, and none near the controls:** an antenna may sway, but nothing blinks, flickers or bobs, and anything that moves stops for people who ask their device for reduced motion.
 
-**Where styles live:** TV is part of `player/player.css`. Each other style is one file in `styles/` (`clean.css`, `gadget.css`, `solarpunk.css` and so on) that styles both the lesson player and the home page. `styles/all.css` loads them all, along with their fonts.
+**Where styles live:** TV is part of `player/player.css`. Each other style is one file in `styles/` (`clean.css`, `gadget.css`, `solarpunk.css` and so on) that styles both the lesson player and the lesson library (the Glitch'n home page keeps one fixed look). `styles/all.css` loads them all, along with their fonts.
 
 **Things a style can use:** the player adds the class `is-playing` to `.app` while the video plays, sets `--played` (0 to 1) on `.app` as it goes (for the player itself, not decorations; see rule 2), and has a spare decoration slot `.deco` (five empty `<i>` elements) inside the TV. The drawings are SVG pictures written into the CSS; the files in `styles/` are the ones to edit, and `tools/style_art.py` keeps the sources of the original drawings.
 
 **To add a style** (Cartoon, say):
 1. Copy a file in `styles/` to `styles/cartoon.css` and change `data-style="…"` throughout. Start with the colour and font tokens at the top, then restyle the parts.
 2. Add `@import url("cartoon.css");` to `styles/all.css`, and add any new fonts to its first line.
-3. Add `'cartoon'` to the `STYLES` list in `player/player.js` and in `index.html`, and its menu name (`style_cartoon`) to the English and Spanish word lists in both files.
+3. Add `'cartoon'` to the `STYLES` list in `player/player.js` and in `lessons/index.html`, and its menu name (`style_cartoon`) to the English and Spanish word lists in both files.
 
 ## Status
 

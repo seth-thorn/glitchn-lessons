@@ -3,358 +3,236 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Glitch'n Lessons</title>
+<title>Glitch'n: make music with circuits</title>
+<meta name="description" content="Free video lessons for building sound circuits on a breadboard, one small step at a time. From Arizona State University.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <style>
-/* Layout: the lesson library. A header, a row of lesson cards, then the whole map of lessons
-   (a growing, non-linear web), then what's coming. Same ink outlines as the player. */
+/* The Glitch'n home page: one big line, two ways in, the drum machine from the first lesson,
+   and a few words on where Glitch'n comes from. Same ink outlines and coral as the lessons. */
 :root {
   --ink: #161514; --page: #FAF9F7; --muted: #5E5955; --white: #FFFFFF;
-  --panel: #EE6668; --card: #FCE4E4; --on-panel: #161514;
+  --coral: #EE6668; --blush: #FCE4E4;
   --display: "Archivo", "Arial Black", "Helvetica Neue", Arial, sans-serif;
   --body: "Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
   --bw: 3.5px;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
-[hidden] { display: none !important; }
 html, body { background: var(--page); color: var(--ink); }
-body { margin: 0; font-family: var(--body); font-size: 17px; line-height: 1.5; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 32px 48px; }
+body {
+  margin: 0; font-family: var(--body); font-size: 18px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
 :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-main { max-width: 1120px; margin: 0 auto; display: grid; gap: 30px; }
-main > * { min-width: 0; } /* lets the wide map scroll inside its box instead of widening the page */
-.eyebrow { font-family: var(--mono); font-size: 12.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-h1 { font-family: var(--display); font-weight: 860; font-stretch: 112%; font-size: clamp(36px, 6vw, 60px); line-height: 1; margin: 6px 0 12px; }
-h2 { font-family: var(--display); font-weight: 800; font-stretch: 108%; font-size: 24px; margin: 0 0 12px; }
-.intro { margin: 0; max-width: 62ch; font-size: 18px; }
-.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 18px; }
-.card { position: relative; display: grid; grid-template-rows: auto 1fr; text-decoration: none; color: var(--ink); background: var(--panel); border: var(--bw) solid var(--ink); border-radius: 20px; overflow: hidden; box-shadow: 0 5px 0 var(--ink); transition: transform .12s, box-shadow .12s; }
-.card:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--ink); }
-.card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; border-bottom: var(--bw) solid var(--ink); background: var(--card); }
-.card .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; color: var(--on-panel); }
-/* the title is the card's link; its ::after stretches over the whole card so the card stays one big target */
-.card-link { color: inherit; text-decoration: none; }
-.card-link::after { content: ""; position: absolute; inset: 0; z-index: 0; border-radius: inherit; }
-.card-link:focus-visible { outline: none; }
-.card:has(.card-link:focus-visible) { outline: 3px solid var(--ink); outline-offset: 3px; }
-/* fold-out step list: sits above the stretched link so its own links work */
-.outline { position: relative; z-index: 1; margin-top: auto; padding-top: 4px; font-family: var(--body); }
-.outline summary { display: inline-flex; align-items: center; gap: 8px; min-height: 34px; padding: 4px 12px 4px 10px; border-radius: 99px; border: 1.5px solid color-mix(in srgb, currentColor 45%, transparent); font-size: 14px; font-weight: 700; cursor: pointer; list-style: none; width: fit-content; }
-.outline summary::-webkit-details-marker { display: none; }
-.outline summary::before { content: ""; width: 7px; height: 7px; border: solid currentColor; border-width: 0 2px 2px 0; transform: translateY(-2px) rotate(45deg); }
-.outline[open] summary::before { transform: translateY(1px) rotate(-135deg); }
-.outline summary:hover { background: color-mix(in srgb, currentColor 10%, transparent); }
-.outline summary:focus-visible { outline: 3px solid currentColor; outline-offset: 2px; }
-.outline ol { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 10px; }
-.outline li a { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 5px 6px; align-items: baseline; padding: 4px; margin: -4px; border-radius: 10px; color: inherit; text-decoration: none; font-size: 14px; line-height: 1.25; }
-.outline li a:hover { background: color-mix(in srgb, currentColor 10%, transparent); }
-.outline li a:hover .st { text-decoration: underline; text-underline-offset: 2px; }
-.outline li a:focus-visible { outline: 3px solid currentColor; outline-offset: 0; }
-/* the stills are wide shots; zoom the small pictures in on the breadboard */
-.outline .pic { grid-column: 1 / -1; display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 6px; background: color-mix(in srgb, currentColor 12%, transparent); }
-:root .card .outline .pic img { display: block; width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; border: 0; border-radius: 0; margin: 0; box-shadow: none; background: none; transform: scale(1.45); transform-origin: 50% 56%; }
-.outline .n { font-family: var(--display); font-weight: 700; opacity: .75; }
-@media (pointer: coarse) { .outline summary { min-height: 44px; } }
-/* when a list is open, the other cards keep their own height instead of stretching to match */
-.cards:has(.outline[open]) { align-items: start; }
-.card b { font-family: var(--display); font-weight: 800; font-stretch: 106%; font-size: 21px; line-height: 1.15; }
-.card .meta { font-family: var(--mono); font-size: 12.5px; font-weight: 600; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-.chip { border: 2px solid var(--ink); background: var(--white); color: var(--ink); border-radius: 99px; padding: 0 8px; font-size: 11.5px; }
-.mapwrap { background: var(--card); border: var(--bw) solid var(--ink); border-radius: 20px; padding: 16px; }
-.mapscroll { overflow-x: auto; background: var(--panel); border-radius: 12px; padding: 8px; }
-#map { display: block; margin: 0 auto; max-width: none; color: var(--ink); }
-#map .edge { stroke: var(--ink); stroke-width: 3; fill: none; }
-#map .edge.soft { stroke-dasharray: 5 5; opacity: .75; }
-#map .node circle { fill: var(--white); stroke: var(--ink); stroke-width: 3.5; }
-#map .node.later circle { fill: var(--card); stroke-dasharray: 6 4; }
-#map .node text { font-family: var(--body); font-weight: 700; fill: var(--ink); text-anchor: middle; dominant-baseline: middle; pointer-events: none; }
-#map .node .sub { font-family: var(--mono); font-weight: 600; fill: var(--muted); }
-#map .node { cursor: pointer; }
-#map .node:hover circle, #map .node:focus-visible circle { fill: var(--card); }
-#map .node:focus { outline: none; }
-#map .elabel rect { fill: var(--white); stroke: var(--ink); stroke-width: 2; }
-#map .elabel text { font-family: var(--mono); font-weight: 600; font-size: 11px; fill: var(--ink); text-anchor: middle; dominant-baseline: middle; }
-.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px; margin-top: 10px; }
-.legend i { display: inline-block; width: 14px; height: 14px; border-radius: 50%; border: 2.5px solid var(--ink); background: var(--white); vertical-align: -2px; margin-right: 6px; }
-.legend i.dash { border-style: dashed; background: var(--card); }
-.coming { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.coming li { border: 2.5px dashed var(--ink); border-radius: 14px; padding: 10px 14px; background: var(--white); }
-.coming b { font-family: var(--display); font-weight: 700; }
-.coming span { display: block; font-size: 15px; color: var(--muted); }
-.team { font-size: 15px; color: var(--muted); border-top: 2px solid var(--ink); padding-top: 14px; }
-.team a { color: var(--ink); font-weight: 700; }
-/* Header: text on the left, language switch pinned top-right whatever the text's length. */
-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 12px 28px; }
-.tools { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; justify-content: flex-end; }
-@media (max-width: 699px) { header { grid-template-columns: minmax(0, 1fr); } header .tools { order: -1; } }
-.style-pick { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
-.style-pick select { font-family: var(--body); font-weight: 700; font-size: 14px; color: var(--ink); background: var(--white); border: var(--bw) solid var(--ink); border-radius: 99px; padding: 4px 10px; cursor: pointer; }
-@media (pointer: coarse) { .style-pick select { padding: 8px 12px; font-size: 15px; } }
-header > div { min-width: 0; }
-.langs { display: inline-flex; border: var(--bw) solid var(--ink); border-radius: 99px; overflow: hidden; background: var(--white); }
-.lang { border: 0; background: none; padding: 4px 13px; font-family: var(--body); font-weight: 700; font-size: 14px; cursor: pointer; color: var(--ink); }
-.lang + .lang { border-left: 2.5px solid var(--ink); }
-.lang:hover { background: var(--card); }
-.lang[aria-pressed="true"] { background: var(--ink); color: var(--white); }
-@media (pointer: coarse) { .lang { padding: 8px 16px; font-size: 15px; } }
-.err { border: var(--bw) solid var(--ink); border-radius: 16px; background: var(--card); padding: 16px; }
-.toast { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: var(--ink); color: var(--white); padding: 10px 16px; border-radius: 10px; font-weight: 700; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; max-width: calc(100% - 32px); text-align: center; }
-.toast.show { opacity: 1; transform: translate(-50%, 0); }
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-/* filters and card badges: built from the colour tokens, so every style picks them up */
-.filters { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; margin: 0 0 18px; padding: 12px 16px; background: var(--card); color: var(--ink); border: var(--bw) solid var(--ink); border-radius: 16px; font-family: var(--body); }
-.fgroup { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-.fname { font-size: 13px; color: var(--muted); margin-right: 2px; }
-.filter { font: inherit; font-size: 13.5px; font-weight: 600; padding: 5px 12px; border-radius: 99px; border: 1.5px solid color-mix(in srgb, var(--ink) 40%, transparent); background: transparent; color: var(--ink); cursor: pointer; min-height: 34px; }
-.filter:hover { background: color-mix(in srgb, var(--ink) 8%, transparent); }
-.filter[aria-pressed="true"] { background: var(--ink); color: var(--card); border-color: var(--ink); }
-.filter.clear { border-style: dashed; }
-.fnone { flex-basis: 100%; margin: 0; color: var(--muted); }
-@media (pointer: coarse) { .filter { min-height: 44px; padding: 8px 14px; } }
-.ftoggle { display: none; }
-.ftoggle::after { content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 9px; border: solid currentColor; border-width: 0 2px 2px 0; transform: translateY(-2px) rotate(45deg); }
-.filters.open .ftoggle::after { transform: translateY(1px) rotate(-135deg); }
-/* on a phone the filters fold away behind one button, so the lessons come first */
-@media (max-width: 600px) { .ftoggle { display: inline-flex; align-items: center; } .filters:not(.open) .fgroup { display: none; } .filters { gap: 10px; } }
-.badges { display: flex; flex-wrap: wrap; gap: 5px; }
-.badge { font-family: var(--body); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 99px; border: 1.5px solid color-mix(in srgb, currentColor 45%, transparent); line-height: 1.35; }
-.badge.start { background: var(--ink); color: var(--card); border-color: var(--ink); }
-.badge.level::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 5px; border-radius: 50%; background: currentColor; vertical-align: 0; }
-.badge.level-medium::before { border-radius: 1px; transform: rotate(45deg); width: 7px; height: 7px; }
-.badge.level-hard::before { border-radius: 0; width: 0; height: 0; background: none; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-bottom: 8px solid currentColor; }
-.card[hidden] { display: none; }
+.wrap { max-width: 1120px; margin: 0 auto; }
 
+/* top bar: the name, and the language switch */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
+.mark { font-family: var(--display); font-weight: 860; font-stretch: 118%; font-size: 24px; letter-spacing: -.01em; color: var(--ink); text-decoration: none; }
+.langs { display: inline-flex; border: 2.5px solid var(--ink); border-radius: 99px; overflow: hidden; background: var(--white); }
+.lang { font: 700 14px/1 var(--body); color: var(--ink); background: none; border: 0; padding: 9px 14px; min-height: 38px; cursor: pointer; }
+.lang + .lang { border-left: 2.5px solid var(--ink); }
+.lang[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+.lang:focus-visible { outline-offset: -5px; outline-color: var(--coral); }
+
+/* the big line */
+.hero { padding-block: clamp(24px, 5vw, 60px) clamp(28px, 3.4vw, 40px); }
+h1 {
+  font-family: var(--display); font-weight: 880; font-stretch: 122%;
+  font-size: clamp(46px, 8.4vw, 108px); line-height: .92; letter-spacing: -.025em;
+  margin: 0; white-space: pre-line; /* the line break in the text is kept; narrow screens wrap further */
+}
+.lead { margin: clamp(18px, 2.4vw, 26px) 0 0; max-width: 40ch; text-wrap: pretty; font-size: clamp(19px, 1.9vw, 23px); line-height: 1.45; }
+.doors { display: flex; flex-wrap: wrap; gap: 14px 16px; margin-top: clamp(24px, 3vw, 34px); }
+.btn {
+  display: inline-flex; align-items: center; min-height: 54px; padding: 12px 24px;
+  font: 800 19px/1.15 var(--display); font-stretch: 108%; color: var(--ink); text-decoration: none;
+  background: var(--white); border: var(--bw) solid var(--ink); border-radius: 99px;
+  box-shadow: 0 5px 0 var(--ink); transition: transform .12s, box-shadow .12s;
+}
+.btn.go { background: var(--coral); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--ink); }
+.btn:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--ink); }
+
+/* the drum machine: the first lesson's finished board, blinking */
+.board { margin: 0; }
+.screen {
+  position: relative; aspect-ratio: 960 / 290; background: #9C9C9E;
+  border: var(--bw) solid var(--ink); border-radius: 22px; overflow: hidden; box-shadow: 0 6px 0 var(--ink);
+}
+.screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.sound {
+  position: absolute; right: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 8px 16px 8px 12px; font: 700 15px/1 var(--body); color: var(--ink);
+  background: var(--white); border: 2.5px solid var(--ink); border-radius: 99px; cursor: pointer;
+}
+.sound svg { width: 22px; height: 22px; flex: none; }
+.sound .on { display: none; }
+.sound[aria-pressed="true"] { background: var(--coral); }
+.sound[aria-pressed="true"] .on { display: inline; }
+.sound[aria-pressed="true"] .off { display: none; }
+.board figcaption { margin-top: 16px; color: var(--muted); font-size: 16px; }
+
+/* where it comes from */
+.story { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px 48px; padding-block: clamp(44px, 7vw, 88px); }
+.story h2 { font-family: var(--display); font-weight: 820; font-stretch: 112%; font-size: clamp(26px, 3vw, 34px); line-height: 1.05; margin: 0; letter-spacing: -.01em; }
+.story p { margin: 0; max-width: 58ch; }
+@media (min-width: 860px) { .story { grid-template-columns: 5fr 7fr; } }
+
+footer { border-top: 2.5px solid var(--ink); padding-block: 22px 40px; font-size: 14.5px; color: var(--muted); display: grid; gap: 8px; }
+footer p { margin: 0; max-width: 92ch; }
+footer .who { color: var(--ink); font-weight: 700; }
+footer .mt { font-style: italic; }
+
+@media (max-width: 600px) {
+  .screen { aspect-ratio: 960 / 380; border-radius: 16px; }
+  .sound { right: 8px; bottom: 8px; padding: 0; width: 44px; justify-content: center; }
+  .sound span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .btn { flex: 1 1 auto; justify-content: center; }
+}
+@media (pointer: coarse) { .lang { min-height: 44px; padding-inline: 16px; } }
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn:hover { transform: none; } }
 </style>
-<link rel="stylesheet" href="styles/all.css">
 </head>
 <body>
-<main>
-  <header>
-    <div>
-      <div class="eyebrow">Glitch'n</div>
-      <h1 data-i18n="lessons">Lessons</h1>
-      <p class="intro" data-i18n="intro">Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.</p>
-    </div>
-    <div class="tools">
-      <label class="style-pick"><span id="styleLabel">Style</span><select id="styleSel"></select></label>
-      <div class="langs words" role="group" aria-label="Words" id="words"></div>
-      <div class="langs" role="group" aria-label="Language" id="langs"></div>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="./">Glitch'n</a>
+    <div class="langs" role="group" aria-label="Language" id="langs">
+      <button class="lang" data-lang="en" lang="en" aria-pressed="true">English</button>
+      <button class="lang" data-lang="es" lang="es" aria-pressed="false">Español</button>
     </div>
   </header>
 
-  <section aria-labelledby="h-lessons">
-    <h2 id="h-lessons" data-i18n="startBuilding">Start building</h2>
-    <div class="filters" id="filters" hidden></div>
-    <div class="cards" id="cards"><p data-i18n="loading">Loading lessons…</p></div>
-  </section>
+  <main>
+    <section class="hero">
+      <h1 data-t="h1">Make music
+with circuits.</h1>
+      <p class="lead" data-t="lead">Free video lessons that show you how to build sound circuits on a breadboard, one small step at a time.</p>
+      <div class="doors">
+        <a class="btn go" id="first" href="lessons/blink-to-drum-machine/index.html" data-t="first">Start the first lesson</a>
+        <a class="btn" id="all" href="lessons/index.html" data-t="all">See all lessons</a>
+      </div>
+    </section>
 
-  <section class="mapwrap" aria-labelledby="h-map">
-    <h2 id="h-map" data-i18n="map">Map of lessons</h2>
-    <div class="mapscroll"><svg id="map" role="group" aria-label="How the lessons connect" data-i18n-aria="mapAria"></svg></div>
-    <div class="legend"><span><i></i><span data-i18n="ready">Ready to build</span></span><span><i class="dash"></i><span data-i18n="coming">Coming</span></span><span data-i18n="arrows">Arrows point to where a lesson leads.</span></div>
-  </section>
+    <figure class="board">
+      <div class="screen">
+        <video id="clip" src="home/drum-machine.mp4" poster="home/drum-machine.jpg" muted loop playsinline preload="metadata" aria-describedby="cap"></video>
+        <button class="sound" id="sound" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path class="off" d="M16 9.5l5 5M21 9.5l-5 5"/><path class="on" d="M15.5 9a4.5 4.5 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/></svg>
+          <span id="soundLabel">Turn sound on</span>
+        </button>
+      </div>
+      <figcaption id="cap" data-t="cap">The drum machine you build in the first lesson. Each light blinks with a drum.</figcaption>
+    </figure>
 
-  <section aria-labelledby="h-coming" id="comingSec" hidden>
-    <h2 id="h-coming" data-i18n="coming">Coming</h2>
-    <ul class="coming" id="coming"></ul>
-  </section>
+    <section class="story" aria-labelledby="h-story">
+      <h2 id="h-story" data-t="storyH">How Glitch'n started</h2>
+      <p data-t="story">Glitch'n began in June 2025 with three free summer courses at the ASU MIX Center in downtown Mesa, Arizona. Sixty young people and their families came to build circuits that make sound. These lessons carry that course forward, so more people can build along.</p>
+    </section>
+  </main>
 
-  <p class="team" lang="en">For the Glitch'n team: <a href="editor/index.html">open the step editor</a> to turn a new video into a lesson.</p>
-</main>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <footer>
+    <p class="who" data-t="who">Glitch'n is a project of the School of Games, Arts, Media and Engineering at Arizona State University.</p>
+    <p data-t="nsf">This material is based upon work supported by the U.S. National Science Foundation under Award No. 2432637 (Advancing Informal STEM Learning). Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.</p>
+    <p class="mt" id="mt" lang="es" hidden>Traducción automática.</p>
+  </footer>
+</div>
 
 <script>
 (() => {
-  const $ = (id) => document.getElementById(id);
-  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const fmt = (s) => { s = Math.round(s); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
-  /* ---------- language: ?lang= in the address, then the visitor's last choice, then the browser ---------- */
-  const LANGS = { en: 'English', es: 'Español' };
-  const UI = {
-    en: { style: 'Style', style_tv: 'TV', style_clean: 'Clean', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', lessons: 'Lessons', intro: 'Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.',
-      startBuilding: 'Start building', fDifficulty: 'Difficulty', fChips: 'Chips', fOsc: 'Oscillators', fConcepts: 'Concepts', fClear: 'Show all', fToggle: 'Filter lessons', fNone: 'No lessons match these filters.', startHere: 'Start here', words: 'Words', wordsSimple: 'Simple', wordsTech: 'Technical', wordsSimpleTitle: 'Plain words for the parts and steps', wordsTechTitle: 'The real names of the parts', requires: 'Requires', oscN: '{n} osc.', loading: 'Loading lessons…', map: 'Map of lessons', mapAria: 'How the lessons connect', ready: 'Ready to build', coming: 'Coming', arrows: 'Arrows point to where a lesson leads.',
-      language: 'Language', steps: 'steps', subSteps: 'sub-steps', seeSteps: 'See the {n} steps', draft: 'Draft', comingSmall: 'coming', notReady: '“{t}” isn’t ready yet.', none: 'No lessons yet.',
-      listError: '<b>The lesson list did not load.</b> It lives in lessons/index.json; run tools/build_index.py to make it.', title: "Glitch'n Lessons", machine: '',
-      'kind_variation': 'variation', 'kind_related': 'related', 'kind_next day': 'next day', 'kind_revisited': 'revisited' },
-    es: { style: 'Estilo', style_tv: 'Tele', style_clean: 'Limpio', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', lessons: 'Lecciones', intro: 'Arma circuitos de sonido en una protoboard, un pequeño paso a la vez. Cada lección muestra un video del armado junto a instrucciones paso a paso, con fotos de cerca que puedes ampliar y un mapa de a dónde ir después.',
-      startBuilding: 'Empieza a armar', fDifficulty: 'Dificultad', fChips: 'Chips', fOsc: 'Osciladores', fConcepts: 'Conceptos', fClear: 'Mostrar todas', fToggle: 'Filtrar lecciones', fNone: 'Ninguna lección coincide con estos filtros.', startHere: 'Empieza aquí', words: 'Palabras', wordsSimple: 'Sencillo', wordsTech: 'Técnico', wordsSimpleTitle: 'Palabras sencillas para las piezas y los pasos', wordsTechTitle: 'Los nombres reales de las piezas', requires: 'Requiere', oscN: '{n} osc.', loading: 'Cargando lecciones…', map: 'Mapa de lecciones', mapAria: 'Cómo se conectan las lecciones', ready: 'Lista para armar', coming: 'Próximamente', arrows: 'Las flechas apuntan hacia donde lleva cada lección.',
-      language: 'Idioma', steps: 'pasos', subSteps: 'subpasos', seeSteps: 'Ver los {n} pasos', draft: 'Borrador', comingSmall: 'próximamente', notReady: '“{t}” todavía no está lista.', none: 'Todavía no hay lecciones.',
-      listError: '<b>No se pudo cargar la lista de lecciones.</b>', title: 'Lecciones de Glitch’n', machine: 'Traducción automática',
-      'kind_variation': 'variación', 'kind_related': 'relacionada', 'kind_next day': 'día siguiente', 'kind_revisited': 'repaso' }
+  /* ---------- words, in English and Spanish ---------- */
+  const T = {
+    en: {
+      title: "Glitch\'n: make music with circuits",
+      h1: 'Make music\nwith circuits.',
+      lead: 'Free video lessons that show you how to build sound circuits on a breadboard, one small step at a time.',
+      first: 'Start the first lesson', all: 'See all lessons',
+      cap: 'The drum machine you build in the first lesson. Each light blinks with a drum.',
+      soundOn: 'Turn sound on', soundOff: 'Turn sound off', play: 'Play with sound', pause: 'Pause',
+      storyH: "How Glitch\'n started",
+      story: 'Glitch\'n began in June 2025 with three free summer courses at the ASU MIX Center in downtown Mesa, Arizona. Sixty young people and their families came to build circuits that make sound. These lessons carry that course forward, so more people can build along.',
+      who: 'Glitch\'n is a project of the School of Games, Arts, Media and Engineering at Arizona State University.',
+      nsf: 'This material is based upon work supported by the U.S. National Science Foundation under Award No. 2432637 (Advancing Informal STEM Learning). Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.',
+    },
+    es: {
+      title: 'Glitch\'n: haz música con circuitos',
+      h1: 'Haz música\ncon circuitos.',
+      lead: 'Lecciones en video, gratis, que te enseñan a construir circuitos de sonido en una protoboard, un pequeño paso a la vez.',
+      first: 'Empieza la primera lección', all: 'Ver todas las lecciones',
+      cap: 'La caja de ritmos que construyes en la primera lección. Cada luz parpadea con un golpe de tambor.',
+      soundOn: 'Activar sonido', soundOff: 'Quitar sonido', play: 'Reproducir con sonido', pause: 'Pausar',
+      storyH: 'Cómo empezó Glitch\'n',
+      story: 'Glitch\'n empezó en junio de 2025 con tres cursos de verano gratuitos en el ASU MIX Center, en el centro de Mesa, Arizona. Sesenta jóvenes y sus familias vinieron a construir circuitos que hacen sonido. Estas lecciones continúan ese curso, para que más personas puedan construir con nosotros.',
+      who: 'Glitch\'n es un proyecto de la School of Games, Arts, Media and Engineering de Arizona State University.',
+      nsf: 'Este material se basa en trabajo financiado por la Fundación Nacional de Ciencias de EE. UU. (NSF) mediante la subvención n.º 2432637 (Advancing Informal STEM Learning). Las opiniones, hallazgos, conclusiones o recomendaciones expresadas en este material son de los autores y no reflejan necesariamente el punto de vista de la NSF.',
+    },
   };
-  function pickLang() {
-    const q = new URLSearchParams(location.search).get('lang'); if (q && LANGS[q]) return q;
-    try { const v = JSON.parse(localStorage.getItem('glitchn-lang')); if (v && LANGS[v]) return v; } catch (e) {}
+
+  /* ---------- language: ?lang= in the address, then the visitor's last choice, then the browser (same as the lessons) ---------- */
+  const q = new URLSearchParams(location.search);
+  const pick = () => {
+    if (T[q.get('lang')]) return q.get('lang');
+    try { const v = JSON.parse(localStorage.getItem('glitchn-lang')); if (T[v]) return v; } catch (e) {}
     return (navigator.languages || [navigator.language || '']).some((l) => /^es\b/i.test(l)) ? 'es' : 'en';
-  }
-  const LANG = pickLang();
-  // Styles: same names and storage as the lesson player, so a choice made anywhere applies everywhere.
-  // To add a style: add its name here and in player/player.js, its menu name (style_<name>) to UI, and its CSS file in /styles.
-  const STYLES = ['tv', 'clean', 'gadget', 'solarpunk', 'treehouse', 'quest', 'skyline', 'daydream', 'terminal'];
-  const OLD_STYLE_NAMES = { rams: 'gadget' }; // earlier names, so old links and saved choices still work
-  const okStyle = (v) => { v = OLD_STYLE_NAMES[v] || v; return STYLES.includes(v) ? v : null; };
-  let STYLE = (() => { const q = okStyle(new URLSearchParams(location.search).get('style')); if (q) return q; try { const v = okStyle(JSON.parse(localStorage.getItem('glitchn-style'))); if (v) return v; } catch (e) {} return 'tv'; })();
-  document.documentElement.dataset.style = STYLE;
-  const t = (k, v) => String(UI[LANG][k] ?? UI.en[k] ?? k).replace(/\{(\w+)\}/g, (_, n) => (v && v[n] != null ? v[n] : ''));
-  // Words: Simple (plain words, the default) or Technical (the real names of the parts); same storage as the player.
-  const WORDS_LIST = ['simple', 'technical'];
-  const WORDS = (() => { const q = new URLSearchParams(location.search).get('words'); if (WORDS_LIST.includes(q)) return q; try { const v = JSON.parse(localStorage.getItem('glitchn-words')); if (WORDS_LIST.includes(v)) return v; } catch (e) {} return 'simple'; })();
-  document.documentElement.dataset.words = WORDS;
-  const keepLang = (() => { const q = new URLSearchParams(location.search), k = new URLSearchParams(); if (q.get('lang')) k.set('lang', LANG); if (q.get('words')) k.set('words', WORDS); const s = k.toString(); return s ? '?' + s : ''; })();
-  // a lesson's text in the chosen words and language: simple in this language, then simple English only for English, then the normal text
-  const loc = (x, f) => (WORDS === 'simple' && x.simple && x.simple[LANG] && x.simple[LANG][f]) || (x.i18n && x.i18n[LANG] && x.i18n[LANG][f]) || x[f];
-  document.documentElement.lang = LANG; document.title = t('title');
-  document.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = t(el.dataset.i18n); });
-  document.querySelectorAll('[data-i18n-aria]').forEach((el) => el.setAttribute('aria-label', t(el.dataset.i18nAria)));
-  $('langs').setAttribute('aria-label', t('language'));
-  $('styleLabel').textContent = t('style');
-  $('styleSel').innerHTML = STYLES.map((k) => '<option value="' + k + '"' + (k === STYLE ? ' selected' : '') + '>' + t('style_' + k) + '</option>').join('');
-  $('styleSel').addEventListener('change', (e) => { STYLE = e.target.value; document.documentElement.dataset.style = STYLE; try { localStorage.setItem('glitchn-style', JSON.stringify(STYLE)); } catch (err) {} });
-  $('langs').innerHTML = Object.entries(LANGS).map(([k, n]) => '<button class="lang" data-lang="' + k + '" lang="' + k + '" aria-pressed="' + (k === LANG) + '">' + n + '</button>').join('');
-  $('words').setAttribute('aria-label', t('words'));
-  $('words').innerHTML = WORDS_LIST.map((k) => '<button class="lang" data-words="' + k + '" title="' + t(k === 'simple' ? 'wordsSimpleTitle' : 'wordsTechTitle') + '" aria-pressed="' + (k === WORDS) + '">' + t(k === 'simple' ? 'wordsSimple' : 'wordsTech') + '</button>').join('');
-  $('words').addEventListener('click', (e) => {
-    const b = e.target.closest('.lang'); if (!b || b.dataset.words === WORDS) return;
-    try { localStorage.setItem('glitchn-words', JSON.stringify(b.dataset.words)); } catch (err) {}
-    const u = new URL(location.href); u.searchParams.set('words', b.dataset.words); location.href = u.href;
-  });
-  $('langs').addEventListener('click', (e) => {
-    const b = e.target.closest('.lang'); if (!b || b.dataset.lang === LANG) return;
-    try { localStorage.setItem('glitchn-lang', JSON.stringify(b.dataset.lang)); } catch (err) {}
-    const u = new URL(location.href); u.searchParams.set('lang', b.dataset.lang); location.href = u.href;
-  });
-  let tt; function toast(m) { const t = $('toast'); t.textContent = m; t.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 2600); }
-  const lessonHref = (slug) => 'lessons/' + slug + '/index.html' + keepLang;
+  };
+  let LANG = pick();
 
-  fetch('lessons/index.json').then((r) => r.json()).then(render).catch(() => {
-    $('cards').innerHTML = '<div class="err">' + t('listError') + '</div>';
+  const clip = document.getElementById('clip');
+  const btn = document.getElementById('sound');
+  const label = document.getElementById('soundLabel');
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const soundLabel = () => {
+    const t = T[LANG];
+    label.textContent = still ? (clip.paused ? t.play : t.pause) : (clip.muted ? t.soundOn : t.soundOff);
+    btn.setAttribute('aria-pressed', String(still ? !clip.paused : !clip.muted));
+  };
+
+  const apply = () => {
+    const t = T[LANG];
+    document.documentElement.lang = LANG;
+    document.title = t.title;
+    document.querySelectorAll('[data-t]').forEach((el) => { el.textContent = t[el.dataset.t]; });
+    document.querySelectorAll('.lang').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === LANG)));
+    document.getElementById('mt').hidden = LANG !== 'es';
+    // carry the language into the lessons only when it was set in the address, as the lesson pages do
+    const keep = q.get('lang') ? '?lang=' + LANG : '';
+    document.getElementById('first').href = 'lessons/blink-to-drum-machine/index.html' + keep;
+    document.getElementById('all').href = 'lessons/index.html' + keep;
+    soundLabel();
+  };
+
+  document.getElementById('langs').addEventListener('click', (e) => {
+    const b = e.target.closest('.lang'); if (!b) return;
+    LANG = b.dataset.lang;
+    try { localStorage.setItem('glitchn-lang', JSON.stringify(LANG)); } catch (err) {}
+    if (q.get('lang')) { q.set('lang', LANG); history.replaceState(null, '', '?' + q.toString()); }
+    apply();
   });
 
-  function render(IDX) {
-    const ready = IDX.lessons || [], planned = IDX.planned || [];
-    $('cards').innerHTML = ready.length ? ready.map((l) => (
-      '<article class="card">' +
-        (l.thumb ? '<img src="lessons/' + esc(l.thumb) + '" alt="" loading="lazy">' : '') +
-        '<div class="body"><b><a class="card-link" href="' + lessonHref(l.slug) + '">' + esc(loc(l, 'title')) + '</a></b><span>' + esc(loc(l, 'summary')) + '</span>' +
-        badges(l, IDX) +
-        '<span class="meta">' + fmt(l.duration) + (l.outline && l.outline.length ? '' : ' · ' + l.steps + ' ' + t('steps')) + ' · ' + l.subSteps + ' ' + t('subSteps') + (l.status === 'draft' ? ' <span class="chip">' + t('draft') + '</span>' : '') + (LANG !== 'en' && l.i18n && l.i18n[LANG] ? ' <span class="chip">' + t('machine') + '</span>' : '') + '</span>' +
-        outline(l) + '</div>' +
-      '</article>')).join('') : '<p>' + t('none') + '</p>';
-    // step pictures load only when someone opens a list
-    $('cards').addEventListener('toggle', (e) => {
-      if (!e.target.open) return;
-      e.target.querySelectorAll('img[data-src]').forEach((im) => { im.src = im.dataset.src; im.removeAttribute('data-src'); });
-    }, true);
-    buildFilters(ready, IDX);
-    $('comingSec').hidden = !planned.length;
-    $('coming').innerHTML = planned.map((p) => '<li><b>' + esc(loc(p, 'title')) + '</b><span>' + esc(loc(p, 'summary')) + '</span></li>').join('');
-    drawMap(ready, planned);
+  /* ---------- the drum machine: blinks quietly on its own; sound only when asked ---------- */
+  clip.volume = 0.7;
+  if (!still) {
+    clip.autoplay = true;
+    clip.play().catch(() => {});
   }
-
-  /* ---------- the fold-out list of a lesson's steps, each linking straight to that step ---------- */
-  function outline(l) {
-    if (!l.outline || !l.outline.length) return '';
-    const plain = (WORDS === 'simple' && l.simple && l.simple[LANG] && l.simple[LANG].outline) || [];
-    const tech = (l.i18n && l.i18n[LANG] && l.i18n[LANG].outline) || [];
-    const titles = l.outline.map((o, i) => plain[i] || tech[i] || '');
-    return '<details class="outline"><summary>' + esc(t('seeSteps', { n: l.outline.length })) + '</summary><ol>' +
-      l.outline.map((o, i) => '<li><a href="' + lessonHref(l.slug) + '#step-' + (i + 1) + '">' +
-        '<span class="pic">' + (o.thumb ? '<img data-src="lessons/' + esc(o.thumb) + '" alt="" width="320" height="180">' : '') + '</span>' +
-        '<span class="n">' + (i + 1) + '</span><span class="st">' + esc(titles[i] || o.title) + '</span></a></li>').join('') +
-      '</ol></details>';
-  }
-  /* ---------- descriptors on cards, and filters (difficulty, chips, oscillators, concepts) ---------- */
-  const catLabel = (IDX, kind, k) => { const e = ((IDX && IDX.catalog) || {})[kind] && IDX.catalog[kind][k]; if (!e) return k; const sp = WORDS === 'simple' && e.simple; return (sp && (sp[LANG] || sp.en)) || e[LANG] || e.en; };
-  function badges(l, IDX) {
-    if (!l.difficulty) return '';
-    const titleOf = (s) => { const x = (IDX.lessons || []).find((y) => y.slug === s); return x ? loc(x, 'title') : s; };
-    const b = ['<span class="badge level level-' + l.difficulty.level + '" title="' + esc(l.difficulty.why) + '">' + esc(catLabel(IDX, 'difficulty', l.difficulty.level)) + '</span>'];
-    if (l.startHere) b.push('<span class="badge start">' + esc(t('startHere')) + '</span>');
-    (l.requires || []).forEach((r) => b.push('<span class="badge req">' + esc(t('requires')) + ': ' + esc(titleOf(r)) + '</span>'));
-    (l.chips || []).forEach((c) => b.push('<span class="badge">' + esc(c) + '</span>'));
-    if (l.oscillators) b.push('<span class="badge">' + esc(t('oscN', { n: l.oscillators })) + '</span>');
-    return '<span class="badges">' + b.join('') + '</span>';
-  }
-  function buildFilters(ready, IDX) {
-    const rated = ready.filter((l) => l.difficulty);
-    if (rated.length < 2) return;
-    const uniq = (arr) => [...new Set(arr)];
-    const groups = [
-      ['difficulty', t('fDifficulty'), ['easy', 'medium', 'hard'].filter((v) => rated.some((l) => l.difficulty.level === v)), (v) => catLabel(IDX, 'difficulty', v), (l, v) => l.difficulty.level === v],
-      ['chips', t('fChips'), uniq(rated.flatMap((l) => l.chips || [])), (v) => v, (l, v) => (l.chips || []).includes(v)],
-      ['osc', t('fOsc'), uniq(rated.map((l) => l.oscillators)).sort(), (v) => String(v), (l, v) => l.oscillators === v],
-      ['concepts', t('fConcepts'), uniq(rated.flatMap((l) => l.concepts || [])), (v) => catLabel(IDX, 'concepts', v), (l, v) => (l.concepts || []).includes(v)]
-    ];
-    const on = {}; // group -> Set of chosen values (any of them matches; every group must match)
-    const box = $('filters');
-    box.innerHTML = '<button class="filter ftoggle" id="fToggle" aria-expanded="false" aria-controls="filters">' + esc(t('fToggle')) + '</button>' + groups.map(([g, name, vals, lab], gi) => '<div class="fgroup" role="group" aria-label="' + esc(name) + '"><span class="fname">' + esc(name) + '</span>' +
-      vals.map((v, vi) => '<button class="filter" aria-pressed="false" data-g="' + gi + '" data-v="' + vi + '">' + esc(lab(v)) + '</button>').join('') + '</div>').join('') +
-      '<button class="filter clear" id="fClear" hidden>' + esc(t('fClear')) + '</button><p class="fnone" id="fNone" hidden>' + esc(t('fNone')) + '</p>';
-    box.hidden = false;
-    const cards = [...$('cards').querySelectorAll('.card')];
-    function apply() {
-      let shown = 0;
-      ready.forEach((l, i) => {
-        const ok = groups.every(([g, , vals, , test], gi) => !on[gi] || !on[gi].size || [...on[gi]].some((vi) => l.difficulty && test(l, vals[vi])));
-        if (cards[i]) cards[i].hidden = !ok; if (ok) shown++;
-      });
-      $('fNone').hidden = shown > 0;
-      const n = Object.values(on).reduce((a, x) => a + x.size, 0);
-      $('fClear').hidden = !n;
-      $('fToggle').textContent = t('fToggle') + (n ? ' (' + n + ')' : '');
+  btn.addEventListener('click', () => {
+    if (still) {
+      clip.muted = false;
+      if (clip.paused) clip.play().catch(() => {}); else clip.pause();
+    } else {
+      clip.muted = !clip.muted;
+      if (clip.paused) clip.play().catch(() => {});
     }
-    box.addEventListener('click', (e) => {
-      const b = e.target.closest('.filter'); if (!b) return;
-      if (b.id === 'fToggle') { const open = box.classList.toggle('open'); b.setAttribute('aria-expanded', String(open)); return; }
-      if (b.id === 'fClear') { Object.values(on).forEach((x) => x.clear()); box.querySelectorAll('.filter[aria-pressed]').forEach((x) => x.setAttribute('aria-pressed', 'false')); apply(); return; }
-      const gi = +b.dataset.g, vi = +b.dataset.v; on[gi] = on[gi] || new Set();
-      if (on[gi].has(vi)) on[gi].delete(vi); else on[gi].add(vi);
-      b.setAttribute('aria-pressed', String(on[gi].has(vi))); apply();
-    });
-  }
+    soundLabel();
+  });
+  clip.addEventListener('play', soundLabel);
+  clip.addEventListener('pause', soundLabel);
 
-  function wrap(text, max) {
-    const words = String(text).split(/\s+/); const lines = []; let line = '';
-    words.forEach((w) => { if ((line + ' ' + w).trim().length > max && line) { lines.push(line); line = w; } else line = (line + ' ' + w).trim(); });
-    if (line) lines.push(line); return lines.slice(0, 4);
-  }
-
-  // Layered layout: each lesson sits one column to the right of the lessons that lead to it.
-  function drawMap(ready, planned) {
-    const nodes = {}; const order = [];
-    [...ready.map((l) => ({ ...l, title: loc(l, 'title'), ready: true })), ...planned.map((p) => ({ ...p, title: loc(p, 'title'), ready: false }))].forEach((n) => { nodes[n.slug] = n; order.push(n.slug); });
-    const edges = [];
-    order.forEach((s) => (nodes[s].links || []).forEach((l) => { if (nodes[l.to]) edges.push({ from: s, to: l.to, kind: l.kind || 'next' }); }));
-    const depth = {}; order.forEach((s) => { depth[s] = 0; });
-    for (let k = 0; k < order.length; k++) edges.forEach((e) => { if (depth[e.to] < depth[e.from] + 1) depth[e.to] = Math.min(depth[e.from] + 1, order.length); });
-    const cols = {}; order.forEach((s) => { (cols[depth[s]] = cols[depth[s]] || []).push(s); });
-    const nCols = Math.max(...Object.keys(cols).map(Number)) + 1;
-    const maxRows = Math.max(...Object.values(cols).map((c) => c.length));
-    const R = 52, CW = 170, RH = 130, PAD = 18;
-    const W = PAD * 2 + R * 2 + (nCols - 1) * CW, H = PAD * 2 + R * 2 + (maxRows - 1) * RH;
-    const pos = {};
-    Object.entries(cols).forEach(([c, list]) => list.forEach((s, i) => { pos[s] = [PAD + R + c * CW, H / 2 + (i - (list.length - 1) / 2) * RH]; }));
-    let out = '<defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>';
-    edges.forEach((e) => {
-      const [x1, y1] = pos[e.from], [x2, y2] = pos[e.to]; const dx = x2 - x1, dy = y2 - y1, d = Math.hypot(dx, dy) || 1;
-      const sx = x1 + dx / d * R, sy = y1 + dy / d * R, ex = x2 - dx / d * (R + 5), ey = y2 - dy / d * (R + 5);
-      out += '<path class="edge' + (nodes[e.to].ready ? '' : ' soft') + '" d="M' + sx + ' ' + sy + 'L' + ex + ' ' + ey + '" marker-end="url(#arr)"/>';
-      if (e.kind !== 'next') { const kl = UI[LANG]['kind_' + e.kind] || e.kind; const mx = (sx + ex) / 2, my = (sy + ey) / 2, w = kl.length * 6.8 + 12; out += '<g class="elabel"><rect x="' + (mx - w / 2) + '" y="' + (my - 9) + '" width="' + w + '" height="18" rx="9"/><text x="' + mx + '" y="' + (my + 0.5) + '">' + esc(kl) + '</text></g>'; }
-    });
-    order.forEach((s) => {
-      const n = nodes[s], [x, y] = pos[s]; const lines = wrap(n.title, 12); const lh = 14; const y0 = y - (lines.length - 1) * lh / 2 - (n.ready ? 0 : 6);
-      out += '<g class="node' + (n.ready ? '' : ' later') + '" tabindex="0" role="button" data-slug="' + esc(s) + '" aria-label="' + esc(n.title) + (n.ready ? '' : ', ' + t('comingSmall')) + '"><circle cx="' + x + '" cy="' + y + '" r="' + R + '"/>' +
-        lines.map((l, i) => '<text x="' + x + '" y="' + (y0 + i * lh) + '" font-size="12.5">' + esc(l) + '</text>').join('') +
-        (n.ready ? '' : '<text class="sub" x="' + x + '" y="' + (y0 + lines.length * lh + 2) + '" font-size="10.5">' + esc(t('comingSmall')) + '</text>') + '</g>';
-    });
-    const svg = $('map'); svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.setAttribute('width', W); svg.setAttribute('height', H); svg.innerHTML = out;
-    const open = (s) => { const n = nodes[s]; if (n.ready) location.href = lessonHref(s); else toast(t('notReady', { t: n.title })); };
-    svg.addEventListener('click', (e) => { const g = e.target.closest('.node'); if (g) open(g.dataset.slug); });
-    svg.addEventListener('keydown', (e) => { const g = e.target.closest('.node'); if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(g.dataset.slug); } });
-  }
+  apply();
 })();
 </script>
 </body>
