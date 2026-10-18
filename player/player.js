@@ -10,6 +10,12 @@
   const INDEX_URL = C.index || '../index.json';
   const HOME_URL = C.home || '../index.html';
   const lessonHref = (slug) => (C.lessonHref || '../{slug}/index.html').replace('{slug}', slug);
+  // The part pictures (parts-art.js at the site root, beside player/) for the parts list.
+  const ART_URL = C.partsArt || new URL('../parts-art.js', (document.currentScript && document.currentScript.src) || location.href).href;
+  let artLoad = null;
+  const loadArt = () => artLoad || (artLoad = window.GlitchnParts ? Promise.resolve() : new Promise((ok) => {
+    const sc = document.createElement('script'); sc.src = ART_URL; sc.onload = ok; sc.onerror = ok; document.head.appendChild(sc);
+  }));
   /* ---------- language ----------
      Interface wording lives in UI below. Lesson text comes from lesson.json (English) and, for other
      languages, from lesson.<lang>.json beside it: a list of English lines and their translations.
@@ -292,12 +298,14 @@
         const e = (cat.parts || {})[k] || {}, sp = WORDS === 'simple' && e.simple;
         // Simple: a plain name and what the part is or does. Technical: the real name and the kit part number.
         const name = sp ? (sp[LANG] || sp.en) : (e[LANG] || e.en || k), small = sp ? (sp['about_' + LANG] || sp.about_en) : e.id;
-        return '<li><b class="qty">' + esc(q) + '</b><span class="pname">' + esc(name) + (small ? '<small>' + esc(small) + '</small>' : '') + '</span></li>';
+        const pic = window.GlitchnParts ? GlitchnParts.picture(k) : '';
+        return '<li><span class="pic" aria-hidden="true">' + pic + '</span><b class="qty">' + esc(q) + '</b><span class="pname">' + esc(name) + (small ? '<small>' + esc(small) + '</small>' : '') + '</span></li>';
       }).join('') +
       '</ul></div>')).join('') +
       '<p class="parts-buy"><a href="../../materials/index.html' + keep + '">' + esc(t('whereToGet')) + '</a></p>';
     $('partsCount').textContent = t('partsCount', { n: Object.keys(me.parts).length });
     $('partsPanel').hidden = false;
+    if (!window.GlitchnParts) loadArt().then(() => { if (window.GlitchnParts) renderFacts(me, IDX); });
   }
 
   function start(L, IDX) {

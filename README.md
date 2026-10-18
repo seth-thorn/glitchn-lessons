@@ -21,6 +21,7 @@ materials/
 downloads/                 files to download: chip labels, chip maps (pinout cards), posters and table signs, stickers, logos, colors,
                            and glitchn-pack.zip with all of them (made by tools/make_pack.py)
 player/player.js, .css     the one lesson player every lesson page uses
+parts-art.js               the part pictures, shared by the What you need page and the lessons' parts lists
 lessons/
   index.html               the lesson library: lesson cards, the map of all lessons, what's coming
   index.json               the list of lessons (made by tools/build_index.py; don't edit by hand)
@@ -143,7 +144,7 @@ The site is plain HTML with no build step, published with GitHub Pages from the 
 
 - **The DigiKey cart** is a FastAdd link (`https://www.digikey.com/classic/ordering/fastadd.aspx?part1=…&qty1=…`) built from the `dk` field of each kit row: `dk.pn` is the DigiKey part number and `dk.per` the pieces in one DigiKey unit. Every `dk` number was checked in stock on 2026-10-18; the resistors, capacitors and diode are generic equivalents because DigiKey had the Adafruit packs on backorder. A wrong part number makes DigiKey stop on an error page, so check new numbers by opening the link. For bigger orders DigiKey may first show a "better value" page; the page tells buyers to press Submit there.
 - **The kit list** is `materials/kit.json`: each row names a part (`key`, a `lessons/catalog.json` key where there is one), how many are in one full kit (`qty`), where else to buy it (`buy`, with `per` for packs) and its DigiKey number (`dk`). A row with no store shows "Any store".
-- **The part pictures** are drawn in the page itself (`ART` in `materials/index.html`), one small SVG per kit key. A new part needs a picture there and a short name in `NAMES`.
+- **The part pictures** are in `parts-art.js` at the site root (`GlitchnParts.picture(key)`), one small SVG per kit/catalog key; chips are drawn with their real pin count (40106: 14, the others: 16). The What you need page and every lesson's parts list use them (the player loads `parts-art.js` itself). A new part needs a picture there, and a short name in `NAMES` on the What you need page.
 - **Chip labels** (`downloads/glitchn-chip-labels.pdf`) are made by `python3 tools/make_labels.py`: 13 × 5.6 mm labels for the top of a 14-pin chip, with the Glitch'n logo and "© Glitch'n" on the sheet.
 - **The pack** (`downloads/glitchn-pack.zip`) is made by `python3 tools/make_pack.py` from the files in `downloads/`. Run it after changing any of them.
 - **Chip maps, stickers, logos and colors** come from Seth's Design Assets folder. The chip map JPEGs were converted from CMYK to sRGB for screens. The colors sheet has the Glitch'n logo added.

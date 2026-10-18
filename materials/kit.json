@@ -242,12 +242,13 @@
    "key": "breadboard",
    "qty": 1,
    "buy": {
-    "store": null,
-    "number": "Elenco"
+    "store": "Elenco",
+    "number": "9830 BreadBlox, 830 points",
+    "url": "https://shop.elenco.com/consumers/9830-breadblox-830-tie-points.html"
    },
    "note": {
-    "en": "Elenco boards recommended.",
-    "es": "Recomendamos las de Elenco."
+    "en": "We strongly recommend Elenco. On cheap breadboards the holes are too stiff or too loose, and kids struggle to push wires in and pull them out.",
+    "es": "Recomendamos mucho Elenco. En las protoboards baratas los agujeros quedan muy duros o muy flojos, y a los niños les cuesta meter y sacar los cables."
    }
   },
   {
@@ -261,22 +262,11 @@
     "store": "Amazon",
     "number": "AUSTOR assortment",
     "url": "https://www.amazon.com/AUSTOR-Lengths-Assorted-Preformed-Breadboard/dp/B07CJYSL2T/"
+   },
+   "note": {
+    "en": "The set we use: its colors match the lessons.",
+    "es": "El juego que usamos: sus colores coinciden con las lecciones."
    }
-  },
-  {
-   "key": "alligator",
-   "qty": 2,
-   "name": {
-    "en": "Alligator clip to jumper wire",
-    "es": "Cable de caimán a puente"
-   },
-   "buy": {
-    "store": "Adafruit",
-    "number": "#4304",
-    "url": "https://www.adafruit.com/product/4304",
-    "per": 6
-   },
-   "group": "connect"
   },
   {
    "key": "jack",

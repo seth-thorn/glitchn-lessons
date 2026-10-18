@@ -190,6 +190,19 @@
 :root[data-style="simple"] .parts-group { background: var(--card); border-radius: 12px; }
 :root[data-style="simple"] .parts-group h3 { font-family: var(--body); font-weight: 600; font-size: 14px; color: var(--muted); }
 :root[data-style="simple"] .parts-group .qty { font-family: var(--body); font-weight: 700; color: var(--ink); }
+/* Simple: the parts as pictures, like the What you need page. Kids find a part by how it looks. */
+:root[data-style="simple"] .parts-groups { columns: auto; display: flex; flex-wrap: wrap; gap: 12px; }
+:root[data-style="simple"] .parts-group { flex: 1 1 auto; margin: 0; padding: 14px 16px 16px; }
+:root[data-style="simple"] .parts-groups > .parts-buy { flex-basis: 100%; margin: 4px 0 20px; }
+:root[data-style="simple"] .parts-group ul { display: flex; flex-wrap: wrap; gap: 16px 12px; }
+:root[data-style="simple"] .parts-group li { position: relative; display: block; width: 116px; font-size: 14px; }
+:root[data-style="simple"] .parts-group .pic { width: auto; height: auto; aspect-ratio: 1; border-radius: 12px; background: var(--panel); }
+:root[data-style="simple"] .parts-group .pic svg { width: 76%; height: 76%; }
+:root[data-style="simple"] .parts-group .qty { position: absolute; top: 7px; left: 9px; text-align: left; font-size: 18px; line-height: 1; }
+:root[data-style="simple"] .parts-group .qty::after { content: none; }
+:root[data-style="simple"] .parts-group .pname { display: block; margin-top: 8px; font-weight: 600; line-height: 1.3; }
+:root[data-style="simple"] .parts-group small { font-weight: 400; font-size: 12.5px; line-height: 1.35; opacity: 1; color: var(--muted); margin-top: 3px; }
+@media (max-width: 480px) { :root[data-style="simple"] .parts-group { flex-basis: 100%; } :root[data-style="simple"] .parts-group ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 8px; } :root[data-style="simple"] .parts-group li { width: auto; } }
 :root[data-style="simple"] .parts-buy a { color: var(--blue); text-decoration: none; font-weight: 600; }
 :root[data-style="simple"] .parts-buy a::after { content: " →"; }
 
