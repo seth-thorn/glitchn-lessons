@@ -30,6 +30,8 @@ main > * { min-width: 0; } /* lets the wide map scroll inside its box instead of
 h1 { font-family: var(--display); font-weight: 860; font-stretch: 112%; font-size: clamp(36px, 6vw, 60px); line-height: 1; margin: 6px 0 12px; }
 h2 { font-family: var(--display); font-weight: 800; font-stretch: 108%; font-size: 24px; margin: 0 0 12px; }
 .intro { margin: 0; max-width: 62ch; font-size: 18px; }
+.parts-link { margin-top: 10px; font-weight: 700; }
+.parts-link a { color: inherit; text-underline-offset: 3px; }
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 18px; }
 .card { position: relative; display: grid; grid-template-rows: auto 1fr; text-decoration: none; color: var(--ink); background: var(--panel); border: var(--bw) solid var(--ink); border-radius: 20px; overflow: hidden; box-shadow: 0 5px 0 var(--ink); transition: transform .12s, box-shadow .12s; }
 .card:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--ink); }
@@ -137,6 +139,7 @@ header > div { min-width: 0; }
       <div class="eyebrow"><a class="home" href="../index.html">Glitch'n</a></div>
       <h1 data-i18n="lessons">Lessons</h1>
       <p class="intro" data-i18n="intro">Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.</p>
+      <p class="intro parts-link"><a href="../materials/index.html" data-i18n="partsLink">What you need: parts, chip labels, stickers</a></p>
     </div>
     <div class="tools">
       <label class="style-pick"><span id="styleLabel">Style</span><select id="styleSel"></select></label>
@@ -174,12 +177,12 @@ header > div { min-width: 0; }
   /* ---------- language: ?lang= in the address, then the visitor's last choice, then the browser ---------- */
   const LANGS = { en: 'English', es: 'Español' };
   const UI = {
-    en: { style: 'Style', style_tv: 'TV', style_clean: 'Clean', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', lessons: 'Lessons', intro: 'Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.',
+    en: { partsLink: 'What you need: parts, chip labels, stickers', style: 'Style', style_tv: 'TV', style_clean: 'Clean', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', lessons: 'Lessons', intro: 'Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.',
       startBuilding: 'Start building', fDifficulty: 'Difficulty', fChips: 'Chips', fOsc: 'Oscillators', fConcepts: 'Concepts', fClear: 'Show all', fToggle: 'Filter lessons', fNone: 'No lessons match these filters.', startHere: 'Start here', words: 'Words', wordsSimple: 'Simple', wordsTech: 'Technical', wordsSimpleTitle: 'Plain words for the parts and steps', wordsTechTitle: 'The real names of the parts', requires: 'Requires', oscN: '{n} osc.', loading: 'Loading lessons…', map: 'Map of lessons', mapAria: 'How the lessons connect', ready: 'Ready to build', coming: 'Coming', arrows: 'Arrows point to where a lesson leads.',
       language: 'Language', steps: 'steps', subSteps: 'sub-steps', seeSteps: 'See the {n} steps', draft: 'Draft', comingSmall: 'coming', notReady: '“{t}” isn’t ready yet.', none: 'No lessons yet.',
       listError: '<b>The lesson list did not load.</b> It lives in lessons/index.json; run tools/build_index.py to make it.', title: "Glitch'n Lessons", machine: '',
       'kind_variation': 'variation', 'kind_related': 'related', 'kind_next day': 'next day', 'kind_revisited': 'revisited' },
-    es: { style: 'Estilo', style_tv: 'Tele', style_clean: 'Limpio', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', lessons: 'Lecciones', intro: 'Arma circuitos de sonido en una protoboard, un pequeño paso a la vez. Cada lección muestra un video del armado junto a instrucciones paso a paso, con fotos de cerca que puedes ampliar y un mapa de a dónde ir después.',
+    es: { partsLink: 'Lo que necesitas: piezas, etiquetas, calcomanías', style: 'Estilo', style_tv: 'Tele', style_clean: 'Limpio', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', lessons: 'Lecciones', intro: 'Arma circuitos de sonido en una protoboard, un pequeño paso a la vez. Cada lección muestra un video del armado junto a instrucciones paso a paso, con fotos de cerca que puedes ampliar y un mapa de a dónde ir después.',
       startBuilding: 'Empieza a armar', fDifficulty: 'Dificultad', fChips: 'Chips', fOsc: 'Osciladores', fConcepts: 'Conceptos', fClear: 'Mostrar todas', fToggle: 'Filtrar lecciones', fNone: 'Ninguna lección coincide con estos filtros.', startHere: 'Empieza aquí', words: 'Palabras', wordsSimple: 'Sencillo', wordsTech: 'Técnico', wordsSimpleTitle: 'Palabras sencillas para las piezas y los pasos', wordsTechTitle: 'Los nombres reales de las piezas', requires: 'Requiere', oscN: '{n} osc.', loading: 'Cargando lecciones…', map: 'Mapa de lecciones', mapAria: 'Cómo se conectan las lecciones', ready: 'Lista para armar', coming: 'Próximamente', arrows: 'Las flechas apuntan hacia donde lleva cada lección.',
       language: 'Idioma', steps: 'pasos', subSteps: 'subpasos', seeSteps: 'Ver los {n} pasos', draft: 'Borrador', comingSmall: 'próximamente', notReady: '“{t}” todavía no está lista.', none: 'Todavía no hay lecciones.',
       listError: '<b>No se pudo cargar la lista de lecciones.</b>', title: 'Lecciones de Glitch’n', machine: 'Traducción automática',

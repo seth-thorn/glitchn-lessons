@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Glitch'n: what you need</title>
+<meta name="description" content="Everything you need to do Glitch'n: the parts to buy, the sheets to print, and stickers and logos to share.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* What you need: 1 buy the parts, 2 print the sheets, 3 share the stickers and logos, then start the first lesson.
+   Pictures first, very few words. Glitch'n house style: white and cream, logo blue and pink, Manrope at medium
+   weight, a thin coral rule, flat colour, no outlines or shadows. Parts and quantities come from kit.json. */
+:root {
+  --text: #222222; --soft: #77706B; --page: #FFFFFF; --cream: #F6E8E0; --line: #EEE3DC;
+  --blue: #3859B3; --pink: #FA6E79; --teal: #8AC9C3;
+  --font: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { background: var(--page); color: var(--text); }
+body { margin: 0; font: 400 16px/1.5 var(--font); padding-inline: max(20px, env(safe-area-inset-left, 0px)) max(20px, env(safe-area-inset-right, 0px)); }
+a { color: var(--blue); text-decoration: none; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1080px; margin: 0 auto; }
+
+/* header */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 14px 28px; flex-wrap: wrap; padding-block: 26px 22px; }
+.mark img { display: block; height: 40px; width: auto; }
+.nav { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px; font-size: 15px; font-weight: 500; }
+.nav a { color: var(--text); padding-block: 6px; }
+.nav a:hover { color: var(--blue); }
+.nav a[aria-current="page"] { color: var(--pink); }
+.langs { display: inline-flex; }
+.lang { font: 500 14px/1 var(--font); color: var(--soft); background: none; border: 0; padding: 10px 6px; cursor: pointer; }
+.lang[aria-pressed="true"] { color: var(--text); text-decoration: underline 2px var(--pink); text-underline-offset: 6px; }
+.bar { height: 4px; background: var(--pink); }
+
+/* the three steps, as a map of the page */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 48px 0 8px; padding: 0; list-style: none; }
+.steps a { display: flex; align-items: center; gap: 16px; padding: 18px 20px; border-radius: 14px; background: var(--cream); color: var(--text); }
+.steps a:hover { background: #F1DDD2; }
+.num { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--pink); color: #FFFFFF; font-weight: 700; font-size: 18px; }
+.steps svg { flex: none; width: 40px; height: 40px; color: var(--blue); }
+.steps b { font-weight: 600; font-size: 20px; }
+@media (max-width: 640px) { .steps { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: 28px; } .steps a { padding: 12px 16px; } }
+
+/* a step */
+.step { padding-block: 56px 8px; scroll-margin-top: 12px; }
+.step-head { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+.step-head h2 { margin: 0; font-weight: 600; font-size: 28px; letter-spacing: -.01em; }
+.step-head svg { width: 34px; height: 34px; color: var(--blue); }
+
+/* parts: picture, how many, name, where */
+.parts { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 28px 18px; margin: 0; padding: 0; list-style: none; }
+@media (max-width: 420px) { .parts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 12px; } }
+.part .pic { position: relative; aspect-ratio: 1; border-radius: 14px; background: var(--cream); display: grid; place-items: center; }
+.part .pic svg { width: 76%; height: 76%; }
+.part .qty { position: absolute; top: 10px; left: 12px; font-weight: 700; font-size: 20px; line-height: 1; color: var(--text); }
+.part .qty small { font-weight: 500; font-size: 14px; }
+.part .name { display: block; margin-top: 10px; font-weight: 600; font-size: 15px; line-height: 1.3; }
+.part .buy { display: inline-flex; align-items: center; gap: 4px; margin-top: 2px; font-size: 14px; font-weight: 500; }
+.part .buy svg { width: 13px; height: 13px; }
+.part .any { margin-top: 2px; font-size: 14px; color: var(--soft); }
+
+/* downloads */
+.dl-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.dl {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 10px 20px 10px 16px; border-radius: 99px;
+  background: var(--blue); color: #FFFFFF; font-weight: 600; font-size: 16px;
+}
+.dl:hover { background: #2D4A99; }
+.dl svg { width: 20px; height: 20px; flex: none; }
+.dl small { font-weight: 500; opacity: .8; font-size: 13px; }
+.dl.light { background: var(--cream); color: var(--text); }
+.dl.light:hover { background: #F1DDD2; }
+
+.prints { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 32px 24px; }
+.print .pic { aspect-ratio: 3 / 2; border-radius: 14px; background: var(--cream); display: grid; place-items: center; overflow: hidden; padding: 10%; }
+.print .pic.photo { padding: 0; background: var(--teal); }
+.print .pic img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.print h3 { margin: 14px 0 2px; font-weight: 600; font-size: 18px; }
+.print p { margin: 0 0 14px; font-size: 14.5px; color: var(--soft); max-width: 40ch; }
+.print .dl-row { margin-top: 0; }
+
+.pack { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 24px; align-items: stretch; }
+.pack .big { border-radius: 14px; background: var(--cream); display: grid; place-items: center; padding: 8% 10%; min-height: 220px; }
+.pack .big img { width: 100%; max-width: 420px; }
+.pack .side { display: grid; align-content: center; gap: 14px; }
+.pack h3 { margin: 0; font-weight: 600; font-size: 20px; }
+.pack ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 15px; }
+.pack li { display: flex; align-items: center; gap: 10px; }
+.pack li i { width: 8px; height: 8px; border-radius: 50%; background: var(--pink); flex: none; }
+@media (max-width: 720px) { .pack { grid-template-columns: minmax(0, 1fr); } }
+.more { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+.go { margin: 72px 0 56px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px 24px; padding: 28px 32px; border-radius: 16px; background: var(--pink); color: #FFFFFF; }
+.go b { font-weight: 600; font-size: 24px; }
+.go a { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 12px 24px; border-radius: 99px; background: #FFFFFF; color: var(--text); font-weight: 600; font-size: 17px; }
+.go a svg { width: 20px; height: 20px; color: var(--pink); }
+
+footer { padding-block: 26px 48px; border-top: 1px solid var(--line); font-size: 13px; color: var(--soft); display: grid; gap: 6px; }
+footer p { margin: 0; max-width: 92ch; }
+footer .who { color: var(--text); font-weight: 500; }
+footer .mt { font-style: italic; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.5l2.2 10.5h10.6L20.5 7H7"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="M8 12.5l2.5 2.5L16 9.5"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h9v9M18 6L6 18"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<div class="wrap">
+  <header class="top">
+    <a class="mark" data-href="../index.html" href="../index.html"><img src="../downloads/logos/glitchn-logo.svg" alt="Glitch'n home" width="131" height="40"></a>
+    <nav class="nav" aria-label="Pages">
+      <a data-href="../lessons/index.html" href="../lessons/index.html" data-t="navLessons">Lessons</a>
+      <a data-href="index.html" href="index.html" data-t="navNeed" aria-current="page">What you need</a>
+      <span class="langs" role="group" aria-label="Language" id="langs">
+        <button class="lang" data-lang="en" lang="en" aria-pressed="true">EN</button>
+        <button class="lang" data-lang="es" lang="es" aria-pressed="false">ES</button>
+      </span>
+    </nav>
+  </header>
+</div>
+<div class="bar"></div>
+
+<div class="wrap">
+  <main>
+    <h1 class="sr" data-t="h1" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">What you need</h1>
+    <ol class="steps">
+      <li><a href="#buy"><span class="num">1</span><svg aria-hidden="true"><use href="#i-cart"/></svg><b data-t="buyH">Buy</b></a></li>
+      <li><a href="#print"><span class="num">2</span><svg aria-hidden="true"><use href="#i-print"/></svg><b data-t="printH">Print</b></a></li>
+      <li><a href="#share"><span class="num">3</span><svg aria-hidden="true"><use href="#i-share"/></svg><b data-t="shareH">Share</b></a></li>
+    </ol>
+
+    <section class="step" id="buy" aria-labelledby="h-buy">
+      <div class="step-head"><span class="num">1</span><h2 id="h-buy" data-t="buyH">Buy</h2></div>
+      <ul class="parts" id="parts"></ul>
+      <div class="dl-row"><a class="dl" id="csv" href="#" download="glitchn-shopping-list.csv"><svg aria-hidden="true"><use href="#i-down"/></svg><span data-t="csv">Shopping list</span> <small>CSV</small></a></div>
+    </section>
+
+    <section class="step" id="print" aria-labelledby="h-print">
+      <div class="step-head"><span class="num">2</span><h2 id="h-print" data-t="printH">Print</h2></div>
+      <div class="prints">
+        <article class="print">
+          <div class="pic"><img src="img/chip-labels.png" alt="" width="900" height="445"></div>
+          <h3 data-t="labelsH">Chip labels</h3>
+          <p data-t="labelsP">Sticker paper. Print at 100%. Cut. Stick one on each chip.</p>
+          <div class="dl-row"><a class="dl" href="../downloads/glitchn-chip-labels.pdf" download><svg aria-hidden="true"><use href="#i-down"/></svg>PDF <small data-t="letter">Letter</small></a></div>
+        </article>
+        <article class="print">
+          <div class="pic photo"><img src="img/pinout-40106.jpg" alt="" width="1200" height="480" loading="lazy"></div>
+          <h3 data-t="pinH">Chip maps</h3>
+          <p data-t="pinP">What each leg of a chip does. Keep it next to your board.</p>
+          <div class="dl-row"><a class="dl" href="../downloads/pinouts/glitchn-pinout-cards.pdf" download><svg aria-hidden="true"><use href="#i-down"/></svg>PDF <small data-t="letter">Letter</small></a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="step" id="share" aria-labelledby="h-share">
+      <div class="step-head"><span class="num">3</span><h2 id="h-share" data-t="shareH">Share</h2></div>
+      <div class="pack">
+        <div class="big"><img src="../downloads/logos/glitchn-logo-glitch.svg" alt=""></div>
+        <div class="side">
+          <h3 data-t="packH">The Glitch'n pack</h3>
+          <ul>
+            <li><i></i><span data-t="pack1">Logos</span></li>
+            <li><i></i><span data-t="pack2">Stickers</span></li>
+            <li><i></i><span data-t="pack3">Chip labels</span></li>
+            <li><i></i><span data-t="pack4">Chip maps</span></li>
+            <li><i></i><span data-t="pack5">Colors</span></li>
+          </ul>
+          <div><a class="dl" href="../downloads/glitchn-pack.zip" download><svg aria-hidden="true"><use href="#i-down"/></svg>ZIP <small id="packSize"></small></a></div>
+        </div>
+      </div>
+      <div class="more">
+        <a class="dl light" href="../downloads/stickers/glitchn-sticker-3in.pdf" download><svg aria-hidden="true"><use href="#i-down"/></svg><span data-t="sticker">Sticker</span> <small>3 in · PDF</small></a>
+        <a class="dl light" href="../downloads/stickers/glitchn-sticker-6in.pdf" download><svg aria-hidden="true"><use href="#i-down"/></svg><span data-t="sticker">Sticker</span> <small>6 in · PDF</small></a>
+        <a class="dl light" href="../downloads/logos/glitchn-logo.svg" download><svg aria-hidden="true"><use href="#i-down"/></svg><span data-t="logo">Logo</span> <small>SVG</small></a>
+        <a class="dl light" href="../downloads/logos/glitchn-logo.png" download><svg aria-hidden="true"><use href="#i-down"/></svg><span data-t="logo">Logo</span> <small>PNG</small></a>
+      </div>
+    </section>
+
+    <div class="go"><b data-t="ready">Ready?</b><a data-href="../lessons/blink-to-drum-machine/index.html" href="../lessons/blink-to-drum-machine/index.html"><span data-t="first">Start the first lesson</span><svg aria-hidden="true"><use href="#i-next"/></svg></a></div>
+  </main>
+
+  <footer>
+    <p class="who" data-t="who"></p>
+    <p data-t="nsf"></p>
+    <p class="mt" id="mt" lang="es" hidden>Traducción automática.</p>
+  </footer>
+</div>
+
+<script src="../site.js"></script>
+<script>
+(() => {
+  const T = {
+    en: {
+      title: "Glitch'n: what you need", h1: 'What you need',
+      buyH: 'Buy', printH: 'Print', shareH: 'Share', csv: 'Shopping list', anyStore: 'Any store',
+      labelsH: 'Chip labels', labelsP: 'Sticker paper. Print at 100%. Cut. Stick one on each chip.',
+      pinH: 'Chip maps', pinP: 'What each leg of a chip does. Keep it next to your board.', letter: 'Letter',
+      packH: "The Glitch'n pack", pack1: 'Logos', pack2: 'Stickers', pack3: 'Chip labels', pack4: 'Chip maps', pack5: 'Colors',
+      sticker: 'Sticker', logo: 'Logo', ready: 'Ready?', first: 'Start the first lesson', set: 'set',
+      csvHead: ['Part', 'How many', 'Store', 'Part number', 'Link'],
+    },
+    es: {
+      title: "Glitch'n: lo que necesitas", h1: 'Lo que necesitas',
+      buyH: 'Compra', printH: 'Imprime', shareH: 'Comparte', csv: 'Lista de compras', anyStore: 'Cualquier tienda',
+      labelsH: 'Etiquetas para chips', labelsP: 'Papel adhesivo. Imprime al 100 %. Corta. Pega una en cada chip.',
+      pinH: 'Mapas de chips', pinP: 'Qué hace cada pata del chip. Tenlo junto a tu protoboard.', letter: 'Carta',
+      packH: "El paquete Glitch'n", pack1: 'Logos', pack2: 'Calcomanías', pack3: 'Etiquetas para chips', pack4: 'Mapas de chips', pack5: 'Colores',
+      sticker: 'Calcomanía', logo: 'Logo', ready: '¿Listo?', first: 'Empieza la primera lección', set: 'juego',
+      csvHead: ['Pieza', 'Cuántas', 'Tienda', 'Número de pieza', 'Enlace'],
+    },
+  };
+
+  /* short names for the picture grid */
+  const NAMES = {
+    en: { breadboard: 'Breadboard', jumpers: 'Wires', '40106': 'Chip 40106', '4040': 'Chip 4040', '4021': 'Chip 4021', '4051': 'Chip 4051',
+      pot: 'Knob', photocell: 'Light sensor', button: 'Button', led: 'Light (LED)', diode: 'Diode',
+      r_1k: 'Resistor 1K', r_10k: 'Resistor 10K', r_4k7: 'Resistor 4.7K', r_22k: 'Resistor 22K',
+      c_0u1: 'Capacitor 0.1 µF', c_68p: 'Capacitor 68 pF', c_1u: 'Capacitor 1 µF', c_10u: 'Capacitor 10 µF', c_100u: 'Capacitor 100 µF',
+      jack: 'Audio jack', cable: 'Audio cable', speaker: 'Speaker', battery: '9 V battery', 'battery-clip': 'Battery clip', alligator: 'Alligator clips', radio: 'AM radio' },
+    es: { breadboard: 'Protoboard', jumpers: 'Cables', '40106': 'Chip 40106', '4040': 'Chip 4040', '4021': 'Chip 4021', '4051': 'Chip 4051',
+      pot: 'Perilla', photocell: 'Sensor de luz', button: 'Botón', led: 'Luz (LED)', diode: 'Diodo',
+      r_1k: 'Resistencia 1K', r_10k: 'Resistencia 10K', r_4k7: 'Resistencia 4.7K', r_22k: 'Resistencia 22K',
+      c_0u1: 'Capacitor 0.1 µF', c_68p: 'Capacitor 68 pF', c_1u: 'Capacitor 1 µF', c_10u: 'Capacitor 10 µF', c_100u: 'Capacitor 100 µF',
+      jack: 'Conector de audio', cable: 'Cable de audio', speaker: 'Bocina', battery: 'Batería 9 V', 'battery-clip': 'Conector de batería', alligator: 'Caimanes', radio: 'Radio AM' },
+  };
+  const ORDER = ['breadboard', 'jumpers', '40106', '4040', '4021', '4051', 'pot', 'photocell', 'button', 'led',
+    'r_1k', 'r_10k', 'r_4k7', 'r_22k', 'diode', 'c_0u1', 'c_68p', 'c_1u', 'c_10u', 'c_100u',
+    'jack', 'cable', 'speaker', 'battery', 'battery-clip', 'alligator', 'radio'];
+
+  /* ---------- part pictures: flat, top-down, the colours the parts really have (viewBox 0 0 100 100) ---------- */
+  const LEG = '#A9ADB2';
+  const legsDown = (xs, y1, y2, w = 2.2) => xs.map((x) => `<rect x="${x - w / 2}" y="${y1}" width="${w}" height="${y2 - y1}" rx="${w / 2}" fill="${LEG}"/>`).join('');
+  const legsSide = (y, x1, x2) => `<rect x="${x1}" y="${y - 1.1}" width="${x2 - x1}" height="2.2" rx="1.1" fill="${LEG}"/>`;
+  const chip = (num) => {
+    const xs = [22, 31, 40, 50, 59, 68, 77];
+    return `${xs.map((x) => `<rect x="${x - 2.4}" y="30" width="4.8" height="8" rx="1" fill="${LEG}"/><rect x="${x - 2.4}" y="62" width="4.8" height="8" rx="1" fill="${LEG}"/>`).join('')}
+      <rect x="12" y="35" width="76" height="30" rx="3" fill="#26262A"/><path d="M12 44a6 6 0 0 1 0 12z" fill="#3E3E43"/>
+      <rect x="27" y="39.5" width="56" height="21" fill="#FFF"/><text x="55" y="50.5" text-anchor="middle" dominant-baseline="middle" font-family="Manrope, sans-serif" font-weight="500" font-size="12.5" fill="#222">${num}</text>`;
+  };
+  const resistor = (bands) => `${legsSide(50, 6, 94)}<rect x="28" y="40" width="44" height="20" rx="9" fill="#E9D6AE"/>
+      ${bands.map((c, i) => `<rect x="${36 + i * 8}" y="40" width="4.5" height="20" fill="${c}"/>`).join('')}`;
+  const can = (w, h, color) => { const x = 50 - w / 2, y = 44 - h / 2;
+    return `${legsDown([50 - w / 5, 50 + w / 5], y + h - 2, 92)}<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${w / 6}" fill="${color}"/>
+      <rect x="${x + w * .66}" y="${y}" width="${w * .16}" height="${h}" fill="#C9CDD6" opacity=".75"/><ellipse cx="50" cy="${y + 3}" rx="${w / 2 - 2}" ry="2.2" fill="#000" opacity=".18"/>`; };
+  const ART = {
+    breadboard: () => { let d = ''; for (let r = 0; r < 5; r++) for (let c = 0; c < 12; c++) d += `<rect x="${17 + c * 6}" y="${36 + r * 6}" width="2.6" height="2.6" fill="#8C857C"/>`;
+      return `<rect x="6" y="20" width="88" height="60" rx="4" fill="#FBF8F2"/><rect x="11" y="25" width="78" height="1.6" fill="#E25B5B"/><rect x="11" y="73.4" width="78" height="1.6" fill="#4C7BD9"/>${d}`; },
+    jumpers: () => `<path d="M18 74V48a8 8 0 0 1 8-8h0a8 8 0 0 1 8 8v26" fill="none" stroke="#F08A24" stroke-width="5" stroke-linecap="round"/>
+      <path d="M44 74V34a10 10 0 0 1 10-10h0a10 10 0 0 1 10 10v40" fill="none" stroke="#E34B4B" stroke-width="5" stroke-linecap="round"/>
+      <path d="M72 74V58a6 6 0 0 1 12 0v16" fill="none" stroke="#F2C230" stroke-width="5" stroke-linecap="round"/>`,
+    '40106': () => chip('40106'), '4040': () => chip('4040'), '4021': () => chip('4021'), '4051': () => chip('4051'),
+    pot: () => `${legsDown([38, 50, 62], 70, 88)}<rect x="24" y="22" width="52" height="50" rx="6" fill="#2F64C9"/><circle cx="50" cy="47" r="18" fill="#4A80E8"/><rect x="47.5" y="32" width="5" height="17" rx="2.5" fill="#FFF"/>`,
+    photocell: () => `${legsDown([44, 56], 62, 92)}<circle cx="50" cy="42" r="22" fill="#F1D7A3"/><path d="M36 36h24v5H40v5h20v5H36" fill="none" stroke="#B5523B" stroke-width="3" stroke-linejoin="round"/>`,
+    button: () => `<rect x="22" y="22" width="56" height="56" rx="5" fill="#2B2B2E"/><circle cx="50" cy="50" r="16" fill="#55555B"/>
+      ${[[18, 30], [18, 70], [82, 30], [82, 70]].map(([x, y]) => `<rect x="${x - 4}" y="${y - 2}" width="8" height="4" rx="2" fill="${LEG}"/>`).join('')}`,
+    led: () => `${legsDown([44], 62, 94)}${legsDown([56], 62, 86)}<path d="M33 64V40a17 17 0 0 1 34 0v24z" fill="#F25C54"/><rect x="31" y="62" width="38" height="5" rx="2" fill="#E04A43"/><ellipse cx="44" cy="36" rx="4" ry="7" fill="#FFF" opacity=".45"/>`,
+    diode: () => `${legsSide(50, 6, 94)}<rect x="32" y="42" width="36" height="16" rx="8" fill="#E58B5B"/><rect x="58" y="42" width="5" height="16" fill="#222"/>`,
+    r_1k: () => resistor(['#7A4B2A', '#222', '#D8403A']),
+    r_10k: () => resistor(['#7A4B2A', '#222', '#F08A24']),
+    r_4k7: () => resistor(['#F2C230', '#7D4BC2', '#D8403A']),
+    r_22k: () => resistor(['#D8403A', '#D8403A', '#F08A24']),
+    c_0u1: () => `${legsDown([44, 56], 58, 92)}<ellipse cx="50" cy="44" rx="17" ry="15" fill="#E9B949"/>`,
+    c_68p: () => `${legsDown([45, 55], 56, 92)}<circle cx="50" cy="44" r="13" fill="#D98B3A"/>`,
+    c_1u: () => can(22, 30, '#2E3B8F'),
+    c_10u: () => can(26, 36, '#2E3B8F'),
+    c_100u: () => can(32, 44, '#26262A'),
+    jack: () => `${legsDown([38, 50, 62], 70, 88)}<rect x="28" y="28" width="44" height="44" rx="4" fill="#26262A"/><circle cx="50" cy="44" r="9" fill="#8E9299"/><circle cx="50" cy="44" r="4.5" fill="#26262A"/>`,
+    cable: () => `<path d="M22 70C22 40 78 60 78 30" fill="none" stroke="#2B2B2E" stroke-width="5" stroke-linecap="round"/>
+      <rect x="16" y="68" width="12" height="16" rx="3" fill="#2B2B2E"/><rect x="20" y="84" width="4" height="10" rx="2" fill="${LEG}"/>
+      <rect x="72" y="16" width="12" height="16" rx="3" fill="#2B2B2E"/><rect x="76" y="6" width="4" height="10" rx="2" fill="${LEG}"/>`,
+    speaker: () => `<rect x="12" y="28" width="76" height="46" rx="20" fill="#FA6E79"/><circle cx="50" cy="51" r="15" fill="#E25562"/>
+      ${[[-6, -6], [0, -6], [6, -6], [-6, 0], [0, 0], [6, 0], [-6, 6], [0, 6], [6, 6]].map(([x, y]) => `<circle cx="${50 + x}" cy="${51 + y}" r="1.6" fill="#FA6E79"/>`).join('')}`,
+    battery: () => `<rect x="28" y="24" width="44" height="64" rx="5" fill="#2B2B2E"/><rect x="28" y="54" width="44" height="16" fill="#F2C230"/>
+      <rect x="35" y="14" width="10" height="10" rx="2" fill="${LEG}"/><path d="M55 14h10v10H55z" fill="${LEG}"/><circle cx="60" cy="19" r="3" fill="#2B2B2E"/>`,
+    'battery-clip': () => `<rect x="30" y="16" width="40" height="18" rx="4" fill="#2B2B2E"/>
+      <path d="M42 34c0 20-14 26-14 48" fill="none" stroke="#E34B4B" stroke-width="4" stroke-linecap="round"/>
+      <path d="M58 34c0 20 14 26 14 48" fill="none" stroke="#2B2B2E" stroke-width="4" stroke-linecap="round"/>`,
+    alligator: () => `<path d="M14 62l34-10 2 7-34 9z" fill="#E34B4B"/><path d="M14 52l34 6-2 7-34-6z" fill="#E34B4B" opacity=".85"/>
+      <path d="M50 58c14 0 18 18 34 18" fill="none" stroke="#E34B4B" stroke-width="4" stroke-linecap="round"/><rect x="82" y="72" width="10" height="8" rx="2" fill="${LEG}"/>`,
+    radio: () => `<rect x="14" y="34" width="72" height="48" rx="8" fill="#9A4D76"/><circle cx="36" cy="58" r="12" fill="#B17491"/><rect x="56" y="48" width="22" height="6" rx="3" fill="#F6E8E0"/><rect x="56" y="60" width="22" height="6" rx="3" fill="#F6E8E0"/>
+      <rect x="68" y="10" width="3" height="26" rx="1.5" fill="${LEG}" transform="rotate(20 70 34)"/>`,
+  };
+  const picture = (k) => '<svg viewBox="0 0 100 100" aria-hidden="true">' + (ART[k] ? ART[k]() : '') + '</svg>';
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  let KIT = null, lang = 'en', words = T.en;
+  const loc = (o) => (o && (o[lang] || o.en)) || '';
+  const rows = () => (KIT ? KIT.rows.slice().sort((a, b) => ORDER.indexOf(a.key) - ORDER.indexOf(b.key)) : []);
+
+  function draw() {
+    const N = NAMES[lang];
+    $('parts').innerHTML = rows().map((r) => {
+      const b = r.buy || {};
+      const where = b.url
+        ? '<a class="buy" href="' + esc(b.url) + '" target="_blank" rel="noopener">' + esc(b.store) + '<svg aria-hidden="true"><use href="#i-out"/></svg></a>'
+        : '<span class="any">' + esc(words.anyStore) + '</span>';
+      return '<li class="part"><div class="pic">' + picture(r.key) + '<span class="qty">' + esc(r.qty) + (r.unit ? ' <small>' + esc(loc(r.unit)) + '</small>' : '') + '</span></div>' +
+        '<span class="name">' + esc(N[r.key] || r.key) + '</span>' + where + '</li>';
+    }).join('');
+    // the shopping list as a CSV
+    const csv = [words.csvHead].concat(rows().map((r) => { const b = r.buy || {};
+      return [N[r.key] || r.key, r.qty + (r.unit ? ' ' + loc(r.unit) : ''), b.store || words.anyStore, b.number || '', b.url || '']; }))
+      .map((row) => row.map((c) => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\r\n');
+    const a = $('csv');
+    if (a.dataset.url) URL.revokeObjectURL(a.dataset.url);
+    a.dataset.url = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' }));
+    a.href = a.dataset.url;
+  }
+
+  fetch('kit.json').then((r) => r.json()).then((k) => { KIT = k; draw(); });
+  fetch('../downloads/glitchn-pack.zip', { method: 'HEAD' }).then((r) => {
+    const n = +r.headers.get('content-length'); if (n) $('packSize').textContent = (n / 1048576).toFixed(1) + ' MB';
+  }).catch(() => {});
+
+  GL.start(T, (L, t) => { lang = L; words = t; if (KIT) draw(); });
+})();
+</script>
+</body>
+</html>

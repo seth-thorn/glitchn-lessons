@@ -11,6 +11,12 @@ Each **lesson** plays a build video beside step-by-step instructions, with close
 ```
 index.html                 the Glitch'n home page: what Glitch'n is, the way into the lessons, where it started
 home/                      the home page's drum-machine clip and its poster picture
+site.css, site.js          shared by the home page and other site pages: top bar (logo, pages, language), buttons, footer
+materials/
+  index.html               "What you need": 1 buy the parts, 2 print the sheets, 3 share the stickers and logos
+  kit.json                 the kit list: quantities and stores for each part (edit by hand)
+downloads/                 files to download: chip labels, chip maps (pinout cards), stickers, logos, colors,
+                           and glitchn-pack.zip with all of them (made by tools/make_pack.py)
 player/player.js, .css     the one lesson player every lesson page uses
 lessons/
   index.html               the lesson library: lesson cards, the map of all lessons, what's coming
@@ -127,3 +133,13 @@ Every page has a **Style** menu that changes the page's whole personality, not j
 All five lessons from the original five-day course are up, as drafts for the Glitch'n team to review: step text, parts lists and difficulty ratings included.
 
 The site is plain HTML with no build step, published with GitHub Pages from the `main` branch.
+
+## What you need (materials/)
+
+`materials/index.html` shows everything someone needs to take part, as pictures first and very few words: **1 Buy** (every part as a flat picture, how many, and a store link; a shopping list CSV), **2 Print** (chip labels, chip maps), **3 Share** (the Glitch'n pack zip, stickers, logo). Each lesson's parts list and the lesson library link here.
+
+- **The kit list** is `materials/kit.json`: each row names a part (`key`, a `lessons/catalog.json` key where there is one), how many are in one full kit (`qty`) and where to buy it (`buy`). A row with no store shows "Any store".
+- **The part pictures** are drawn in the page itself (`ART` in `materials/index.html`), one small SVG per kit key. A new part needs a picture there and a short name in `NAMES`.
+- **Chip labels** (`downloads/glitchn-chip-labels.pdf`) are made by `python3 tools/make_labels.py`: 13 × 5.6 mm labels for the top of a 14-pin chip, with the Glitch'n logo and "© Glitch'n" on the sheet.
+- **The pack** (`downloads/glitchn-pack.zip`) is made by `python3 tools/make_pack.py` from the files in `downloads/`. Run it after changing any of them.
+- **Chip maps, stickers, logos and colors** come from Seth's Design Assets folder. The chip map JPEGs were converted from CMYK to sRGB for screens.

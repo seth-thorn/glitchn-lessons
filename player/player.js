@@ -28,7 +28,7 @@
       keyPlay: 'play / pause', keySeconds: '5 seconds', keySub: 'previous / next sub-step', keyMute: 'mute',
       startingPoint: 'Starting point', finishedResult: 'Finished result of {n}', beforeStep: 'Before step {n}: ', boardAt: 'Breadboard at {n}: {t}',
       done: 'done ✓', watched: 'Watched {x} of {y} sub-steps', stepOf: 'Step <b>{n}</b> of {m} · {t}', goToStep: 'Go to step {n}: {t}', of: '{a} of {b}',
-      startHere: 'Start here', words: 'Words', wordsSimple: 'Simple', wordsTech: 'Technical', wordsSimpleTitle: 'Plain words for the parts and steps', wordsTechTitle: 'The real names of the parts', requires: 'Requires', partsList: 'Parts list', partsNote: 'Everything this lesson uses, at most at once.', kitPart: 'Kit part', oscillators1: '1 oscillator', oscillatorsN: '{n} oscillators', learn: 'You’ll learn', difficulty: 'Difficulty', moreSoon: 'More soon', youAreHere: 'You’re in this lesson.', notReady: '“{t}” isn’t ready yet.',
+      startHere: 'Start here', words: 'Words', wordsSimple: 'Simple', wordsTech: 'Technical', wordsSimpleTitle: 'Plain words for the parts and steps', wordsTechTitle: 'The real names of the parts', requires: 'Requires', partsList: 'Parts list', partsNote: 'Everything this lesson uses, at most at once.', kitPart: 'Kit part', whereToGet: 'Where to get these parts', oscillators1: '1 oscillator', oscillatorsN: '{n} oscillators', learn: 'You’ll learn', difficulty: 'Difficulty', moreSoon: 'More soon', youAreHere: 'You’re in this lesson.', notReady: '“{t}” isn’t ready yet.',
       noFullScreen: 'Full screen is not available here.', videoError: 'This video could not load. Check that {f} is next to the page.',
       notFound: 'Lesson not found', notFoundBody: '<b>The lesson file did not load.</b> Each lesson folder needs a lesson.json beside its page.',
       untranslated: '', machine: '',
@@ -45,7 +45,7 @@
       keyPlay: 'reproducir / pausar', keySeconds: '5 segundos', keySub: 'subpaso anterior / siguiente', keyMute: 'silenciar',
       startingPoint: 'Punto de partida', finishedResult: 'Resultado terminado de {n}', beforeStep: 'Antes del paso {n}: ', boardAt: 'Protoboard en {n}: {t}',
       done: 'listo ✓', watched: 'Viste {x} de {y} subpasos', stepOf: 'Paso <b>{n}</b> de {m} · {t}', goToStep: 'Ir al paso {n}: {t}', of: '{a} de {b}',
-      startHere: 'Empieza aquí', words: 'Palabras', wordsSimple: 'Sencillo', wordsTech: 'Técnico', wordsSimpleTitle: 'Palabras sencillas para las piezas y los pasos', wordsTechTitle: 'Los nombres reales de las piezas', requires: 'Requiere', partsList: 'Lista de piezas', partsNote: 'Todo lo que usa esta lección, como máximo a la vez.', kitPart: 'Pieza del kit', oscillators1: '1 oscilador', oscillatorsN: '{n} osciladores', learn: 'Aprenderás', difficulty: 'Dificultad', moreSoon: 'Pronto habrá más', youAreHere: 'Ya estás en esta lección.', notReady: '“{t}” todavía no está lista.',
+      startHere: 'Empieza aquí', words: 'Palabras', wordsSimple: 'Sencillo', wordsTech: 'Técnico', wordsSimpleTitle: 'Palabras sencillas para las piezas y los pasos', wordsTechTitle: 'Los nombres reales de las piezas', requires: 'Requiere', partsList: 'Lista de piezas', partsNote: 'Todo lo que usa esta lección, como máximo a la vez.', kitPart: 'Pieza del kit', whereToGet: 'Dónde conseguir estas piezas', oscillators1: '1 oscilador', oscillatorsN: '{n} osciladores', learn: 'Aprenderás', difficulty: 'Dificultad', moreSoon: 'Pronto habrá más', youAreHere: 'Ya estás en esta lección.', notReady: '“{t}” todavía no está lista.',
       noFullScreen: 'La pantalla completa no está disponible aquí.', videoError: 'Este video no se pudo cargar ({f}).',
       notFound: 'No se encontró la lección', notFoundBody: '<b>No se pudo cargar el archivo de la lección.</b> Cada carpeta de lección necesita un lesson.json junto a su página.',
       untranslated: 'Esta lección todavía no está traducida. Se muestra en inglés.', machine: 'Traducción automática',
@@ -288,7 +288,8 @@
         const name = sp ? (sp[LANG] || sp.en) : (e[LANG] || e.en || k), small = sp ? (sp['about_' + LANG] || sp.about_en) : e.id;
         return '<li><b class="qty">' + esc(q) + '</b><span class="pname">' + esc(name) + (small ? '<small>' + esc(small) + '</small>' : '') + '</span></li>';
       }).join('') +
-      '</ul></div>')).join('');
+      '</ul></div>')).join('') +
+      '<p class="parts-buy"><a href="../../materials/index.html' + keep + '">' + esc(t('whereToGet')) + '</a></p>';
     $('partsPanel').hidden = false;
   }
 

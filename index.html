@@ -8,35 +8,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="site.css">
 <style>
 /* The Glitch'n home page: one big line, two ways in, the drum machine from the first lesson,
-   and a few words on where Glitch'n comes from. Same ink outlines and coral as the lessons. */
-:root {
-  --ink: #161514; --page: #FAF9F7; --muted: #5E5955; --white: #FFFFFF;
-  --coral: #EE6668; --blush: #FCE4E4;
-  --display: "Archivo", "Arial Black", "Helvetica Neue", Arial, sans-serif;
-  --body: "Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
-  --bw: 3.5px;
-  color-scheme: light;
-}
-* { box-sizing: border-box; }
-html, body { background: var(--page); color: var(--ink); }
-body {
-  margin: 0; font-family: var(--body); font-size: 18px; line-height: 1.55;
-  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
-}
-:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-.wrap { max-width: 1120px; margin: 0 auto; }
-
-/* top bar: the name, and the language switch */
-.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
-.mark { font-family: var(--display); font-weight: 860; font-stretch: 118%; font-size: 24px; letter-spacing: -.01em; color: var(--ink); text-decoration: none; }
-.langs { display: inline-flex; border: 2.5px solid var(--ink); border-radius: 99px; overflow: hidden; background: var(--white); }
-.lang { font: 700 14px/1 var(--body); color: var(--ink); background: none; border: 0; padding: 9px 14px; min-height: 38px; cursor: pointer; }
-.lang + .lang { border-left: 2.5px solid var(--ink); }
-.lang[aria-pressed="true"] { background: var(--ink); color: var(--white); }
-.lang:focus-visible { outline-offset: -5px; outline-color: var(--coral); }
-
+   and a few words on where Glitch'n comes from. Shared parts (top bar, buttons, footer) are in site.css. */
 /* the big line */
 .hero { padding-block: clamp(24px, 5vw, 60px) clamp(28px, 3.4vw, 40px); }
 h1 {
@@ -46,16 +21,6 @@ h1 {
 }
 .lead { margin: clamp(18px, 2.4vw, 26px) 0 0; max-width: 40ch; text-wrap: pretty; font-size: clamp(19px, 1.9vw, 23px); line-height: 1.45; }
 .doors { display: flex; flex-wrap: wrap; gap: 14px 16px; margin-top: clamp(24px, 3vw, 34px); }
-.btn {
-  display: inline-flex; align-items: center; min-height: 54px; padding: 12px 24px;
-  font: 800 19px/1.15 var(--display); font-stretch: 108%; color: var(--ink); text-decoration: none;
-  background: var(--white); border: var(--bw) solid var(--ink); border-radius: 99px;
-  box-shadow: 0 5px 0 var(--ink); transition: transform .12s, box-shadow .12s;
-}
-.btn.go { background: var(--coral); }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--ink); }
-.btn:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--ink); }
-
 /* the drum machine: the first lesson's finished board, blinking */
 .board { margin: 0; }
 .screen {
@@ -81,25 +46,21 @@ h1 {
 .story p { margin: 0; max-width: 58ch; }
 @media (min-width: 860px) { .story { grid-template-columns: 5fr 7fr; } }
 
-footer { border-top: 2.5px solid var(--ink); padding-block: 22px 40px; font-size: 14.5px; color: var(--muted); display: grid; gap: 8px; }
-footer p { margin: 0; max-width: 92ch; }
-footer .who { color: var(--ink); font-weight: 700; }
-footer .mt { font-style: italic; }
-
 @media (max-width: 600px) {
   .screen { aspect-ratio: 960 / 380; border-radius: 16px; }
   .sound { right: 8px; bottom: 8px; padding: 0; width: 44px; justify-content: center; }
   .sound span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .btn { flex: 1 1 auto; justify-content: center; }
 }
-@media (pointer: coarse) { .lang { min-height: 44px; padding-inline: 16px; } }
-@media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn:hover { transform: none; } }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <a class="mark" href="./">Glitch'n</a>
+    <a class="mark" data-href="./" href="./"><img src="downloads/logos/glitchn-logo.svg" alt="Glitch'n" width="112" height="34"></a>
+    <nav class="nav" aria-label="Pages">
+      <a data-href="lessons/index.html" href="lessons/index.html" data-t="navLessons">Lessons</a>
+      <a data-href="materials/index.html" href="materials/index.html" data-t="navNeed">What you need</a>
+    </nav>
     <div class="langs" role="group" aria-label="Language" id="langs">
       <button class="lang" data-lang="en" lang="en" aria-pressed="true">English</button>
       <button class="lang" data-lang="es" lang="es" aria-pressed="false">Español</button>
@@ -112,8 +73,8 @@ footer .mt { font-style: italic; }
 with circuits.</h1>
       <p class="lead" data-t="lead">Free video lessons that show you how to build sound circuits on a breadboard, one small step at a time.</p>
       <div class="doors">
-        <a class="btn go" id="first" href="lessons/blink-to-drum-machine/index.html" data-t="first">Start the first lesson</a>
-        <a class="btn" id="all" href="lessons/index.html" data-t="all">See all lessons</a>
+        <a class="btn go" id="first" data-href="lessons/blink-to-drum-machine/index.html" href="lessons/blink-to-drum-machine/index.html" data-t="first">Start the first lesson</a>
+        <a class="btn" id="all" data-href="lessons/index.html" href="lessons/index.html" data-t="all">See all lessons</a>
       </div>
     </section>
 
@@ -141,6 +102,7 @@ with circuits.</h1>
   </footer>
 </div>
 
+<script src="site.js"></script>
 <script>
 (() => {
   /* ---------- words, in English and Spanish ---------- */
@@ -154,8 +116,6 @@ with circuits.</h1>
       soundOn: 'Turn sound on', soundOff: 'Turn sound off', play: 'Play with sound', pause: 'Pause',
       storyH: "How Glitch\'n started",
       story: 'Glitch\'n began in June 2025 with three free summer courses at the ASU MIX Center in downtown Mesa, Arizona. Sixty young people and their families came to build circuits that make sound. These lessons carry that course forward, so more people can build along.',
-      who: 'Glitch\'n is a project of the School of Games, Arts, Media and Engineering at Arizona State University.',
-      nsf: 'This material is based upon work supported by the U.S. National Science Foundation under Award No. 2432637 (Advancing Informal STEM Learning). Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.',
     },
     es: {
       title: 'Glitch\'n: haz música con circuitos',
@@ -166,19 +126,8 @@ with circuits.</h1>
       soundOn: 'Activar sonido', soundOff: 'Quitar sonido', play: 'Reproducir con sonido', pause: 'Pausar',
       storyH: 'Cómo empezó Glitch\'n',
       story: 'Glitch\'n empezó en junio de 2025 con tres cursos de verano gratuitos en el ASU MIX Center, en el centro de Mesa, Arizona. Sesenta jóvenes y sus familias vinieron a construir circuitos que hacen sonido. Estas lecciones continúan ese curso, para que más personas puedan construir con nosotros.',
-      who: 'Glitch\'n es un proyecto de la School of Games, Arts, Media and Engineering de Arizona State University.',
-      nsf: 'Este material se basa en trabajo financiado por la Fundación Nacional de Ciencias de EE. UU. (NSF) mediante la subvención n.º 2432637 (Advancing Informal STEM Learning). Las opiniones, hallazgos, conclusiones o recomendaciones expresadas en este material son de los autores y no reflejan necesariamente el punto de vista de la NSF.',
     },
   };
-
-  /* ---------- language: ?lang= in the address, then the visitor's last choice, then the browser (same as the lessons) ---------- */
-  const q = new URLSearchParams(location.search);
-  const pick = () => {
-    if (T[q.get('lang')]) return q.get('lang');
-    try { const v = JSON.parse(localStorage.getItem('glitchn-lang')); if (T[v]) return v; } catch (e) {}
-    return (navigator.languages || [navigator.language || '']).some((l) => /^es\b/i.test(l)) ? 'es' : 'en';
-  };
-  let LANG = pick();
 
   const clip = document.getElementById('clip');
   const btn = document.getElementById('sound');
@@ -186,32 +135,10 @@ with circuits.</h1>
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const soundLabel = () => {
-    const t = T[LANG];
+    const t = T[GL.lang];
     label.textContent = still ? (clip.paused ? t.play : t.pause) : (clip.muted ? t.soundOn : t.soundOff);
     btn.setAttribute('aria-pressed', String(still ? !clip.paused : !clip.muted));
   };
-
-  const apply = () => {
-    const t = T[LANG];
-    document.documentElement.lang = LANG;
-    document.title = t.title;
-    document.querySelectorAll('[data-t]').forEach((el) => { el.textContent = t[el.dataset.t]; });
-    document.querySelectorAll('.lang').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === LANG)));
-    document.getElementById('mt').hidden = LANG !== 'es';
-    // carry the language into the lessons only when it was set in the address, as the lesson pages do
-    const keep = q.get('lang') ? '?lang=' + LANG : '';
-    document.getElementById('first').href = 'lessons/blink-to-drum-machine/index.html' + keep;
-    document.getElementById('all').href = 'lessons/index.html' + keep;
-    soundLabel();
-  };
-
-  document.getElementById('langs').addEventListener('click', (e) => {
-    const b = e.target.closest('.lang'); if (!b) return;
-    LANG = b.dataset.lang;
-    try { localStorage.setItem('glitchn-lang', JSON.stringify(LANG)); } catch (err) {}
-    if (q.get('lang')) { q.set('lang', LANG); history.replaceState(null, '', '?' + q.toString()); }
-    apply();
-  });
 
   /* ---------- the drum machine: blinks quietly on its own; sound only when asked ---------- */
   clip.volume = 0.7;
@@ -232,7 +159,7 @@ with circuits.</h1>
   clip.addEventListener('play', soundLabel);
   clip.addEventListener('pause', soundLabel);
 
-  apply();
+  GL.start(T, soundLabel);
 })();
 </script>
 </body>

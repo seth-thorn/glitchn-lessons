@@ -1,0 +1,272 @@
+{
+ "format": "glitchn-kit/1",
+ "note": "The Glitch'n kit: what to order to build every lesson, from the kit list on glitchn.net/course. 'key' is a part in lessons/catalog.json ('part' when one catalog part is ordered as two items; 'name' and 'group' for items the lessons don't list). qty is for one full kit. A row with buy.store null has no specific store: any electronics supplier sells it. Edit by hand.",
+ "rows": [
+  {
+   "key": "40106",
+   "qty": 2,
+   "buy": {
+    "store": "Mouser",
+    "number": "CD40106BE",
+    "url": "https://www.mouser.com/ProductDetail/Texas-Instruments/CD40106BE?qs=YhsVCygOPE1CyKyInx%252Bh3Q%3D%3D"
+   }
+  },
+  {
+   "key": "4040",
+   "qty": 2,
+   "buy": {
+    "store": "Mouser",
+    "number": "CD4040BE",
+    "url": "https://www.mouser.com/ProductDetail/Texas-Instruments/CD4040BE?qs=L4Mc90zKIpgVInmXWEixLQ%3D%3D"
+   }
+  },
+  {
+   "key": "4021",
+   "qty": 2,
+   "buy": {
+    "store": "Mouser",
+    "number": "CD4021BE",
+    "url": "https://www.mouser.com/ProductDetail/Texas-Instruments/CD4021BE?qs=gqbMQSs93zMTXfAY8zdLvw%3D%3D"
+   }
+  },
+  {
+   "key": "4051",
+   "qty": 2,
+   "buy": {
+    "store": "Mouser",
+    "number": "CD4051BE",
+    "url": "https://www.mouser.com/ProductDetail/Texas-Instruments/CD4051BE?qs=q2XTDbzbm6DxulBsMcV7tA%3D%3D"
+   }
+  },
+  {
+   "key": "pot",
+   "qty": 6,
+   "buy": {
+    "store": "Adafruit",
+    "number": "#356",
+    "url": "https://www.adafruit.com/product/356"
+   }
+  },
+  {
+   "key": "photocell",
+   "qty": 3,
+   "buy": {
+    "store": "Adafruit",
+    "number": "#161",
+    "url": "https://www.adafruit.com/product/161"
+   }
+  },
+  {
+   "key": "button",
+   "qty": 5,
+   "buy": {
+    "store": "Adafruit",
+    "number": "#1009",
+    "url": "https://www.adafruit.com/product/1009"
+   }
+  },
+  {
+   "key": "led",
+   "qty": 5,
+   "buy": {
+    "store": "Adafruit",
+    "number": "#4202",
+    "url": "https://www.adafruit.com/product/4202"
+   }
+  },
+  {
+   "key": "diode",
+   "qty": 5,
+   "buy": {
+    "store": "Adafruit",
+    "number": "#1641",
+    "url": "https://www.adafruit.com/product/1641"
+   }
+  },
+  {
+   "key": "r_1k",
+   "qty": 5,
+   "buy": {
+    "store": "Adafruit",
+    "number": "#4294",
+    "url": "https://www.adafruit.com/product/4294"
+   }
+  },
+  {
+   "key": "r_10k",
+   "qty": 5,
+   "buy": {
+    "store": "Adafruit",
+    "number": "#2784",
+    "url": "https://www.adafruit.com/product/2784"
+   }
+  },
+  {
+   "key": "r_4k7",
+   "qty": 1,
+   "buy": {
+    "store": null
+   }
+  },
+  {
+   "key": "r_22k",
+   "qty": 1,
+   "buy": {
+    "store": null
+   }
+  },
+  {
+   "key": "c_0u1",
+   "qty": 5,
+   "buy": {
+    "store": "Adafruit",
+    "number": "#753",
+    "url": "https://www.adafruit.com/product/753"
+   }
+  },
+  {
+   "key": "c_68p",
+   "qty": 1,
+   "buy": {
+    "store": null
+   }
+  },
+  {
+   "key": "c_1u",
+   "qty": 3,
+   "buy": {
+    "store": "DigiKey",
+    "number": "Rubycon 50NXA1MEFC5X11",
+    "url": "https://www.digikey.com/en/products/detail/rubycon/50NXA1MEFC5X11/3562827"
+   }
+  },
+  {
+   "key": "c_10u",
+   "qty": 3,
+   "buy": {
+    "store": "Adafruit",
+    "number": "#2195",
+    "url": "https://www.adafruit.com/product/2195"
+   }
+  },
+  {
+   "key": "c_100u",
+   "qty": 3,
+   "buy": {
+    "store": "Adafruit",
+    "number": "#2193",
+    "url": "https://www.adafruit.com/product/2193"
+   }
+  },
+  {
+   "key": "breadboard",
+   "qty": 1,
+   "buy": {
+    "store": null,
+    "number": "Elenco"
+   },
+   "note": {
+    "en": "Elenco boards recommended.",
+    "es": "Recomendamos las de Elenco."
+   }
+  },
+  {
+   "key": "jumpers",
+   "qty": 1,
+   "unit": {
+    "en": "set",
+    "es": "juego"
+   },
+   "buy": {
+    "store": "Amazon",
+    "number": "AUSTOR assortment",
+    "url": "https://www.amazon.com/AUSTOR-Lengths-Assorted-Preformed-Breadboard/dp/B07CJYSL2T/"
+   }
+  },
+  {
+   "key": "alligator",
+   "qty": 2,
+   "name": {
+    "en": "Alligator clip to jumper wire",
+    "es": "Cable de caimán a puente"
+   },
+   "buy": {
+    "store": "Adafruit",
+    "number": "#4304",
+    "url": "https://www.adafruit.com/product/4304"
+   },
+   "group": "connect"
+  },
+  {
+   "key": "jack",
+   "qty": 1,
+   "buy": {
+    "store": "Adafruit",
+    "number": "#1699",
+    "url": "https://www.adafruit.com/product/1699"
+   }
+  },
+  {
+   "key": "battery",
+   "part": "battery",
+   "qty": 1,
+   "name": {
+    "en": "9 V battery",
+    "es": "Batería de 9 V"
+   },
+   "buy": {
+    "store": null
+   }
+  },
+  {
+   "key": "battery-clip",
+   "part": "battery",
+   "qty": 1,
+   "name": {
+    "en": "9 V battery clip with jumper ends",
+    "es": "Conector para batería de 9 V con puntas para protoboard"
+   },
+   "buy": {
+    "store": "RP Electronics",
+    "number": "MB-921",
+    "url": "https://www.rpelectronics.com/mb-921.html"
+   }
+  },
+  {
+   "key": "cable",
+   "part": "cable",
+   "qty": 1,
+   "name": {
+    "en": "Stereo audio cable (3.5 mm)",
+    "es": "Cable de audio estéreo (3.5 mm)"
+   },
+   "buy": {
+    "store": null
+   }
+  },
+  {
+   "key": "speaker",
+   "part": "cable",
+   "qty": 1,
+   "name": {
+    "en": "Speaker with an aux input",
+    "es": "Bocina con entrada auxiliar"
+   },
+   "buy": {
+    "store": null,
+    "number": "e.g. JBL Go 2"
+   },
+   "note": {
+    "en": "Any battery or rechargeable speaker with an aux input works.",
+    "es": "Sirve cualquier bocina de baterías o recargable con entrada auxiliar."
+   }
+  },
+  {
+   "key": "radio",
+   "qty": 1,
+   "buy": {
+    "store": null
+   }
+  }
+ ]
+}

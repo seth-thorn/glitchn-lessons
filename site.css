@@ -1,0 +1,61 @@
+/* Shared look for the Glitch'n site pages (the home page, parts and printables, and pages to come):
+   colours, type, the top bar with the logo, nav and language switch, buttons, and the footer.
+   The lesson player and the lesson library have their own CSS (player/player.css, lessons/index.html). */
+:root {
+  --ink: #161514; --page: #FAF9F7; --muted: #5E5955; --white: #FFFFFF;
+  --coral: #EE6668; --blush: #FCE4E4;
+  --logo-blue: #3859B3;
+  --display: "Archivo", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --body: "Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
+  --bw: 3.5px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { background: var(--page); color: var(--ink); }
+body {
+  margin: 0; font-family: var(--body); font-size: 18px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+a { color: inherit; text-underline-offset: 3px; }
+.wrap { max-width: 1120px; margin: 0 auto; }
+
+/* top bar: the logo, the pages, and the language switch */
+.top { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px 28px; padding-block: 20px; }
+.mark { display: block; line-height: 0; }
+.mark img { display: block; height: 34px; width: auto; }
+.nav { display: flex; flex-wrap: wrap; gap: 4px 22px; }
+.nav a { font: 700 16px/1.2 var(--body); text-decoration: none; padding: 8px 0; border-bottom: 3px solid transparent; }
+.nav a:hover { border-bottom-color: currentColor; }
+.nav a[aria-current="page"] { border-bottom-color: var(--coral); }
+.langs { display: inline-flex; border: 2.5px solid var(--ink); border-radius: 99px; overflow: hidden; background: var(--white); }
+.lang { font: 700 14px/1 var(--body); color: var(--ink); background: none; border: 0; padding: 9px 14px; min-height: 38px; cursor: pointer; }
+.lang + .lang { border-left: 2.5px solid var(--ink); }
+.lang[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+.lang:focus-visible { outline-offset: -5px; outline-color: var(--coral); }
+@media (max-width: 640px) {
+  .top { grid-template-columns: auto auto; justify-content: space-between; }
+  .nav { grid-column: 1 / -1; grid-row: 2; }
+  .mark img { height: 28px; }
+}
+
+/* buttons: ink outline, a solid shadow that presses down */
+.btn {
+  display: inline-flex; align-items: center; min-height: 54px; padding: 12px 24px;
+  font: 800 19px/1.15 var(--display); font-stretch: 108%; color: var(--ink); text-decoration: none;
+  background: var(--white); border: var(--bw) solid var(--ink); border-radius: 99px;
+  box-shadow: 0 5px 0 var(--ink); transition: transform .12s, box-shadow .12s;
+}
+.btn.go { background: var(--coral); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--ink); }
+.btn:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--ink); }
+
+footer { border-top: 2.5px solid var(--ink); padding-block: 22px 40px; font-size: 14.5px; color: var(--muted); display: grid; gap: 8px; }
+footer p { margin: 0; max-width: 92ch; }
+footer .who { color: var(--ink); font-weight: 700; }
+footer .mt { font-style: italic; }
+
+@media (max-width: 600px) { .btn { flex: 1 1 auto; justify-content: center; } }
+@media (pointer: coarse) { .lang { min-height: 44px; padding-inline: 16px; } }
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn:hover { transform: none; } }
