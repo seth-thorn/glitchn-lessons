@@ -12,10 +12,13 @@ Each **lesson** plays a build video beside step-by-step instructions, with close
 index.html                 the Glitch'n home page: what Glitch'n is, the way into the lessons, where it started
 home/                      the home page's drum-machine clip and its poster picture
 site.css, site.js          shared by the home page and other site pages: top bar (logo, pages, language), buttons, footer
+about/
+  index.html               About: an executive summary for donors (why, how, results, milestones, team, publications, funding)
+  img/                     the About page's photos (team headshots in img/people/)
 materials/
   index.html               "What you need": 1 buy the parts, 2 print the sheets, 3 share the stickers and logos
   kit.json                 the kit list: quantities and stores for each part (edit by hand)
-downloads/                 files to download: chip labels, chip maps (pinout cards), stickers, logos, colors,
+downloads/                 files to download: chip labels, chip maps (pinout cards), posters and table signs, stickers, logos, colors,
                            and glitchn-pack.zip with all of them (made by tools/make_pack.py)
 player/player.js, .css     the one lesson player every lesson page uses
 lessons/
@@ -136,7 +139,7 @@ The site is plain HTML with no build step, published with GitHub Pages from the 
 
 ## What you need (materials/)
 
-`materials/index.html` shows everything someone needs to take part, as pictures first and very few words: **1 Buy** (every part as a flat picture, how many, and a store link; a shopping list CSV), **2 Print** (chip labels, chip maps), **3 Share** (the Glitch'n pack zip, stickers, logo). Each lesson's parts list and the lesson library link here.
+`materials/index.html` shows everything someone needs to take part, as pictures first and very few words: **1 Buy** (every part as a flat picture, how many, and a store link; a shopping list CSV), **2 Print** (chip labels, chip maps, posters and table signs; the previews in `materials/img/posters/` are cropped to each PDF's trim box), **3 Share** (the Glitch'n pack zip, stickers, logo). Each lesson's parts list and the lesson library link here.
 
 - **The kit list** is `materials/kit.json`: each row names a part (`key`, a `lessons/catalog.json` key where there is one), how many are in one full kit (`qty`) and where to buy it (`buy`). A row with no store shows "Any store".
 - **The part pictures** are drawn in the page itself (`ART` in `materials/index.html`), one small SVG per kit key. A new part needs a picture there and a short name in `NAMES`.

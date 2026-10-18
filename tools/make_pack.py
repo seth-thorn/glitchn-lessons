@@ -10,17 +10,19 @@ logos/        Glitch'n logos (SVG, PNG)
 stickers/     Stickers, 3 in and 6 in (PDF, SVG)
 chip-labels/  Chip labels. Print at 100% on sticker paper.
 chip-maps/    What each leg of each chip does (PDF, JPG)
+posters/      Posters (24 x 36 in) and table signs (8.5 x 11 in), PDF
 colors/       Glitch'n colors
 
 logos/        Logos de Glitch'n (SVG, PNG)
 stickers/     Calcomanías, 3 y 6 pulgadas (PDF, SVG)
 chip-labels/  Etiquetas para chips. Imprime al 100 % en papel adhesivo.
 chip-maps/    Qué hace cada pata de cada chip (PDF, JPG)
+posters/      Carteles (24 x 36 in) y letreros de mesa (8.5 x 11 in), PDF
 colors/       Colores de Glitch'n
 
 (c) Glitch'n. School of Games, Arts, Media and Engineering, Arizona State University.
 """
-PLAN = [('logos', 'logos'), ('stickers', 'stickers'), ('pinouts', 'chip-maps'), ('colors', 'colors')]
+PLAN = [('logos', 'logos'), ('stickers', 'stickers'), ('pinouts', 'chip-maps'), ('posters', 'posters'), ('colors', 'colors')]
 out = D / 'glitchn-pack.zip'
 with zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED) as z:
     z.writestr('glitchn-pack/README.txt', README)

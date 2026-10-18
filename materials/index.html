@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Glitch'n: what you need</title>
-<meta name="description" content="Everything you need to do Glitch'n: the parts to buy, the sheets to print, and stickers and logos to share.">
+<meta name="description" content="Everything you need to do Glitch'n: the parts to buy, the labels, chip maps and posters to print, and stickers and logos to share.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
@@ -53,6 +53,17 @@
 .dl.light { background: var(--cream); color: var(--text); }
 .dl.light:hover { background: #F1DDD2; }
 
+/* posters and table signs: the picture is the label; one tap downloads the PDF */
+.sheets-head { display: flex; align-items: baseline; gap: 12px; margin: 48px 0 16px; }
+.sheets-head h3 { margin: 0; font-weight: 600; font-size: 18px; }
+.sheets-head small { color: var(--soft); font-size: 14px; }
+.sheets { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px 16px; margin: 0; padding: 0; list-style: none; }
+.sheets a { display: grid; gap: 8px; color: var(--text); }
+.sheets .thumb { display: grid; place-items: center; aspect-ratio: 3 / 4; border-radius: 12px; background: var(--cream); padding: 10px; }
+.sheets .thumb img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.sheets a:hover .thumb { background: var(--cream-2); }
+.sheets .cap { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; }
+.sheets .cap svg { width: 16px; height: 16px; color: var(--blue); flex: none; }
 .prints { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 32px 24px; }
 .print .pic { aspect-ratio: 3 / 2; border-radius: 14px; background: var(--cream); display: grid; place-items: center; overflow: hidden; padding: 10%; }
 .print .pic.photo { padding: 0; background: var(--teal); }
@@ -96,6 +107,7 @@
     <nav class="nav" aria-label="Pages">
       <a data-href="../lessons/index.html" href="../lessons/index.html" data-t="navLessons">Lessons</a>
       <a data-href="index.html" href="index.html" data-t="navNeed" aria-current="page">What you need</a>
+      <a data-href="../about/index.html" href="../about/index.html" data-t="navAbout">About</a>
       <span class="langs" role="group" aria-label="Language" id="langs">
         <button class="lang" data-lang="en" lang="en" aria-pressed="true">EN</button>
         <button class="lang" data-lang="es" lang="es" aria-pressed="false">ES</button>
@@ -136,6 +148,22 @@
           <div class="dl-row"><a class="dl" href="../downloads/pinouts/glitchn-pinout-cards.pdf" download><svg aria-hidden="true"><use href="#i-down"/></svg>PDF <small data-t="letter">Letter</small></a></div>
         </article>
       </div>
+      <div class="sheets-head"><h3 data-t="postersH">Posters</h3><small>24 × 36 in · PDF</small></div>
+      <ul class="sheets">
+        <li><a href="../downloads/posters/poster-welcome.pdf" download><span class="thumb"><img src="img/posters/poster-welcome.jpg" alt="" loading="lazy"></span><span class="cap"><svg aria-hidden="true"><use href="#i-down"/></svg><span data-t="pWelcome">Welcome</span></span></a></li>
+        <li><a href="../downloads/posters/poster-hang-out.pdf" download><span class="thumb"><img src="img/posters/poster-hang-out.jpg" alt="" loading="lazy"></span><span class="cap"><svg aria-hidden="true"><use href="#i-down"/></svg><span data-t="pHang">Hang out</span></span></a></li>
+        <li><a href="../downloads/posters/poster-mess-around.pdf" download><span class="thumb"><img src="img/posters/poster-mess-around.jpg" alt="" loading="lazy"></span><span class="cap"><svg aria-hidden="true"><use href="#i-down"/></svg><span data-t="pMess">Mess around</span></span></a></li>
+        <li><a href="../downloads/posters/poster-geek-out.pdf" download><span class="thumb"><img src="img/posters/poster-geek-out.jpg" alt="" loading="lazy"></span><span class="cap"><svg aria-hidden="true"><use href="#i-down"/></svg><span data-t="pGeek">Geek out</span></span></a></li>
+        <li><a href="../downloads/posters/poster-before-you-go.pdf" download><span class="thumb"><img src="img/posters/poster-before-you-go.jpg" alt="" loading="lazy"></span><span class="cap"><svg aria-hidden="true"><use href="#i-down"/></svg><span data-t="pBefore">Before you go</span></span></a></li>
+        <li><a href="../downloads/posters/poster-feeling-curious.pdf" download><span class="thumb"><img src="img/posters/poster-feeling-curious.jpg" alt="" loading="lazy"></span><span class="cap"><svg aria-hidden="true"><use href="#i-down"/></svg><span data-t="pCurious">Feeling curious?</span></span></a></li>
+      </ul>
+      <div class="sheets-head"><h3 data-t="signsH">Table signs</h3><small>8.5 × 11 in · PDF</small></div>
+      <ul class="sheets">
+        <li><a href="../downloads/posters/sign-turn-a-knob.pdf" download><span class="thumb"><img src="img/posters/sign-turn-a-knob.jpg" alt="" loading="lazy"></span><span class="cap"><svg aria-hidden="true"><use href="#i-down"/></svg><span data-t="sKnob">Turn a knob</span></span></a></li>
+        <li><a href="../downloads/posters/sign-push-a-button.pdf" download><span class="thumb"><img src="img/posters/sign-push-a-button.jpg" alt="" loading="lazy"></span><span class="cap"><svg aria-hidden="true"><use href="#i-down"/></svg><span data-t="sButton">Push a button</span></span></a></li>
+        <li><a href="../downloads/posters/sign-cover-a-sensor.pdf" download><span class="thumb"><img src="img/posters/sign-cover-a-sensor.jpg" alt="" loading="lazy"></span><span class="cap"><svg aria-hidden="true"><use href="#i-down"/></svg><span data-t="sSensor">Cover a sensor</span></span></a></li>
+        <li><a href="../downloads/posters/sign-try-something-new.pdf" download><span class="thumb"><img src="img/posters/sign-try-something-new.jpg" alt="" loading="lazy"></span><span class="cap"><svg aria-hidden="true"><use href="#i-down"/></svg><span data-t="sNew">Try something new</span></span></a></li>
+      </ul>
     </section>
 
     <section class="step" id="share" aria-labelledby="h-share">
@@ -149,6 +177,7 @@
             <li><i></i><span data-t="pack2">Stickers</span></li>
             <li><i></i><span data-t="pack3">Chip labels</span></li>
             <li><i></i><span data-t="pack4">Chip maps</span></li>
+            <li><i></i><span data-t="pack6">Posters and table signs</span></li>
             <li><i></i><span data-t="pack5">Colors</span></li>
           </ul>
           <div><a class="dl" href="../downloads/glitchn-pack.zip" download><svg aria-hidden="true"><use href="#i-down"/></svg>ZIP <small id="packSize"></small></a></div>
@@ -182,7 +211,8 @@
       buyH: 'Buy', printH: 'Print', shareH: 'Share', csv: 'Shopping list', anyStore: 'Any store',
       labelsH: 'Chip labels', labelsP: 'Sticker paper. Print at 100%. Cut. Stick one on each chip.',
       pinH: 'Chip maps', pinP: 'What each leg of a chip does. Keep it next to your board.', letter: 'Letter',
-      packH: "The Glitch'n pack", pack1: 'Logos', pack2: 'Stickers', pack3: 'Chip labels', pack4: 'Chip maps', pack5: 'Colors',
+      packH: "The Glitch'n pack", pack1: 'Logos', pack2: 'Stickers', pack3: 'Chip labels', pack4: 'Chip maps', pack5: 'Colors', pack6: 'Posters and table signs',
+      postersH: 'Posters', signsH: 'Table signs', pWelcome: 'Welcome', pHang: 'Hang out', pMess: 'Mess around', pGeek: 'Geek out', pBefore: 'Before you go', pCurious: 'Feeling curious?', sKnob: 'Turn a knob', sButton: 'Push a button', sSensor: 'Cover a sensor', sNew: 'Try something new',
       sticker: 'Sticker', logo: 'Logo', ready: 'Ready?', first: 'Start the first lesson', set: 'set',
       csvHead: ['Part', 'How many', 'Store', 'Part number', 'Link'],
     },
@@ -191,7 +221,8 @@
       buyH: 'Compra', printH: 'Imprime', shareH: 'Comparte', csv: 'Lista de compras', anyStore: 'Cualquier tienda',
       labelsH: 'Etiquetas para chips', labelsP: 'Papel adhesivo. Imprime al 100 %. Corta. Pega una en cada chip.',
       pinH: 'Mapas de chips', pinP: 'Qué hace cada pata del chip. Tenlo junto a tu protoboard.', letter: 'Carta',
-      packH: "El paquete Glitch'n", pack1: 'Logos', pack2: 'Calcomanías', pack3: 'Etiquetas para chips', pack4: 'Mapas de chips', pack5: 'Colores',
+      packH: "El paquete Glitch'n", pack1: 'Logos', pack2: 'Calcomanías', pack3: 'Etiquetas para chips', pack4: 'Mapas de chips', pack5: 'Colores', pack6: 'Carteles y letreros de mesa',
+      postersH: 'Carteles', signsH: 'Letreros de mesa', pWelcome: 'Bienvenida', pHang: 'Pasar el rato', pMess: 'Experimentar', pGeek: 'Clavarse', pBefore: 'Antes de irte', pCurious: '¿Curiosidad?', sKnob: 'Gira una perilla', sButton: 'Aprieta un botón', sSensor: 'Tapa un sensor', sNew: 'Prueba algo nuevo',
       sticker: 'Calcomanía', logo: 'Logo', ready: '¿Listo?', first: 'Empieza la primera lección', set: 'juego',
       csvHead: ['Pieza', 'Cuántas', 'Tienda', 'Número de pieza', 'Enlace'],
     },

@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Glitch'n: about</title>
+<meta name="description" content="Glitch'n at a glance: a free, music-first way into circuits and semiconductor careers for young people in Phoenix. The model, the results, the team, the research and how to support it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../site.css">
+<style>
+/* About Glitch'n: an executive summary for donors and partners, read top to bottom.
+   Each section: a short label on the left, a few sentences and a picture or numbers on the right.
+   House style in site.css. */
+main { padding-bottom: 72px; }
+.hero { padding-block: 56px 24px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px 48px; align-items: center; }
+.hero h1 { margin: 0; font-weight: 500; font-size: clamp(34px, 4.6vw, 52px); line-height: 1.08; letter-spacing: -.02em; }
+.hero p { margin: 16px 0 0; font-size: 19px; line-height: 1.55; max-width: 44ch; }
+.hero img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 16px; background: var(--cream); }
+@media (max-width: 820px) { .hero { grid-template-columns: minmax(0, 1fr); padding-top: 36px; } }
+
+/* at a glance */
+.glance { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 32px 0 0; padding: 0; list-style: none; }
+.glance li { padding: 20px 22px; border-radius: 14px; background: var(--cream); display: grid; gap: 6px; align-content: start; }
+.glance b { font-weight: 600; font-size: 38px; line-height: 1; color: var(--blue); letter-spacing: -.02em; }
+.glance span { font-size: 14.5px; line-height: 1.4; }
+@media (max-width: 820px) { .glance { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* a section: label on the left, content on the right */
+.sec { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 16px 48px; padding-block: 56px; border-top: 1px solid var(--line); scroll-margin-top: 12px; }
+.glance + .sec { border-top: 0; margin-top: 24px; }
+.sec > h2 { margin: 0; font-weight: 500; font-size: 22px; line-height: 1.25; color: var(--pink); }
+.sec .body { min-width: 0; }
+.sec .body > p { margin: 0 0 14px; max-width: 64ch; font-size: 17px; line-height: 1.65; }
+.sec .body > p:last-child { margin-bottom: 0; }
+.sec figure { margin: 22px 0 0; }
+.sec figure img { display: block; width: 100%; height: auto; border-radius: 14px; background: var(--cream); }
+.sec figcaption { margin-top: 8px; font-size: 13px; color: var(--soft); }
+@media (max-width: 820px) { .sec { grid-template-columns: minmax(0, 1fr); padding-block: 40px; } }
+
+/* the pathway: learner, intern, teacher */
+.path { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 22px 0; padding: 0; list-style: none; }
+.path li { padding: 18px 20px; border-radius: 14px; background: var(--cream); display: grid; gap: 6px; align-content: start; }
+.path .num { width: 32px; height: 32px; font-size: 15px; }
+.path b { font-weight: 600; font-size: 17px; }
+.path span { font-size: 14.5px; color: var(--soft); line-height: 1.45; }
+@media (max-width: 640px) { .path { grid-template-columns: minmax(0, 1fr); } }
+
+/* results */
+.nums { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.nums li { padding: 20px 22px; border-radius: 14px; background: var(--cream); display: grid; gap: 6px; }
+.nums b { font-weight: 600; font-size: 40px; line-height: 1; color: var(--blue); letter-spacing: -.02em; }
+.nums span { font-size: 15px; line-height: 1.45; }
+.source { margin: 12px 0 0; font-size: 13px; color: var(--soft); }
+@media (max-width: 520px) { .nums { grid-template-columns: minmax(0, 1fr); } }
+
+/* milestones */
+.time { list-style: none; margin: 0; padding: 0; position: relative; }
+.time::before { content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--line); }
+.time > li { position: relative; display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 2px 20px; padding: 0 0 22px 36px; }
+.time > li::before { content: ""; position: absolute; left: 0; top: 5px; width: 16px; height: 16px; border-radius: 50%; background: var(--page); box-shadow: inset 0 0 0 3px var(--pink); }
+.time > li.now::before { background: var(--pink); }
+.time .when { font-weight: 600; color: var(--pink); font-size: 14.5px; }
+.time .what { font-size: 16px; line-height: 1.5; }
+@media (max-width: 560px) { .time > li { grid-template-columns: minmax(0, 1fr); } }
+.strip { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+.strip img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 10px; background: var(--cream); }
+@media (max-width: 640px) { .strip { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* team */
+.lead-card { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 20px 32px; align-items: center; padding: 24px; border-radius: 16px; background: var(--cream); }
+.lead-card img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 50%; }
+.lead-card b { display: block; font-weight: 600; font-size: 24px; }
+.lead-card .role { display: block; margin-top: 2px; color: var(--pink); font-weight: 600; font-size: 15px; }
+.lead-card p { margin: 12px 0 0; font-size: 15.5px; line-height: 1.6; max-width: 60ch; }
+@media (max-width: 640px) { .lead-card { grid-template-columns: minmax(0, 1fr); } .lead-card img { max-width: 160px; } }
+h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft); }
+.people { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 24px 16px; margin: 0; padding: 0; list-style: none; }
+.people .face { display: grid; place-items: center; aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--cream); color: var(--pink); font-weight: 600; font-size: 30px; }
+.people img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.people b { display: block; margin-top: 10px; font-weight: 600; font-size: 15px; line-height: 1.3; }
+.people span { display: block; margin-top: 2px; font-size: 13px; line-height: 1.35; color: var(--soft); }
+.board { columns: 2 260px; column-gap: 32px; margin: 0; padding: 0; list-style: none; }
+.board li { break-inside: avoid; padding: 0 0 12px; font-size: 15px; }
+.board b { font-weight: 600; }
+.board span { display: block; font-size: 13.5px; color: var(--soft); }
+
+/* publications */
+.pubs { margin: 0; padding: 0; list-style: none; display: grid; gap: 16px; }
+.pubs li { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 4px 16px; font-size: 15px; line-height: 1.55; }
+.pubs .yr { font-weight: 600; color: var(--pink); }
+.pubs i { font-style: normal; font-weight: 600; }
+.pubs .note { display: block; font-size: 13.5px; color: var(--soft); }
+
+/* funding and support */
+.fund { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.fund li { padding: 18px 20px; border-radius: 14px; background: var(--cream); display: grid; gap: 4px; align-content: start; }
+.fund .when { font-weight: 600; color: var(--pink); font-size: 13.5px; }
+.fund b { font-weight: 600; font-size: 16px; line-height: 1.3; }
+.fund span { font-size: 14px; color: var(--soft); }
+@media (max-width: 860px) { .fund { grid-template-columns: minmax(0, 1fr); } }
+.partners { margin: 18px 0 0; font-size: 14.5px; line-height: 1.6; color: var(--soft); max-width: 72ch; }
+.support { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px 36px; align-items: center; margin-top: 28px; padding: 24px; border-radius: 16px; background: var(--cream); }
+.support .vid { position: relative; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #1E1E1E; }
+.support iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.support b { display: block; font-weight: 600; font-size: 21px; margin-bottom: 8px; }
+.support p { margin: 0 0 18px; color: var(--soft); max-width: 38ch; line-height: 1.55; }
+@media (max-width: 760px) { .support { grid-template-columns: minmax(0, 1fr); padding: 16px; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></symbol>
+</svg>
+
+<div class="wrap">
+  <header class="top">
+    <a class="mark" data-href="../index.html" href="../index.html"><img src="../downloads/logos/glitchn-logo.svg" alt="Glitch'n home" width="131" height="40"></a>
+    <nav class="nav" aria-label="Pages">
+      <a data-href="../lessons/index.html" href="../lessons/index.html" data-t="navLessons">Lessons</a>
+      <a data-href="../materials/index.html" href="../materials/index.html" data-t="navNeed">What you need</a>
+      <a data-href="index.html" href="index.html" data-t="navAbout" aria-current="page">About</a>
+      <span class="langs" role="group" aria-label="Language" id="langs">
+        <button class="lang" data-lang="en" lang="en" aria-pressed="true">EN</button>
+        <button class="lang" data-lang="es" lang="es" aria-pressed="false">ES</button>
+      </span>
+    </nav>
+  </header>
+</div>
+<div class="bar"></div>
+
+<div class="wrap">
+  <main>
+    <section class="hero">
+      <div>
+        <h1 data-t="h1">Music first. Circuits next. Careers after that.</h1>
+        <p data-t="lead">Glitch'n is a free program from Arizona State University that teaches young people electronics by building circuits that make music. Graduates become paid interns who teach what they learned to their own community.</p>
+      </div>
+      <img src="img/building.jpg" alt="Young people building a sound circuit on a breadboard" width="1600" height="1200">
+    </section>
+
+    <ul class="glance" id="glance" aria-label="At a glance">
+      <li><b>60</b><span data-t="g1">young people and family members in the first courses, June 2025</span></li>
+      <li><b>14</b><span data-t="g2">course graduates hired as paid CTRL interns</span></li>
+      <li><b>6</b><span data-t="g3">public pop-up events in Phoenix, 2025 and 2026</span></li>
+      <li><b>5</b><span data-t="g4">free video lessons online, with more on the way</span></li>
+    </ul>
+
+    <section class="sec" aria-labelledby="h-why">
+      <h2 id="h-why" data-t="whyH">Why it matters</h2>
+      <div class="body">
+        <p data-t="why1">Phoenix is one of the country's centers for microelectronics and semiconductors, with Intel, NXP and TSMC nearby. Yet many young people never see themselves in that work. Traditional, step-by-step STEM pathways lose students who learn best by doing, trying and getting things wrong.</p>
+        <p data-t="why2">Glitch'n starts somewhere else: with sound. A "glitch" is a sudden malfunction. We treat it as an invitation. Students build small circuits that blink, click and make rhythms, bend them on purpose, and learn how chips, resistors and capacitors work along the way. Careers in electronics open at many levels, from a high-school diploma to an engineering degree. Glitch'n is a first step onto any of them.</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="h-how">
+      <h2 id="h-how" data-t="howH">How it works</h2>
+      <div class="body">
+        <p data-t="how1">The model is learning by teaching. We call it a community circuit: each group of learners becomes the next group of teachers.</p>
+        <ol class="path">
+          <li><span class="num">1</span><b data-t="p1">Course</b><span data-t="p1p">A free, five-day course. Students build a blinking light, then a drum machine, then their own instruments.</span></li>
+          <li><span class="num">2</span><b data-t="p2">CTRL internship</b><span data-t="p2p">Graduates are paid to co-lead pop-up workshops in public places, with the teaching and research team.</span></li>
+          <li><span class="num">3</span><b data-t="p3">Teaching</b><span data-t="p3p">Interns grow into course teachers, and recruit the next group.</span></li>
+        </ol>
+        <p data-t="how2">Pop-ups are laid out in three zones so everyone can join at their own level: hang out and watch, mess around with finished circuits, or geek out and build one from scratch.</p>
+        <figure><img src="img/homago-posters.jpg" alt="Three Glitch'n posters: Hang out, Mess around, Geek out" loading="lazy" width="1800" height="897"><figcaption data-t="homagoC">The three zones at every pop-up.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="h-found">
+      <h2 id="h-found" data-t="foundH">Results, 2025</h2>
+      <div class="body">
+        <ul class="nums">
+          <li><b>93%</b><span data-t="n1">of course participants said they understood technology better</span></li>
+          <li><b>90%</b><span data-t="n2">of course participants developed or strengthened an interest in a STEAM career</span></li>
+          <li><b>62%</b><span data-t="n3">of pop-up visitors had never played with circuits before</span></li>
+          <li><b>93%</b><span data-t="n4">of pop-up visitors felt more confident exploring circuits afterwards</span></li>
+        </ul>
+        <p class="source" data-t="src">End-of-course survey (58 participants) and pop-up exit survey (96 visitors, ages 6 to 91).</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="h-story">
+      <h2 id="h-story" data-t="storyH">Milestones</h2>
+      <div class="body">
+        <ol class="time">
+          <li><span class="when" data-t="m1w">Aug 2024</span><span class="what" data-t="m1">The National Science Foundation funds Glitch'n.</span></li>
+          <li><span class="when" data-t="m2w">Jun 2025</span><span class="what" data-t="m2">Three free courses at the ASU MIX Center in Mesa: 60 young people and family members.</span></li>
+          <li><span class="when" data-t="m3w">Jul 2025</span><span class="what" data-t="m3">14 graduates become the first CTRL interns and co-lead three pop-ups at Burton Barr Central Library, Phoenix.</span></li>
+          <li><span class="when" data-t="m4w">Oct 2025</span><span class="what" data-t="m4">An ASU award starts Glitch'n AI: musical circuits that work a little like neurons.</span></li>
+          <li><span class="when">2026</span><span class="what" data-t="m5">A gift from the Qualcomm Foundation, and three pop-ups at the Phoenix Conservatory of Music.</span></li>
+          <li class="now"><span class="when" data-t="m6w">Oct 2026</span><span class="what" data-t="m6">The course becomes free video lessons, open to everyone.</span></li>
+        </ol>
+        <figure><img src="img/ctrl-2025-group.jpg" alt="The first CTRL interns with the Glitch'n team and posters" loading="lazy" width="1280" height="960"><figcaption data-t="ctrlC">The first CTRL interns, July 2025.</figcaption></figure>
+        <div class="strip" aria-label="Pop-ups at Burton Barr Central Library, July 2025">
+          <img src="img/popup-1.jpg" alt="" loading="lazy" width="1200" height="800"><img src="img/popup-2.jpg" alt="" loading="lazy" width="1200" height="800"><img src="img/popup-3.jpg" alt="" loading="lazy" width="1200" height="800"><img src="img/popup-4.jpg" alt="" loading="lazy" width="1200" height="800"><img src="img/popup-5.jpg" alt="" loading="lazy" width="1200" height="800"><img src="img/popup-6.jpg" alt="" loading="lazy" width="1200" height="800">
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="h-next">
+      <h2 id="h-next" data-t="nextH">What support makes possible</h2>
+      <div class="body">
+        <p data-t="next1">Every course and pop-up needs kits, paid teen facilitators and places to meet. Support helps us run more courses and pop-ups across Phoenix, put a kit in every learner's hands, pay more young people to teach, and keep adding free lessons to this site, so anyone, anywhere, can build along.</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="h-team">
+      <h2 id="h-team" data-t="teamH">Team</h2>
+      <div class="body">
+        <div class="lead-card">
+          <img src="img/people/seth-thorn.jpg" alt="Seth Thorn" width="360" height="360">
+          <div>
+            <b>Seth Thorn, PhD</b>
+            <span class="role" data-t="sethRole">Founder and director. Creator and circuit designer.</span>
+            <p data-t="sethBio">Assistant Professor of Interactive Media in ASU's School of Games, Arts, Media and Engineering, and principal investigator of the NSF grant. Seth created Glitch'n and designs its circuits and lessons. He received the GAME School's inaugural Teaching Innovation Award in 2024, holds a PhD from Brown University, and is a two-time finalist in the Guthman New Musical Instruments Competition.</p>
+          </div>
+        </div>
+        <h3 data-t="gAffil">Research affiliates</h3>
+        <ul class="people" id="affiliates"></ul>
+        <h3 data-t="gDesign">Visual design</h3>
+        <ul class="people" id="design"></ul>
+        <h3 data-t="gFellows">Student fellows</h3>
+        <ul class="people" id="fellows"></ul>
+        <h3 data-t="gBoard">Advisory board</h3>
+        <ul class="board">
+          <li><b>Suren Jayasuriya, PhD</b><span>Electrical Engineering, Arizona State University</span></li>
+          <li><b>Rob Stenson, EdD</b><span>Neurodiversity Education Research Center</span></li>
+          <li><b>Ruth Wylie, PhD</b><span>Center for Science and the Imagination, Arizona State University</span></li>
+          <li><b>Jennifer Yu, ScD</b><span>SRI International</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="h-pubs">
+      <h2 id="h-pubs" data-t="pubsH">Publications and talks</h2>
+      <div class="body">
+        <ul class="pubs">
+          <li><span class="yr">2026</span><span>Akinbadewa, B., Reutlinger, C., Vasquez, A., &amp; Thorn, S. <i>From frustration to creativity: Exploring how neurodiversity-affirming learning contexts transform uncertainty into strengths.</i> International Conference of the Learning Sciences (ICLS 2026), ISLS.</span></li>
+          <li><span class="yr">2026</span><span>Pivovarova, M., Reutlinger, C., Sanchez Chavarria, K., &amp; Thorn, S. <i>Building confidence in STEM one chip at a time.</i> Association for Education Finance and Policy (AEFP), Chicago.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec" id="support" aria-labelledby="h-support">
+      <h2 id="h-support" data-t="supportH">Funding and partners</h2>
+      <div class="body">
+        <ul class="fund">
+          <li><span class="when" data-t="f1w">2024 to 2027</span><b data-t="f1">U.S. National Science Foundation</b><span>Advancing Informal STEM Learning, <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2432637" target="_blank" rel="noopener">Award 2432637</a></span></li>
+          <li><span class="when">2025</span><b>Arizona State University</b><span data-t="f2p">An internal award for Glitch'n AI</span></li>
+          <li><span class="when">2026</span><b>Qualcomm Foundation</b><span data-t="f3p">A gift to Glitch'n</span></li>
+        </ul>
+        <p class="partners" data-t="partners">Led by ASU's School of Games, Arts, Media and Engineering, with the Mary Lou Fulton College for Teaching and Learning Innovation, the Ira A. Fulton Schools of Engineering, the School of Music, Dance and Theatre, and Enterprise Technology. Pop-ups hosted by Burton Barr Central Library and the Phoenix Conservatory of Music.</p>
+        <div class="support">
+          <div class="vid"><iframe src="https://player.vimeo.com/video/1150502908?h=355f4a8299&amp;dnt=1" title="Glitch'n support video" allow="fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+          <div>
+            <b data-t="supH">Support Glitch'n</b>
+            <p data-t="supP">Glitch'n is funded by the National Science Foundation and is looking for partners and sponsors, especially in industry.</p>
+            <a class="btn" href="mailto:sdthorn@asu.edu?subject=Supporting%20Glitch'n"><svg aria-hidden="true"><use href="#i-mail"/></svg><span data-t="supBtn">Email Seth Thorn</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="who" data-t="who"></p>
+    <p data-t="nsf"></p>
+    <p data-t="copy">© Glitch'n</p>
+    <p class="mt" id="mt" lang="es" hidden>Traducción automática.</p>
+  </footer>
+</div>
+
+<script src="../site.js"></script>
+<script>
+(() => {
+  const T = {
+    en: {
+      title: "Glitch'n: about", glanceAria: 'At a glance',
+      h1: 'Music first. Circuits next. Careers after that.',
+      lead: "Glitch'n is a free program from Arizona State University that teaches young people electronics by building circuits that make music. Graduates become paid interns who teach what they learned to their own community.",
+      g1: 'young people and family members in the first courses, June 2025', g2: 'course graduates hired as paid CTRL interns', g3: 'public pop-up events in Phoenix, 2025 and 2026', g4: 'free video lessons online, with more on the way',
+      whyH: 'Why it matters',
+      why1: "Phoenix is one of the country's centers for microelectronics and semiconductors, with Intel, NXP and TSMC nearby. Yet many young people never see themselves in that work. Traditional, step-by-step STEM pathways lose students who learn best by doing, trying and getting things wrong.",
+      why2: 'Glitch\'n starts somewhere else: with sound. A "glitch" is a sudden malfunction. We treat it as an invitation. Students build small circuits that blink, click and make rhythms, bend them on purpose, and learn how chips, resistors and capacitors work along the way. Careers in electronics open at many levels, from a high-school diploma to an engineering degree. Glitch\'n is a first step onto any of them.',
+      howH: 'How it works', how1: 'The model is learning by teaching. We call it a community circuit: each group of learners becomes the next group of teachers.',
+      p1: 'Course', p1p: 'A free, five-day course. Students build a blinking light, then a drum machine, then their own instruments.',
+      p2: 'CTRL internship', p2p: 'Graduates are paid to co-lead pop-up workshops in public places, with the teaching and research team.',
+      p3: 'Teaching', p3p: 'Interns grow into course teachers, and recruit the next group.',
+      how2: 'Pop-ups are laid out in three zones so everyone can join at their own level: hang out and watch, mess around with finished circuits, or geek out and build one from scratch.',
+      homagoC: 'The three zones at every pop-up.',
+      foundH: 'Results, 2025',
+      n1: 'of course participants said they understood technology better', n2: 'of course participants developed or strengthened an interest in a STEAM career',
+      n3: 'of pop-up visitors had never played with circuits before', n4: 'of pop-up visitors felt more confident exploring circuits afterwards',
+      src: 'End-of-course survey (58 participants) and pop-up exit survey (96 visitors, ages 6 to 91).',
+      storyH: 'Milestones',
+      m1w: 'Aug 2024', m1: "The National Science Foundation funds Glitch'n.",
+      m2w: 'Jun 2025', m2: 'Three free courses at the ASU MIX Center in Mesa: 60 young people and family members.',
+      m3w: 'Jul 2025', m3: '14 graduates become the first CTRL interns and co-lead three pop-ups at Burton Barr Central Library, Phoenix.',
+      m4w: 'Oct 2025', m4: "An ASU award starts Glitch'n AI: musical circuits that work a little like neurons.",
+      m5: 'A gift from the Qualcomm Foundation, and three pop-ups at the Phoenix Conservatory of Music.',
+      m6w: 'Oct 2026', m6: 'The course becomes free video lessons, open to everyone.',
+      ctrlC: 'The first CTRL interns, July 2025.',
+      nextH: 'What support makes possible',
+      next1: "Every course and pop-up needs kits, paid teen facilitators and places to meet. Support helps us run more courses and pop-ups across Phoenix, put a kit in every learner's hands, pay more young people to teach, and keep adding free lessons to this site, so anyone, anywhere, can build along.",
+      teamH: 'Team', sethRole: 'Founder and director. Creator and circuit designer.',
+      sethBio: "Assistant Professor of Interactive Media in ASU's School of Games, Arts, Media and Engineering, and principal investigator of the NSF grant. Seth created Glitch'n and designs its circuits and lessons. He received the GAME School's inaugural Teaching Innovation Award in 2024, holds a PhD from Brown University, and is a two-time finalist in the Guthman New Musical Instruments Competition.",
+      gAffil: 'Research affiliates', gDesign: 'Visual design', gFellows: 'Student fellows', gBoard: 'Advisory board',
+      pubsH: 'Publications and talks',
+      supportH: 'Funding and partners', f1w: '2024 to 2027', f1: 'U.S. National Science Foundation', f2p: "An internal award for Glitch'n AI", f3p: "A gift to Glitch'n",
+      partners: "Led by ASU's School of Games, Arts, Media and Engineering, with the Mary Lou Fulton College for Teaching and Learning Innovation, the Ira A. Fulton Schools of Engineering, the School of Music, Dance and Theatre, and Enterprise Technology. Pop-ups hosted by Burton Barr Central Library and the Phoenix Conservatory of Music.",
+      supH: "Support Glitch'n", supP: "Glitch'n is funded by the National Science Foundation and is looking for partners and sponsors, especially in industry.", supBtn: 'Email Seth Thorn',
+    },
+    es: {
+      title: "Glitch'n: acerca de", glanceAria: 'De un vistazo',
+      h1: 'Primero la música. Luego los circuitos. Después, una carrera.',
+      lead: "Glitch'n es un programa gratuito de Arizona State University que enseña electrónica a jóvenes construyendo circuitos que hacen música. Quienes terminan el curso se convierten en practicantes pagados que enseñan lo aprendido en su propia comunidad.",
+      g1: 'jóvenes y familiares en los primeros cursos, junio de 2025', g2: 'egresados contratados como practicantes pagados de CTRL', g3: 'eventos públicos en Phoenix, 2025 y 2026', g4: 'lecciones en video gratuitas, y vienen más',
+      whyH: 'Por qué importa',
+      why1: 'Phoenix es uno de los centros de microelectrónica y semiconductores del país, con Intel, NXP y TSMC cerca. Aun así, muchos jóvenes nunca se imaginan en ese trabajo. Los caminos tradicionales de STEM, paso a paso, pierden a quienes aprenden mejor haciendo, probando y equivocándose.',
+      why2: 'Glitch\'n empieza por otro lado: por el sonido. Un "glitch" es una falla repentina. Nosotros lo tomamos como una invitación. Los estudiantes construyen pequeños circuitos que parpadean, hacen clics y crean ritmos, los alteran a propósito y, de paso, aprenden cómo funcionan los chips, las resistencias y los capacitores. Las carreras en electrónica empiezan en muchos niveles, desde la preparatoria hasta un título de ingeniería. Glitch\'n es un primer paso hacia cualquiera de ellas.',
+      howH: 'Cómo funciona', how1: 'El modelo es aprender enseñando. Lo llamamos un circuito comunitario: cada grupo de aprendices se convierte en el siguiente grupo de maestros.',
+      p1: 'Curso', p1p: 'Un curso gratuito de cinco días. Construyen una luz que parpadea, luego una caja de ritmos y luego sus propios instrumentos.',
+      p2: 'Práctica CTRL', p2p: 'Los egresados reciben pago por codirigir talleres en espacios públicos, junto con el equipo docente y de investigación.',
+      p3: 'Enseñanza', p3p: 'Los practicantes se convierten en maestros del curso y reclutan al siguiente grupo.',
+      how2: 'Los eventos se organizan en tres zonas para que cada quien participe a su nivel: pasar el rato y mirar, experimentar con circuitos terminados, o clavarse y armar uno desde cero.',
+      homagoC: 'Las tres zonas de cada evento.',
+      foundH: 'Resultados, 2025',
+      n1: 'de quienes tomaron el curso dijeron entender mejor la tecnología', n2: 'de quienes tomaron el curso desarrollaron o fortalecieron su interés en una carrera STEAM',
+      n3: 'de los visitantes nunca habían jugado con circuitos', n4: 'de los visitantes se sintieron más seguros para explorar circuitos',
+      src: 'Encuesta al final del curso (58 participantes) y encuesta de salida de los eventos (96 visitantes, de 6 a 91 años).',
+      storyH: 'Hitos',
+      m1w: 'Ago 2024', m1: "La Fundación Nacional de Ciencias financia Glitch'n.",
+      m2w: 'Jun 2025', m2: 'Tres cursos gratuitos en el ASU MIX Center de Mesa: 60 jóvenes y familiares.',
+      m3w: 'Jul 2025', m3: '14 egresados se convierten en los primeros practicantes de CTRL y codirigen tres eventos en la Biblioteca Central Burton Barr de Phoenix.',
+      m4w: 'Oct 2025', m4: "Un premio de ASU inicia Glitch'n AI: circuitos musicales que funcionan un poco como neuronas.",
+      m5: 'Una donación de la Qualcomm Foundation y tres eventos en el Phoenix Conservatory of Music.',
+      m6w: 'Oct 2026', m6: 'El curso se convierte en lecciones en video gratuitas, abiertas a todos.',
+      ctrlC: 'Los primeros practicantes de CTRL, julio de 2025.',
+      nextH: 'Lo que hace posible tu apoyo',
+      next1: 'Cada curso y evento necesita kits, facilitadores jóvenes pagados y lugares para reunirse. El apoyo nos permite hacer más cursos y eventos en Phoenix, poner un kit en manos de cada aprendiz, pagar a más jóvenes para enseñar y seguir sumando lecciones gratuitas a este sitio, para que cualquiera, en cualquier lugar, pueda construir con nosotros.',
+      teamH: 'Equipo', sethRole: 'Fundador y director. Creador y diseñador de circuitos.',
+      sethBio: "Profesor asistente de Medios Interactivos en la School of Games, Arts, Media and Engineering de ASU e investigador principal de la beca de la NSF. Seth creó Glitch'n y diseña sus circuitos y lecciones. Recibió el primer Premio a la Innovación Docente de la GAME School en 2024, tiene un doctorado de Brown University y fue dos veces finalista del Guthman New Musical Instruments Competition.",
+      gAffil: 'Investigadores afiliados', gDesign: 'Diseño visual', gFellows: 'Becarios estudiantes', gBoard: 'Consejo asesor',
+      pubsH: 'Publicaciones y ponencias',
+      supportH: 'Fondos y socios', f1w: '2024 a 2027', f1: 'Fundación Nacional de Ciencias de EE. UU.', f2p: "Un premio interno para Glitch'n AI", f3p: "Una donación a Glitch'n",
+      partners: "Dirigido por la School of Games, Arts, Media and Engineering de ASU, con Mary Lou Fulton College for Teaching and Learning Innovation, Ira A. Fulton Schools of Engineering, School of Music, Dance and Theatre y Enterprise Technology. Eventos en la Biblioteca Central Burton Barr y el Phoenix Conservatory of Music.",
+      supH: "Apoya a Glitch'n", supP: "Glitch'n está financiado por la Fundación Nacional de Ciencias y busca socios y patrocinadores, sobre todo en la industria.", supBtn: 'Escribe a Seth Thorn',
+    },
+  };
+
+  /* research affiliates: ASU faculty and graduate researchers. student fellows: everyone, all years together */
+  const AFFIL = [
+    { n: 'Jennifer Blain Christen, PhD', r: { en: 'Electrical Engineering, ASU', es: 'Ingeniería Eléctrica, ASU' }, p: 'jennifer-blain-christen.jpg' },
+    { n: 'Mirka Koro, PhD', r: { en: 'Qualitative research, ASU', es: 'Investigación cualitativa, ASU' }, p: 'mirka-koro.jpg' },
+    { n: 'Margarita Pivovarova, PhD', r: { en: 'Economics of education, ASU', es: 'Economía de la educación, ASU' }, p: 'margarita-pivovarova.jpg' },
+    { n: 'Evan Tobias, PhD', r: { en: 'Music learning and teaching, ASU', es: 'Aprendizaje y enseñanza de la música, ASU' }, p: 'evan-tobias.jpg' },
+    { n: 'Ananí Vasquez, PhD', r: { en: 'Accessibility and inclusive learning', es: 'Accesibilidad y aprendizaje inclusivo' }, p: 'anani-vasquez.jpg' },
+    { n: 'Corey Reutlinger, PhD', r: { en: 'Postdoctoral researcher, ASU', es: 'Investigador posdoctoral, ASU' } },
+    { n: 'Bukola Akinbadewa', r: { en: 'Doctoral researcher, ASU', es: 'Investigadora doctoral, ASU' }, p: 'bukola-akinbadewa.jpg' },
+  ];
+  const DESIGN = [
+    { n: 'Kirk Markarian', r: { en: 'Visual branding and artist mentor', es: 'Identidad visual y mentor artístico' }, p: 'kirk-markarian.jpg' },
+  ];
+  const FELLOWS = [
+    { n: 'Jadyn Calhoun', p: 'jadyn-calhoun.jpg' }, { n: 'Carl Mitchell', p: 'carl-mitchell.jpg' }, { n: 'Miah Miner', p: 'miah-miner.jpg' }, { n: 'Patrick Neal', p: 'patrick-neal.jpg' },
+    { n: 'Kayla Sanchez Chavarria', p: 'kayla-sanchez-chavarria.jpg' }, { n: 'Iniobong (Ini) Obong', p: 'iniobong-obong.jpg' }, { n: 'Aivery Onstott', p: 'aivery-onstott.jpg' }, { n: 'Andrea Salazar', p: 'andrea-salazar.jpg' },
+  ];
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const initials = (n) => n.replace(/\(.*?\)|,.*$/g, '').trim().split(/\s+/).map((w) => w[0]).slice(0, 2).join('');
+  const card = (p, lang) => '<li><div class="face">' + (p.p ? '<img src="img/people/' + p.p + '" alt="" loading="lazy" width="360" height="360">' : '<span aria-hidden="true">' + esc(initials(p.n)) + '</span>') + '</div><b>' + esc(p.n) + '</b>' + (p.r ? '<span>' + esc(p.r[lang] || p.r.en) + '</span>' : '') + '</li>';
+
+  GL.start(T, (lang, t) => {
+    document.getElementById('glance').setAttribute('aria-label', t.glanceAria);
+    document.getElementById('affiliates').innerHTML = AFFIL.map((p) => card(p, lang)).join('');
+    document.getElementById('design').innerHTML = DESIGN.map((p) => card(p, lang)).join('');
+    document.getElementById('fellows').innerHTML = FELLOWS.map((p) => card(p, lang)).join('');
+  });
+})();
+</script>
+</body>
+</html>
