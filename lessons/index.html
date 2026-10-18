@@ -6,147 +6,166 @@
 <title>Glitch'n Lessons</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: the lesson library. A header, a row of lesson cards, then the whole map of lessons
-   (a growing, non-linear web), then what's coming. Same ink outlines as the player. */
+/* The lesson library, in the Glitch'n house style (white and cream, logo blue and pink, Manrope, a thin coral
+   rule, flat colour, no outlines or shadows): the lessons as picture cards, the map of how they connect,
+   and what's coming. The other lesson styles (styles/*.css) restyle this page through the same tokens. */
 :root {
-  --ink: #161514; --page: #FAF9F7; --muted: #5E5955; --white: #FFFFFF;
-  --panel: #EE6668; --card: #FCE4E4; --on-panel: #161514;
-  --display: "Archivo", "Arial Black", "Helvetica Neue", Arial, sans-serif;
-  --body: "Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
-  --bw: 3.5px;
+  --ink: #222222; --page: #FFFFFF; --muted: #77706B; --white: #FFFFFF;
+  --panel: #F6E8E0; --card: #FBF3EE; --on-panel: #222222;
+  --pink: #FA6E79; --blue: #3859B3; --line: #EEE3DC;
+  --display: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --body: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --bw: 0px;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { background: var(--page); color: var(--ink); }
-body { margin: 0; font-family: var(--body); font-size: 17px; line-height: 1.5; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 32px 48px; }
-:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-main { max-width: 1120px; margin: 0 auto; display: grid; gap: 30px; }
+body { margin: 0; font-family: var(--body); font-size: 16px; line-height: 1.55; padding-inline: max(20px, env(safe-area-inset-left, 0px)) max(20px, env(safe-area-inset-right, 0px)); padding-bottom: 48px; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+a { color: var(--blue); text-decoration: none; }
+
+/* site header (same as the other site pages) */
+.wrap { max-width: 1080px; margin: 0 auto; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 14px 28px; flex-wrap: wrap; padding-block: 26px 22px; }
+.mark img { display: block; height: 40px; width: auto; }
+.nav { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px; font-size: 15px; font-weight: 500; }
+.nav a { color: var(--ink); padding-block: 6px; }
+.nav a:hover { color: var(--blue); }
+.nav a[aria-current="page"] { color: var(--pink); }
+.bar { height: 4px; background: var(--pink); margin-inline: calc(-1 * max(20px, env(safe-area-inset-left, 0px))); }
+
+main { max-width: 1080px; margin: 0 auto; display: grid; gap: 44px; padding-top: 40px; }
 main > * { min-width: 0; } /* lets the wide map scroll inside its box instead of widening the page */
-.eyebrow { font-family: var(--mono); font-size: 12.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-h1 { font-family: var(--display); font-weight: 860; font-stretch: 112%; font-size: clamp(36px, 6vw, 60px); line-height: 1; margin: 6px 0 12px; }
-h2 { font-family: var(--display); font-weight: 800; font-stretch: 108%; font-size: 24px; margin: 0 0 12px; }
-.intro { margin: 0; max-width: 62ch; font-size: 18px; }
-.parts-link { margin-top: 10px; font-weight: 700; }
-.parts-link a { color: inherit; text-underline-offset: 3px; }
-.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 18px; }
-.card { position: relative; display: grid; grid-template-rows: auto 1fr; text-decoration: none; color: var(--ink); background: var(--panel); border: var(--bw) solid var(--ink); border-radius: 20px; overflow: hidden; box-shadow: 0 5px 0 var(--ink); transition: transform .12s, box-shadow .12s; }
-.card:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--ink); }
-.card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; border-bottom: var(--bw) solid var(--ink); background: var(--card); }
-.card .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; color: var(--on-panel); }
+h1 { font-family: var(--display); font-weight: 500; font-size: clamp(34px, 4.6vw, 48px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 10px; }
+h2 { font-family: var(--display); font-weight: 600; font-size: 22px; margin: 0 0 16px; letter-spacing: -.01em; }
+.intro { margin: 0; max-width: 52ch; font-size: 17px; color: var(--muted); }
+
+/* the page's own controls: lesson style, words, language. Quiet text toggles. */
+.head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 16px 32px; }
+@media (max-width: 760px) { .head { grid-template-columns: minmax(0, 1fr); } }
+.tools { display: flex; flex-wrap: wrap; gap: 6px 22px; align-items: center; }
+.style-pick { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
+.style-pick select { font: 500 14px/1.2 var(--body); color: var(--ink); background: var(--panel); border: 0; border-radius: 99px; padding: 8px 12px; cursor: pointer; }
+.langs { display: inline-flex; gap: 2px; }
+.lang { border: 0; background: none; padding: 10px 6px; font: 500 14px/1 var(--body); cursor: pointer; color: var(--muted); }
+.lang:hover { color: var(--ink); }
+.lang[aria-pressed="true"] { color: var(--ink); text-decoration: underline 2px var(--pink); text-underline-offset: 6px; }
+
+/* lesson cards: a picture, a title, a line */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 32px 20px; }
+.card { position: relative; display: grid; grid-template-rows: auto 1fr; text-decoration: none; color: var(--ink); background: none; border-radius: 14px; }
+.card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; border-radius: 14px; background: var(--panel); }
+.card .body { padding: 14px 2px 0; display: flex; flex-direction: column; gap: 6px; color: var(--on-panel); }
+.card .body > span:not(.badges):not(.meta) { font-size: 15px; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 /* the title is the card's link; its ::after stretches over the whole card so the card stays one big target */
 .card-link { color: inherit; text-decoration: none; }
 .card-link::after { content: ""; position: absolute; inset: 0; z-index: 0; border-radius: inherit; }
 .card-link:focus-visible { outline: none; }
-.card:has(.card-link:focus-visible) { outline: 3px solid var(--ink); outline-offset: 3px; }
+.card:has(.card-link:focus-visible) { outline: 2px solid var(--blue); outline-offset: 4px; }
+.card:hover b { color: var(--blue); }
 /* fold-out step list: sits above the stretched link so its own links work */
-.outline { position: relative; z-index: 1; margin-top: auto; padding-top: 4px; font-family: var(--body); }
-.outline summary { display: inline-flex; align-items: center; gap: 8px; min-height: 34px; padding: 4px 12px 4px 10px; border-radius: 99px; border: 1.5px solid color-mix(in srgb, currentColor 45%, transparent); font-size: 14px; font-weight: 700; cursor: pointer; list-style: none; width: fit-content; }
+.outline { position: relative; z-index: 1; margin-top: auto; padding-top: 6px; font-family: var(--body); }
+.outline summary { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 6px 14px 6px 12px; border-radius: 99px; background: var(--panel); font-size: 14px; font-weight: 600; cursor: pointer; list-style: none; width: fit-content; }
 .outline summary::-webkit-details-marker { display: none; }
 .outline summary::before { content: ""; width: 7px; height: 7px; border: solid currentColor; border-width: 0 2px 2px 0; transform: translateY(-2px) rotate(45deg); }
 .outline[open] summary::before { transform: translateY(1px) rotate(-135deg); }
-.outline summary:hover { background: color-mix(in srgb, currentColor 10%, transparent); }
-.outline summary:focus-visible { outline: 3px solid currentColor; outline-offset: 2px; }
-.outline ol { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 10px; }
-.outline li a { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 5px 6px; align-items: baseline; padding: 4px; margin: -4px; border-radius: 10px; color: inherit; text-decoration: none; font-size: 14px; line-height: 1.25; }
-.outline li a:hover { background: color-mix(in srgb, currentColor 10%, transparent); }
-.outline li a:hover .st { text-decoration: underline; text-underline-offset: 2px; }
-.outline li a:focus-visible { outline: 3px solid currentColor; outline-offset: 0; }
+.outline summary:hover { background: #F1DDD2; }
+.outline ol { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 12px; }
+.outline li a { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 5px 6px; align-items: baseline; padding: 4px; margin: -4px; border-radius: 10px; color: inherit; text-decoration: none; font-size: 14px; line-height: 1.3; }
+.outline li a:hover .st { color: var(--blue); }
 /* the stills are wide shots; zoom the small pictures in on the breadboard */
-.outline .pic { grid-column: 1 / -1; display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 6px; background: color-mix(in srgb, currentColor 12%, transparent); }
+.outline .pic { grid-column: 1 / -1; display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 8px; background: var(--panel); }
 :root .card .outline .pic img { display: block; width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; border: 0; border-radius: 0; margin: 0; box-shadow: none; background: none; transform: scale(1.45); transform-origin: 50% 56%; }
-.outline .n { font-family: var(--display); font-weight: 700; opacity: .75; }
+.outline .n { font-weight: 600; color: var(--pink); }
 @media (pointer: coarse) { .outline summary { min-height: 44px; } }
-/* when a list is open, the other cards keep their own height instead of stretching to match */
 .cards:has(.outline[open]) { align-items: start; }
-.card b { font-family: var(--display); font-weight: 800; font-stretch: 106%; font-size: 21px; line-height: 1.15; }
-.card .meta { font-family: var(--mono); font-size: 12.5px; font-weight: 600; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-.chip { border: 2px solid var(--ink); background: var(--white); color: var(--ink); border-radius: 99px; padding: 0 8px; font-size: 11.5px; }
-.mapwrap { background: var(--card); border: var(--bw) solid var(--ink); border-radius: 20px; padding: 16px; }
-.mapscroll { overflow-x: auto; background: var(--panel); border-radius: 12px; padding: 8px; }
+.card b { font-family: var(--display); font-weight: 600; font-size: 19px; line-height: 1.25; }
+.card .meta { font-size: 13px; font-weight: 500; color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.chip { background: var(--panel); color: var(--ink); border-radius: 99px; padding: 1px 9px; font-size: 12.5px; font-weight: 600; }
+
+/* the map of lessons */
+.mapwrap { background: none; }
+.mapscroll { overflow-x: auto; background: var(--panel); border-radius: 14px; padding: 16px; }
 #map { display: block; margin: 0 auto; max-width: none; color: var(--ink); }
-#map .edge { stroke: var(--ink); stroke-width: 3; fill: none; }
-#map .edge.soft { stroke-dasharray: 5 5; opacity: .75; }
-#map .node circle { fill: var(--white); stroke: var(--ink); stroke-width: 3.5; }
-#map .node.later circle { fill: var(--card); stroke-dasharray: 6 4; }
-#map .node text { font-family: var(--body); font-weight: 700; fill: var(--ink); text-anchor: middle; dominant-baseline: middle; pointer-events: none; }
-#map .node .sub { font-family: var(--mono); font-weight: 600; fill: var(--muted); }
+#map .edge { stroke: #C9B8AE; stroke-width: 2; fill: none; }
+#map .edge.soft { stroke-dasharray: 4 5; }
+#map .node circle { fill: var(--white); stroke: var(--pink); stroke-width: 2.5; }
+#map .node.later circle { fill: none; stroke: #C9B8AE; stroke-dasharray: 5 4; }
+#map .node text { font-family: var(--body); font-weight: 600; fill: var(--ink); text-anchor: middle; dominant-baseline: middle; pointer-events: none; }
+#map .node .sub { font-weight: 500; fill: var(--muted); }
 #map .node { cursor: pointer; }
-#map .node:hover circle, #map .node:focus-visible circle { fill: var(--card); }
+#map .node:hover circle, #map .node:focus-visible circle { fill: var(--card); stroke: var(--blue); }
 #map .node:focus { outline: none; }
-#map .elabel rect { fill: var(--white); stroke: var(--ink); stroke-width: 2; }
-#map .elabel text { font-family: var(--mono); font-weight: 600; font-size: 11px; fill: var(--ink); text-anchor: middle; dominant-baseline: middle; }
-.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px; margin-top: 10px; }
-.legend i { display: inline-block; width: 14px; height: 14px; border-radius: 50%; border: 2.5px solid var(--ink); background: var(--white); vertical-align: -2px; margin-right: 6px; }
-.legend i.dash { border-style: dashed; background: var(--card); }
+#map .elabel rect { fill: var(--page); stroke: none; }
+#map .elabel text { font-family: var(--body); font-weight: 500; font-size: 11px; fill: var(--muted); text-anchor: middle; dominant-baseline: middle; }
+.legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13.5px; color: var(--muted); margin-top: 12px; }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--pink); background: var(--white); vertical-align: -1px; margin-right: 6px; }
+.legend i.dash { border: 2px dashed #C9B8AE; background: none; }
 .coming { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.coming li { border: 2.5px dashed var(--ink); border-radius: 14px; padding: 10px 14px; background: var(--white); }
-.coming b { font-family: var(--display); font-weight: 700; }
-.coming span { display: block; font-size: 15px; color: var(--muted); }
-.team { font-size: 15px; color: var(--muted); border-top: 2px solid var(--ink); padding-top: 14px; }
-.team a { color: var(--ink); font-weight: 700; }
-/* Header: text on the left, language switch pinned top-right whatever the text's length. */
-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 12px 28px; }
-.tools { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; justify-content: flex-end; }
-@media (max-width: 699px) { header { grid-template-columns: minmax(0, 1fr); } header .tools { order: -1; } }
-.style-pick { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
-.style-pick select { font-family: var(--body); font-weight: 700; font-size: 14px; color: var(--ink); background: var(--white); border: var(--bw) solid var(--ink); border-radius: 99px; padding: 4px 10px; cursor: pointer; }
-@media (pointer: coarse) { .style-pick select { padding: 8px 12px; font-size: 15px; } }
-header > div { min-width: 0; }
-.langs { display: inline-flex; border: var(--bw) solid var(--ink); border-radius: 99px; overflow: hidden; background: var(--white); }
-.lang { border: 0; background: none; padding: 4px 13px; font-family: var(--body); font-weight: 700; font-size: 14px; cursor: pointer; color: var(--ink); }
-.lang + .lang { border-left: 2.5px solid var(--ink); }
-.lang:hover { background: var(--card); }
-.lang[aria-pressed="true"] { background: var(--ink); color: var(--white); }
-@media (pointer: coarse) { .lang { padding: 8px 16px; font-size: 15px; } }
-.err { border: var(--bw) solid var(--ink); border-radius: 16px; background: var(--card); padding: 16px; }
-.toast { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: var(--ink); color: var(--white); padding: 10px 16px; border-radius: 10px; font-weight: 700; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; max-width: calc(100% - 32px); text-align: center; }
+.coming li { border-radius: 14px; padding: 12px 16px; background: var(--card); }
+.coming b { font-weight: 600; }
+.coming span { display: block; font-size: 14.5px; color: var(--muted); }
+.team { font-size: 13.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px; }
+.team a { font-weight: 600; }
+.err { border-radius: 14px; background: var(--panel); padding: 16px; }
+.toast { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: var(--ink); color: var(--white); padding: 10px 16px; border-radius: 10px; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-/* filters and card badges: built from the colour tokens, so every style picks them up */
-.filters { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; margin: 0 0 18px; padding: 12px 16px; background: var(--card); color: var(--ink); border: var(--bw) solid var(--ink); border-radius: 16px; font-family: var(--body); }
+
+/* filters and card badges */
+.filters { display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; margin: 0 0 24px; padding: 0; background: none; color: var(--ink); font-family: var(--body); }
 .fgroup { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-.fname { font-size: 13px; color: var(--muted); margin-right: 2px; }
-.filter { font: inherit; font-size: 13.5px; font-weight: 600; padding: 5px 12px; border-radius: 99px; border: 1.5px solid color-mix(in srgb, var(--ink) 40%, transparent); background: transparent; color: var(--ink); cursor: pointer; min-height: 34px; }
-.filter:hover { background: color-mix(in srgb, var(--ink) 8%, transparent); }
-.filter[aria-pressed="true"] { background: var(--ink); color: var(--card); border-color: var(--ink); }
-.filter.clear { border-style: dashed; }
+.fname { font-size: 13px; color: var(--muted); margin-right: 4px; }
+.filter { font: inherit; font-size: 13.5px; font-weight: 500; padding: 6px 13px; border-radius: 99px; border: 0; background: var(--card); color: var(--ink); cursor: pointer; min-height: 34px; }
+.filter:hover { background: var(--panel); }
+.filter[aria-pressed="true"] { background: var(--blue); color: var(--white); }
+.filter.clear { background: none; color: var(--blue); }
 .fnone { flex-basis: 100%; margin: 0; color: var(--muted); }
 @media (pointer: coarse) { .filter { min-height: 44px; padding: 8px 14px; } }
-.ftoggle { display: none; }
 .ftoggle::after { content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 9px; border: solid currentColor; border-width: 0 2px 2px 0; transform: translateY(-2px) rotate(45deg); }
 .filters.open .ftoggle::after { transform: translateY(1px) rotate(-135deg); }
-/* on a phone the filters fold away behind one button, so the lessons come first */
-@media (max-width: 600px) { .ftoggle { display: inline-flex; align-items: center; } .filters:not(.open) .fgroup { display: none; } .filters { gap: 10px; } }
+.ftoggle { display: inline-flex; align-items: center; font: 600 14px/1 var(--body); color: var(--ink); background: var(--card); border: 0; border-radius: 99px; padding: 10px 14px; min-height: 40px; cursor: pointer; }
+.ftoggle:hover { background: var(--panel); }
+.filters:not(.open) .fgroup { display: none; }
+.filters.open { gap: 12px 24px; }
 .badges { display: flex; flex-wrap: wrap; gap: 5px; }
-.badge { font-family: var(--body); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 99px; border: 1.5px solid color-mix(in srgb, currentColor 45%, transparent); line-height: 1.35; }
-.badge.start { background: var(--ink); color: var(--card); border-color: var(--ink); }
+.badge { font-family: var(--body); font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 99px; background: var(--panel); line-height: 1.4; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.badge.start { background: var(--pink); color: var(--white); }
 .badge.level::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 5px; border-radius: 50%; background: currentColor; vertical-align: 0; }
 .badge.level-medium::before { border-radius: 1px; transform: rotate(45deg); width: 7px; height: 7px; }
 .badge.level-hard::before { border-radius: 0; width: 0; height: 0; background: none; border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; border-bottom: 8px solid currentColor; }
 .card[hidden] { display: none; }
-
+.card, .card .body, .badges { min-width: 0; }
 </style>
 <link rel="stylesheet" href="../styles/all.css">
 </head>
 <body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="../index.html"><img src="../downloads/logos/glitchn-logo.svg" alt="Glitch'n home" width="131" height="40"></a>
+    <nav class="nav" aria-label="Pages">
+      <a href="index.html" aria-current="page" data-i18n="navLessons">Lessons</a>
+      <a href="../materials/index.html" data-i18n="navNeed">What you need</a>
+    </nav>
+  </header>
+</div>
+<div class="bar"></div>
 <main>
-  <header>
+  <section class="head">
     <div>
-      <div class="eyebrow"><a class="home" href="../index.html">Glitch'n</a></div>
       <h1 data-i18n="lessons">Lessons</h1>
-      <p class="intro" data-i18n="intro">Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.</p>
-      <p class="intro parts-link"><a href="../materials/index.html" data-i18n="partsLink">What you need: parts, chip labels, stickers</a></p>
+      <p class="intro" data-i18n="intro">Pick a lesson. Follow the video, one small step at a time.</p>
     </div>
     <div class="tools">
       <label class="style-pick"><span id="styleLabel">Style</span><select id="styleSel"></select></label>
       <div class="langs words" role="group" aria-label="Words" id="words"></div>
       <div class="langs" role="group" aria-label="Language" id="langs"></div>
     </div>
-  </header>
+  </section>
 
   <section aria-labelledby="h-lessons">
     <h2 id="h-lessons" data-i18n="startBuilding">Start building</h2>
@@ -165,7 +184,7 @@ header > div { min-width: 0; }
     <ul class="coming" id="coming"></ul>
   </section>
 
-  <p class="team" lang="en">For the Glitch'n team: <a href="../editor/index.html">open the step editor</a> to turn a new video into a lesson.</p>
+  <footer class="team" lang="en">For the Glitch'n team: <a href="../editor/index.html">open the step editor</a> to turn a new video into a lesson. © Glitch'n</footer>
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -175,14 +194,14 @@ header > div { min-width: 0; }
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const fmt = (s) => { s = Math.round(s); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
   /* ---------- language: ?lang= in the address, then the visitor's last choice, then the browser ---------- */
-  const LANGS = { en: 'English', es: 'Español' };
+  const LANGS = { en: 'EN', es: 'ES' };
   const UI = {
-    en: { partsLink: 'What you need: parts, chip labels, stickers', style: 'Style', style_tv: 'TV', style_clean: 'Clean', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', lessons: 'Lessons', intro: 'Build sound circuits on a breadboard, one small step at a time. Each lesson plays a build video beside step-by-step instructions, with close-up photos you can magnify and a map of where to go next.',
+    en: { navLessons: 'Lessons', navNeed: 'What you need', style: 'Style', style_tv: 'TV', style_clean: 'Clean', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', lessons: 'Lessons', intro: 'Pick a lesson. Follow the video, one small step at a time.',
       startBuilding: 'Start building', fDifficulty: 'Difficulty', fChips: 'Chips', fOsc: 'Oscillators', fConcepts: 'Concepts', fClear: 'Show all', fToggle: 'Filter lessons', fNone: 'No lessons match these filters.', startHere: 'Start here', words: 'Words', wordsSimple: 'Simple', wordsTech: 'Technical', wordsSimpleTitle: 'Plain words for the parts and steps', wordsTechTitle: 'The real names of the parts', requires: 'Requires', oscN: '{n} osc.', loading: 'Loading lessons…', map: 'Map of lessons', mapAria: 'How the lessons connect', ready: 'Ready to build', coming: 'Coming', arrows: 'Arrows point to where a lesson leads.',
       language: 'Language', steps: 'steps', subSteps: 'sub-steps', seeSteps: 'See the {n} steps', draft: 'Draft', comingSmall: 'coming', notReady: '“{t}” isn’t ready yet.', none: 'No lessons yet.',
       listError: '<b>The lesson list did not load.</b> It lives in lessons/index.json; run tools/build_index.py to make it.', title: "Glitch'n Lessons", machine: '',
       'kind_variation': 'variation', 'kind_related': 'related', 'kind_next day': 'next day', 'kind_revisited': 'revisited' },
-    es: { partsLink: 'Lo que necesitas: piezas, etiquetas, calcomanías', style: 'Estilo', style_tv: 'Tele', style_clean: 'Limpio', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', lessons: 'Lecciones', intro: 'Arma circuitos de sonido en una protoboard, un pequeño paso a la vez. Cada lección muestra un video del armado junto a instrucciones paso a paso, con fotos de cerca que puedes ampliar y un mapa de a dónde ir después.',
+    es: { navLessons: 'Lecciones', navNeed: 'Lo que necesitas', style: 'Estilo', style_tv: 'Tele', style_clean: 'Limpio', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', lessons: 'Lecciones', intro: 'Elige una lección. Sigue el video, un pequeño paso a la vez.',
       startBuilding: 'Empieza a armar', fDifficulty: 'Dificultad', fChips: 'Chips', fOsc: 'Osciladores', fConcepts: 'Conceptos', fClear: 'Mostrar todas', fToggle: 'Filtrar lecciones', fNone: 'Ninguna lección coincide con estos filtros.', startHere: 'Empieza aquí', words: 'Palabras', wordsSimple: 'Sencillo', wordsTech: 'Técnico', wordsSimpleTitle: 'Palabras sencillas para las piezas y los pasos', wordsTechTitle: 'Los nombres reales de las piezas', requires: 'Requiere', oscN: '{n} osc.', loading: 'Cargando lecciones…', map: 'Mapa de lecciones', mapAria: 'Cómo se conectan las lecciones', ready: 'Lista para armar', coming: 'Próximamente', arrows: 'Las flechas apuntan hacia donde lleva cada lección.',
       language: 'Idioma', steps: 'pasos', subSteps: 'subpasos', seeSteps: 'Ver los {n} pasos', draft: 'Borrador', comingSmall: 'próximamente', notReady: '“{t}” todavía no está lista.', none: 'Todavía no hay lecciones.',
       listError: '<b>No se pudo cargar la lista de lecciones.</b>', title: 'Lecciones de Glitch’n', machine: 'Traducción automática',

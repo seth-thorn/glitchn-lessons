@@ -8,41 +8,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../site.css">
 <style>
 /* What you need: 1 buy the parts, 2 print the sheets, 3 share the stickers and logos, then start the first lesson.
    Pictures first, very few words. Glitch'n house style: white and cream, logo blue and pink, Manrope at medium
-   weight, a thin coral rule, flat colour, no outlines or shadows. Parts and quantities come from kit.json. */
-:root {
-  --text: #222222; --soft: #77706B; --page: #FFFFFF; --cream: #F6E8E0; --line: #EEE3DC;
-  --blue: #3859B3; --pink: #FA6E79; --teal: #8AC9C3;
-  --font: "Manrope", "Helvetica Neue", Arial, sans-serif;
-  color-scheme: light;
-}
-* { box-sizing: border-box; }
-[hidden] { display: none !important; }
-html, body { background: var(--page); color: var(--text); }
-body { margin: 0; font: 400 16px/1.5 var(--font); padding-inline: max(20px, env(safe-area-inset-left, 0px)) max(20px, env(safe-area-inset-right, 0px)); }
-a { color: var(--blue); text-decoration: none; }
-:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
-.wrap { max-width: 1080px; margin: 0 auto; }
+   weight, a thin coral rule, flat colour, no outlines or shadows (site.css). Parts and quantities come from kit.json. */
 
-/* header */
-.top { display: flex; align-items: center; justify-content: space-between; gap: 14px 28px; flex-wrap: wrap; padding-block: 26px 22px; }
-.mark img { display: block; height: 40px; width: auto; }
-.nav { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px; font-size: 15px; font-weight: 500; }
-.nav a { color: var(--text); padding-block: 6px; }
-.nav a:hover { color: var(--blue); }
-.nav a[aria-current="page"] { color: var(--pink); }
-.langs { display: inline-flex; }
-.lang { font: 500 14px/1 var(--font); color: var(--soft); background: none; border: 0; padding: 10px 6px; cursor: pointer; }
-.lang[aria-pressed="true"] { color: var(--text); text-decoration: underline 2px var(--pink); text-underline-offset: 6px; }
-.bar { height: 4px; background: var(--pink); }
 
 /* the three steps, as a map of the page */
 .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 48px 0 8px; padding: 0; list-style: none; }
 .steps a { display: flex; align-items: center; gap: 16px; padding: 18px 20px; border-radius: 14px; background: var(--cream); color: var(--text); }
 .steps a:hover { background: #F1DDD2; }
-.num { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--pink); color: #FFFFFF; font-weight: 700; font-size: 18px; }
 .steps svg { flex: none; width: 40px; height: 40px; color: var(--blue); }
 .steps b { font-weight: 600; font-size: 20px; }
 @media (max-width: 640px) { .steps { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: 28px; } .steps a { padding: 12px 16px; } }
@@ -101,11 +77,7 @@ a { color: var(--blue); text-decoration: none; }
 .go a { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 12px 24px; border-radius: 99px; background: #FFFFFF; color: var(--text); font-weight: 600; font-size: 17px; }
 .go a svg { width: 20px; height: 20px; color: var(--pink); }
 
-footer { padding-block: 26px 48px; border-top: 1px solid var(--line); font-size: 13px; color: var(--soft); display: grid; gap: 6px; }
-footer p { margin: 0; max-width: 92ch; }
-footer .who { color: var(--text); font-weight: 500; }
-footer .mt { font-style: italic; }
-@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
 </style>
 </head>
 <body>
@@ -135,7 +107,7 @@ footer .mt { font-style: italic; }
 
 <div class="wrap">
   <main>
-    <h1 class="sr" data-t="h1" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">What you need</h1>
+    <h1 class="sr" data-t="h1">What you need</h1>
     <ol class="steps">
       <li><a href="#buy"><span class="num">1</span><svg aria-hidden="true"><use href="#i-cart"/></svg><b data-t="buyH">Buy</b></a></li>
       <li><a href="#print"><span class="num">2</span><svg aria-hidden="true"><use href="#i-print"/></svg><b data-t="printH">Print</b></a></li>
@@ -196,6 +168,7 @@ footer .mt { font-style: italic; }
   <footer>
     <p class="who" data-t="who"></p>
     <p data-t="nsf"></p>
+    <p data-t="copy">© Glitch'n</p>
     <p class="mt" id="mt" lang="es" hidden>Traducción automática.</p>
   </footer>
 </div>

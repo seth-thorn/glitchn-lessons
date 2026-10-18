@@ -7,87 +7,108 @@
 <meta name="description" content="Free video lessons for building sound circuits on a breadboard, one small step at a time. From Arizona State University.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="site.css">
 <style>
-/* The Glitch'n home page: one big line, two ways in, the drum machine from the first lesson,
-   and a few words on where Glitch'n comes from. Shared parts (top bar, buttons, footer) are in site.css. */
-/* the big line */
-.hero { padding-block: clamp(24px, 5vw, 60px) clamp(28px, 3.4vw, 40px); }
-h1 {
-  font-family: var(--display); font-weight: 880; font-stretch: 122%;
-  font-size: clamp(46px, 8.4vw, 108px); line-height: .92; letter-spacing: -.025em;
-  margin: 0; white-space: pre-line; /* the line break in the text is kept; narrow screens wrap further */
-}
-.lead { margin: clamp(18px, 2.4vw, 26px) 0 0; max-width: 40ch; text-wrap: pretty; font-size: clamp(19px, 1.9vw, 23px); line-height: 1.45; }
-.doors { display: flex; flex-wrap: wrap; gap: 14px 16px; margin-top: clamp(24px, 3vw, 34px); }
+/* The Glitch'n home page: one line, the drum machine from the first lesson, the three steps
+   (get what you need, follow a lesson, make music), and where Glitch'n started. House style in site.css. */
+.hero { padding-block: 56px 32px; display: grid; gap: 16px; }
+h1 { margin: 0; font-weight: 500; font-size: clamp(38px, 5.6vw, 60px); line-height: 1.06; letter-spacing: -.025em; max-width: 14ch; }
+.lead { margin: 0; max-width: 40ch; font-size: 19px; color: var(--soft); }
+.doors { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+
 /* the drum machine: the first lesson's finished board, blinking */
-.board { margin: 0; }
-.screen {
-  position: relative; aspect-ratio: 960 / 290; background: #9C9C9E;
-  border: var(--bw) solid var(--ink); border-radius: 22px; overflow: hidden; box-shadow: 0 6px 0 var(--ink);
-}
+.board { margin: 24px 0 0; }
+.screen { position: relative; aspect-ratio: 960 / 290; border-radius: 14px; overflow: hidden; background: #9C9C9E; }
 .screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.sound {
-  position: absolute; right: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 8px;
-  min-height: 44px; padding: 8px 16px 8px 12px; font: 700 15px/1 var(--body); color: var(--ink);
-  background: var(--white); border: 2.5px solid var(--ink); border-radius: 99px; cursor: pointer;
-}
-.sound svg { width: 22px; height: 22px; flex: none; }
+.sound { position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px 8px 12px;
+  font: 600 14px/1 var(--font); color: var(--text); background: #FFFFFF; border: 0; border-radius: 99px; cursor: pointer; }
+.sound svg { width: 20px; height: 20px; flex: none; color: var(--blue); }
 .sound .on { display: none; }
-.sound[aria-pressed="true"] { background: var(--coral); }
+.sound[aria-pressed="true"] { background: var(--pink); color: #FFFFFF; }
+.sound[aria-pressed="true"] svg { color: #FFFFFF; }
 .sound[aria-pressed="true"] .on { display: inline; }
 .sound[aria-pressed="true"] .off { display: none; }
-.board figcaption { margin-top: 16px; color: var(--muted); font-size: 16px; }
+.board figcaption { margin-top: 10px; color: var(--soft); font-size: 14px; }
 
-/* where it comes from */
-.story { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px 48px; padding-block: clamp(44px, 7vw, 88px); }
-.story h2 { font-family: var(--display); font-weight: 820; font-stretch: 112%; font-size: clamp(26px, 3vw, 34px); line-height: 1.05; margin: 0; letter-spacing: -.01em; }
-.story p { margin: 0; max-width: 58ch; }
-@media (min-width: 860px) { .story { grid-template-columns: 5fr 7fr; } }
+/* the three steps */
+.path { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 56px 0 0; padding: 0; list-style: none; }
+.path a { display: grid; grid-template-rows: auto 1fr auto; gap: 14px; height: 100%; padding: 22px; border-radius: 14px; background: var(--cream); color: var(--text); }
+.path a:hover { background: var(--cream-2); }
+.path .ico { width: 56px; height: 56px; color: var(--blue); }
+.path b { font-weight: 600; font-size: 20px; line-height: 1.25; }
+.path .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.path .go { width: 22px; height: 22px; flex: none; color: var(--blue); }
+@media (max-width: 720px) {
+  .path { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .path a { grid-template-columns: auto auto 1fr; grid-template-rows: none; align-items: center; padding: 12px 16px; }
+  .path .ico { width: 34px; height: 34px; }
+  .path b { font-size: 18px; }
+}
 
+/* where it started */
+.story { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 12px 48px; padding-block: 64px; }
+.story h2 { margin: 0; font-weight: 500; font-size: 22px; color: var(--pink); }
+.story p { margin: 0; max-width: 56ch; }
+@media (max-width: 720px) { .story { grid-template-columns: minmax(0, 1fr); padding-block: 44px; } }
 @media (max-width: 600px) {
-  .screen { aspect-ratio: 960 / 380; border-radius: 16px; }
-  .sound { right: 8px; bottom: 8px; padding: 0; width: 44px; justify-content: center; }
+  .hero { padding-top: 32px; }
+  .screen { aspect-ratio: 960 / 380; }
+  .sound { padding: 0; width: 44px; justify-content: center; }
   .sound span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .doors .btn { flex: 1 1 auto; }
 }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.5l2.2 10.5h10.6L20.5 7H7"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></symbol>
+  <symbol id="i-wave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h3l2-6 3 12 3-9 2 6 2-3h5"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
 <div class="wrap">
   <header class="top">
-    <a class="mark" data-href="./" href="./"><img src="downloads/logos/glitchn-logo.svg" alt="Glitch'n" width="112" height="34"></a>
+    <a class="mark" data-href="./" href="./"><img src="downloads/logos/glitchn-logo.svg" alt="Glitch'n" width="131" height="40"></a>
     <nav class="nav" aria-label="Pages">
       <a data-href="lessons/index.html" href="lessons/index.html" data-t="navLessons">Lessons</a>
       <a data-href="materials/index.html" href="materials/index.html" data-t="navNeed">What you need</a>
+      <span class="langs" role="group" aria-label="Language" id="langs">
+        <button class="lang" data-lang="en" lang="en" aria-pressed="true">EN</button>
+        <button class="lang" data-lang="es" lang="es" aria-pressed="false">ES</button>
+      </span>
     </nav>
-    <div class="langs" role="group" aria-label="Language" id="langs">
-      <button class="lang" data-lang="en" lang="en" aria-pressed="true">English</button>
-      <button class="lang" data-lang="es" lang="es" aria-pressed="false">Español</button>
-    </div>
   </header>
+</div>
+<div class="bar"></div>
 
+<div class="wrap">
   <main>
     <section class="hero">
-      <h1 data-t="h1">Make music
-with circuits.</h1>
-      <p class="lead" data-t="lead">Free video lessons that show you how to build sound circuits on a breadboard, one small step at a time.</p>
+      <h1 data-t="h1">Make music with circuits.</h1>
+      <p class="lead" data-t="lead">Free video lessons. One small step at a time.</p>
       <div class="doors">
-        <a class="btn go" id="first" data-href="lessons/blink-to-drum-machine/index.html" href="lessons/blink-to-drum-machine/index.html" data-t="first">Start the first lesson</a>
-        <a class="btn" id="all" data-href="lessons/index.html" href="lessons/index.html" data-t="all">See all lessons</a>
+        <a class="btn" data-href="lessons/blink-to-drum-machine/index.html" href="lessons/blink-to-drum-machine/index.html"><span data-t="first">Start the first lesson</span><svg aria-hidden="true"><use href="#i-next"/></svg></a>
+        <a class="btn light" data-href="lessons/index.html" href="lessons/index.html" data-t="all">All lessons</a>
       </div>
+      <figure class="board">
+        <div class="screen">
+          <video id="clip" src="home/drum-machine.mp4" poster="home/drum-machine.jpg" muted loop playsinline preload="metadata" aria-describedby="cap"></video>
+          <button class="sound" id="sound" type="button" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path class="off" d="M16 9.5l5 5M21 9.5l-5 5"/><path class="on" d="M15.5 9a4.5 4.5 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/></svg>
+            <span id="soundLabel">Sound on</span>
+          </button>
+        </div>
+        <figcaption id="cap" data-t="cap">The drum machine from the first lesson.</figcaption>
+      </figure>
     </section>
 
-    <figure class="board">
-      <div class="screen">
-        <video id="clip" src="home/drum-machine.mp4" poster="home/drum-machine.jpg" muted loop playsinline preload="metadata" aria-describedby="cap"></video>
-        <button class="sound" id="sound" type="button" aria-pressed="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path class="off" d="M16 9.5l5 5M21 9.5l-5 5"/><path class="on" d="M15.5 9a4.5 4.5 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/></svg>
-          <span id="soundLabel">Turn sound on</span>
-        </button>
-      </div>
-      <figcaption id="cap" data-t="cap">The drum machine you build in the first lesson. Each light blinks with a drum.</figcaption>
-    </figure>
+    <ol class="path" id="path" aria-label="How it works">
+      <li><a data-href="materials/index.html" href="materials/index.html"><span class="num">1</span><svg class="ico" aria-hidden="true"><use href="#i-cart"/></svg><span class="row"><b data-t="p1">Get what you need</b><svg class="go" aria-hidden="true"><use href="#i-next"/></svg></span></a></li>
+      <li><a data-href="lessons/blink-to-drum-machine/index.html" href="lessons/blink-to-drum-machine/index.html"><span class="num">2</span><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span class="row"><b data-t="p2">Follow a lesson</b><svg class="go" aria-hidden="true"><use href="#i-next"/></svg></span></a></li>
+      <li><a data-href="lessons/index.html" href="lessons/index.html"><span class="num">3</span><svg class="ico" aria-hidden="true"><use href="#i-wave"/></svg><span class="row"><b data-t="p3">Make music</b><svg class="go" aria-hidden="true"><use href="#i-next"/></svg></span></a></li>
+    </ol>
 
     <section class="story" aria-labelledby="h-story">
       <h2 id="h-story" data-t="storyH">How Glitch'n started</h2>
@@ -96,8 +117,9 @@ with circuits.</h1>
   </main>
 
   <footer>
-    <p class="who" data-t="who">Glitch'n is a project of the School of Games, Arts, Media and Engineering at Arizona State University.</p>
-    <p data-t="nsf">This material is based upon work supported by the U.S. National Science Foundation under Award No. 2432637 (Advancing Informal STEM Learning). Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.</p>
+    <p class="who" data-t="who"></p>
+    <p data-t="nsf"></p>
+    <p data-t="copy">© Glitch'n</p>
     <p class="mt" id="mt" lang="es" hidden>Traducción automática.</p>
   </footer>
 </div>
@@ -105,27 +127,26 @@ with circuits.</h1>
 <script src="site.js"></script>
 <script>
 (() => {
-  /* ---------- words, in English and Spanish ---------- */
   const T = {
     en: {
-      title: "Glitch\'n: make music with circuits",
-      h1: 'Make music\nwith circuits.',
-      lead: 'Free video lessons that show you how to build sound circuits on a breadboard, one small step at a time.',
-      first: 'Start the first lesson', all: 'See all lessons',
-      cap: 'The drum machine you build in the first lesson. Each light blinks with a drum.',
-      soundOn: 'Turn sound on', soundOff: 'Turn sound off', play: 'Play with sound', pause: 'Pause',
-      storyH: "How Glitch\'n started",
-      story: 'Glitch\'n began in June 2025 with three free summer courses at the ASU MIX Center in downtown Mesa, Arizona. Sixty young people and their families came to build circuits that make sound. These lessons carry that course forward, so more people can build along.',
+      title: "Glitch'n: make music with circuits",
+      h1: 'Make music with circuits.', lead: 'Free video lessons. One small step at a time.',
+      first: 'Start the first lesson', all: 'All lessons',
+      cap: 'The drum machine from the first lesson.',
+      soundOn: 'Sound on', soundOff: 'Sound off', play: 'Play with sound', pause: 'Pause',
+      p1: 'Get what you need', p2: 'Follow a lesson', p3: 'Make music', pathAria: 'How it works',
+      storyH: "How Glitch'n started",
+      story: "Glitch'n began in June 2025 with three free summer courses at the ASU MIX Center in downtown Mesa, Arizona. Sixty young people and their families came to build circuits that make sound. These lessons carry that course forward, so more people can build along.",
     },
     es: {
-      title: 'Glitch\'n: haz música con circuitos',
-      h1: 'Haz música\ncon circuitos.',
-      lead: 'Lecciones en video, gratis, que te enseñan a construir circuitos de sonido en una protoboard, un pequeño paso a la vez.',
-      first: 'Empieza la primera lección', all: 'Ver todas las lecciones',
-      cap: 'La caja de ritmos que construyes en la primera lección. Cada luz parpadea con un golpe de tambor.',
+      title: "Glitch'n: haz música con circuitos",
+      h1: 'Haz música con circuitos.', lead: 'Lecciones en video, gratis. Un pequeño paso a la vez.',
+      first: 'Empieza la primera lección', all: 'Todas las lecciones',
+      cap: 'La caja de ritmos de la primera lección.',
       soundOn: 'Activar sonido', soundOff: 'Quitar sonido', play: 'Reproducir con sonido', pause: 'Pausar',
-      storyH: 'Cómo empezó Glitch\'n',
-      story: 'Glitch\'n empezó en junio de 2025 con tres cursos de verano gratuitos en el ASU MIX Center, en el centro de Mesa, Arizona. Sesenta jóvenes y sus familias vinieron a construir circuitos que hacen sonido. Estas lecciones continúan ese curso, para que más personas puedan construir con nosotros.',
+      p1: 'Consigue lo que necesitas', p2: 'Sigue una lección', p3: 'Haz música', pathAria: 'Cómo funciona',
+      storyH: "Cómo empezó Glitch'n",
+      story: "Glitch'n empezó en junio de 2025 con tres cursos de verano gratuitos en el ASU MIX Center, en el centro de Mesa, Arizona. Sesenta jóvenes y sus familias vinieron a construir circuitos que hacen sonido. Estas lecciones continúan ese curso, para que más personas puedan construir con nosotros.",
     },
   };
 
@@ -140,26 +161,18 @@ with circuits.</h1>
     btn.setAttribute('aria-pressed', String(still ? !clip.paused : !clip.muted));
   };
 
-  /* ---------- the drum machine: blinks quietly on its own; sound only when asked ---------- */
+  /* the drum machine: blinks quietly on its own; sound only when asked */
   clip.volume = 0.7;
-  if (!still) {
-    clip.autoplay = true;
-    clip.play().catch(() => {});
-  }
+  if (!still) { clip.autoplay = true; clip.play().catch(() => {}); }
   btn.addEventListener('click', () => {
-    if (still) {
-      clip.muted = false;
-      if (clip.paused) clip.play().catch(() => {}); else clip.pause();
-    } else {
-      clip.muted = !clip.muted;
-      if (clip.paused) clip.play().catch(() => {});
-    }
+    if (still) { clip.muted = false; if (clip.paused) clip.play().catch(() => {}); else clip.pause(); }
+    else { clip.muted = !clip.muted; if (clip.paused) clip.play().catch(() => {}); }
     soundLabel();
   });
   clip.addEventListener('play', soundLabel);
   clip.addEventListener('pause', soundLabel);
 
-  GL.start(T, soundLabel);
+  GL.start(T, (lang, t) => { document.getElementById('path').setAttribute('aria-label', t.pathAria); soundLabel(); });
 })();
 </script>
 </body>
