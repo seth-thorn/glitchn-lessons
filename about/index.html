@@ -27,9 +27,20 @@ main { padding-bottom: 72px; }
 .glance span { font-size: 14.5px; line-height: 1.4; }
 @media (max-width: 820px) { .glance { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
+/* partners: logos in one quiet row, right under the numbers */
+.logos { margin: 40px 0 0; padding: 28px 0 0; border-top: 1px solid var(--line); }
+.logos h2 { margin: 0 0 8px; font-weight: 600; font-size: 14px; color: var(--soft); }
+.logos ul + h2 { margin-top: 28px; }
+.logos ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 48px; align-items: center; margin: 0; padding: 0; list-style: none; }
+.logos a { display: grid; place-items: center; height: 120px; border-radius: 12px; }
+.logos a:hover { background: var(--cream); }
+.logos img { display: block; max-width: 100%; max-height: 72px; width: auto; height: auto; }
+.logos .tall img { max-height: 104px; }
+@media (max-width: 480px) { .logos ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 20px; } .logos a { height: 104px; } }
+
 /* a section: label on the left, content on the right */
 .sec { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 16px 48px; padding-block: 56px; border-top: 1px solid var(--line); scroll-margin-top: 12px; }
-.glance + .sec { border-top: 0; margin-top: 24px; }
+.logos + .sec { margin-top: 32px; }
 .sec > h2 { margin: 0; font-weight: 500; font-size: 22px; line-height: 1.25; color: var(--pink); }
 .sec .body { min-width: 0; }
 .sec .body > p { margin: 0 0 14px; max-width: 64ch; font-size: 17px; line-height: 1.65; }
@@ -147,6 +158,21 @@ h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft);
       <li><b>5</b><span data-t="g4">free video lessons online, with more on the way</span></li>
     </ul>
 
+    <section class="logos" aria-label="Funders and partners" id="logosSec">
+      <h2 id="h-fund" data-t="fundersH">Funders</h2>
+      <ul aria-labelledby="h-fund">
+        <li><a class="tall" href="https://www.nsf.gov/" target="_blank" rel="noopener"><img src="img/partners/nsf.png" alt="U.S. National Science Foundation" width="360" height="360"></a></li>
+        <li><a href="https://www.qualcomm.com/company/corporate-responsibility/qualcomm-foundation" target="_blank" rel="noopener"><img src="img/partners/qualcomm-foundation.png" alt="Qualcomm Foundation" width="720" height="224" style="max-height:64px"></a></li>
+        <li><a href="https://herbergerinstitute.asu.edu/" target="_blank" rel="noopener"><img src="img/partners/asu-herberger.png" alt="Herberger Institute for Design and the Arts, Arizona State University" width="900" height="224" style="max-height:72px"></a></li>
+      </ul>
+      <h2 id="h-part" data-t="partnersH">Partners</h2>
+      <ul aria-labelledby="h-part">
+        <li><a href="https://www.bgcaz.org/" target="_blank" rel="noopener"><img src="img/partners/bgcaz.png" alt="Boys &amp; Girls Clubs of the Valley" width="720" height="157" style="max-height:58px"></a></li>
+        <li><a href="https://pcmrocks.org/" target="_blank" rel="noopener"><img src="img/partners/pcm.svg" alt="Phoenix Conservatory of Music" width="342" height="70" style="max-height:50px"></a></li>
+        <li><a class="tall" href="https://azsta.org/" target="_blank" rel="noopener"><img src="img/partners/asta.jpg" alt="Arizona Science Teachers Association" width="346" height="432"></a></li>
+      </ul>
+    </section>
+
     <section class="sec" aria-labelledby="h-why">
       <h2 id="h-why" data-t="whyH">Why it matters</h2>
       <div class="body">
@@ -189,7 +215,7 @@ h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft);
           <li><span class="when" data-t="m1w">Aug 2024</span><span class="what" data-t="m1">The National Science Foundation funds Glitch'n.</span></li>
           <li><span class="when" data-t="m2w">Jun 2025</span><span class="what" data-t="m2">Three free courses at the ASU MIX Center in Mesa: 60 young people and family members.</span></li>
           <li><span class="when" data-t="m3w">Jul 2025</span><span class="what" data-t="m3">14 graduates become the first CTRL interns and co-lead three pop-ups at Burton Barr Central Library, Phoenix.</span></li>
-          <li><span class="when" data-t="m4w">Oct 2025</span><span class="what" data-t="m4">An ASU award starts Glitch'n AI: musical circuits that work a little like neurons.</span></li>
+          <li><span class="when" data-t="m4w">Oct 2025</span><span class="what" data-t="m4">A grant from ASU's Herberger Institute for Design and the Arts starts Glitch'n AI: musical circuits that work a little like neurons.</span></li>
           <li><span class="when">2026</span><span class="what" data-t="m5">A gift from the Qualcomm Foundation, and three pop-ups at the Phoenix Conservatory of Music.</span></li>
           <li class="now"><span class="when" data-t="m6w">Oct 2026</span><span class="what" data-t="m6">The course becomes free video lessons, open to everyone.</span></li>
         </ol>
@@ -249,10 +275,10 @@ h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft);
       <div class="body">
         <ul class="fund">
           <li><span class="when" data-t="f1w">2024 to 2027</span><b data-t="f1">U.S. National Science Foundation</b><span>Advancing Informal STEM Learning, <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2432637" target="_blank" rel="noopener">Award 2432637</a></span></li>
-          <li><span class="when">2025</span><b>Arizona State University</b><span data-t="f2p">An internal award for Glitch'n AI</span></li>
+          <li><span class="when">2025</span><b>ASU Herberger Institute for Design and the Arts</b><span data-t="f2p">A grant for Glitch'n AI</span></li>
           <li><span class="when">2026</span><b>Qualcomm Foundation</b><span data-t="f3p">A gift to Glitch'n</span></li>
         </ul>
-        <p class="partners" data-t="partners">Led by ASU's School of Games, Arts, Media and Engineering, with the Mary Lou Fulton College for Teaching and Learning Innovation, the Ira A. Fulton Schools of Engineering, the School of Music, Dance and Theatre, and Enterprise Technology. Pop-ups hosted by Burton Barr Central Library and the Phoenix Conservatory of Music.</p>
+        <p class="partners" data-t="partners">Led by ASU's School of Games, Arts, Media and Engineering, with the Mary Lou Fulton College for Teaching and Learning Innovation, the Ira A. Fulton Schools of Engineering, the School of Music, Dance and Theatre, and Enterprise Technology. Pop-ups hosted by Burton Barr Central Library and the Phoenix Conservatory of Music. Community partners include Boys &amp; Girls Clubs of the Valley and the Arizona Science Teachers Association.</p>
         <div class="support">
           <div class="vid"><iframe src="https://player.vimeo.com/video/1150502908?h=355f4a8299&amp;dnt=1" title="Glitch'n support video" allow="fullscreen; picture-in-picture" loading="lazy"></iframe></div>
           <div>
@@ -299,18 +325,18 @@ h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft);
       m1w: 'Aug 2024', m1: "The National Science Foundation funds Glitch'n.",
       m2w: 'Jun 2025', m2: 'Three free courses at the ASU MIX Center in Mesa: 60 young people and family members.',
       m3w: 'Jul 2025', m3: '14 graduates become the first CTRL interns and co-lead three pop-ups at Burton Barr Central Library, Phoenix.',
-      m4w: 'Oct 2025', m4: "An ASU award starts Glitch'n AI: musical circuits that work a little like neurons.",
+      m4w: 'Oct 2025', m4: "A grant from ASU's Herberger Institute for Design and the Arts starts Glitch'n AI: musical circuits that work a little like neurons.",
       m5: 'A gift from the Qualcomm Foundation, and three pop-ups at the Phoenix Conservatory of Music.',
       m6w: 'Oct 2026', m6: 'The course becomes free video lessons, open to everyone.',
       ctrlC: 'The first CTRL interns, July 2025.',
       nextH: 'What support makes possible',
       next1: "Every course and pop-up needs kits, paid teen facilitators and places to meet. Support helps us run more courses and pop-ups across Phoenix, put a kit in every learner's hands, pay more young people to teach, and keep adding free lessons to this site, so anyone, anywhere, can build along.",
-      teamH: 'Team', sethRole: 'Founder and director. Creator and circuit designer.',
+      logosAria: 'Funders and partners', fundersH: 'Funders', partnersH: 'Partners', teamH: 'Team', sethRole: 'Founder and director. Creator and circuit designer.',
       sethBio: "Assistant Professor of Interactive Media in ASU's School of Games, Arts, Media and Engineering, and principal investigator of the NSF grant. Seth created Glitch'n and designs its circuits and lessons. He received the GAME School's inaugural Teaching Innovation Award in 2024, holds a PhD from Brown University, and is a two-time finalist in the Guthman New Musical Instruments Competition.",
       gAffil: 'Research affiliates', gDesign: 'Visual design', gFellows: 'Student fellows', gBoard: 'Advisory board',
       pubsH: 'Publications and talks',
-      supportH: 'Funding and partners', f1w: '2024 to 2027', f1: 'U.S. National Science Foundation', f2p: "An internal award for Glitch'n AI", f3p: "A gift to Glitch'n",
-      partners: "Led by ASU's School of Games, Arts, Media and Engineering, with the Mary Lou Fulton College for Teaching and Learning Innovation, the Ira A. Fulton Schools of Engineering, the School of Music, Dance and Theatre, and Enterprise Technology. Pop-ups hosted by Burton Barr Central Library and the Phoenix Conservatory of Music.",
+      supportH: 'Funding and partners', f1w: '2024 to 2027', f1: 'U.S. National Science Foundation', f2p: "A grant for Glitch'n AI", f3p: "A gift to Glitch'n",
+      partners: "Led by ASU's School of Games, Arts, Media and Engineering, with the Mary Lou Fulton College for Teaching and Learning Innovation, the Ira A. Fulton Schools of Engineering, the School of Music, Dance and Theatre, and Enterprise Technology. Pop-ups hosted by Burton Barr Central Library and the Phoenix Conservatory of Music. Community partners include Boys & Girls Clubs of the Valley and the Arizona Science Teachers Association.",
       supH: "Support Glitch'n", supP: "Glitch'n is funded by the National Science Foundation and is looking for partners and sponsors, especially in industry.", supBtn: 'Email Seth Thorn',
     },
     es: {
@@ -335,18 +361,18 @@ h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft);
       m1w: 'Ago 2024', m1: "La Fundación Nacional de Ciencias financia Glitch'n.",
       m2w: 'Jun 2025', m2: 'Tres cursos gratuitos en el ASU MIX Center de Mesa: 60 jóvenes y familiares.',
       m3w: 'Jul 2025', m3: '14 egresados se convierten en los primeros practicantes de CTRL y codirigen tres eventos en la Biblioteca Central Burton Barr de Phoenix.',
-      m4w: 'Oct 2025', m4: "Un premio de ASU inicia Glitch'n AI: circuitos musicales que funcionan un poco como neuronas.",
+      m4w: 'Oct 2025', m4: "Una beca del Herberger Institute for Design and the Arts de ASU inicia Glitch'n AI: circuitos musicales que funcionan un poco como neuronas.",
       m5: 'Una donación de la Qualcomm Foundation y tres eventos en el Phoenix Conservatory of Music.',
       m6w: 'Oct 2026', m6: 'El curso se convierte en lecciones en video gratuitas, abiertas a todos.',
       ctrlC: 'Los primeros practicantes de CTRL, julio de 2025.',
       nextH: 'Lo que hace posible tu apoyo',
       next1: 'Cada curso y evento necesita kits, facilitadores jóvenes pagados y lugares para reunirse. El apoyo nos permite hacer más cursos y eventos en Phoenix, poner un kit en manos de cada aprendiz, pagar a más jóvenes para enseñar y seguir sumando lecciones gratuitas a este sitio, para que cualquiera, en cualquier lugar, pueda construir con nosotros.',
-      teamH: 'Equipo', sethRole: 'Fundador y director. Creador y diseñador de circuitos.',
+      logosAria: 'Fondos y socios', fundersH: 'Financiadores', partnersH: 'Socios', teamH: 'Equipo', sethRole: 'Fundador y director. Creador y diseñador de circuitos.',
       sethBio: "Profesor asistente de Medios Interactivos en la School of Games, Arts, Media and Engineering de ASU e investigador principal de la beca de la NSF. Seth creó Glitch'n y diseña sus circuitos y lecciones. Recibió el primer Premio a la Innovación Docente de la GAME School en 2024, tiene un doctorado de Brown University y fue dos veces finalista del Guthman New Musical Instruments Competition.",
       gAffil: 'Investigadores afiliados', gDesign: 'Diseño visual', gFellows: 'Becarios estudiantes', gBoard: 'Consejo asesor',
       pubsH: 'Publicaciones y ponencias',
-      supportH: 'Fondos y socios', f1w: '2024 a 2027', f1: 'Fundación Nacional de Ciencias de EE. UU.', f2p: "Un premio interno para Glitch'n AI", f3p: "Una donación a Glitch'n",
-      partners: "Dirigido por la School of Games, Arts, Media and Engineering de ASU, con Mary Lou Fulton College for Teaching and Learning Innovation, Ira A. Fulton Schools of Engineering, School of Music, Dance and Theatre y Enterprise Technology. Eventos en la Biblioteca Central Burton Barr y el Phoenix Conservatory of Music.",
+      supportH: 'Fondos y socios', f1w: '2024 a 2027', f1: 'Fundación Nacional de Ciencias de EE. UU.', f2p: "Una beca para Glitch'n AI", f3p: "Una donación a Glitch'n",
+      partners: "Dirigido por la School of Games, Arts, Media and Engineering de ASU, con Mary Lou Fulton College for Teaching and Learning Innovation, Ira A. Fulton Schools of Engineering, School of Music, Dance and Theatre y Enterprise Technology. Eventos en la Biblioteca Central Burton Barr y el Phoenix Conservatory of Music. Entre sus socios comunitarios están Boys & Girls Clubs of the Valley y la Arizona Science Teachers Association.",
       supH: "Apoya a Glitch'n", supP: "Glitch'n está financiado por la Fundación Nacional de Ciencias y busca socios y patrocinadores, sobre todo en la industria.", supBtn: 'Escribe a Seth Thorn',
     },
   };
@@ -374,6 +400,7 @@ h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft);
 
   GL.start(T, (lang, t) => {
     document.getElementById('glance').setAttribute('aria-label', t.glanceAria);
+    document.getElementById('logosSec').setAttribute('aria-label', t.logosAria);
     document.getElementById('affiliates').innerHTML = AFFIL.map((p) => card(p, lang)).join('');
     document.getElementById('design').innerHTML = DESIGN.map((p) => card(p, lang)).join('');
     document.getElementById('fellows').innerHTML = FELLOWS.map((p) => card(p, lang)).join('');
