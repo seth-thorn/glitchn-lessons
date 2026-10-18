@@ -1,6 +1,6 @@
 {
  "format": "glitchn-kit/1",
- "note": "The Glitch'n kit: what to order to build every lesson, from the kit list on glitchn.net/course. 'key' is a part in lessons/catalog.json ('part' when one catalog part is ordered as two items; 'name' and 'group' for items the lessons don't list). qty is for one full kit. A row with buy.store null has no specific store: any electronics supplier sells it. Edit by hand.",
+ "note": "The Glitch'n kit: what to order to build every lesson, from the kit list on glitchn.net/course. 'key' is a part in lessons/catalog.json ('part' when one catalog part is ordered as two items; 'name' and 'group' for items the lessons don't list). qty is for one full kit. A row with buy.store null has no specific store: any electronics supplier sells it. Edit by hand. 'dk' is the DigiKey part number used for the one-click DigiKey cart (FastAdd link), with 'per' = pieces in one DigiKey unit; every dk number was checked in stock at DigiKey on 2026-10-18 (generic equivalents for the passives and diode, because DigiKey had the Adafruit packs on backorder). 'buy.per' = pieces in one unit at that store. Rows without 'dk' are bought elsewhere.",
  "rows": [
   {
    "key": "40106",
@@ -9,6 +9,10 @@
     "store": "Mouser",
     "number": "CD40106BE",
     "url": "https://www.mouser.com/ProductDetail/Texas-Instruments/CD40106BE?qs=YhsVCygOPE1CyKyInx%252Bh3Q%3D%3D"
+   },
+   "dk": {
+    "pn": "296-3503-5-ND",
+    "per": 1
    }
   },
   {
@@ -18,6 +22,10 @@
     "store": "Mouser",
     "number": "CD4040BE",
     "url": "https://www.mouser.com/ProductDetail/Texas-Instruments/CD4040BE?qs=L4Mc90zKIpgVInmXWEixLQ%3D%3D"
+   },
+   "dk": {
+    "pn": "296-2048-ND",
+    "per": 1
    }
   },
   {
@@ -27,6 +35,10 @@
     "store": "Mouser",
     "number": "CD4021BE",
     "url": "https://www.mouser.com/ProductDetail/Texas-Instruments/CD4021BE?qs=gqbMQSs93zMTXfAY8zdLvw%3D%3D"
+   },
+   "dk": {
+    "pn": "296-2040-5-ND",
+    "per": 1
    }
   },
   {
@@ -36,6 +48,10 @@
     "store": "Mouser",
     "number": "CD4051BE",
     "url": "https://www.mouser.com/ProductDetail/Texas-Instruments/CD4051BE?qs=q2XTDbzbm6DxulBsMcV7tA%3D%3D"
+   },
+   "dk": {
+    "pn": "296-2057-5-ND",
+    "per": 1
    }
   },
   {
@@ -45,6 +61,10 @@
     "store": "Adafruit",
     "number": "#356",
     "url": "https://www.adafruit.com/product/356"
+   },
+   "dk": {
+    "pn": "1528-1997-ND",
+    "per": 1
    }
   },
   {
@@ -54,6 +74,10 @@
     "store": "Adafruit",
     "number": "#161",
     "url": "https://www.adafruit.com/product/161"
+   },
+   "dk": {
+    "pn": "1528-161-ND",
+    "per": 1
    }
   },
   {
@@ -62,7 +86,12 @@
    "buy": {
     "store": "Adafruit",
     "number": "#1009",
-    "url": "https://www.adafruit.com/product/1009"
+    "url": "https://www.adafruit.com/product/1009",
+    "per": 15
+   },
+   "dk": {
+    "pn": "1009-ND",
+    "per": 15
    }
   },
   {
@@ -71,7 +100,12 @@
    "buy": {
     "store": "Adafruit",
     "number": "#4202",
-    "url": "https://www.adafruit.com/product/4202"
+    "url": "https://www.adafruit.com/product/4202",
+    "per": 25
+   },
+   "dk": {
+    "pn": "1528-2951-ND",
+    "per": 25
    }
   },
   {
@@ -80,7 +114,12 @@
    "buy": {
     "store": "Adafruit",
     "number": "#1641",
-    "url": "https://www.adafruit.com/product/1641"
+    "url": "https://www.adafruit.com/product/1641",
+    "per": 10
+   },
+   "dk": {
+    "pn": "1N4148FS-ND",
+    "per": 1
    }
   },
   {
@@ -89,7 +128,12 @@
    "buy": {
     "store": "Adafruit",
     "number": "#4294",
-    "url": "https://www.adafruit.com/product/4294"
+    "url": "https://www.adafruit.com/product/4294",
+    "per": 25
+   },
+   "dk": {
+    "pn": "CF14JT1K00CT-ND",
+    "per": 1
    }
   },
   {
@@ -98,7 +142,12 @@
    "buy": {
     "store": "Adafruit",
     "number": "#2784",
-    "url": "https://www.adafruit.com/product/2784"
+    "url": "https://www.adafruit.com/product/2784",
+    "per": 25
+   },
+   "dk": {
+    "pn": "CF14JT10K0CT-ND",
+    "per": 1
    }
   },
   {
@@ -106,6 +155,10 @@
    "qty": 1,
    "buy": {
     "store": null
+   },
+   "dk": {
+    "pn": "CF14JT4K70CT-ND",
+    "per": 1
    }
   },
   {
@@ -113,6 +166,10 @@
    "qty": 1,
    "buy": {
     "store": null
+   },
+   "dk": {
+    "pn": "CF14JT22K0CT-ND",
+    "per": 1
    }
   },
   {
@@ -121,7 +178,12 @@
    "buy": {
     "store": "Adafruit",
     "number": "#753",
-    "url": "https://www.adafruit.com/product/753"
+    "url": "https://www.adafruit.com/product/753",
+    "per": 10
+   },
+   "dk": {
+    "pn": "478-3193-ND",
+    "per": 1
    }
   },
   {
@@ -129,6 +191,10 @@
    "qty": 1,
    "buy": {
     "store": null
+   },
+   "dk": {
+    "pn": "445-181271-ND",
+    "per": 1
    }
   },
   {
@@ -138,6 +204,10 @@
     "store": "DigiKey",
     "number": "Rubycon 50NXA1MEFC5X11",
     "url": "https://www.digikey.com/en/products/detail/rubycon/50NXA1MEFC5X11/3562827"
+   },
+   "dk": {
+    "pn": "1189-50NXA1MEFC5X11-ND",
+    "per": 1
    }
   },
   {
@@ -146,7 +216,12 @@
    "buy": {
     "store": "Adafruit",
     "number": "#2195",
-    "url": "https://www.adafruit.com/product/2195"
+    "url": "https://www.adafruit.com/product/2195",
+    "per": 10
+   },
+   "dk": {
+    "pn": "399-6599-ND",
+    "per": 1
    }
   },
   {
@@ -155,7 +230,12 @@
    "buy": {
     "store": "Adafruit",
     "number": "#2193",
-    "url": "https://www.adafruit.com/product/2193"
+    "url": "https://www.adafruit.com/product/2193",
+    "per": 10
+   },
+   "dk": {
+    "pn": "399-6601-ND",
+    "per": 1
    }
   },
   {
@@ -193,7 +273,8 @@
    "buy": {
     "store": "Adafruit",
     "number": "#4304",
-    "url": "https://www.adafruit.com/product/4304"
+    "url": "https://www.adafruit.com/product/4304",
+    "per": 6
    },
    "group": "connect"
   },

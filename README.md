@@ -16,7 +16,7 @@ about/
   index.html               About: an executive summary for donors (why, how, results, milestones, team, publications, funding)
   img/                     the About page's photos (team headshots in img/people/)
 materials/
-  index.html               "What you need": 1 buy the parts, 2 print the sheets, 3 share the stickers and logos
+  index.html               "What you need": how many kits, 1 buy (one DigiKey cart), 2 print, 3 pop-up (optional), share
   kit.json                 the kit list: quantities and stores for each part (edit by hand)
 downloads/                 files to download: chip labels, chip maps (pinout cards), posters and table signs, stickers, logos, colors,
                            and glitchn-pack.zip with all of them (made by tools/make_pack.py)
@@ -139,10 +139,12 @@ The site is plain HTML with no build step, published with GitHub Pages from the 
 
 ## What you need (materials/)
 
-`materials/index.html` shows everything someone needs to take part, as pictures first and very few words: **1 Buy** (every part as a flat picture, how many, and a store link; a shopping list CSV), **2 Print** (chip labels, chip maps, posters and table signs; the previews in `materials/img/posters/` are cropped to each PDF's trim box), **3 Share** (the Glitch'n pack zip, stickers, logo). Each lesson's parts list and the lesson library link here.
+`materials/index.html` is for the adults who set Glitch'n up, so it explains more than the rest of the site. One number drives it: **how many kits** (kept in the address as `?kits=` and in the browser). A switch, **I'm hosting a pop-up event** (`?popup=1`), adds the pop-up section. Sections: **1 Buy** (one button fills a DigiKey cart with every part in the right amounts; "Also get" for what isn't in it; a note on screens; the kit in pictures; other stores with copyable lists and a CSV), **2 Print** (chip labels: must print; chip maps: recommended; with how-to steps and how many to print), **3 Pop-up** (only when switched on: the three zones, a room layout, a checklist, posters, table signs, stickers), **Share** (the Glitch'n pack zip). Each lesson's parts list and the lesson library link here.
 
-- **The kit list** is `materials/kit.json`: each row names a part (`key`, a `lessons/catalog.json` key where there is one), how many are in one full kit (`qty`) and where to buy it (`buy`). A row with no store shows "Any store".
+- **The DigiKey cart** is a FastAdd link (`https://www.digikey.com/classic/ordering/fastadd.aspx?part1=…&qty1=…`) built from the `dk` field of each kit row: `dk.pn` is the DigiKey part number and `dk.per` the pieces in one DigiKey unit. Every `dk` number was checked in stock on 2026-10-18; the resistors, capacitors and diode are generic equivalents because DigiKey had the Adafruit packs on backorder. A wrong part number makes DigiKey stop on an error page, so check new numbers by opening the link. For bigger orders DigiKey may first show a "better value" page; the page tells buyers to press Submit there.
+- **The kit list** is `materials/kit.json`: each row names a part (`key`, a `lessons/catalog.json` key where there is one), how many are in one full kit (`qty`), where else to buy it (`buy`, with `per` for packs) and its DigiKey number (`dk`). A row with no store shows "Any store".
 - **The part pictures** are drawn in the page itself (`ART` in `materials/index.html`), one small SVG per kit key. A new part needs a picture there and a short name in `NAMES`.
 - **Chip labels** (`downloads/glitchn-chip-labels.pdf`) are made by `python3 tools/make_labels.py`: 13 × 5.6 mm labels for the top of a 14-pin chip, with the Glitch'n logo and "© Glitch'n" on the sheet.
 - **The pack** (`downloads/glitchn-pack.zip`) is made by `python3 tools/make_pack.py` from the files in `downloads/`. Run it after changing any of them.
-- **Chip maps, stickers, logos and colors** come from Seth's Design Assets folder. The chip map JPEGs were converted from CMYK to sRGB for screens.
+- **Chip maps, stickers, logos and colors** come from Seth's Design Assets folder. The chip map JPEGs were converted from CMYK to sRGB for screens. The colors sheet has the Glitch'n logo added.
+- **Posters and table signs** (`downloads/posters/`) are Seth's print PDFs with the NSF logo removed (2026-10-18; the logo's drawing was taken out of each file, not covered). The "Feeling curious?" poster still names NSF support and the old school name in its small print.
