@@ -1,7 +1,8 @@
 /* Glitch'n lesson player styles.
-   Layout: two columns like a workbench. Left: the "TV" video and the magnifier stills below it.
-   Right: the step list (same height as the TV), progress, and the "what's next" map. Stacks on narrow screens.
-   Other looks live in /styles; this file is the default TV look. */
+   Layout: two columns like a workbench. Left: the video and the magnifier stills below it.
+   Right: the step list (same height as the video), progress, and the "what's next" map. Stacks on narrow screens.
+   This file is the shared layout plus the old TV look that the styles in /styles build on.
+   The default look is Simple (styles/simple.css). */
 :root {
   --ink: #161514;
   --page: #FAF9F7;
@@ -251,6 +252,7 @@ h1 .sub { display: block; font-weight: 600; font-stretch: 100%; font-size: .44em
 
 /* ---------- additions for the shared player ---------- */
 body { margin: 0; }
+.site-bar { display: none; } /* the site header: only the Simple style shows it (styles/simple.css) */
 .home-link { color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--ink); font-weight: 600; }
 .home-link:hover { background: var(--card); }
 .map-svg .map-note { font-family: var(--body); font-weight: 700; font-size: 12px; fill: var(--on-panel); text-anchor: middle; dominant-baseline: middle; }
@@ -332,6 +334,14 @@ body { margin: 0; }
 .fact.learn { border-style: dashed; }
 .parts { padding: 18px 20px 20px; color: var(--on-panel); }
 .parts-note { margin: 4px 0 14px; font-size: 14px; opacity: .85; }
+/* the parts list folds away: a single bar until someone opens it */
+.parts-fold > summary { display: flex; align-items: center; gap: 12px; cursor: pointer; list-style: none; }
+.parts-fold > summary::-webkit-details-marker { display: none; }
+.parts-fold > summary .panel-title { margin: 0; }
+.parts-fold > summary::after { content: ""; width: 9px; height: 9px; margin-left: auto; border: solid currentColor; border-width: 0 2.5px 2.5px 0; transform: translateY(-3px) rotate(45deg); }
+.parts-fold[open] > summary::after { transform: translateY(2px) rotate(-135deg); }
+.parts-fold[open] > summary { margin-bottom: 12px; }
+.parts-count { font-size: 14px; opacity: .75; }
 .parts-buy { margin: 14px 0 0; font-size: 15px; font-weight: 700; }
 .parts-buy a { color: inherit; text-underline-offset: 3px; }
 .parts-groups { columns: 4 230px; column-gap: 12px; }

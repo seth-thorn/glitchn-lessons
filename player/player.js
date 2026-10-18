@@ -15,15 +15,15 @@
      languages, from lesson.<lang>.json beside it: a list of English lines and their translations.
      A line with no translation simply shows in English. Choice order: ?lang= in the address,
      then the visitor's last choice, then the browser's language. */
-  const LANGS = { en: 'English', es: 'Español' };
+  const LANGS = { en: 'EN', es: 'ES' };
   const UI = {
     en: {
-      style: 'Style', style_tv: 'TV', style_clean: 'Clean', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', allLessons: '← All lessons', lessonEyebrow: "Glitch'n lesson", draft: 'Draft', draftTitle: 'Step text and links are drafts for the team to review',
+      style: 'Style', style_simple: 'Simple', style_tv: 'TV', navLessons: 'Lessons', navNeed: 'What you need', style_clean: 'Clean', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', allLessons: '← All lessons', lessonEyebrow: "Glitch'n lesson", draft: 'Draft', draftTitle: 'Step text and links are drafts for the team to review',
       loading: 'Loading…', language: 'Language',
       tutorialVideo: 'Tutorial video', play: 'Play', pause: 'Pause', mute: 'Mute', unmute: 'Unmute', speed: 'Playback speed', fullScreen: 'Full screen', seek: 'Seek through the lesson',
       instructions: 'Instructions', buildSteps: 'Build steps', follow: 'Follow video', followTitle: 'Scroll the list to follow the video',
       closeups: 'Close-up stills', hint: 'Point at the board to magnify', hintTouch: 'Touch and drag to magnify', zoomLess: 'Less magnification', zoomMore: 'More magnification',
-      prevStill: 'Previous still', nextStill: 'Next still', backToVideo: "Back to the video's step", stillsForStep: 'Stills for this step', showStill: 'Show still {n}',
+      prevStill: 'Previous still', nextStill: 'Next still', prevStep: 'Previous step', nextStep: 'Next step', partsCount: '{n} parts', backToVideo: "Back to the video's step", stillsForStep: 'Stills for this step', showStill: 'Show still {n}',
       progress: 'Progress', whatsNext: "What's next?", mapLabel: 'Lessons connected to this one', ready: 'Ready', coming: 'Coming', comingSmall: 'coming', comingLater: ', coming later',
       keyPlay: 'play / pause', keySeconds: '5 seconds', keySub: 'previous / next sub-step', keyMute: 'mute',
       startingPoint: 'Starting point', finishedResult: 'Finished result of {n}', beforeStep: 'Before step {n}: ', boardAt: 'Breadboard at {n}: {t}',
@@ -35,12 +35,12 @@
       kind_variation: 'variation', kind_related: 'related', 'kind_next day': 'next day', kind_revisited: 'revisited'
     },
     es: {
-      style: 'Estilo', style_tv: 'Tele', style_clean: 'Limpio', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', allLessons: '← Todas las lecciones', lessonEyebrow: 'Lección de Glitch’n', draft: 'Borrador', draftTitle: 'El texto de los pasos y los enlaces son un borrador',
+      style: 'Estilo', style_simple: 'Sencillo', style_tv: 'Tele', navLessons: 'Lecciones', navNeed: 'Lo que necesitas', style_clean: 'Limpio', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', allLessons: '← Todas las lecciones', lessonEyebrow: 'Lección de Glitch’n', draft: 'Borrador', draftTitle: 'El texto de los pasos y los enlaces son un borrador',
       loading: 'Cargando…', language: 'Idioma',
       tutorialVideo: 'Video de la lección', play: 'Reproducir', pause: 'Pausar', mute: 'Silenciar', unmute: 'Activar sonido', speed: 'Velocidad de reproducción', fullScreen: 'Pantalla completa', seek: 'Avanzar o retroceder en la lección',
       instructions: 'Instrucciones', buildSteps: 'Pasos de armado', follow: 'Seguir el video', followTitle: 'Desplazar la lista para seguir el video',
       closeups: 'Fotos de cerca', hint: 'Señala la protoboard para ampliar', hintTouch: 'Toca y arrastra para ampliar', zoomLess: 'Menos aumento', zoomMore: 'Más aumento',
-      prevStill: 'Foto anterior', nextStill: 'Foto siguiente', backToVideo: 'Volver al paso del video', stillsForStep: 'Fotos de este paso', showStill: 'Mostrar la foto {n}',
+      prevStill: 'Foto anterior', nextStill: 'Foto siguiente', prevStep: 'Paso anterior', nextStep: 'Paso siguiente', partsCount: '{n} piezas', backToVideo: 'Volver al paso del video', stillsForStep: 'Fotos de este paso', showStill: 'Mostrar la foto {n}',
       progress: 'Progreso', whatsNext: '¿Qué sigue?', mapLabel: 'Lecciones conectadas con esta', ready: 'Lista', coming: 'Próximamente', comingSmall: 'próximamente', comingLater: ', disponible más adelante',
       keyPlay: 'reproducir / pausar', keySeconds: '5 segundos', keySub: 'subpaso anterior / siguiente', keyMute: 'silenciar',
       startingPoint: 'Punto de partida', finishedResult: 'Resultado terminado de {n}', beforeStep: 'Antes del paso {n}: ', boardAt: 'Protoboard en {n}: {t}',
@@ -74,22 +74,24 @@
   const WORDS = pickWords();
   document.documentElement.dataset.words = WORDS;
   /* ---------- styles: whole looks for the page (colours, type, shapes, the TV itself) ----------
-     TV is the default, in player.css. Each other style is a file in /styles (see styles/all.css).
-     Choice order: ?style= in the address, then the visitor's last choice, then TV.
+     Simple (the Glitch'n house style, styles/simple.css) is the default. player.css holds the shared layout and the
+     old TV look that the other styles build on. Each style is a file in /styles (see styles/all.css).
+     Choice order: ?style= in the address, then the visitor's last choice, then Simple.
      To add a style: add its name here and in lessons/index.html, its menu name (style_<name>) to UI, and its CSS file. */
-  const STYLES = ['tv', 'clean', 'gadget', 'solarpunk', 'treehouse', 'quest', 'skyline', 'daydream', 'terminal'];
-  const OLD_STYLE_NAMES = { rams: 'gadget' }; // earlier names, so old links and saved choices still work
+  const STYLES = ['simple', 'clean', 'gadget', 'solarpunk', 'treehouse', 'quest', 'skyline', 'daydream', 'terminal'];
+  const OLD_STYLE_NAMES = { rams: 'gadget', tv: 'simple' }; // earlier names, so old links and saved choices still work (TV became Simple)
   function pickStyle() {
     const ok = (v) => { v = OLD_STYLE_NAMES[v] || v; return STYLES.includes(v) ? v : null; };
     const q = ok(new URLSearchParams(location.search).get('style')); if (q) return q;
     try { const v = ok(JSON.parse(localStorage.getItem('glitchn-style'))); if (v) return v; } catch (e) {}
-    return 'tv';
+    return 'simple';
   }
   let STYLE = pickStyle();
   document.documentElement.dataset.style = STYLE;
   const kindLabel = (k) => t('kind_' + k) === 'kind_' + k ? k : t('kind_' + k);
   const mount = document.getElementById('glitchn-player') || document.body.appendChild(document.createElement('div'));
-  mount.innerHTML = `<div class="app" id="app">
+  mount.innerHTML = `<div class="site-bar"><div class="site-in"><a class="site-logo" href="../../index.html"><img src="../../downloads/logos/glitchn-logo.svg" alt="Glitch'n" width="131" height="40"></a><nav class="site-nav" aria-label="Pages"><a href="${HOME_URL}" aria-current="page">${t('navLessons')}</a><a href="../../materials/index.html">${t('navNeed')}</a></nav></div></div>
+<div class="app" id="app">
   <header class="top">
     <div>
       <div class="eyebrow"><a class="home-link" id="homeLink" href="../index.html">${t('allLessons')}</a><span>${t('lessonEyebrow')}</span><span class="draft-chip" id="draftChip" title="${t('draftTitle')}" hidden>${t('draft')}</span><span class="draft-chip lang-note" id="langNote" hidden></span></div>
@@ -123,7 +125,9 @@
           <div class="hover-tip" id="tip" hidden></div>
         </div>
         <div class="controls">
+          <button class="ctl skip" id="prevSubBtn" aria-label="${t('prevStep')}" title="${t('prevStep')}"><svg viewBox="0 0 24 24"><rect x="4.5" y="5" width="2.6" height="14" rx="1" fill="currentColor"/><path d="M19.5 5.5v13L9 12z" fill="currentColor"/></svg></button>
           <button class="ctl" id="playBtn" aria-label="${t('play')}"><svg viewBox="0 0 24 24" id="playIcon"><path d="M6 3.5v17l14-8.5z" fill="currentColor"/></svg></button>
+          <button class="ctl skip" id="nextSubBtn" aria-label="${t('nextStep')}" title="${t('nextStep')}"><svg viewBox="0 0 24 24"><path d="M4.5 5.5v13L15 12z" fill="currentColor"/><rect x="16.9" y="5" width="2.6" height="14" rx="1" fill="currentColor"/></svg></button>
           <span class="divider" aria-hidden="true"></span>
           <button class="ctl dial" id="rateBtn" aria-label="${t('speed')}"><span class="dial-face" aria-hidden="true"><span class="dial-mark"></span></span><span class="dial-label" id="rateLabel">1.0x</span></button>
           <span class="divider" aria-hidden="true"></span>
@@ -185,9 +189,11 @@
   </div>
 
   <section class="parts panel" id="partsPanel" aria-labelledby="partsTitle" hidden>
-    <h2 class="panel-title" id="partsTitle">${t('partsList')}</h2>
-    <p class="parts-note">${t('partsNote')}</p>
-    <div class="parts-groups" id="partsBody"></div>
+    <details class="parts-fold" id="partsFold">
+      <summary><h2 class="panel-title" id="partsTitle">${t('partsList')}</h2><span class="parts-count" id="partsCount"></span></summary>
+      <p class="parts-note">${t('partsNote')}</p>
+      <div class="parts-groups" id="partsBody"></div>
+    </details>
   </section>
 
   <div class="keys"><span><kbd>Space</kbd>${t('keyPlay')}</span><span><kbd>←</kbd><kbd>→</kbd>${t('keySeconds')}</span><span><kbd>[</kbd><kbd>]</kbd>${t('keySub')}</span><span><kbd>M</kbd>${t('keyMute')}</span></div>
@@ -290,6 +296,7 @@
       }).join('') +
       '</ul></div>')).join('') +
       '<p class="parts-buy"><a href="../../materials/index.html' + keep + '">' + esc(t('whereToGet')) + '</a></p>';
+    $('partsCount').textContent = t('partsCount', { n: Object.keys(me.parts).length });
     $('partsPanel').hidden = false;
   }
 
@@ -337,7 +344,7 @@
     const check = '<svg viewBox="0 0 12 12" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.3l2.3 2.3 4.7-5"/></svg>';
     list.innerHTML = L.steps.map((st, si) => (
       '<li class="step" id="step-' + si + '">' +
-        '<button class="step-btn" data-step="' + si + '"><span class="step-num">' + (si + 1) + '.</span><span class="step-title">' + esc(st.title) + '</span><span class="step-meta" id="meta-' + si + '"></span></button>' +
+        '<button class="step-btn" data-step="' + si + '"><span class="step-num">' + (si + 1) + '<span class="dot">.</span></span><span class="step-title">' + esc(st.title) + '</span><span class="step-meta" id="meta-' + si + '"></span></button>' +
         '<ol class="subs">' + st.subs.map((sub, ui) => {
           const fi = flat.findIndex((f) => f.si === si && f.ui === ui);
           return '<li><button class="sub" id="sub-' + fi + '" data-fi="' + fi + '"><span class="chk">' + check + '</span><span class="ts">' + fmt(flat[fi].g - offsets[st.segment]) + '</span><span>' + esc(sub.text) + '</span></button></li>';
@@ -460,13 +467,18 @@
       else if (tv.requestFullscreen) tv.requestFullscreen().catch(() => toast(t('noFullScreen')));
       else toast(t('noFullScreen'));
     });
+    /* previous / next step: back to the start of this sub-step (or the one before, if just started), or on to the next */
+    function prevSub() { const i = findFlat(now()); const f = flat[i]; seek((now() - f.g > 1.5 || i === 0) ? f.g + 0.01 : flat[i - 1].g + 0.01); unpin(); }
+    function nextSub() { const i = findFlat(now()); if (i + 1 < flat.length) { seek(flat[i + 1].g + 0.01); unpin(); } }
+    $('prevSubBtn').addEventListener('click', prevSub);
+    $('nextSubBtn').addEventListener('click', nextSub);
     document.addEventListener('keydown', (e) => {
       if (e.target.closest('input, textarea, select') || e.metaKey || e.ctrlKey || e.altKey) return;
       if (e.key === ' ' || e.key === 'k') { if (e.target.closest('button') && e.key === ' ') return; e.preventDefault(); S.everPlayed = true; S.playing ? pause() : play(); }
       else if (e.key === 'ArrowLeft') { e.preventDefault(); seek(now() - 5); }
       else if (e.key === 'ArrowRight') { e.preventDefault(); seek(now() + 5); }
-      else if (e.key === '[') { const i = findFlat(now()); const f = flat[i]; seek((now() - f.g > 1.5 || i === 0) ? f.g + 0.01 : flat[i - 1].g + 0.01); unpin(); }
-      else if (e.key === ']') { const i = findFlat(now()); if (i + 1 < flat.length) { seek(flat[i + 1].g + 0.01); unpin(); } }
+      else if (e.key === '[') prevSub();
+      else if (e.key === ']') nextSub();
       else if (e.key === 'm' || e.key === 'M') toggleMute();
     });
 

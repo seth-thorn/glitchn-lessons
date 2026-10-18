@@ -1,0 +1,209 @@
+/* Simple: the Glitch'n house style, and the default look for lessons. The same look as the rest of the site
+   (home, lessons, what you need): white and cream, the logo blue and pink, Manrope at medium weight, the site
+   header with a thin coral rule, flat colour, no outlines or shadows, no TV cabinet. Few words: the video,
+   the steps and the pictures lead. Nothing is shown by colour alone (the current sub-step has a bar, a tint
+   and bold text; finished sub-steps have check marks). This file styles the lesson player; the lesson library
+   and the site pages are already in this look. */
+
+/* ---------- tokens ---------- */
+:root[data-style="simple"] {
+  --ink: #222222; --page: #FFFFFF; --muted: #77706B; --white: #FFFFFF;
+  --panel: #F6E8E0; --card: #FFFFFF; --deep: #222222; --on-panel: #222222;
+  --blue: #3859B3; --pink: #FA6E79; --line: #EEE3DC; --track: #E9DCD3; --edge: #C9B8AE;
+  --display: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --body: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --bw: 0px; --r-lg: 14px; --r-md: 12px; --r-sm: 8px;
+}
+:root[data-style="simple"], :root[data-style="simple"] body { background: var(--page); }
+:root[data-style="simple"] body { padding-top: 0; font-size: 16px; line-height: 1.55; }
+:root[data-style="simple"] :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+
+/* ---------- the site header: logo, pages, coral rule ---------- */
+:root[data-style="simple"] .site-bar { display: block; margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))) 28px; padding: 0 max(16px, env(safe-area-inset-left, 0px)); border-bottom: 4px solid var(--pink); }
+:root[data-style="simple"] .site-in { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px 28px; flex-wrap: wrap; padding-block: 22px 18px; }
+:root[data-style="simple"] .site-logo img { display: block; height: 36px; width: auto; }
+:root[data-style="simple"] .site-nav { display: flex; gap: 4px 24px; flex-wrap: wrap; font-size: 15px; font-weight: 500; }
+:root[data-style="simple"] .site-nav a { color: var(--ink); text-decoration: none; padding-block: 6px; }
+:root[data-style="simple"] .site-nav a:hover { color: var(--blue); }
+:root[data-style="simple"] .site-nav a[aria-current="page"] { color: var(--pink); }
+
+/* ---------- lesson title and the page's own switches ---------- */
+:root[data-style="simple"] .eyebrow { font-family: var(--body); font-size: 14px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--muted); gap: 10px; }
+:root[data-style="simple"] .eyebrow > span:not(.draft-chip) { display: none; } /* "Lesson": the page says it already */
+:root[data-style="simple"] .home-link { color: var(--blue); border: 0; font-weight: 500; }
+:root[data-style="simple"] .home-link:hover { background: none; text-decoration: underline; text-underline-offset: 3px; }
+:root[data-style="simple"] .draft-chip { font-family: var(--body); letter-spacing: 0; font-weight: 600; font-size: 12px; border: 0; background: var(--panel); color: var(--muted); padding: 2px 10px; }
+:root[data-style="simple"] h1 { font-family: var(--display); font-weight: 500; font-stretch: 100%; font-size: clamp(30px, 3.8vw, 44px); letter-spacing: -.02em; line-height: 1.1; margin-top: 8px; }
+:root[data-style="simple"] h1 .sub { font-weight: 400; font-size: 16px; line-height: 1.5; letter-spacing: 0; color: var(--muted); margin-top: 10px; max-width: 60ch; }
+:root[data-style="simple"] .style-pick { font-family: var(--body); font-size: 14px; color: var(--muted); }
+:root[data-style="simple"] .style-pick select { font: 500 14px/1.2 var(--body); color: var(--ink); background: var(--panel); border: 0; border-radius: 99px; padding: 8px 12px; }
+:root[data-style="simple"] .langs { border: 0; background: none; border-radius: 0; gap: 2px; overflow: visible; }
+:root[data-style="simple"] .lang { font: 500 14px/1 var(--body); padding: 10px 6px; color: var(--muted); background: none; }
+:root[data-style="simple"] .lang + .lang { border-left: 0; }
+:root[data-style="simple"] .lang:hover { background: none; color: var(--ink); }
+:root[data-style="simple"] .lang[aria-pressed="true"] { background: none; color: var(--ink); text-decoration: underline 2px var(--pink); text-underline-offset: 6px; }
+:root[data-style="simple"] .top-tools { gap: 6px; }
+:root[data-style="simple"] .err { border: 0; background: var(--panel); }
+:root[data-style="simple"] .toast { background: var(--ink); color: var(--white); border-radius: 12px; font-weight: 600; }
+
+/* lesson facts: small cream chips; the list of concepts is left out (the steps teach them) */
+:root[data-style="simple"] .facts { font-size: 13px; gap: 6px; }
+:root[data-style="simple"] .fact { border: 0; background: var(--panel); color: var(--ink); font-weight: 500; padding: 3px 11px; }
+:root[data-style="simple"] .fact a { color: var(--blue); text-decoration: none; font-weight: 600; }
+:root[data-style="simple"] .fact.start { background: var(--pink); color: var(--white); }
+:root[data-style="simple"] .fact.learn { display: none; }
+
+/* ---------- panels: flat cream, no frames ---------- */
+:root[data-style="simple"] .grid { gap: 24px; }
+:root[data-style="simple"] .panel { background: var(--panel); border: 0; border-radius: 14px; box-shadow: none; }
+:root[data-style="simple"] .panel-title { font-family: var(--body); font-weight: 600; font-stretch: 100%; font-size: 18px; letter-spacing: -.01em; }
+
+/* ---------- the video: no TV, just the picture and its controls ---------- */
+:root[data-style="simple"] .ant, :root[data-style="simple"] .feet, :root[data-style="simple"] .glass, :root[data-style="simple"] .divider, :root[data-style="simple"] .now-chip, :root[data-style="simple"] .deco { display: none; }
+:root[data-style="simple"] .tv-wrap { padding: 0; }
+:root[data-style="simple"] .tv.panel { background: none; padding: 0; box-shadow: none; }
+:root[data-style="simple"] .screen { border: 0; border-radius: 14px; background: #1E1E1E; }
+:root[data-style="simple"] .big-play span { width: 76px; height: 76px; border: 0; background: var(--blue); color: var(--white); box-shadow: none; }
+:root[data-style="simple"] .big-play svg { width: 28px; height: 28px; margin-left: 4px; }
+:root[data-style="simple"] .big-play:hover span { transform: none; background: #2D4A99; }
+:root[data-style="simple"] .scrub { margin-top: 14px; height: 30px; }
+:root[data-style="simple"] .track { top: 12px; height: 6px; border: 0; border-radius: 3px; background: var(--track); }
+:root[data-style="simple"] .track .fill { background: var(--blue); }
+:root[data-style="simple"] .track .sep { top: 0; bottom: 0; width: 3px; background: var(--white); }
+/* two layers of time markers: white gaps between the steps, small ticks above the bar for each sub-step */
+:root[data-style="simple"] .ticks { top: 0; height: 8px; }
+:root[data-style="simple"] .ticks i { width: 2px; height: 7px; border-radius: 1px; background: var(--edge); opacity: 1; }
+:root[data-style="simple"] .scrub .knob { top: 5px; width: 20px; height: 20px; margin-left: -10px; border: 3px solid var(--blue); background: var(--white); }
+:root[data-style="simple"] .scrub:focus-within .knob { box-shadow: 0 0 0 3px var(--white), 0 0 0 5px var(--blue); }
+:root[data-style="simple"] .hover-tip { background: var(--ink); border-radius: 8px; font-size: 13.5px; }
+:root[data-style="simple"] .hover-tip b { font-family: var(--body); color: var(--pink); }
+:root[data-style="simple"] .controls { border-top: 0; margin-top: 6px; padding-top: 4px; gap: 8px; color: var(--ink); }
+:root[data-style="simple"] .ctl { width: 44px; min-width: 44px; height: 44px; padding: 0; border-radius: 50%; border: 0; background: var(--panel); color: var(--ink); font-family: var(--body); font-weight: 600; font-size: 14px; }
+:root[data-style="simple"] .ctl:hover { background: #F1DDD2; }
+:root[data-style="simple"] .ctl svg { width: 20px; height: 20px; }
+:root[data-style="simple"] #playBtn { background: var(--blue); color: var(--white); }
+:root[data-style="simple"] #playBtn:hover { background: #2D4A99; }
+/* previous step / next step, either side of play: big enough for a finger on a tablet */
+:root[data-style="simple"] #playBtn { width: 52px; min-width: 52px; height: 52px; }
+:root[data-style="simple"] #playBtn svg { width: 22px; height: 22px; }
+:root[data-style="simple"] .ctl.skip { width: 52px; min-width: 52px; height: 52px; background: var(--panel); color: var(--blue); }
+:root[data-style="simple"] .ctl.skip svg { width: 22px; height: 22px; }
+:root[data-style="simple"] .ctl.dial { width: auto; padding: 0 16px; border-radius: 22px; }
+:root[data-style="simple"] .ctl.dial .dial-face { display: none; }
+:root[data-style="simple"] .time { font-family: var(--body); font-weight: 500; font-size: 14px; color: var(--muted); margin-left: 4px; }
+:root[data-style="simple"] .tv:fullscreen { background: var(--page); }
+
+/* ---------- build steps ---------- */
+:root[data-style="simple"] .steps { padding: 18px 10px 14px 18px; }
+:root[data-style="simple"] .steps-head { padding: 0 8px 12px 0; }
+:root[data-style="simple"] .follow { border: 0; background: var(--white); border-radius: 99px; padding: 7px 14px 7px 10px; font-weight: 600; font-size: 13.5px; color: var(--ink); }
+:root[data-style="simple"] .follow i { width: 12px; height: 12px; border: 2px solid var(--muted); background: transparent; }
+:root[data-style="simple"] .follow[aria-pressed="true"] i { background: var(--pink); border-color: var(--pink); }
+:root[data-style="simple"] .step-list { gap: 8px; padding: 0 8px 6px 0; scrollbar-color: var(--edge) transparent; }
+:root[data-style="simple"] .step { background: transparent; border: 0; border-radius: 12px; }
+:root[data-style="simple"] .step.active { background: var(--card); box-shadow: none; }
+:root[data-style="simple"] .step-btn { padding: 12px 12px; border-radius: 12px; }
+:root[data-style="simple"] .step-btn:hover { background: rgba(255, 255, 255, .6); }
+:root[data-style="simple"] .step-num { display: inline-grid; place-items: center; flex: none; width: 28px; height: 28px; min-width: 0; border-radius: 50%; background: var(--white); color: var(--ink); font-family: var(--body); font-weight: 700; font-size: 14px; align-self: center; }
+:root[data-style="simple"] .step-num .dot { display: none; }
+:root[data-style="simple"] .step.active .step-num { background: var(--pink); color: var(--white); }
+:root[data-style="simple"] .step-btn { align-items: center; }
+:root[data-style="simple"] .step-title { font-family: var(--body); font-weight: 600; font-size: 16.5px; line-height: 1.3; }
+:root[data-style="simple"] .step-meta { font-family: var(--body); font-size: 13px; color: var(--muted); }
+:root[data-style="simple"] .step-meta .ok { color: var(--blue); font-weight: 700; }
+:root[data-style="simple"] .subs { padding: 0 8px 12px; gap: 2px; }
+:root[data-style="simple"] .sub { grid-template-columns: 22px 44px minmax(0, 1fr); gap: 8px; padding: 9px 10px; border-radius: 10px; font-size: 15.5px; line-height: 1.45; }
+:root[data-style="simple"] .sub:hover { background: var(--panel); }
+:root[data-style="simple"] .sub .chk { width: 20px; height: 20px; margin-top: 1px; border: 2px solid var(--edge); border-radius: 50%; }
+:root[data-style="simple"] .sub .chk svg { width: 11px; height: 11px; }
+:root[data-style="simple"] .sub.watched .chk { background: var(--blue); border-color: var(--blue); }
+:root[data-style="simple"] .sub.watched .chk svg { stroke: var(--white); }
+:root[data-style="simple"] .sub .ts { font-family: var(--body); font-weight: 500; font-size: 13px; padding-top: 2px; color: var(--muted); }
+/* the current sub-step: a bar, a tint and bold text */
+:root[data-style="simple"] .sub.current { background: var(--panel); color: var(--ink); font-weight: 700; box-shadow: inset 4px 0 0 var(--pink); border-radius: 4px 10px 10px 4px; }
+:root[data-style="simple"] .sub.current .ts { color: var(--ink); }
+:root[data-style="simple"] .sub.current .chk { border-color: var(--pink); }
+:root[data-style="simple"] .sub.current.watched .chk { background: var(--blue); border-color: var(--blue); }
+:root[data-style="simple"] .sub.current.watched .chk svg { stroke: var(--white); }
+
+/* ---------- close-up stills ---------- */
+:root[data-style="simple"] .stills { padding: 16px 52px 16px; }
+:root[data-style="simple"] .viewport { border: 0; border-radius: 12px; background: #E4DDD8; }
+:root[data-style="simple"] .lens { border: 3px solid var(--white); box-shadow: 0 0 0 2px var(--blue), 0 8px 24px rgba(0, 0, 0, .2); }
+:root[data-style="simple"] .lens::after { width: 56px; height: 9px; background: var(--blue); }
+:root[data-style="simple"] .hint { border: 0; background: var(--white); font-weight: 600; font-size: 12.5px; color: var(--muted); padding: 4px 11px; }
+:root[data-style="simple"] .zoom { border: 0; background: var(--white); }
+:root[data-style="simple"] .zoom button { width: 36px; height: 30px; font-weight: 600; color: var(--ink); }
+:root[data-style="simple"] .zoom button:hover { background: var(--panel); }
+:root[data-style="simple"] .zoom output { font-family: var(--body); font-weight: 600; font-size: 12.5px; }
+:root[data-style="simple"] .arrow { color: var(--blue); width: 42px; height: 42px; border-radius: 50%; }
+:root[data-style="simple"] .arrow:hover { background: var(--white); }
+:root[data-style="simple"] .caption-row { margin-top: 12px; }
+:root[data-style="simple"] .caption { background: transparent; padding: 0 6px; font-weight: 600; font-size: 15.5px; line-height: 1.4; }
+:root[data-style="simple"] .caption .tag { font-family: var(--body); font-weight: 500; font-size: 12.5px; letter-spacing: 0; color: var(--muted); margin-bottom: 2px; }
+:root[data-style="simple"] .back-btn { border: 0; background: var(--blue); color: var(--white); border-radius: 99px; padding: 7px 14px; font-weight: 600; font-size: 13.5px; }
+:root[data-style="simple"] .film { gap: 8px; margin-top: 12px; }
+:root[data-style="simple"] .film button { border: 0; border-radius: 6px; opacity: .65; }
+:root[data-style="simple"] .film button[aria-current="true"] { opacity: 1; box-shadow: 0 0 0 3px var(--pink); }
+:root[data-style="simple"] .film button span { font-family: var(--body); font-size: 10.5px; font-weight: 700; background: rgba(34, 34, 34, .75); }
+
+/* ---------- progress ---------- */
+:root[data-style="simple"] .progress { padding: 18px 20px; }
+:root[data-style="simple"] .prog-pct { font-family: var(--body); font-weight: 700; font-size: 16px; color: var(--blue); }
+:root[data-style="simple"] .prog-bar { height: 10px; gap: 4px; margin-top: 12px; }
+:root[data-style="simple"] .prog-seg { border: 0; border-radius: 5px; background: var(--white); background-image: none; }
+:root[data-style="simple"] .prog-seg .f { background: var(--blue); }
+:root[data-style="simple"] .prog-seg.cur { box-shadow: 0 0 0 2px var(--panel), 0 0 0 4px var(--pink); }
+:root[data-style="simple"] .prog-note { margin-top: 12px; font-size: 14px; color: var(--muted); }
+:root[data-style="simple"] .prog-note b { font-family: var(--body); font-weight: 600; color: var(--ink); }
+
+/* ---------- what's next ---------- */
+:root[data-style="simple"] .mapbox { padding: 14px; }
+:root[data-style="simple"] .map-inner { background: var(--card); border-radius: 12px; }
+:root[data-style="simple"] .map-svg { color: var(--edge); }
+:root[data-style="simple"] .map-svg .edge { stroke: var(--edge); stroke-width: 2; }
+:root[data-style="simple"] .map-svg .node circle { fill: var(--white); stroke: var(--pink); stroke-width: 2.5; }
+:root[data-style="simple"] .map-svg .node:hover circle { fill: var(--panel); stroke: var(--blue); }
+:root[data-style="simple"] .map-svg .node.center circle { fill: var(--pink); stroke: var(--pink); }
+:root[data-style="simple"] .map-svg .node.center text { fill: var(--white); }
+:root[data-style="simple"] .map-svg .node.later circle { fill: none; stroke: var(--edge); stroke-dasharray: 5 4; }
+:root[data-style="simple"] .map-svg .node text { font-family: var(--body); font-weight: 600; fill: var(--ink); }
+:root[data-style="simple"] .map-svg .node .day { font-family: var(--body); font-weight: 500; fill: var(--muted); }
+:root[data-style="simple"] .map-svg .elabel rect { fill: var(--white); stroke: none; }
+:root[data-style="simple"] .map-svg .elabel text { font-family: var(--body); font-weight: 500; fill: var(--muted); }
+:root[data-style="simple"] .map-svg .map-note { font-family: var(--body); font-weight: 600; fill: var(--muted); }
+:root[data-style="simple"] .map-legend { display: none; } /* the circles explain themselves */
+
+/* ---------- parts list ---------- */
+:root[data-style="simple"] .parts { padding: 0; }
+/* the parts list is one quiet bar until someone opens it */
+:root[data-style="simple"] .parts-fold > summary { padding: 14px 20px; border-radius: 14px; }
+:root[data-style="simple"] .parts-fold > summary:hover { background: #F1DDD2; }
+:root[data-style="simple"] .parts-fold > summary .panel-title { font-size: 16px; }
+:root[data-style="simple"] .parts-fold > summary::after { color: var(--blue); }
+:root[data-style="simple"] .parts-count { font-size: 14px; color: var(--muted); opacity: 1; }
+:root[data-style="simple"] .parts-fold[open] > summary { margin-bottom: 0; }
+:root[data-style="simple"] .parts-fold .parts-groups, :root[data-style="simple"] .parts-fold .parts-buy { margin-inline: 20px; }
+:root[data-style="simple"] .parts-fold .parts-buy { margin-bottom: 20px; }
+:root[data-style="simple"] .parts-note { display: none; }
+:root[data-style="simple"] .parts-group { background: var(--card); border-radius: 12px; }
+:root[data-style="simple"] .parts-group h3 { font-family: var(--body); font-weight: 600; font-size: 14px; color: var(--muted); }
+:root[data-style="simple"] .parts-group .qty { font-family: var(--body); font-weight: 700; color: var(--ink); }
+:root[data-style="simple"] .parts-buy a { color: var(--blue); text-decoration: none; font-weight: 600; }
+:root[data-style="simple"] .parts-buy a::after { content: " →"; }
+
+/* keyboard shortcuts are for the few who look for them; keep the page quiet */
+:root[data-style="simple"] .keys { display: none; }
+
+@media (max-width: 699px) {
+  :root[data-style="simple"] .site-in { padding-block: 16px 12px; }
+  :root[data-style="simple"] .site-logo img { height: 30px; }
+  :root[data-style="simple"] .grid { gap: 18px; }
+  :root[data-style="simple"] .controls { gap: 6px; }
+  :root[data-style="simple"] .ctl { width: 42px; min-width: 42px; height: 42px; }
+  :root[data-style="simple"] .ctl.dial { width: auto; padding: 0 12px; }
+  :root[data-style="simple"] .ctl.skip, :root[data-style="simple"] #playBtn { width: 48px; min-width: 48px; height: 48px; }
+  :root[data-style="simple"] .stills { padding: 12px; }
+  :root[data-style="simple"] .sub { grid-template-columns: 22px 42px minmax(0, 1fr); }
+}

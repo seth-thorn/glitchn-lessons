@@ -101,7 +101,7 @@ To add another language later, add its column to the two interface tables and a 
 
 Every page has a **Style** menu that changes the page's whole personality, not just its colours. The choice is remembered across pages, and a link can force one with `?style=treehouse` (for example).
 
-- **TV** (the default): the video sits in a chunky television with an antenna, feet and a speed dial. While it plays, the antenna sways a little.
+- **Simple** (the default): the Glitch'n house style, the same look as the rest of the site: white and cream, the logo blue and pink, Manrope, the site header with a thin coral rule, flat colour, no TV cabinet, and fewer words on screen (no keyboard hints, legend or concept list). Old `?style=tv` links and saved TV choices open in Simple.
 - **Clean**: calm, simple and precise, in the spirit of Dieter Rams, and built on Universal Design for Learning: no motion, no decoration, a warm off-white page, a highly legible typeface (Atkinson Hyperlegible), large controls, and nothing shown by colour alone. A quiet place to learn.
 - **Gadget**: quiet, precise and tactile, after Dieter Rams's devices for Braun: warm greys, hairlines, round buttons, one orange accent and a small "glitch'n" nameplate above the screen. (It was called "Rams" at first; old links with `?style=rams` still work.)
 - **Solar Punk**: a cozy retro-future workshop full of plants: cream 1970s consoles with an amber nameplate, a pothos trailing down the monitor, steps on cream paper and a dark green screen for the map.
@@ -119,7 +119,7 @@ Every page has a **Style** menu that changes the page's whole personality, not j
 5. **Calm behind reading and the map:** plain surfaces behind text, the steps and the map; pictures stay at the edges of the page, and nothing extra fills the foot of the page.
 6. **Little motion, and none near the controls:** an antenna may sway, but nothing blinks, flickers or bobs, and anything that moves stops for people who ask their device for reduced motion.
 
-**Where styles live:** TV is part of `player/player.css`. Each other style is one file in `styles/` (`clean.css`, `gadget.css`, `solarpunk.css` and so on) that styles both the lesson player and the lesson library (the Glitch'n home page keeps one fixed look). `styles/all.css` loads them all, along with their fonts.
+**Where styles live:** `player/player.css` holds the shared layout and the old TV look the styles build on. Each style is one file in `styles/` (`simple.css`, `clean.css`, `gadget.css`, `solarpunk.css` and so on) that styles both the lesson player and the lesson library (the Glitch'n home page keeps one fixed look). `styles/all.css` loads them all, along with their fonts.
 
 **Things a style can use:** the player adds the class `is-playing` to `.app` while the video plays, sets `--played` (0 to 1) on `.app` as it goes (for the player itself, not decorations; see rule 2), and has a spare decoration slot `.deco` (five empty `<i>` elements) inside the TV. The drawings are SVG pictures written into the CSS; the files in `styles/` are the ones to edit, and `tools/style_art.py` keeps the sources of the original drawings.
 
