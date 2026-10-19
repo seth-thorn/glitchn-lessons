@@ -12,7 +12,7 @@
   const lessonHref = (slug) => (C.lessonHref || '../{slug}/index.html').replace('{slug}', slug);
   // The part pictures (parts-art.js at the site root, beside player/) for the parts list.
   const PLAYER_SRC = (document.currentScript && document.currentScript.src) || location.href;
-  const ART_URL = C.partsArt || new URL('../parts-art.js?v=202610190951', (document.currentScript && document.currentScript.src) || location.href).href;
+  const ART_URL = C.partsArt || new URL('../parts-art.js?v=202610190955', (document.currentScript && document.currentScript.src) || location.href).href;
   let artLoad = null;
   const loadArt = () => artLoad || (artLoad = window.GlitchnParts ? Promise.resolve() : new Promise((ok) => {
     const sc = document.createElement('script'); sc.src = ART_URL; sc.onload = ok; sc.onerror = ok; document.head.appendChild(sc);
