@@ -8,16 +8,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="site.css?v=202610190955">
+<link rel="stylesheet" href="site.css?v=202610191037">
 <style>
 /* The Glitch'n home page, on one two-column grid (text 1fr | picture 600px, 64px gutter).
    Row 1: title and the three steps | the drum machine, top and bottom edges aligned.
-   Row 2, under a hairline: how it started | funders and partners, labels on one line.
-   Then the chip band, then the footer. House style in site.css. */
+   Then the chip band.
+   Row 2: how it started | funders and partners, labels on one line. Then the footer, under its hairline. House style in site.css. */
 .row { display: grid; grid-template-columns: minmax(0, 1fr) 600px; column-gap: 64px; }
 .row > * { min-width: 0; }
 .hero { padding-top: 64px; }
-.facts { margin-top: 72px; padding-top: 32px; border-top: 1px solid var(--line); align-items: start; }
+.facts { margin-block: 64px; align-items: start; }
 
 /* row 1, left: title at the top, steps at the bottom, so both line up with the video's edges */
 .intro { display: flex; flex-direction: column; justify-content: space-between; gap: 32px; }
@@ -73,7 +73,7 @@ html { overflow-x: clip; }
   .board { max-width: 600px; }
   .screen { min-height: 0; }
   .board figcaption { position: static; }
-  .facts { margin-top: 48px; row-gap: 40px; }
+  .facts { margin-block: 48px; row-gap: 40px; }
   .chipband { margin-top: 56px; }
 }
 @media (max-width: 600px) {
@@ -135,6 +135,12 @@ html { overflow-x: clip; }
       </figure>
     </section>
 
+    <div class="chipband" role="img" aria-label="Maps of the four Glitch'n chips: 40106, 4040, 4021 and 4051">
+  <div class="track">
+    <img src="img/pinouts/band-40106.jpg" alt=""><img src="img/pinouts/band-4040.jpg" alt=""><img src="img/pinouts/band-4021.jpg" alt=""><img src="img/pinouts/band-4051.jpg" alt=""><img src="img/pinouts/band-40106.jpg" alt=""><img src="img/pinouts/band-4040.jpg" alt=""><img src="img/pinouts/band-4021.jpg" alt=""><img src="img/pinouts/band-4051.jpg" alt="">
+  </div>
+    </div>
+
     <div class="row facts">
       <section class="story" aria-labelledby="h-story">
         <h2 class="label" id="h-story" data-t="storyH">How Glitch'n started</h2>
@@ -156,22 +162,17 @@ html { overflow-x: clip; }
       </section>
     </div>
 
-    <div class="chipband" role="img" aria-label="Maps of the four Glitch'n chips: 40106, 4040, 4021 and 4051">
-  <div class="track">
-    <img src="img/pinouts/band-40106.jpg" alt=""><img src="img/pinouts/band-4040.jpg" alt=""><img src="img/pinouts/band-4021.jpg" alt=""><img src="img/pinouts/band-4051.jpg" alt=""><img src="img/pinouts/band-40106.jpg" alt=""><img src="img/pinouts/band-4040.jpg" alt=""><img src="img/pinouts/band-4021.jpg" alt=""><img src="img/pinouts/band-4051.jpg" alt="">
-  </div>
-    </div>
   </main>
 
   <footer>
     <p class="who" data-t="who"></p>
     <p data-t="nsf"></p>
-    <p data-t="copy">© Glitch'n</p>
+    <p data-t="copy">© Glitch'n 2026</p>
     <p class="mt" id="mt" lang="es" hidden>Traducción automática.</p>
   </footer>
 </div>
 
-<script src="site.js?v=202610190955"></script>
+<script src="site.js?v=202610191037"></script>
 <script>
 (() => {
   const T = {

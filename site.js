@@ -10,13 +10,13 @@ window.GL = (() => {
   const SITE = {
     en: {
       navLessons: 'Lessons', navNeed: 'What you need', navAbout: 'About', langLabel: 'Language',
-      copy: "© Glitch'n",
+      copy: "© Glitch'n 2026",
       who: "Glitch'n is a project of the School of Games, Arts, Media and Engineering at Arizona State University.",
       nsf: 'This material is based upon work supported by the U.S. National Science Foundation under Award No. 2432637 (Advancing Informal STEM Learning). Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.',
     },
     es: {
       navLessons: 'Lecciones', navNeed: 'Lo que necesitas', navAbout: 'Acerca de', langLabel: 'Idioma',
-      copy: "© Glitch'n",
+      copy: "© Glitch'n 2026",
       who: "Glitch'n es un proyecto de la School of Games, Arts, Media and Engineering de Arizona State University.",
       nsf: 'Este material se basa en trabajo financiado por la Fundación Nacional de Ciencias de EE. UU. (NSF) mediante la subvención n.º 2432637 (Advancing Informal STEM Learning). Las opiniones, hallazgos, conclusiones o recomendaciones expresadas en este material son de los autores y no reflejan necesariamente el punto de vista de la NSF.',
     },
