@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="site.css?v=202610190949">
+<link rel="stylesheet" href="site.css?v=202610190951">
 <style>
 /* The Glitch'n home page: one line, the drum machine from the first lesson, the three steps
    (get what you need, follow a lesson, make music), and where Glitch'n started. House style in site.css. */
@@ -64,11 +64,10 @@ html { overflow-x: clip; }
 .logos img { display: block; max-width: 100%; max-height: 48px; width: auto; height: auto; }
 .logos .tall img { max-height: 72px; }
 
-/* where it started */
-.story { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 12px 48px; padding-block: 64px; border-top: 1px solid var(--line); margin-top: 8px; }
-.story h2 { margin: 0; font-weight: 500; font-size: 22px; color: var(--pink); }
-.story p { margin: 0; max-width: 56ch; }
-@media (max-width: 720px) { .story { grid-template-columns: minmax(0, 1fr); padding-block: 44px; } }
+/* where it started: under the three steps */
+.story { display: grid; gap: 8px; max-width: 440px; margin-top: 28px; }
+.story h2 { margin: 0; font-weight: 500; font-size: 20px; color: var(--pink); }
+.story p { margin: 0; color: var(--soft); }
 @media (max-width: 600px) {
   .hero { padding-top: 32px; }
   .sound { padding: 0; width: 44px; justify-content: center; }
@@ -116,6 +115,10 @@ html { overflow-x: clip; }
         <li><a data-href="lessons/blink-to-drum-machine/index.html" href="lessons/blink-to-drum-machine/index.html"><span class="num">2</span><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span class="row"><b data-t="p2">Follow a lesson</b><svg class="go" aria-hidden="true"><use href="#i-next"/></svg></span></a></li>
         <li><a data-href="lessons/index.html" href="lessons/index.html"><span class="num">3</span><svg class="ico" aria-hidden="true"><use href="#i-wave"/></svg><span class="row"><b data-t="p3">Make music</b><svg class="go" aria-hidden="true"><use href="#i-next"/></svg></span></a></li>
       </ol>
+      <section class="story" aria-labelledby="h-story">
+        <h2 id="h-story" data-t="storyH">How Glitch'n started</h2>
+        <p data-t="story">Glitch'n began in June 2025 with three free summer courses at the ASU MIX Center in downtown Mesa, Arizona. Sixty young people and their families came to build circuits that make sound. These lessons carry that course forward, so more people can build along.</p>
+      </section>
       </div>
       <div class="hero-r">
       <figure class="board">
@@ -146,10 +149,6 @@ html { overflow-x: clip; }
     </section>
 
 
-    <section class="story" aria-labelledby="h-story">
-      <h2 id="h-story" data-t="storyH">How Glitch'n started</h2>
-      <p data-t="story">Glitch'n began in June 2025 with three free summer courses at the ASU MIX Center in downtown Mesa, Arizona. Sixty young people and their families came to build circuits that make sound. These lessons carry that course forward, so more people can build along.</p>
-    </section>
 
     <div class="chipband" role="img" aria-label="Maps of the four Glitch'n chips: 40106, 4040, 4021 and 4051">
   <div class="track">
@@ -166,7 +165,7 @@ html { overflow-x: clip; }
   </footer>
 </div>
 
-<script src="site.js?v=202610190949"></script>
+<script src="site.js?v=202610190951"></script>
 <script>
 (() => {
   const T = {
