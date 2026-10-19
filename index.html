@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="site.css?v=202610190927">
+<link rel="stylesheet" href="site.css?v=202610190937">
 <style>
 /* The Glitch'n home page: one line, the drum machine from the first lesson, the three steps
    (get what you need, follow a lesson, make music), and where Glitch'n started. House style in site.css. */
@@ -38,7 +38,7 @@ h1 { margin: 0; font-weight: 500; font-size: clamp(38px, 5.6vw, 60px); line-heig
 /* the chip maps band: the four chips' pinout cards, drifting slowly sideways in a loop (still for reduced motion) */
 .chipband { position: relative; width: 100vw; margin: 56px 0 0 calc(50% - 50vw); background: #8AC8C3; border-block: 6px solid var(--pink); overflow: hidden; }
 .chipband .track { display: flex; width: max-content; animation: drift 90s linear infinite; }
-.chipband img { display: block; height: clamp(120px, 15vw, 210px); width: auto; flex: none; }
+.chipband img { display: block; height: clamp(120px, 16.3vw, 260px); width: auto; flex: none; }   /* the original glitchn.net spacing: each chip centred in an equal cell, four across */
 .chipband:hover .track { animation-play-state: paused; }
 @keyframes drift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .chipband .track { animation: none; } .chipband { overflow-x: auto; } }
@@ -143,7 +143,7 @@ html { overflow-x: clip; }
   </footer>
 </div>
 
-<script src="site.js?v=202610190927"></script>
+<script src="site.js?v=202610190937"></script>
 <script>
 (() => {
   const T = {

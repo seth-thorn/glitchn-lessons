@@ -12,7 +12,7 @@
   const lessonHref = (slug) => (C.lessonHref || '../{slug}/index.html').replace('{slug}', slug);
   // The part pictures (parts-art.js at the site root, beside player/) for the parts list.
   const PLAYER_SRC = (document.currentScript && document.currentScript.src) || location.href;
-  const ART_URL = C.partsArt || new URL('../parts-art.js?v=202610190927', (document.currentScript && document.currentScript.src) || location.href).href;
+  const ART_URL = C.partsArt || new URL('../parts-art.js?v=202610190937', (document.currentScript && document.currentScript.src) || location.href).href;
   let artLoad = null;
   const loadArt = () => artLoad || (artLoad = window.GlitchnParts ? Promise.resolve() : new Promise((ok) => {
     const sc = document.createElement('script'); sc.src = ART_URL; sc.onload = ok; sc.onerror = ok; document.head.appendChild(sc);
@@ -316,7 +316,7 @@
     // chip maps: the pinout card of each chip this lesson uses (img/pinouts at the site root)
     const chips = (me.chips || []).filter((c) => /^\d+$/.test(c));
     if (chips.length) {
-      $('chipsBody').innerHTML = chips.map((c) => '<figure class="chipmap" id="chipmap-' + esc(c) + '"><img src="' + esc(new URL('../img/pinouts/' + c + '.jpg', PLAYER_SRC).href) + '" alt="' + esc(t('chipMapAlt', { c })) + '" width="1100" height="440" loading="lazy"></figure>').join('') +
+      $('chipsBody').innerHTML = chips.map((c) => '<figure class="chipmap" id="chipmap-' + esc(c) + '"><img src="' + esc(new URL('../img/pinouts/' + c + '.jpg', PLAYER_SRC).href) + '" alt="' + esc(t('chipMapAlt', { c })) + '" width="637" height="524" loading="lazy"></figure>').join('') +
         '<p class="parts-buy"><a href="../../materials/index.html' + keep + '#print">' + esc(t('printMaps')) + '</a></p>';
       $('chipsCount').textContent = chips.length === 1 ? t('chipCount1') : t('chipCountN', { n: chips.length });
       $('chipsPanel').hidden = false;
