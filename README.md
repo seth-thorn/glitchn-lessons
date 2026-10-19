@@ -149,3 +149,7 @@ The site is plain HTML with no build step, published with GitHub Pages from the 
 - **The pack** (`downloads/glitchn-pack.zip`) is made by `python3 tools/make_pack.py` from the files in `downloads/`. Run it after changing any of them.
 - **Chip maps, stickers, logos and colors** come from Seth's Design Assets folder. The chip map JPEGs were converted from CMYK to sRGB for screens. The colors sheet has the Glitch'n logo added.
 - **Posters and table signs** (`downloads/posters/`) are Seth's print PDFs with the NSF logo removed (2026-10-18; the logo's drawing was taken out of each file, not covered). The "Feeling curious?" poster still names NSF support and the old school name in its small print.
+
+## After changing CSS or JS
+
+Run `python3 tools/bump_version.py`. It stamps a new `?v=` on every link to the site's own CSS and JS (pages, `styles/all.css` imports, the lesson page template in `tools/build_index.py`, and the parts pictures loaded by the player), so browsers fetch the new files right away instead of a copy they kept for up to 10 minutes.
