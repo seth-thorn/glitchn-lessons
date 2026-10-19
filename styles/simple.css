@@ -7,8 +7,8 @@
 
 /* ---------- tokens ---------- */
 :root[data-style="simple"] {
-  --ink: #222222; --page: #FFFFFF; --muted: #77706B; --white: #FFFFFF;
-  --panel: #F6E8E0; --card: #FFFFFF; --deep: #222222; --on-panel: #222222;
+  --ink: #3A3533; --page: #FDFAF9; --muted: #6E6762; --white: #FFFFFF;
+  --panel: #F6E8E0; --card: #FFFFFF; --deep: #3A3533; --on-panel: #3A3533;
   --blue: #3859B3; --pink: #FA6E79; --line: #EEE3DC; --track: #E9DCD3; --edge: #C9B8AE;
   --display: "Manrope", "Helvetica Neue", Arial, sans-serif;
   --body: "Manrope", "Helvetica Neue", Arial, sans-serif;

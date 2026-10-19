@@ -2,7 +2,7 @@
    white and cream, the logo blue and pink, Manrope at medium weight, a thin coral rule under the header,
    flat colour, no outlines or shadows. Pictures lead; words are short. */
 :root {
-  --text: #222222; --soft: #77706B; --page: #FFFFFF; --cream: #F6E8E0; --cream-2: #F1DDD2; --line: #EEE3DC;
+  --text: #3A3533; --soft: #6E6762; --page: #FDFAF9; --cream: #F6E8E0; --cream-2: #F1DDD2; --line: #EEE3DC;
   --blue: #3859B3; --blue-2: #2D4A99; --pink: #FA6E79; --teal: #8AC9C3;
   --font: "Manrope", "Helvetica Neue", Arial, sans-serif;
   color-scheme: light;
