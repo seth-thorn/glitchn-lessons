@@ -12,7 +12,7 @@
   const lessonHref = (slug) => (C.lessonHref || '../{slug}/index.html').replace('{slug}', slug);
   // The part pictures (parts-art.js at the site root, beside player/) for the parts list.
   const PLAYER_SRC = (document.currentScript && document.currentScript.src) || location.href;
-  const ART_URL = C.partsArt || new URL('../parts-art.js?v=202610191037', (document.currentScript && document.currentScript.src) || location.href).href;
+  const ART_URL = C.partsArt || new URL('../parts-art.js?v=202610191116', (document.currentScript && document.currentScript.src) || location.href).href;
   let artLoad = null;
   const loadArt = () => artLoad || (artLoad = window.GlitchnParts ? Promise.resolve() : new Promise((ok) => {
     const sc = document.createElement('script'); sc.src = ART_URL; sc.onload = ok; sc.onerror = ok; document.head.appendChild(sc);
@@ -316,10 +316,15 @@
     // chip maps: the pinout card of each chip this lesson uses (img/pinouts at the site root)
     const chips = (me.chips || []).filter((c) => /^\d+$/.test(c));
     if (chips.length) {
-      $('chipsBody').innerHTML = chips.map((c) => '<figure class="chipmap" id="chipmap-' + esc(c) + '"><img src="' + esc(new URL('../img/pinouts/' + c + '.jpg', PLAYER_SRC).href) + '" alt="' + esc(t('chipMapAlt', { c })) + '" width="637" height="524" loading="lazy"></figure>').join('') +
+      // each map is a short silent loop of the chip at work (img/pinouts/anim); calm settings show its first frame, still
+      const anim = (f) => esc(new URL('../img/pinouts/anim/' + f, PLAYER_SRC).href);
+      $('chipsBody').innerHTML = chips.map((c) => '<figure class="chipmap" id="chipmap-' + esc(c) + '"><video poster="' + anim(c + '.jpg') + '" width="637" height="524" muted loop playsinline preload="metadata" disablepictureinpicture role="img" aria-label="' + esc(t('chipMapAlt', { c })) + '"><source src="' + anim(c + '.mp4') + '" type="video/mp4"><source src="' + anim(c + '.webm') + '" type="video/webm"></video></figure>').join('') +
         '<p class="parts-buy"><a href="../../materials/index.html' + keep + '#print">' + esc(t('printMaps')) + '</a></p>';
       $('chipsCount').textContent = chips.length === 1 ? t('chipCount1') : t('chipCountN', { n: chips.length });
       $('chipsPanel').hidden = false;
+      const playMaps = () => { if (calm() || !$('chipsFold').open) return; $('chipsBody').querySelectorAll('video').forEach((v) => v.play().catch(() => {})); };
+      $('chipsFold').addEventListener('toggle', () => { if ($('chipsFold').open) playMaps(); else $('chipsBody').querySelectorAll('video').forEach((v) => v.pause()); });
+      playMaps();
       document.querySelectorAll('.chip-fact[data-chip]').forEach((b) => b.addEventListener('click', () => {
         $('chipsFold').open = true;
         const f = document.getElementById('chipmap-' + b.dataset.chip);

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="site.css?v=202610191037">
+<link rel="stylesheet" href="site.css?v=202610191116">
 <style>
 /* The Glitch'n home page, on one two-column grid (text 1fr | picture 600px, 64px gutter).
    Row 1: title and the three steps | the drum machine, top and bottom edges aligned.
@@ -56,10 +56,11 @@ h1 { margin: 0; font-weight: 500; font-size: clamp(38px, 5.2vw, 58px); line-heig
 .logos img { display: block; max-width: 100%; width: auto; height: auto; }
 .logos a:hover img { opacity: .75; }
 
-/* the chip maps band: the four chips' pinout cards, drifting slowly sideways in a loop (still for reduced motion) */
+/* the chip maps band: the four chips' pinout cards, each a short loop of the chip at work, drifting slowly sideways
+   (all still for reduced motion) */
 .chipband { position: relative; width: 100vw; margin: 72px 0 0 calc(50% - 50vw); background: #8AC8C3; border-block: 6px solid var(--pink); overflow: hidden; }
 .chipband .track { display: flex; width: max-content; animation: drift 90s linear infinite; }
-.chipband img { display: block; height: clamp(120px, 16.3vw, 260px); width: auto; flex: none; }   /* the original glitchn.net spacing: each chip centred in an equal cell, four across */
+.chipband video { display: block; height: clamp(120px, 16.3vw, 260px); width: auto; flex: none; }   /* the original glitchn.net spacing: each chip centred in an equal cell, four across */
 .chipband:hover .track { animation-play-state: paused; }
 @keyframes drift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .chipband .track { animation: none; } .chipband { overflow-x: auto; } }
@@ -137,7 +138,7 @@ html { overflow-x: clip; }
 
     <div class="chipband" role="img" aria-label="Maps of the four Glitch'n chips: 40106, 4040, 4021 and 4051">
   <div class="track">
-    <img src="img/pinouts/band-40106.jpg" alt=""><img src="img/pinouts/band-4040.jpg" alt=""><img src="img/pinouts/band-4021.jpg" alt=""><img src="img/pinouts/band-4051.jpg" alt=""><img src="img/pinouts/band-40106.jpg" alt=""><img src="img/pinouts/band-4040.jpg" alt=""><img src="img/pinouts/band-4021.jpg" alt=""><img src="img/pinouts/band-4051.jpg" alt="">
+    <video poster="img/pinouts/anim/band-40106.jpg" width="922" height="600" muted loop playsinline preload="auto" disablepictureinpicture aria-hidden="true"><source src="img/pinouts/anim/band-40106.mp4" type="video/mp4"><source src="img/pinouts/anim/band-40106.webm" type="video/webm"></video><video poster="img/pinouts/anim/band-4040.jpg" width="922" height="600" muted loop playsinline preload="auto" disablepictureinpicture aria-hidden="true"><source src="img/pinouts/anim/band-4040.mp4" type="video/mp4"><source src="img/pinouts/anim/band-4040.webm" type="video/webm"></video><video poster="img/pinouts/anim/band-4021.jpg" width="922" height="600" muted loop playsinline preload="auto" disablepictureinpicture aria-hidden="true"><source src="img/pinouts/anim/band-4021.mp4" type="video/mp4"><source src="img/pinouts/anim/band-4021.webm" type="video/webm"></video><video poster="img/pinouts/anim/band-4051.jpg" width="922" height="600" muted loop playsinline preload="auto" disablepictureinpicture aria-hidden="true"><source src="img/pinouts/anim/band-4051.mp4" type="video/mp4"><source src="img/pinouts/anim/band-4051.webm" type="video/webm"></video><video poster="img/pinouts/anim/band-40106.jpg" width="922" height="600" muted loop playsinline preload="auto" disablepictureinpicture aria-hidden="true"><source src="img/pinouts/anim/band-40106.mp4" type="video/mp4"><source src="img/pinouts/anim/band-40106.webm" type="video/webm"></video><video poster="img/pinouts/anim/band-4040.jpg" width="922" height="600" muted loop playsinline preload="auto" disablepictureinpicture aria-hidden="true"><source src="img/pinouts/anim/band-4040.mp4" type="video/mp4"><source src="img/pinouts/anim/band-4040.webm" type="video/webm"></video><video poster="img/pinouts/anim/band-4021.jpg" width="922" height="600" muted loop playsinline preload="auto" disablepictureinpicture aria-hidden="true"><source src="img/pinouts/anim/band-4021.mp4" type="video/mp4"><source src="img/pinouts/anim/band-4021.webm" type="video/webm"></video><video poster="img/pinouts/anim/band-4051.jpg" width="922" height="600" muted loop playsinline preload="auto" disablepictureinpicture aria-hidden="true"><source src="img/pinouts/anim/band-4051.mp4" type="video/mp4"><source src="img/pinouts/anim/band-4051.webm" type="video/webm"></video>
   </div>
     </div>
 
@@ -172,7 +173,7 @@ html { overflow-x: clip; }
   </footer>
 </div>
 
-<script src="site.js?v=202610191037"></script>
+<script src="site.js?v=202610191116"></script>
 <script>
 (() => {
   const T = {
@@ -218,6 +219,8 @@ html { overflow-x: clip; }
   clip.addEventListener('play', soundLabel);
   clip.addEventListener('pause', soundLabel);
 
+  // the chip band's loops play unless the visitor asks for less motion
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('.chipband video').forEach((v) => v.play().catch(() => {}));
   GL.start(T, (lang, t) => { document.getElementById('path').setAttribute('aria-label', t.pathAria); document.querySelector('.chipband').setAttribute('aria-label', t.bandAria); document.getElementById('logos').setAttribute('aria-label', t.logosAria); soundLabel(); });
 })();
 </script>

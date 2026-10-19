@@ -568,7 +568,7 @@ select.tbtn { padding: 0 6px; }
   const PAGE = (title) => '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<title>' + esc(title) + " · Glitch'n</title>\n" +
     '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
     '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&display=swap">\n' +
-    '<link rel="stylesheet" href="../../player/player.css?v=202610191037">\n<link rel="stylesheet" href="../../styles/all.css?v=202610191037">\n</head>\n<body>\n<div id="glitchn-player"></div>\n<script src="../../player/player.js?v=202610191037"><' + '/script>\n</body>\n</html>\n';
+    '<link rel="stylesheet" href="../../player/player.css?v=202610191116">\n<link rel="stylesheet" href="../../styles/all.css?v=202610191116">\n</head>\n<body>\n<div id="glitchn-player"></div>\n<script src="../../player/player.js?v=202610191116"><' + '/script>\n</body>\n</html>\n';
   async function stillBlob(m) {
     if (m.still.blob) return m.still.blob;
     if (m.still.url) { try { const r = await fetch(m.still.url); if (r.ok) return await r.blob(); } catch (e) {} }
