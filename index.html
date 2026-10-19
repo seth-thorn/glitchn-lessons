@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="site.css?v=202610190744">
+<link rel="stylesheet" href="site.css?v=202610190927">
 <style>
 /* The Glitch'n home page: one line, the drum machine from the first lesson, the three steps
    (get what you need, follow a lesson, make music), and where Glitch'n started. House style in site.css. */
@@ -34,6 +34,15 @@ h1 { margin: 0; font-weight: 500; font-size: clamp(38px, 5.6vw, 60px); line-heig
 .sound[aria-pressed="true"] .on { display: inline; }
 .sound[aria-pressed="true"] .off { display: none; }
 .board figcaption { margin-top: 10px; color: var(--soft); font-size: 14px; }
+
+/* the chip maps band: the four chips' pinout cards, drifting slowly sideways in a loop (still for reduced motion) */
+.chipband { position: relative; width: 100vw; margin: 56px 0 0 calc(50% - 50vw); background: #8AC8C3; border-block: 6px solid var(--pink); overflow: hidden; }
+.chipband .track { display: flex; width: max-content; animation: drift 90s linear infinite; }
+.chipband img { display: block; height: clamp(120px, 15vw, 210px); width: auto; flex: none; }
+.chipband:hover .track { animation-play-state: paused; }
+@keyframes drift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .chipband .track { animation: none; } .chipband { overflow-x: auto; } }
+html { overflow-x: clip; }
 
 /* the three steps */
 .path { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 56px 0 0; padding: 0; list-style: none; }
@@ -108,6 +117,12 @@ h1 { margin: 0; font-weight: 500; font-size: clamp(38px, 5.6vw, 60px); line-heig
       </figure>
     </section>
 
+    <div class="chipband" role="img" aria-label="Maps of the four Glitch'n chips: 40106, 4040, 4021 and 4051">
+  <div class="track">
+    <img src="img/pinouts/band-40106.jpg" alt=""><img src="img/pinouts/band-4040.jpg" alt=""><img src="img/pinouts/band-4021.jpg" alt=""><img src="img/pinouts/band-4051.jpg" alt=""><img src="img/pinouts/band-40106.jpg" alt=""><img src="img/pinouts/band-4040.jpg" alt=""><img src="img/pinouts/band-4021.jpg" alt=""><img src="img/pinouts/band-4051.jpg" alt="">
+  </div>
+    </div>
+
     <ol class="path" id="path" aria-label="How it works">
       <li><a data-href="materials/index.html" href="materials/index.html"><span class="num">1</span><svg class="ico" aria-hidden="true"><use href="#i-cart"/></svg><span class="row"><b data-t="p1">Get what you need</b><svg class="go" aria-hidden="true"><use href="#i-next"/></svg></span></a></li>
       <li><a data-href="lessons/blink-to-drum-machine/index.html" href="lessons/blink-to-drum-machine/index.html"><span class="num">2</span><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span class="row"><b data-t="p2">Follow a lesson</b><svg class="go" aria-hidden="true"><use href="#i-next"/></svg></span></a></li>
@@ -128,12 +143,12 @@ h1 { margin: 0; font-weight: 500; font-size: clamp(38px, 5.6vw, 60px); line-heig
   </footer>
 </div>
 
-<script src="site.js?v=202610190744"></script>
+<script src="site.js?v=202610190927"></script>
 <script>
 (() => {
   const T = {
     en: {
-      title: "Glitch'n: make music with circuits",
+      title: "Glitch'n: make music with circuits", bandAria: "Maps of the four Glitch'n chips: 40106, 4040, 4021 and 4051",
       h1: 'Make music with circuits.', lead: 'Free video lessons. One small step at a time.',
       first: 'Start the first lesson', all: 'All lessons',
       cap: 'The drum machine from the first lesson.',
@@ -143,7 +158,7 @@ h1 { margin: 0; font-weight: 500; font-size: clamp(38px, 5.6vw, 60px); line-heig
       story: "Glitch'n began in June 2025 with three free summer courses at the ASU MIX Center in downtown Mesa, Arizona. Sixty young people and their families came to build circuits that make sound. These lessons carry that course forward, so more people can build along.",
     },
     es: {
-      title: "Glitch'n: haz música con circuitos",
+      title: "Glitch'n: haz música con circuitos", bandAria: "Mapas de los cuatro chips de Glitch'n: 40106, 4040, 4021 y 4051",
       h1: 'Haz música con circuitos.', lead: 'Lecciones en video, gratis. Un pequeño paso a la vez.',
       first: 'Empieza la primera lección', all: 'Todas las lecciones',
       cap: 'La caja de ritmos de la primera lección.',
@@ -176,7 +191,7 @@ h1 { margin: 0; font-weight: 500; font-size: clamp(38px, 5.6vw, 60px); line-heig
   clip.addEventListener('play', soundLabel);
   clip.addEventListener('pause', soundLabel);
 
-  GL.start(T, (lang, t) => { document.getElementById('path').setAttribute('aria-label', t.pathAria); soundLabel(); });
+  GL.start(T, (lang, t) => { document.getElementById('path').setAttribute('aria-label', t.pathAria); document.querySelector('.chipband').setAttribute('aria-label', t.bandAria); soundLabel(); });
 })();
 </script>
 </body>

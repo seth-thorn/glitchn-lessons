@@ -51,6 +51,11 @@
 :root[data-style="simple"] .facts { font-size: 13px; gap: 6px; }
 :root[data-style="simple"] .fact { border: 0; background: var(--panel); color: var(--ink); font-weight: 500; padding: 3px 11px; }
 :root[data-style="simple"] .fact a { color: var(--blue); text-decoration: none; font-weight: 600; }
+:root[data-style="simple"] button.fact.chip-fact { color: var(--blue); font-weight: 600; }
+:root[data-style="simple"] button.fact.chip-fact:hover { background: var(--panel-2, #F1DDD2); }
+:root[data-style="simple"] .chipmaps .chipmap-grid { margin-inline: 20px; padding-bottom: 20px; }
+:root[data-style="simple"] .chipmap img { border-radius: 12px; }
+:root[data-style="simple"] .chipmap-grid .parts-buy { margin: 0; }
 :root[data-style="simple"] .fact.start { background: var(--pink); color: var(--white); }
 :root[data-style="simple"] .fact.learn { display: none; }
 

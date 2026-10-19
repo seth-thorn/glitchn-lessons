@@ -332,6 +332,15 @@ body { margin: 0; }
 .fact.level-medium::before { border-radius: 2px; transform: rotate(45deg); width: 8px; height: 8px; }
 .fact.level-hard::before { border-radius: 0; width: 0; height: 0; background: none; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 9px solid currentColor; }
 .fact.learn { border-style: dashed; }
+/* the chips in the facts row are buttons: they open the chip maps */
+button.fact { font: inherit; cursor: pointer; }
+button.fact:hover { border-color: currentColor; }
+/* chip maps: the pinout card of each chip the lesson uses */
+.chipmaps { margin-bottom: 14px; }
+.chipmap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: 12px; }
+.chipmap { margin: 0; scroll-margin: 80px; }
+.chipmap img { display: block; width: 100%; height: auto; border-radius: var(--r-md, 12px); background: #8AC8C3; }
+.chipmap-grid .parts-buy { grid-column: 1 / -1; margin-top: 2px; }
 .parts { padding: 18px 20px 20px; color: var(--on-panel); }
 .parts-note { margin: 4px 0 14px; font-size: 14px; opacity: .85; }
 /* the parts list folds away: a single bar until someone opens it */

@@ -11,7 +11,8 @@
   const HOME_URL = C.home || '../index.html';
   const lessonHref = (slug) => (C.lessonHref || '../{slug}/index.html').replace('{slug}', slug);
   // The part pictures (parts-art.js at the site root, beside player/) for the parts list.
-  const ART_URL = C.partsArt || new URL('../parts-art.js?v=202610190744', (document.currentScript && document.currentScript.src) || location.href).href;
+  const PLAYER_SRC = (document.currentScript && document.currentScript.src) || location.href;
+  const ART_URL = C.partsArt || new URL('../parts-art.js?v=202610190927', (document.currentScript && document.currentScript.src) || location.href).href;
   let artLoad = null;
   const loadArt = () => artLoad || (artLoad = window.GlitchnParts ? Promise.resolve() : new Promise((ok) => {
     const sc = document.createElement('script'); sc.src = ART_URL; sc.onload = ok; sc.onerror = ok; document.head.appendChild(sc);
@@ -29,7 +30,7 @@
       tutorialVideo: 'Tutorial video', play: 'Play', pause: 'Pause', mute: 'Mute', unmute: 'Unmute', speed: 'Playback speed', fullScreen: 'Full screen', seek: 'Seek through the lesson',
       instructions: 'Instructions', buildSteps: 'Build steps', follow: 'Follow video', followTitle: 'Scroll the list to follow the video',
       closeups: 'Close-up stills', hint: 'Point at the board to magnify', hintTouch: 'Touch and drag to magnify', zoomLess: 'Less magnification', zoomMore: 'More magnification',
-      prevStill: 'Previous still', nextStill: 'Next still', prevStep: 'Previous step', nextStep: 'Next step', partsCount: '{n} parts', backToVideo: "Back to the video's step", stillsForStep: 'Stills for this step', showStill: 'Show still {n}',
+      prevStill: 'Previous still', nextStill: 'Next still', prevStep: 'Previous step', nextStep: 'Next step', partsCount: '{n} parts', chipMaps: 'Chip maps', chipCount1: '1 chip', chipCountN: '{n} chips', chipMapAlt: 'Map of the {c} chip: what each leg does', printMaps: 'Print the chip maps', showChipMap: 'Show the map of the {c} chip', backToVideo: "Back to the video's step", stillsForStep: 'Stills for this step', showStill: 'Show still {n}',
       progress: 'Progress', whatsNext: "What's next?", mapLabel: 'Lessons connected to this one', ready: 'Ready', coming: 'Coming', comingSmall: 'coming', comingLater: ', coming later',
       keyPlay: 'play / pause', keySeconds: '5 seconds', keySub: 'previous / next sub-step', keyMute: 'mute',
       startingPoint: 'Starting point', finishedResult: 'Finished result of {n}', beforeStep: 'Before step {n}: ', boardAt: 'Breadboard at {n}: {t}',
@@ -46,7 +47,7 @@
       tutorialVideo: 'Video de la lección', play: 'Reproducir', pause: 'Pausar', mute: 'Silenciar', unmute: 'Activar sonido', speed: 'Velocidad de reproducción', fullScreen: 'Pantalla completa', seek: 'Avanzar o retroceder en la lección',
       instructions: 'Instrucciones', buildSteps: 'Pasos de armado', follow: 'Seguir el video', followTitle: 'Desplazar la lista para seguir el video',
       closeups: 'Fotos de cerca', hint: 'Señala la protoboard para ampliar', hintTouch: 'Toca y arrastra para ampliar', zoomLess: 'Menos aumento', zoomMore: 'Más aumento',
-      prevStill: 'Foto anterior', nextStill: 'Foto siguiente', prevStep: 'Paso anterior', nextStep: 'Paso siguiente', partsCount: '{n} piezas', backToVideo: 'Volver al paso del video', stillsForStep: 'Fotos de este paso', showStill: 'Mostrar la foto {n}',
+      prevStill: 'Foto anterior', nextStill: 'Foto siguiente', prevStep: 'Paso anterior', nextStep: 'Paso siguiente', partsCount: '{n} piezas', chipMaps: 'Mapas de chips', chipCount1: '1 chip', chipCountN: '{n} chips', chipMapAlt: 'Mapa del chip {c}: qué hace cada pata', printMaps: 'Imprime los mapas de chips', showChipMap: 'Mostrar el mapa del chip {c}', backToVideo: 'Volver al paso del video', stillsForStep: 'Fotos de este paso', showStill: 'Mostrar la foto {n}',
       progress: 'Progreso', whatsNext: '¿Qué sigue?', mapLabel: 'Lecciones conectadas con esta', ready: 'Lista', coming: 'Próximamente', comingSmall: 'próximamente', comingLater: ', disponible más adelante',
       keyPlay: 'reproducir / pausar', keySeconds: '5 segundos', keySub: 'subpaso anterior / siguiente', keyMute: 'silenciar',
       startingPoint: 'Punto de partida', finishedResult: 'Resultado terminado de {n}', beforeStep: 'Antes del paso {n}: ', boardAt: 'Protoboard en {n}: {t}',
@@ -194,6 +195,13 @@
     </div>
   </div>
 
+  <section class="parts panel chipmaps" id="chipsPanel" aria-labelledby="chipsTitle" hidden>
+    <details class="parts-fold" id="chipsFold">
+      <summary><h2 class="panel-title" id="chipsTitle">${t('chipMaps')}</h2><span class="parts-count" id="chipsCount"></span></summary>
+      <div class="chipmap-grid" id="chipsBody"></div>
+    </details>
+  </section>
+
   <section class="parts panel" id="partsPanel" aria-labelledby="partsTitle" hidden>
     <details class="parts-fold" id="partsFold">
       <summary><h2 class="panel-title" id="partsTitle">${t('partsList')}</h2><span class="parts-count" id="partsCount"></span></summary>
@@ -282,7 +290,7 @@
     if (me.difficulty) bits.push('<span class="fact level level-' + me.difficulty.level + '" title="' + esc(me.difficulty.why) + '">' + esc(t('difficulty')) + ': <b>' + esc(label('difficulty', me.difficulty.level)) + '</b></span>');
     if (me.startHere) bits.push('<span class="fact start">' + esc(t('startHere')) + '</span>');
     (me.requires || []).forEach((r) => bits.push('<span class="fact req">' + esc(t('requires')) + ': <a href="' + esc(lessonHref(r)) + keep + '">' + esc(titleOf(r)) + '</a></span>'));
-    (me.chips || []).forEach((c) => bits.push('<span class="fact chip-fact">' + esc(c) + '</span>'));
+    (me.chips || []).forEach((c) => bits.push('<button type="button" class="fact chip-fact" data-chip="' + esc(c) + '" title="' + esc(t('showChipMap', { c })) + '">' + esc(c) + '</button>'));
     if (me.oscillators) bits.push('<span class="fact">' + esc(me.oscillators === 1 ? t('oscillators1') : t('oscillatorsN', { n: me.oscillators })) + '</span>');
     if ((me.concepts || []).length) bits.push('<span class="fact learn">' + esc(t('learn')) + ': ' + me.concepts.map((c) => esc(label('concepts', c))).join(', ') + '</span>');
     $('facts').innerHTML = bits.join('');
@@ -305,6 +313,19 @@
       '<p class="parts-buy"><a href="../../materials/index.html' + keep + '">' + esc(t('whereToGet')) + '</a></p>';
     $('partsCount').textContent = t('partsCount', { n: Object.keys(me.parts).length });
     $('partsPanel').hidden = false;
+    // chip maps: the pinout card of each chip this lesson uses (img/pinouts at the site root)
+    const chips = (me.chips || []).filter((c) => /^\d+$/.test(c));
+    if (chips.length) {
+      $('chipsBody').innerHTML = chips.map((c) => '<figure class="chipmap" id="chipmap-' + esc(c) + '"><img src="' + esc(new URL('../img/pinouts/' + c + '.jpg', PLAYER_SRC).href) + '" alt="' + esc(t('chipMapAlt', { c })) + '" width="1100" height="440" loading="lazy"></figure>').join('') +
+        '<p class="parts-buy"><a href="../../materials/index.html' + keep + '#print">' + esc(t('printMaps')) + '</a></p>';
+      $('chipsCount').textContent = chips.length === 1 ? t('chipCount1') : t('chipCountN', { n: chips.length });
+      $('chipsPanel').hidden = false;
+      document.querySelectorAll('.chip-fact[data-chip]').forEach((b) => b.addEventListener('click', () => {
+        $('chipsFold').open = true;
+        const f = document.getElementById('chipmap-' + b.dataset.chip);
+        (f || $('chipsPanel')).scrollIntoView({ behavior: calm() ? 'auto' : 'smooth', block: 'center' });
+      }));
+    }
     if (!window.GlitchnParts) loadArt().then(() => { if (window.GlitchnParts) renderFacts(me, IDX); });
   }
 
