@@ -8,18 +8,22 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="site.css?v=202610190731">
+<link rel="stylesheet" href="site.css?v=202610190744">
 <style>
 /* The Glitch'n home page: one line, the drum machine from the first lesson, the three steps
    (get what you need, follow a lesson, make music), and where Glitch'n started. House style in site.css. */
-.hero { padding-block: 56px 32px; display: grid; gap: 16px; }
+.hero { padding-block: 56px 32px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px); grid-template-rows: auto auto 1fr; column-gap: 56px; row-gap: 16px; align-items: start; }
+.hero > h1, .hero > .lead, .hero > .doors { grid-column: 1; }
+@media (max-width: 900px) { .hero { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; } }
 h1 { margin: 0; font-weight: 500; font-size: clamp(38px, 5.6vw, 60px); line-height: 1.06; letter-spacing: -.025em; max-width: 14ch; }
 .lead { margin: 0; max-width: 40ch; font-size: 19px; color: var(--soft); }
 .doors { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
 
 /* the drum machine: the first lesson's finished board, blinking */
-.board { margin: 24px 0 0; }
-.screen { position: relative; aspect-ratio: 960 / 290; border-radius: 14px; overflow: hidden; background: #9C9C9E; }
+/* shown small, close to the video's own size (720 × 404), so its low resolution doesn't show */
+.board { margin: 0; grid-column: 2; grid-row: 1 / span 3; align-self: center; }
+@media (max-width: 900px) { .board { grid-column: 1; grid-row: auto; margin-top: 20px; max-width: 560px; } }
+.screen { position: relative; aspect-ratio: 720 / 404; border-radius: 14px; overflow: hidden; background: #D9D9DB; }
 .screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .sound { position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px 8px 12px;
   font: 600 14px/1 var(--font); color: var(--text); background: #FFFFFF; border: 0; border-radius: 99px; cursor: pointer; }
@@ -53,7 +57,6 @@ h1 { margin: 0; font-weight: 500; font-size: clamp(38px, 5.6vw, 60px); line-heig
 @media (max-width: 720px) { .story { grid-template-columns: minmax(0, 1fr); padding-block: 44px; } }
 @media (max-width: 600px) {
   .hero { padding-top: 32px; }
-  .screen { aspect-ratio: 960 / 380; }
   .sound { padding: 0; width: 44px; justify-content: center; }
   .sound span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .doors .btn { flex: 1 1 auto; }
@@ -125,7 +128,7 @@ h1 { margin: 0; font-weight: 500; font-size: clamp(38px, 5.6vw, 60px); line-heig
   </footer>
 </div>
 
-<script src="site.js?v=202610190731"></script>
+<script src="site.js?v=202610190744"></script>
 <script>
 (() => {
   const T = {
