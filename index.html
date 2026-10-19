@@ -8,21 +8,22 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="site.css?v=202610190937">
+<link rel="stylesheet" href="site.css?v=202610190949">
 <style>
 /* The Glitch'n home page: one line, the drum machine from the first lesson, the three steps
    (get what you need, follow a lesson, make music), and where Glitch'n started. House style in site.css. */
-.hero { padding-block: 56px 32px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px); grid-template-rows: auto auto 1fr; column-gap: 56px; row-gap: 16px; align-items: start; }
-.hero > h1, .hero > .lead, .hero > .doors { grid-column: 1; }
-@media (max-width: 900px) { .hero { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; } }
+.hero { padding-block: 56px 32px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px); column-gap: 56px; align-items: start; }
+.hero-l { display: grid; gap: 16px; align-content: start; min-width: 0; }
+.hero-r { display: grid; gap: 28px; align-content: start; min-width: 0; }
+@media (max-width: 900px) { .hero { grid-template-columns: minmax(0, 1fr); row-gap: 32px; } }
 h1 { margin: 0; font-weight: 500; font-size: clamp(38px, 5.6vw, 60px); line-height: 1.06; letter-spacing: -.025em; max-width: 14ch; }
 .lead { margin: 0; max-width: 40ch; font-size: 19px; color: var(--soft); }
 .doors { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
 
 /* the drum machine: the first lesson's finished board, blinking */
 /* shown small, close to the video's own size (720 × 404), so its low resolution doesn't show */
-.board { margin: 0; grid-column: 2; grid-row: 1 / span 3; align-self: center; }
-@media (max-width: 900px) { .board { grid-column: 1; grid-row: auto; margin-top: 20px; max-width: 560px; } }
+.board { margin: 0; }
+@media (max-width: 900px) { .board { max-width: 560px; } }
 .screen { position: relative; aspect-ratio: 720 / 404; border-radius: 14px; overflow: hidden; background: #D9D9DB; }
 .screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .sound { position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px 8px 12px;
@@ -36,7 +37,7 @@ h1 { margin: 0; font-weight: 500; font-size: clamp(38px, 5.6vw, 60px); line-heig
 .board figcaption { margin-top: 10px; color: var(--soft); font-size: 14px; }
 
 /* the chip maps band: the four chips' pinout cards, drifting slowly sideways in a loop (still for reduced motion) */
-.chipband { position: relative; width: 100vw; margin: 56px 0 0 calc(50% - 50vw); background: #8AC8C3; border-block: 6px solid var(--pink); overflow: hidden; }
+.chipband { position: relative; width: 100vw; margin: 0 0 0 calc(50% - 50vw); background: #8AC8C3; border-block: 6px solid var(--pink); overflow: hidden; }
 .chipband .track { display: flex; width: max-content; animation: drift 90s linear infinite; }
 .chipband img { display: block; height: clamp(120px, 16.3vw, 260px); width: auto; flex: none; }   /* the original glitchn.net spacing: each chip centred in an equal cell, four across */
 .chipband:hover .track { animation-play-state: paused; }
@@ -44,23 +45,27 @@ h1 { margin: 0; font-weight: 500; font-size: clamp(38px, 5.6vw, 60px); line-heig
 @media (prefers-reduced-motion: reduce) { .chipband .track { animation: none; } .chipband { overflow-x: auto; } }
 html { overflow-x: clip; }
 
-/* the three steps */
-.path { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 56px 0 0; padding: 0; list-style: none; }
-.path a { display: grid; grid-template-rows: auto 1fr auto; gap: 14px; height: 100%; padding: 22px; border-radius: 14px; background: var(--cream); color: var(--text); }
+/* the three steps: small rows stacked under the buttons */
+.path { display: grid; gap: 8px; max-width: 440px; margin: 20px 0 0; padding: 0; list-style: none; }
+.path a { display: grid; grid-template-columns: auto auto 1fr auto; align-items: center; gap: 12px; padding: 10px 16px 10px 10px; border-radius: 12px; background: var(--cream); color: var(--text); }
 .path a:hover { background: var(--cream-2); }
-.path .ico { width: 56px; height: 56px; color: var(--blue); }
-.path b { font-weight: 600; font-size: 20px; line-height: 1.25; }
-.path .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.path .go { width: 22px; height: 22px; flex: none; color: var(--blue); }
-@media (max-width: 720px) {
-  .path { grid-template-columns: minmax(0, 1fr); gap: 10px; }
-  .path a { grid-template-columns: auto auto 1fr; grid-template-rows: none; align-items: center; padding: 12px 16px; }
-  .path .ico { width: 34px; height: 34px; }
-  .path b { font-size: 18px; }
-}
+.path .num { width: 32px; height: 32px; font-size: 15px; }
+.path .ico { width: 28px; height: 28px; color: var(--blue); }
+.path b { font-weight: 600; font-size: 17px; line-height: 1.25; }
+.path .row { display: contents; }
+.path .go { width: 20px; height: 20px; flex: none; color: var(--blue); }
+
+/* funders and partners, under the video */
+.logos h2 { margin: 0 0 4px; font-weight: 600; font-size: 13px; color: var(--soft); }
+.logos ul + h2 { margin-top: 14px; }
+.logos ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px 20px; align-items: center; margin: 0; padding: 0; list-style: none; }
+.logos a { display: grid; place-items: center; height: 84px; padding: 6px; border-radius: 10px; }
+.logos a:hover { background: var(--cream); }
+.logos img { display: block; max-width: 100%; max-height: 48px; width: auto; height: auto; }
+.logos .tall img { max-height: 72px; }
 
 /* where it started */
-.story { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 12px 48px; padding-block: 64px; }
+.story { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 12px 48px; padding-block: 64px; border-top: 1px solid var(--line); margin-top: 8px; }
 .story h2 { margin: 0; font-weight: 500; font-size: 22px; color: var(--pink); }
 .story p { margin: 0; max-width: 56ch; }
 @media (max-width: 720px) { .story { grid-template-columns: minmax(0, 1fr); padding-block: 44px; } }
@@ -99,12 +104,20 @@ html { overflow-x: clip; }
 <div class="wrap">
   <main>
     <section class="hero">
+      <div class="hero-l">
       <h1 data-t="h1">Make music with circuits.</h1>
       <p class="lead" data-t="lead">Free video lessons. One small step at a time.</p>
       <div class="doors">
         <a class="btn" data-href="lessons/blink-to-drum-machine/index.html" href="lessons/blink-to-drum-machine/index.html"><span data-t="first">Start the first lesson</span><svg aria-hidden="true"><use href="#i-next"/></svg></a>
         <a class="btn light" data-href="lessons/index.html" href="lessons/index.html" data-t="all">All lessons</a>
       </div>
+      <ol class="path" id="path" aria-label="How it works">
+        <li><a data-href="materials/index.html" href="materials/index.html"><span class="num">1</span><svg class="ico" aria-hidden="true"><use href="#i-cart"/></svg><span class="row"><b data-t="p1">Get what you need</b><svg class="go" aria-hidden="true"><use href="#i-next"/></svg></span></a></li>
+        <li><a data-href="lessons/blink-to-drum-machine/index.html" href="lessons/blink-to-drum-machine/index.html"><span class="num">2</span><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span class="row"><b data-t="p2">Follow a lesson</b><svg class="go" aria-hidden="true"><use href="#i-next"/></svg></span></a></li>
+        <li><a data-href="lessons/index.html" href="lessons/index.html"><span class="num">3</span><svg class="ico" aria-hidden="true"><use href="#i-wave"/></svg><span class="row"><b data-t="p3">Make music</b><svg class="go" aria-hidden="true"><use href="#i-next"/></svg></span></a></li>
+      </ol>
+      </div>
+      <div class="hero-r">
       <figure class="board">
         <div class="screen">
           <video id="clip" src="home/drum-machine.mp4" poster="home/drum-machine.jpg" muted loop playsinline preload="metadata" aria-describedby="cap"></video>
@@ -115,6 +128,27 @@ html { overflow-x: clip; }
         </div>
         <figcaption id="cap" data-t="cap">The drum machine from the first lesson.</figcaption>
       </figure>
+      <section class="logos" id="logos" aria-label="Funders and partners">
+        <h2 id="h-fund" data-t="fundersH">Funders</h2>
+        <ul aria-labelledby="h-fund">
+          <li><a class="tall" href="https://www.nsf.gov/" target="_blank" rel="noopener"><img src="about/img/partners/nsf.png" alt="U.S. National Science Foundation" width="360" height="360"></a></li>
+          <li><a href="https://www.qualcomm.com/company/corporate-responsibility/qualcomm-foundation" target="_blank" rel="noopener"><img src="about/img/partners/qualcomm-foundation.png" alt="Qualcomm Foundation" width="720" height="224" style="max-height:42px"></a></li>
+          <li><a href="https://herbergerinstitute.asu.edu/" target="_blank" rel="noopener"><img src="about/img/partners/asu-herberger.png" alt="Herberger Institute for Design and the Arts, Arizona State University" width="900" height="224" style="max-height:48px"></a></li>
+        </ul>
+        <h2 id="h-part" data-t="partnersH">Partners</h2>
+        <ul aria-labelledby="h-part">
+          <li><a href="https://www.bgcaz.org/" target="_blank" rel="noopener"><img src="about/img/partners/bgcaz.png" alt="Boys &amp; Girls Clubs of the Valley" width="720" height="157" style="max-height:40px"></a></li>
+          <li><a href="https://pcmrocks.org/" target="_blank" rel="noopener"><img src="about/img/partners/pcm.svg" alt="Phoenix Conservatory of Music" width="342" height="70" style="max-height:34px"></a></li>
+          <li><a class="tall" href="https://azsta.org/" target="_blank" rel="noopener"><img src="about/img/partners/asta.png" alt="Arizona Science Teachers Association" width="346" height="432"></a></li>
+        </ul>
+      </section>
+      </div>
+    </section>
+
+
+    <section class="story" aria-labelledby="h-story">
+      <h2 id="h-story" data-t="storyH">How Glitch'n started</h2>
+      <p data-t="story">Glitch'n began in June 2025 with three free summer courses at the ASU MIX Center in downtown Mesa, Arizona. Sixty young people and their families came to build circuits that make sound. These lessons carry that course forward, so more people can build along.</p>
     </section>
 
     <div class="chipband" role="img" aria-label="Maps of the four Glitch'n chips: 40106, 4040, 4021 and 4051">
@@ -122,17 +156,6 @@ html { overflow-x: clip; }
     <img src="img/pinouts/band-40106.jpg" alt=""><img src="img/pinouts/band-4040.jpg" alt=""><img src="img/pinouts/band-4021.jpg" alt=""><img src="img/pinouts/band-4051.jpg" alt=""><img src="img/pinouts/band-40106.jpg" alt=""><img src="img/pinouts/band-4040.jpg" alt=""><img src="img/pinouts/band-4021.jpg" alt=""><img src="img/pinouts/band-4051.jpg" alt="">
   </div>
     </div>
-
-    <ol class="path" id="path" aria-label="How it works">
-      <li><a data-href="materials/index.html" href="materials/index.html"><span class="num">1</span><svg class="ico" aria-hidden="true"><use href="#i-cart"/></svg><span class="row"><b data-t="p1">Get what you need</b><svg class="go" aria-hidden="true"><use href="#i-next"/></svg></span></a></li>
-      <li><a data-href="lessons/blink-to-drum-machine/index.html" href="lessons/blink-to-drum-machine/index.html"><span class="num">2</span><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg><span class="row"><b data-t="p2">Follow a lesson</b><svg class="go" aria-hidden="true"><use href="#i-next"/></svg></span></a></li>
-      <li><a data-href="lessons/index.html" href="lessons/index.html"><span class="num">3</span><svg class="ico" aria-hidden="true"><use href="#i-wave"/></svg><span class="row"><b data-t="p3">Make music</b><svg class="go" aria-hidden="true"><use href="#i-next"/></svg></span></a></li>
-    </ol>
-
-    <section class="story" aria-labelledby="h-story">
-      <h2 id="h-story" data-t="storyH">How Glitch'n started</h2>
-      <p data-t="story">Glitch'n began in June 2025 with three free summer courses at the ASU MIX Center in downtown Mesa, Arizona. Sixty young people and their families came to build circuits that make sound. These lessons carry that course forward, so more people can build along.</p>
-    </section>
   </main>
 
   <footer>
@@ -143,7 +166,7 @@ html { overflow-x: clip; }
   </footer>
 </div>
 
-<script src="site.js?v=202610190937"></script>
+<script src="site.js?v=202610190949"></script>
 <script>
 (() => {
   const T = {
@@ -153,7 +176,7 @@ html { overflow-x: clip; }
       first: 'Start the first lesson', all: 'All lessons',
       cap: 'The drum machine from the first lesson.',
       soundOn: 'Sound on', soundOff: 'Sound off', play: 'Play with sound', pause: 'Pause',
-      p1: 'Get what you need', p2: 'Follow a lesson', p3: 'Make music', pathAria: 'How it works',
+      p1: 'Get what you need', p2: 'Follow a lesson', p3: 'Make music', pathAria: 'How it works', fundersH: 'Funders', partnersH: 'Partners', logosAria: 'Funders and partners',
       storyH: "How Glitch'n started",
       story: "Glitch'n began in June 2025 with three free summer courses at the ASU MIX Center in downtown Mesa, Arizona. Sixty young people and their families came to build circuits that make sound. These lessons carry that course forward, so more people can build along.",
     },
@@ -163,7 +186,7 @@ html { overflow-x: clip; }
       first: 'Empieza la primera lección', all: 'Todas las lecciones',
       cap: 'La caja de ritmos de la primera lección.',
       soundOn: 'Activar sonido', soundOff: 'Quitar sonido', play: 'Reproducir con sonido', pause: 'Pausar',
-      p1: 'Consigue lo que necesitas', p2: 'Sigue una lección', p3: 'Haz música', pathAria: 'Cómo funciona',
+      p1: 'Consigue lo que necesitas', p2: 'Sigue una lección', p3: 'Haz música', pathAria: 'Cómo funciona', fundersH: 'Financiadores', partnersH: 'Socios', logosAria: 'Fondos y socios',
       storyH: "Cómo empezó Glitch'n",
       story: "Glitch'n empezó en junio de 2025 con tres cursos de verano gratuitos en el ASU MIX Center, en el centro de Mesa, Arizona. Sesenta jóvenes y sus familias vinieron a construir circuitos que hacen sonido. Estas lecciones continúan ese curso, para que más personas puedan construir con nosotros.",
     },
@@ -191,7 +214,7 @@ html { overflow-x: clip; }
   clip.addEventListener('play', soundLabel);
   clip.addEventListener('pause', soundLabel);
 
-  GL.start(T, (lang, t) => { document.getElementById('path').setAttribute('aria-label', t.pathAria); document.querySelector('.chipband').setAttribute('aria-label', t.bandAria); soundLabel(); });
+  GL.start(T, (lang, t) => { document.getElementById('path').setAttribute('aria-label', t.pathAria); document.querySelector('.chipband').setAttribute('aria-label', t.bandAria); document.getElementById('logos').setAttribute('aria-label', t.logosAria); soundLabel(); });
 })();
 </script>
 </body>
