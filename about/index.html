@@ -83,15 +83,17 @@ main { padding-bottom: 72px; }
 .lead-card { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 20px 32px; align-items: center; padding: 24px; border-radius: 16px; background: var(--cream); }
 .lead-card img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 50%; }
 .lead-card b { display: block; font-weight: 600; font-size: 24px; }
-.lead-card .role { display: block; margin-top: 2px; color: var(--pink); font-weight: 600; font-size: 15px; }
+.lead-card .role { display: block; margin-top: 4px; color: var(--pink); font-weight: 600; font-size: 13.5px; letter-spacing: .08em; }
+.lead-card .site { display: inline-block; margin-top: 12px; font-size: 15px; font-weight: 600; color: var(--pink); }
 .lead-card p { margin: 12px 0 0; font-size: 15.5px; line-height: 1.6; max-width: 60ch; }
 @media (max-width: 640px) { .lead-card { grid-template-columns: minmax(0, 1fr); } .lead-card img { max-width: 160px; } }
 h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft); }
-.people { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 24px 16px; margin: 0; padding: 0; list-style: none; }
+.people { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 28px 20px; margin: 36px 0 0; padding: 0; list-style: none; }
 .people .face { display: grid; place-items: center; aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--cream); color: var(--pink); font-weight: 600; font-size: 30px; }
 .people img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .people b { display: block; margin-top: 10px; font-weight: 600; font-size: 15px; line-height: 1.3; }
-.people span { display: block; margin-top: 2px; font-size: 13px; line-height: 1.35; color: var(--soft); }
+.people span { display: block; margin-top: 3px; font-size: 13px; line-height: 1.4; color: var(--soft); }
+.people .proj { margin-top: 4px; color: var(--pink); font-weight: 600; font-size: 12.5px; }
 .board { columns: 2 260px; column-gap: 32px; margin: 0; padding: 0; list-style: none; }
 .board li { break-inside: avoid; padding: 0 0 12px; font-size: 15px; }
 .board b { font-weight: 600; }
@@ -240,22 +242,18 @@ h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft);
           <img src="img/people/seth-thorn.jpg" alt="Seth Thorn" width="360" height="360">
           <div>
             <b>Seth Thorn, PhD</b>
-            <span class="role" data-t="sethRole">Founder and director. Creator and circuit designer.</span>
+            <span class="role" data-t="sethRole">FOUNDER AND DIRECTOR</span>
             <p data-t="sethBio">Assistant Professor of Interactive Media in ASU's School of Games, Arts, Media and Engineering, and principal investigator of the NSF grant. Seth created Glitch'n and designs its circuits and lessons. He received the GAME School's inaugural Teaching Innovation Award in 2024, holds a PhD from Brown University, and is a two-time finalist in the Guthman New Musical Instruments Competition.</p>
+            <a class="site" href="https://seththorn.net">seththorn.net</a>
           </div>
         </div>
-        <h3 data-t="gAffil">Research affiliates</h3>
-        <ul class="people" id="affiliates"></ul>
-        <h3 data-t="gDesign">Visual design</h3>
-        <ul class="people" id="design"></ul>
-        <h3 data-t="gFellows">Student fellows</h3>
-        <ul class="people" id="fellows"></ul>
+        <ul class="people" id="team"></ul>
         <h3 data-t="gBoard">Advisory board</h3>
         <ul class="board">
-          <li><b>Suren Jayasuriya, PhD</b><span>Electrical Engineering, Arizona State University</span></li>
-          <li><b>Rob Stenson, EdD</b><span>Neurodiversity Education Research Center</span></li>
-          <li><b>Ruth Wylie, PhD</b><span>Center for Science and the Imagination, Arizona State University</span></li>
-          <li><b>Jennifer Yu, ScD</b><span>SRI International</span></li>
+          <li><b>Suren Jayasuriya, PhD</b><span>Assistant Professor, Electrical Engineering, Arizona State University</span></li>
+          <li><b>Rob Stenson, EdD</b><span>Chairman of the Board, Neurodiversity Education Research Center</span></li>
+          <li><b>Ruth Wylie, PhD</b><span>Co-Director, Center for Science and the Imagination, Arizona State University</span></li>
+          <li><b>Jennifer Yu, ScD</b><span>Senior Principal Scientist, SRI International</span></li>
         </ul>
       </div>
     </section>
@@ -331,9 +329,9 @@ h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft);
       ctrlC: 'The first CTRL interns, July 2025.',
       nextH: 'What support makes possible',
       next1: "Every course and pop-up needs kits, paid teen facilitators and places to meet. Support helps us run more courses and pop-ups across Phoenix, put a kit in every learner's hands, pay more young people to teach, and keep adding free lessons to this site, so anyone, anywhere, can build along.",
-      logosAria: 'Funders and partners', fundersH: 'Funders', partnersH: 'Partners', teamH: 'Team', sethRole: 'Founder and director. Creator and circuit designer.',
+      logosAria: 'Funders and partners', fundersH: 'Funders', partnersH: 'Partners', teamH: 'Team', sethRole: 'FOUNDER AND DIRECTOR',
       sethBio: "Assistant Professor of Interactive Media in ASU's School of Games, Arts, Media and Engineering, and principal investigator of the NSF grant. Seth created Glitch'n and designs its circuits and lessons. He received the GAME School's inaugural Teaching Innovation Award in 2024, holds a PhD from Brown University, and is a two-time finalist in the Guthman New Musical Instruments Competition.",
-      gAffil: 'Research affiliates', gDesign: 'Visual design', gFellows: 'Student fellows', gBoard: 'Advisory board',
+      gBoard: 'Advisory board',
       pubsH: 'Publications and talks',
       supportH: 'Funding and partners', f1w: '2024 to 2027', f1: 'U.S. National Science Foundation', f2p: "A grant for Glitch'n AI", f3p: "A gift to Glitch'n",
       partners: "Led by ASU's School of Games, Arts, Media and Engineering, with the Mary Lou Fulton College for Teaching and Learning Innovation, the Ira A. Fulton Schools of Engineering, the School of Music, Dance and Theatre, and Enterprise Technology. Pop-ups hosted by Burton Barr Central Library and the Phoenix Conservatory of Music. Community partners include Boys & Girls Clubs of the Valley and the Arizona Science Teachers Association.",
@@ -367,9 +365,9 @@ h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft);
       ctrlC: 'Los primeros practicantes de CTRL, julio de 2025.',
       nextH: 'Lo que hace posible tu apoyo',
       next1: 'Cada curso y evento necesita kits, facilitadores jóvenes pagados y lugares para reunirse. El apoyo nos permite hacer más cursos y eventos en Phoenix, poner un kit en manos de cada aprendiz, pagar a más jóvenes para enseñar y seguir sumando lecciones gratuitas a este sitio, para que cualquiera, en cualquier lugar, pueda construir con nosotros.',
-      logosAria: 'Fondos y socios', fundersH: 'Financiadores', partnersH: 'Socios', teamH: 'Equipo', sethRole: 'Fundador y director. Creador y diseñador de circuitos.',
+      logosAria: 'Fondos y socios', fundersH: 'Financiadores', partnersH: 'Socios', teamH: 'Equipo', sethRole: 'FUNDADOR Y DIRECTOR',
       sethBio: "Profesor asistente de Medios Interactivos en la School of Games, Arts, Media and Engineering de ASU e investigador principal de la beca de la NSF. Seth creó Glitch'n y diseña sus circuitos y lecciones. Recibió el primer Premio a la Innovación Docente de la GAME School en 2024, tiene un doctorado de Brown University y fue dos veces finalista del Guthman New Musical Instruments Competition.",
-      gAffil: 'Investigadores afiliados', gDesign: 'Diseño visual', gFellows: 'Becarios estudiantes', gBoard: 'Consejo asesor',
+      gBoard: 'Consejo asesor',
       pubsH: 'Publicaciones y ponencias',
       supportH: 'Fondos y socios', f1w: '2024 a 2027', f1: 'Fundación Nacional de Ciencias de EE. UU.', f2p: "Una beca para Glitch'n AI", f3p: "Una donación a Glitch'n",
       partners: "Dirigido por la School of Games, Arts, Media and Engineering de ASU, con Mary Lou Fulton College for Teaching and Learning Innovation, Ira A. Fulton Schools of Engineering, School of Music, Dance and Theatre y Enterprise Technology. Eventos en la Biblioteca Central Burton Barr y el Phoenix Conservatory of Music. Entre sus socios comunitarios están Boys & Girls Clubs of the Valley y la Arizona Science Teachers Association.",
@@ -377,33 +375,52 @@ h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft);
     },
   };
 
-  /* research affiliates: ASU faculty and graduate researchers. student fellows: everyone, all years together */
-  const AFFIL = [
-    { n: 'Jennifer Blain Christen, PhD', r: { en: 'Electrical Engineering, ASU', es: 'Ingeniería Eléctrica, ASU' }, p: 'jennifer-blain-christen.jpg' },
-    { n: 'Mirka Koro, PhD', r: { en: 'Qualitative research, ASU', es: 'Investigación cualitativa, ASU' }, p: 'mirka-koro.jpg' },
-    { n: 'Margarita Pivovarova, PhD', r: { en: 'Economics of education, ASU', es: 'Economía de la educación, ASU' }, p: 'margarita-pivovarova.jpg' },
-    { n: 'Evan Tobias, PhD', r: { en: 'Music learning and teaching, ASU', es: 'Aprendizaje y enseñanza de la música, ASU' }, p: 'evan-tobias.jpg' },
-    { n: 'Ananí Vasquez, PhD', r: { en: 'Accessibility and inclusive learning', es: 'Accesibilidad y aprendizaje inclusivo' }, p: 'anani-vasquez.jpg' },
-    { n: 'Corey Reutlinger, PhD', r: { en: 'Postdoctoral researcher, ASU', es: 'Investigador posdoctoral, ASU' } },
-    { n: 'Bukola Akinbadewa', r: { en: 'Doctoral researcher, ASU', es: 'Investigadora doctoral, ASU' }, p: 'bukola-akinbadewa.jpg' },
-  ];
-  const DESIGN = [
-    { n: 'Kirk Markarian', r: { en: 'Visual branding and artist mentor', es: 'Identidad visual y mentor artístico' }, p: 'kirk-markarian.jpg' },
-  ];
-  const FELLOWS = [
-    { n: 'Jadyn Calhoun', p: 'jadyn-calhoun.jpg' }, { n: 'Carl Mitchell', p: 'carl-mitchell.jpg' }, { n: 'Miah Miner', p: 'miah-miner.jpg' }, { n: 'Patrick Neal', p: 'patrick-neal.jpg' },
-    { n: 'Kayla Sanchez Chavarria', p: 'kayla-sanchez-chavarria.jpg' }, { n: 'Iniobong (Ini) Obong', p: 'iniobong-obong.jpg' }, { n: 'Aivery Onstott', p: 'aivery-onstott.jpg' }, { n: 'Andrea Salazar', p: 'andrea-salazar.jpg' },
+  /* everyone on the team besides Seth, in one group: t = official title (or major, for students), j = role in Glitch'n */
+  const CO = { en: 'Co-principal investigator', es: 'Coinvestigadora principal' };
+  const COM = { en: 'Co-principal investigator', es: 'Coinvestigador principal' };
+  const FEL = (y) => ({ en: 'Teaching fellow, ' + y, es: 'Fellow docente, ' + y });
+  const TEAM = [
+    { n: 'Jennifer Blain Christen, PhD', p: 'jennifer-blain-christen.jpg', j: CO,
+      t: { en: 'Professor of Electrical Engineering, School of Electrical, Computer and Energy Engineering, ASU', es: 'Profesora de Ingeniería Eléctrica, School of Electrical, Computer and Energy Engineering, ASU' } },
+    { n: 'Mirka Koro, PhD', p: 'mirka-koro.jpg', j: CO,
+      t: { en: 'Professor of Qualitative Research, Mary Lou Fulton College for Teaching and Learning Innovation, ASU', es: 'Profesora de Investigación Cualitativa, Mary Lou Fulton College for Teaching and Learning Innovation, ASU' } },
+    { n: 'Margarita (Rita) Pivovarova, PhD', p: 'margarita-pivovarova.jpg', j: CO,
+      t: { en: 'Associate Professor of Economics, Mary Lou Fulton College for Teaching and Learning Innovation, ASU', es: 'Profesora asociada de Economía, Mary Lou Fulton College for Teaching and Learning Innovation, ASU' } },
+    { n: 'Evan Tobias, PhD', p: 'evan-tobias.jpg', j: COM,
+      t: { en: 'Associate Professor of Music Learning and Teaching, School of Music, Dance and Theatre, ASU', es: 'Profesor asociado de Aprendizaje y Enseñanza de la Música, School of Music, Dance and Theatre, ASU' } },
+    { n: 'Ananí Vasquez, PhD', p: 'anani-vasquez.jpg',
+      t: { en: 'Accessibility consultant', es: 'Consultora de accesibilidad' } },
+    { n: 'Corey Reutlinger, PhD',
+      t: { en: 'Postdoctoral researcher, ASU', es: 'Investigador posdoctoral, ASU' } },
+    { n: 'Bukola Akinbadewa', p: 'bukola-akinbadewa.jpg', j: { en: 'Project manager', es: 'Gerente de proyecto' },
+      t: { en: 'Doctoral student, Learning, Literacies and Technologies, ASU', es: 'Estudiante de doctorado, Learning, Literacies and Technologies, ASU' } },
+    { n: 'Kirk Markarian', p: 'kirk-markarian.jpg',
+      t: { en: 'Visual branding and artist mentor', es: 'Identidad visual y mentor artístico' } },
+    { n: 'Jadyn Calhoun', p: 'jadyn-calhoun.jpg', j: FEL(2026),
+      t: { en: 'ASU senior, Media Arts and Sciences', es: 'ASU, cuarto año: Artes y Ciencias de los Medios' } },
+    { n: 'Carl Mitchell', p: 'carl-mitchell.jpg', j: FEL(2026),
+      t: { en: 'ASU junior, Media Arts and Sciences, Electrical Engineering and Nonprofit Leadership', es: 'ASU, tercer año: Artes y Ciencias de los Medios, Ingeniería Eléctrica y Liderazgo sin fines de lucro' } },
+    { n: 'Miah Miner', p: 'miah-miner.jpg', j: FEL(2026),
+      t: { en: 'ASU junior, Electrical Engineering and Media Arts and Sciences', es: 'ASU, tercer año: Ingeniería Eléctrica y Artes y Ciencias de los Medios' } },
+    { n: 'Patrick Neal', p: 'patrick-neal.jpg', j: FEL(2026),
+      t: { en: 'ASU freshman, Electrical Engineering', es: 'ASU, primer año: Ingeniería Eléctrica' } },
+    { n: 'Kayla Sanchez Chavarria', p: 'kayla-sanchez-chavarria.jpg', j: FEL(2025),
+      t: { en: 'ASU sophomore, Ceramics and Media Arts and Sciences', es: 'ASU, segundo año: Cerámica y Artes y Ciencias de los Medios' } },
+    { n: 'Iniobong (Ini) Obong', p: 'iniobong-obong.jpg', j: FEL(2025),
+      t: { en: 'ASU senior, Media Arts and Sciences and Video Games', es: 'ASU, cuarto año: Artes y Ciencias de los Medios y Videojuegos' } },
+    { n: 'Aivery Onstott', p: 'aivery-onstott.jpg', j: FEL(2025),
+      t: { en: 'ASU junior, Computer Science and Media Arts and Sciences', es: 'ASU, tercer año: Ciencias de la Computación y Artes y Ciencias de los Medios' } },
+    { n: 'Andrea Salazar', p: 'andrea-salazar.jpg', j: FEL(2025),
+      t: { en: 'ASU senior, Creative Writing and Theater, and Media Arts and Sciences', es: 'ASU, cuarto año: Escritura Creativa y Teatro, y Artes y Ciencias de los Medios' } },
   ];
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const initials = (n) => n.replace(/\(.*?\)|,.*$/g, '').trim().split(/\s+/).map((w) => w[0]).slice(0, 2).join('');
-  const card = (p, lang) => '<li><div class="face">' + (p.p ? '<img src="img/people/' + p.p + '" alt="" loading="lazy" width="360" height="360">' : '<span aria-hidden="true">' + esc(initials(p.n)) + '</span>') + '</div><b>' + esc(p.n) + '</b>' + (p.r ? '<span>' + esc(p.r[lang] || p.r.en) + '</span>' : '') + '</li>';
+  const card = (p, lang) => '<li><div class="face">' + (p.p ? '<img src="img/people/' + p.p + '" alt="" loading="lazy" width="360" height="360">' : '<span aria-hidden="true">' + esc(initials(p.n)) + '</span>') + '</div><b>' + esc(p.n) + '</b>' + (p.t ? '<span>' + esc(p.t[lang] || p.t.en) + '</span>' : '') + (p.j ? '<span class="proj">' + esc(p.j[lang] || p.j.en) + '</span>' : '') + '</li>';
 
   GL.start(T, (lang, t) => {
     document.getElementById('glance').setAttribute('aria-label', t.glanceAria);
     document.getElementById('logosSec').setAttribute('aria-label', t.logosAria);
-    document.getElementById('affiliates').innerHTML = AFFIL.map((p) => card(p, lang)).join('');
-    document.getElementById('design').innerHTML = DESIGN.map((p) => card(p, lang)).join('');
-    document.getElementById('fellows').innerHTML = FELLOWS.map((p) => card(p, lang)).join('');
+    document.getElementById('team').innerHTML = TEAM.map((p) => card(p, lang)).join('');
   });
 })();
 </script>
