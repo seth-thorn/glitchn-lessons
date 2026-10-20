@@ -30,7 +30,7 @@
       tutorialVideo: 'Tutorial video', play: 'Play', pause: 'Pause', mute: 'Mute', unmute: 'Unmute', speed: 'Playback speed', fullScreen: 'Full screen', seek: 'Seek through the lesson',
       instructions: 'Instructions', buildSteps: 'Build steps', follow: 'Follow video', followTitle: 'Scroll the list to follow the video',
       closeups: 'Close-up stills', hint: 'Point at the board to magnify', hintTouch: 'Touch and drag to magnify', zoomLess: 'Less magnification', zoomMore: 'More magnification',
-      prevStill: 'Previous still', nextStill: 'Next still', prevStep: 'Previous step', nextStep: 'Next step', partsCount: '{n} parts', chipMaps: 'Chip maps', chipCount1: '1 chip', chipCountN: '{n} chips', chipMapAlt: 'Map of the {c} chip: what each leg does', printMaps: 'Print the chip maps', showChipMap: 'Show the map of the {c} chip', backToVideo: "Back to the video's step", stillsForStep: 'Stills for this step', showStill: 'Show still {n}',
+      prevStill: 'Previous still', nextStill: 'Next still', prevStep: 'Previous step', nextStep: 'Next step', partsCount: '{n} parts', chipMaps: 'Chip maps', animPlay: 'Animate', animStop: 'Stop animation', chipCount1: '1 chip', chipCountN: '{n} chips', chipMapAlt: 'Map of the {c} chip: what each leg does', printMaps: 'Print the chip maps', showChipMap: 'Show the map of the {c} chip', backToVideo: "Back to the video's step", stillsForStep: 'Stills for this step', showStill: 'Show still {n}',
       progress: 'Progress', whatsNext: "What's next?", mapLabel: 'Lessons connected to this one', ready: 'Ready', coming: 'Coming', comingSmall: 'coming', comingLater: ', coming later',
       keyPlay: 'play / pause', keySeconds: '5 seconds', keySub: 'previous / next sub-step', keyMute: 'mute',
       startingPoint: 'Starting point', finishedResult: 'Finished result of {n}', beforeStep: 'Before step {n}: ', boardAt: 'Breadboard at {n}: {t}',
@@ -47,7 +47,7 @@
       tutorialVideo: 'Video de la lección', play: 'Reproducir', pause: 'Pausar', mute: 'Silenciar', unmute: 'Activar sonido', speed: 'Velocidad de reproducción', fullScreen: 'Pantalla completa', seek: 'Avanzar o retroceder en la lección',
       instructions: 'Instrucciones', buildSteps: 'Pasos de armado', follow: 'Seguir el video', followTitle: 'Desplazar la lista para seguir el video',
       closeups: 'Fotos de cerca', hint: 'Señala la protoboard para ampliar', hintTouch: 'Toca y arrastra para ampliar', zoomLess: 'Menos aumento', zoomMore: 'Más aumento',
-      prevStill: 'Foto anterior', nextStill: 'Foto siguiente', prevStep: 'Paso anterior', nextStep: 'Paso siguiente', partsCount: '{n} piezas', chipMaps: 'Mapas de chips', chipCount1: '1 chip', chipCountN: '{n} chips', chipMapAlt: 'Mapa del chip {c}: qué hace cada pata', printMaps: 'Imprime los mapas de chips', showChipMap: 'Mostrar el mapa del chip {c}', backToVideo: 'Volver al paso del video', stillsForStep: 'Fotos de este paso', showStill: 'Mostrar la foto {n}',
+      prevStill: 'Foto anterior', nextStill: 'Foto siguiente', prevStep: 'Paso anterior', nextStep: 'Paso siguiente', partsCount: '{n} piezas', chipMaps: 'Mapas de chips', animPlay: 'Animar', animStop: 'Detener animación', chipCount1: '1 chip', chipCountN: '{n} chips', chipMapAlt: 'Mapa del chip {c}: qué hace cada pata', printMaps: 'Imprime los mapas de chips', showChipMap: 'Mostrar el mapa del chip {c}', backToVideo: 'Volver al paso del video', stillsForStep: 'Fotos de este paso', showStill: 'Mostrar la foto {n}',
       progress: 'Progreso', whatsNext: '¿Qué sigue?', mapLabel: 'Lecciones conectadas con esta', ready: 'Lista', coming: 'Próximamente', comingSmall: 'próximamente', comingLater: ', disponible más adelante',
       keyPlay: 'reproducir / pausar', keySeconds: '5 segundos', keySub: 'subpaso anterior / siguiente', keyMute: 'silenciar',
       startingPoint: 'Punto de partida', finishedResult: 'Resultado terminado de {n}', beforeStep: 'Antes del paso {n}: ', boardAt: 'Protoboard en {n}: {t}',
@@ -317,12 +317,21 @@
     if (chips.length) {
       // each map is a short silent loop of the chip at work (img/pinouts/anim); calm settings show its first frame, still
       const anim = (f) => esc(new URL('../img/pinouts/anim/' + f, PLAYER_SRC).href);
-      $('chipsBody').innerHTML = chips.map((c) => '<figure class="chipmap" id="chipmap-' + esc(c) + '"><video poster="' + anim(c + '.jpg') + '" width="637" height="524" muted loop playsinline preload="metadata" disablepictureinpicture role="img" aria-label="' + esc(t('chipMapAlt', { c })) + '"><source src="' + anim(c + '.mp4') + '" type="video/mp4"><source src="' + anim(c + '.webm') + '" type="video/webm"></video></figure>').join('') +
+      $('chipsBody').innerHTML = '<p class="chipmap-ctl"><button type="button" class="follow anim-btn" id="chipsAnim" aria-pressed="false"></button></p>' + chips.map((c) => '<figure class="chipmap" id="chipmap-' + esc(c) + '"><video poster="' + anim(c + '.jpg') + '" width="637" height="524" muted loop playsinline preload="metadata" disablepictureinpicture role="img" aria-label="' + esc(t('chipMapAlt', { c })) + '"><source src="' + anim(c + '.mp4') + '" type="video/mp4"><source src="' + anim(c + '.webm') + '" type="video/webm"></video></figure>').join('') +
         '<p class="parts-buy"><a href="../../materials/index.html' + keep + '#print">' + esc(t('printMaps')) + '</a></p>';
       $('chipsCount').textContent = chips.length === 1 ? t('chipCount1') : t('chipCountN', { n: chips.length });
       $('chipsPanel').hidden = false;
-      const playMaps = () => { if (calm() || !$('chipsFold').open) return; $('chipsBody').querySelectorAll('video').forEach((v) => v.play().catch(() => {})); };
-      $('chipsFold').addEventListener('toggle', () => { if ($('chipsFold').open) playMaps(); else $('chipsBody').querySelectorAll('video').forEach((v) => v.pause()); });
+      // the maps stand still until someone presses Animate; the choice is remembered on this device
+      let animOn = !!store.get('glitchn.chipmapsAnimate', false);
+      const vids = () => $('chipsBody').querySelectorAll('video');
+      const playMaps = () => {
+        const btn = $('chipsAnim');
+        btn.setAttribute('aria-pressed', String(animOn));
+        btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">' + (animOn ? '<rect x="2" y="1.5" width="2.8" height="9" rx=".6" fill="currentColor"/><rect x="7.2" y="1.5" width="2.8" height="9" rx=".6" fill="currentColor"/>' : '<path d="M2.5 1.5v9l8-4.5z" fill="currentColor"/>') + '</svg>' + esc(animOn ? t('animStop') : t('animPlay'));
+        vids().forEach((v) => { if (animOn && $('chipsFold').open) v.play().catch(() => {}); else v.pause(); });
+      };
+      $('chipsAnim').addEventListener('click', () => { animOn = !animOn; store.set('glitchn.chipmapsAnimate', animOn); playMaps(); });
+      $('chipsFold').addEventListener('toggle', playMaps);
       playMaps();
       document.querySelectorAll('.chip-fact[data-chip]').forEach((b) => b.addEventListener('click', () => {
         $('chipsFold').open = true;
