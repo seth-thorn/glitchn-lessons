@@ -93,7 +93,7 @@ h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft);
 .people img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .people b { display: block; margin-top: 10px; font-weight: 600; font-size: 15px; line-height: 1.3; }
 .people span { display: block; margin-top: 3px; font-size: 13px; line-height: 1.4; color: var(--soft); }
-.people .proj { margin-top: 4px; color: var(--pink); font-weight: 600; font-size: 12.5px; }
+.people .proj { margin-top: 2px; color: var(--pink); font-weight: 600; font-size: 12.5px; }
 .board { columns: 2 260px; column-gap: 32px; margin: 0; padding: 0; list-style: none; }
 .board li { break-inside: avoid; padding: 0 0 12px; font-size: 15px; }
 .board b { font-weight: 600; }
@@ -375,7 +375,7 @@ h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft);
     },
   };
 
-  /* everyone on the team besides Seth, in one group: t = official title (or year and major, for students), j = investigator, consultant or student fellow */
+  /* everyone on the team besides Seth, in one group: t = official title (or year and major, for students), j = investigator, consultant, graduate student or student fellow */
   const INV = { en: 'Investigator', es: 'Investigadora' }, INVM = { en: 'Investigator', es: 'Investigador' };
   const CON = { en: 'Consultant', es: 'Consultora' }, CONM = { en: 'Consultant', es: 'Consultor' };
   const FEL = { en: 'Student fellow', es: 'Fellow estudiantil' };
@@ -389,11 +389,11 @@ h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft);
     { n: 'Evan Tobias, PhD', p: 'evan-tobias.jpg', j: INVM,
       t: { en: 'Associate Professor of Music Learning and Teaching, School of Music, Dance and Theatre, ASU', es: 'Profesor asociado de Aprendizaje y Enseñanza de la Música, School of Music, Dance and Theatre, ASU' } },
     { n: 'Ananí Vasquez, PhD', p: 'anani-vasquez.jpg', j: CON,
-      t: { en: 'Accessibility consultant', es: 'Consultora de accesibilidad' } },
-    { n: 'Corey Reutlinger, PhD', p: 'corey-reutlinger.jpg', j: INVM,
-      t: { en: 'Postdoctoral researcher, ASU', es: 'Investigador posdoctoral, ASU' } },
-    { n: 'Bukola Akinbadewa', p: 'bukola-akinbadewa.jpg', j: INV,
-      t: { en: 'Doctoral student, Learning, Literacies and Technologies, ASU', es: 'Estudiante de doctorado, Learning, Literacies and Technologies, ASU' } },
+      t: { en: 'Accessibility and inclusive learning', es: 'Accesibilidad y aprendizaje inclusivo' } },
+    { n: 'Corey Reutlinger, PhD', p: 'corey-reutlinger.jpg', j: CONM,
+      t: { en: 'Communication and accessibility specialist', es: 'Especialista en comunicación y accesibilidad' } },
+    { n: 'Bukola Akinbadewa', p: 'bukola-akinbadewa.jpg', j: { en: 'Graduate student', es: 'Estudiante de posgrado' },
+      t: { en: 'Doctoral program in Learning, Literacies and Technologies, ASU', es: 'Doctorado en Learning, Literacies and Technologies, ASU' } },
     { n: 'Kirk Markarian', p: 'kirk-markarian.jpg', j: CONM,
       t: { en: 'Visual branding and artist mentor', es: 'Identidad visual y mentor artístico' } },
     { n: 'Jadyn Calhoun', p: 'jadyn-calhoun.jpg', j: FEL,
@@ -415,7 +415,7 @@ h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft);
   ];
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const initials = (n) => n.replace(/\(.*?\)|,.*$/g, '').trim().split(/\s+/).map((w) => w[0]).slice(0, 2).join('');
-  const card = (p, lang) => '<li><div class="face">' + (p.p ? '<img src="img/people/' + p.p + '" alt="" loading="lazy" width="360" height="360">' : '<span aria-hidden="true">' + esc(initials(p.n)) + '</span>') + '</div><b>' + esc(p.n) + '</b>' + (p.t ? '<span>' + esc(p.t[lang] || p.t.en) + '</span>' : '') + (p.j ? '<span class="proj">' + esc(p.j[lang] || p.j.en) + '</span>' : '') + '</li>';
+  const card = (p, lang) => '<li><div class="face">' + (p.p ? '<img src="img/people/' + p.p + '" alt="" loading="lazy" width="360" height="360">' : '<span aria-hidden="true">' + esc(initials(p.n)) + '</span>') + '</div><b>' + esc(p.n) + '</b>' + (p.j ? '<span class="proj">' + esc(p.j[lang] || p.j.en) + '</span>' : '') + (p.t ? '<span>' + esc(p.t[lang] || p.t.en) + '</span>' : '') + '</li>';
 
   GL.start(T, (lang, t) => {
     document.getElementById('glance').setAttribute('aria-label', t.glanceAria);
