@@ -12,6 +12,8 @@
   const lessonHref = (slug) => (C.lessonHref || '../{slug}/index.html').replace('{slug}', slug);
   // The part pictures (parts-art.js at the site root, beside player/) for the parts list.
   const PLAYER_SRC = (document.currentScript && document.currentScript.src) || location.href;
+  // Glitch'n Radio, in the corner of every page
+  { const r = document.createElement('script'); r.src = new URL('../radio/radio.js?v=202610201230', PLAYER_SRC).href; r.defer = true; document.head.appendChild(r); }
   const ART_URL = C.partsArt || new URL('../parts-art.js?v=202610191116', (document.currentScript && document.currentScript.src) || location.href).href;
   let artLoad = null;
   const loadArt = () => artLoad || (artLoad = window.GlitchnParts ? Promise.resolve() : new Promise((ok) => {

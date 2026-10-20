@@ -150,6 +150,23 @@ The site is plain HTML with no build step, published with GitHub Pages from the 
 - **Chip maps, stickers, logos and colors** come from Seth's Design Assets folder. The chip map JPEGs were converted from CMYK to sRGB for screens. The colors sheet has the Glitch'n logo added.
 - **Posters and table signs** (`downloads/posters/`) are Seth's print PDFs with the NSF logo removed (2026-10-18; the logo's drawing was taken out of each file, not covered). The "Feeling curious?" poster still names NSF support and the old school name in its small print.
 
+## Glitch'n Radio (radio/)
+
+A "Radio" button in the bottom-right corner of every page (home, lessons, each lesson, materials, about) opens a small player
+with three channels of music from Audiobulb Records: **Listen** (glitchier electronic music, with how it was made),
+**Play along** (slow textures with no beat, to play a circuit over) and **Calm**.
+
+- `radio/tracks.js` is the playlist: each track's SoundCloud id and address on soundcloud.com/audiobulb, artist, title,
+  cover picture, a two-line note (English and Spanish) retold from what the label published with the track, and
+  optionally the lesson that teaches the idea. To add a track, copy an entry; the id is in the track page's source
+  (`"id":` in the sound data) or in the SoundCloud share/embed code.
+- `radio/radio.js` draws the button, the player and the "now playing" card, and drives SoundCloud's embedded player
+  (its widget API). Nothing loads from SoundCloud until someone presses play. The player stays visible as a thin
+  SoundCloud bar inside the panel, which keeps SoundCloud's credit on the page.
+- Moving between pages, it remembers the track and the spot (for this browser tab) and picks up there. If a browser
+  won't start sound on its own on the new page, the button turns pink and says Resume.
+- The pages load it with one line before `</body>`; lesson pages get it from `player/player.js`.
+
 ## After changing CSS or JS
 
 Run `python3 tools/bump_version.py`. It stamps a new `?v=` on every link to the site's own CSS and JS (pages, `styles/all.css` imports, the lesson page template in `tools/build_index.py`, and the parts pictures loaded by the player), so browsers fetch the new files right away instead of a copy they kept for up to 10 minutes.
