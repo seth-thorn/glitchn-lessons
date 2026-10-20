@@ -58,6 +58,7 @@
 .gr-ctl { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
 .gr-play { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 8px 18px 8px 14px; border: 0; border-radius: 99px; background: var(--gr-blue); color: #FFFFFF !important; font-weight: 600; cursor: pointer; }
 .gr-play:hover { background: var(--gr-blue-2); }
+.gr-play:disabled { opacity: .55; cursor: progress; }
 .gr-play svg { width: 18px; height: 18px; }
 .gr-vol { flex: 1; display: flex; align-items: center; min-width: 0; }
 .gr-vol input { width: 100%; accent-color: var(--gr-pink); }

@@ -1,7 +1,7 @@
 /* Glitch'n Radio: music from Audiobulb Records while you browse and build.
    A small "Radio" button in the corner of every page opens a player with three channels (tracks.js).
    The music streams through SoundCloud's embedded player (its widget API), credited and linked to the label;
-   nothing loads from SoundCloud until someone presses play.
+   nothing loads from SoundCloud until someone opens the radio.
    Moving to another page: the player remembers the track and the spot, and picks up there on the next page.
    If the browser won't start sound by itself on the new page, the button offers "Resume" instead. */
 (() => {
@@ -9,7 +9,7 @@
   window.__glitchnRadio = true;
   const SRC = (document.currentScript && document.currentScript.src) || location.href;
   const HERE = new URL('./', SRC).href, ROOT = new URL('../', SRC).href;
-  const VER = '202610201230';
+  const VER = '202610201250';
 
   const WORDS = {
     en: { radio: 'Radio', title: "Glitch'n Radio", open: "Open Glitch'n Radio", close: 'Close', play: 'Play', pause: 'Pause', next: 'Next track',
@@ -33,6 +33,11 @@
   const loc = (o) => (o ? o[lang()] || o.en : '');
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const ART = 'https://i1.sndcdn.com/';
+  // Safari (and every browser on iPhone/iPad) only lets sound start straight from a tap. If the player starts any other
+  // way it runs silently and stays silent, so there play() must happen inside the tap, and nothing starts by itself.
+  const UA = navigator.userAgent;
+  const STRICT = /iPad|iPhone|iPod/.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ||
+    (/AppleWebKit/.test(UA) && /Safari/.test(UA) && !/Chrome|Chromium|CriOS|FxiOS|Edg|OPR|Android/.test(UA));
   const calm = () => matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.style === 'clean';
   const local = { get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
@@ -61,7 +66,7 @@
       ch: Math.max(0, CH.findIndex((c) => c.key === ((saved && saved.ch) || local.get('glitchn-radio-ch', 'listen')))),
       idx: (saved && saved.idx) || {},
       vol: local.get('glitchn-radio-vol', 80),
-      playing: false, wanted: false, blocked: false, open: false, art: {}, widget: null, ready: null, loadedId: null, posMs: 0,
+      playing: false, wanted: false, blocked: false, open: false, art: {}, widget: null, ready: null, live: false, loadedId: null, posMs: 0,
     };
     CH.forEach((c) => { if (S.idx[c.key] == null) S.idx[c.key] = Math.floor(Math.random() * c.tracks.length); });
     const chan = () => CH[S.ch], track = () => chan().tracks[S.idx[chan().key] % chan().tracks.length];
@@ -112,6 +117,7 @@
       $('grArt').innerHTML = ICON.wave + (art ? '<img src="' + esc(art) + '" alt="" width="64" height="64" onerror="this.remove()">' : '');
       $('grPlay').innerHTML = (S.playing ? ICON.pause : ICON.play) + '<span>' + esc(S.playing ? w('pause') : (S.blocked ? w('resume') : w('play'))) + '</span>';
       $('grPlay').setAttribute('aria-pressed', String(S.playing));
+      $('grPlay').disabled = STRICT && !!S.ready && !S.live;   // Safari: wait until the player is there, so the tap can start it
       $('grVolLabel').textContent = w('volume');
       $('grVol').value = S.vol;
       $('grFrom').textContent = w('from');
@@ -145,14 +151,14 @@
     const url = (t) => 'https://api.soundcloud.com/tracks/' + t.id;
     function widget() {
       if (S.ready) return S.ready;
-      S.ready = script('https://w.soundcloud.com/player/api.js').then(() => new Promise((ok) => {
+      S.ready = script('https://w.soundcloud.com/player/api.js').catch((e) => { S.ready = null; throw e; }).then(() => new Promise((ok) => {
         const f = document.createElement('iframe');
         f.title = 'SoundCloud'; f.allow = 'autoplay'; f.width = '100%'; f.height = '20'; f.scrolling = 'no'; f.frameBorder = 'no';
         f.src = 'https://w.soundcloud.com/player/?url=' + encodeURIComponent(url(track())) + '&color=%23fa6e79&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false';
         $('grSCbox').appendChild(f);
         const W = window.SC.Widget(f); S.widget = W; S.loadedId = track().id;
         const E = window.SC.Widget.Events;
-        W.bind(E.READY, () => { W.setVolume(S.vol); ok(W); });
+        W.bind(E.READY, () => { S.live = true; W.setVolume(S.vol); ok(W); draw(); });
         W.bind(E.PLAY, () => { S.playing = true; S.wanted = true; S.blocked = false; info(); save(); draw(); });
         W.bind(E.PAUSE, () => { if (leaving) return; S.playing = false; S.wanted = false; save(); draw(); });   // paused here or in SoundCloud's own bar
         W.bind(E.FINISH, () => { S.playing = false; next(true); });
@@ -179,20 +185,26 @@
         else { S.loadedId = t.id; W.load(url(t), { auto_play: false, show_user: true, visual: false, hide_related: true, show_comments: false, show_reposts: false, show_teaser: false, color: '#fa6e79', callback: go }); }
       }));
     }
+    // load SoundCloud's player (paused) ahead of the first press of play
+    function prime() { if (!S.ready) start(false, S.posMs).catch(() => {}); }   // offline or blocked: try again next time
     function next(auto) {
       const c = chan(); S.idx[c.key] = (S.idx[c.key] + 1) % c.tracks.length; S.posMs = 0; draw();
       const play = auto || S.playing || S.wanted;
-      if (S.widget || play) start(play, 0, auto); else save();
+      if (S.widget || play) start(play, 0, auto).catch(() => {}); else save();
     }
     function playPause() {
       if (S.playing) { S.wanted = false; S.widget.pause(); save(); return; }
-      S.blocked = false; start(true, S.posMs).then(draw);
+      S.blocked = false;
+      if (S.live && S.loadedId === track().id) {   // the usual case: the player is loaded, so start it right here, inside the tap
+        S.wanted = true; save();
+        S.widget.setVolume(S.vol); if (S.posMs) S.widget.seekTo(S.posMs); S.widget.play();
+        return;
+      }
+      start(true, S.posMs).then(draw).catch(() => {});
     }
-
-    /* ---------- controls ---------- */
     function toggle(open) {
       S.open = open == null ? !S.open : open;
-      if (S.open) $('grCard').hidden = true;
+      if (S.open) { $('grCard').hidden = true; prime(); }
       draw();
       if (S.open) { const sel = $('grTabs').querySelector('[aria-selected="true"]'); if (sel) sel.focus(); } else $('grPill').focus({ preventScroll: true });
     }
@@ -205,7 +217,7 @@
       const b = e.target.closest('[data-i]'); if (!b || +b.dataset.i === S.ch) return;
       const was = S.playing || S.wanted; S.ch = +b.dataset.i; S.posMs = 0; local.set('glitchn-radio-ch', chan().key); draw();
       $('grTabs').querySelector('[aria-selected="true"]').focus();
-      if (was) start(true, 0); else save();
+      if (was) start(true, 0).catch(() => {}); else save();
     });
     $('grTabs').addEventListener('keydown', (e) => {
       if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
@@ -225,7 +237,8 @@
 
     /* ---------- coming from another page while music was playing: pick up where it was ---------- */
     if (saved && saved.playing && Date.now() - saved.t < 30 * 60 * 1000) {
-      start(true, saved.pos || 0).then(() => setTimeout(() => { if (!S.playing) { S.blocked = true; draw(); } }, 2500));
+      if (STRICT) { S.blocked = true; S.posMs = saved.pos || 0; draw(); start(false, S.posMs).then(() => { S.wanted = true; save(); }).catch(() => {}); }   // one tap on Resume continues
+      else start(true, saved.pos || 0).then(() => setTimeout(() => { if (!S.playing) { S.blocked = true; draw(); } }, 2500)).catch(() => { S.blocked = true; draw(); });
     }
   }
 })();

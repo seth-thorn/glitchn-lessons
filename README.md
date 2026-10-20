@@ -161,10 +161,12 @@ with three channels of music from Audiobulb Records: **Listen** (glitchier elect
   optionally the lesson that teaches the idea. To add a track, copy an entry; the id is in the track page's source
   (`"id":` in the sound data) or in the SoundCloud share/embed code.
 - `radio/radio.js` draws the button, the player and the "now playing" card, and drives SoundCloud's embedded player
-  (its widget API). Nothing loads from SoundCloud until someone presses play. The player stays visible as a thin
+  (its widget API). Nothing loads from SoundCloud until someone opens the radio; the player loads then, paused, so
+  pressing play starts it straight from the tap (Safari plays silently otherwise). The player stays visible as a thin
   SoundCloud bar inside the panel, which keeps SoundCloud's credit on the page.
 - Moving between pages, it remembers the track and the spot (for this browser tab) and picks up there. If a browser
-  won't start sound on its own on the new page, the button turns pink and says Resume.
+  won't start sound on its own on the new page, the button turns pink and says Resume. Safari and iPhones/iPads
+  always get Resume: there, sound may only start from a tap.
 - The pages load it with one line before `</body>`; lesson pages get it from `player/player.js`.
 
 ## After changing CSS or JS
