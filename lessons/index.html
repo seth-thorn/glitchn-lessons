@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
 <style>
 /* The lesson library, in the Glitch'n house style (white and cream, logo blue and pink, Manrope, a thin coral
-   rule, flat colour, no outlines or shadows): the lessons as picture cards, the map of how they connect,
-   and what's coming. The other lesson styles (styles/*.css) restyle this page through the same tokens. */
+   rule, flat colour, no outlines or shadows): the lessons as picture cards and the map of how they connect.
+   The other lesson styles (styles/*.css) restyle this page through the same tokens. */
 :root {
   --ink: #3A3533; --page: #FDFAF9; --muted: #6E6762; --white: #FFFFFF;
   --panel: #F6E8E0; --card: #FBF3EE; --on-panel: #3A3533;
@@ -102,13 +102,6 @@ h2 { font-family: var(--display); font-weight: 600; font-size: 22px; margin: 0 0
 #map .node:focus { outline: none; }
 #map .elabel rect { fill: var(--page); stroke: none; }
 #map .elabel text { font-family: var(--body); font-weight: 500; font-size: 11px; fill: var(--muted); text-anchor: middle; dominant-baseline: middle; }
-.legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13.5px; color: var(--muted); margin-top: 12px; }
-.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--pink); background: var(--white); vertical-align: -1px; margin-right: 6px; }
-.legend i.dash { border: 2px dashed #C9B8AE; background: none; }
-.coming { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.coming li { border-radius: 14px; padding: 12px 16px; background: var(--card); }
-.coming b { font-weight: 600; }
-.coming span { display: block; font-size: 14.5px; color: var(--muted); }
 .team { font-size: 13.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px; }
 .team a { font-weight: 600; }
 .err { border-radius: 14px; background: var(--panel); padding: 16px; }
@@ -177,12 +170,6 @@ h2 { font-family: var(--display); font-weight: 600; font-size: 22px; margin: 0 0
   <section class="mapwrap" aria-labelledby="h-map">
     <h2 id="h-map" data-i18n="map">Map of lessons</h2>
     <div class="mapscroll"><svg id="map" role="group" aria-label="How the lessons connect" data-i18n-aria="mapAria"></svg></div>
-    <div class="legend"><span><i></i><span data-i18n="ready">Ready to build</span></span><span><i class="dash"></i><span data-i18n="coming">Coming</span></span><span data-i18n="arrows">Arrows point to where a lesson leads.</span></div>
-  </section>
-
-  <section aria-labelledby="h-coming" id="comingSec" hidden>
-    <h2 id="h-coming" data-i18n="coming">Coming</h2>
-    <ul class="coming" id="coming"></ul>
   </section>
 
   <footer class="team" lang="en">For the Glitch'n team: <a href="../editor/index.html">open the step editor</a> to turn a new video into a lesson. © Glitch'n 2026</footer>
@@ -257,7 +244,7 @@ h2 { font-family: var(--display); font-weight: 600; font-size: 22px; margin: 0 0
   });
 
   function render(IDX) {
-    const ready = IDX.lessons || [], planned = IDX.planned || [];
+    const ready = IDX.lessons || [];
     $('cards').innerHTML = ready.length ? ready.map((l) => (
       '<article class="card">' +
         (l.thumb ? '<img src="' + esc(l.thumb) + '" alt="" loading="lazy">' : '') +
@@ -272,9 +259,7 @@ h2 { font-family: var(--display); font-weight: 600; font-size: 22px; margin: 0 0
       e.target.querySelectorAll('img[data-src]').forEach((im) => { im.src = im.dataset.src; im.removeAttribute('data-src'); });
     }, true);
     buildFilters(ready, IDX);
-    $('comingSec').hidden = !planned.length;
-    $('coming').innerHTML = planned.map((p) => '<li><b>' + esc(loc(p, 'title')) + '</b><span>' + esc(loc(p, 'summary')) + '</span></li>').join('');
-    drawMap(ready, planned);
+    drawMap(ready, []);                      // only lessons that are posted: no teasers for what's coming
   }
 
   /* ---------- the fold-out list of a lesson's steps, each linking straight to that step ---------- */

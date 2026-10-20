@@ -189,7 +189,6 @@
         <div class="map-inner">
           <h2 class="panel-title">${t('whatsNext')}</h2>
           <svg class="map-svg" id="map" viewBox="0 0 440 290" role="group" aria-label="${t('mapLabel')}"></svg>
-          <div class="map-legend"><span><i></i>${t('ready')}</span><span><i class="dash"></i>${t('coming')}</span></div>
         </div>
       </section>
     </div>
@@ -615,7 +614,7 @@
     /* ---------- what's next map: this lesson and the lessons linked to it ---------- */
     // Nodes come from the lesson index (lessons/index.json); each lesson lists its own outgoing links.
     const nodes = {};
-    const all = IDX ? [...(IDX.lessons || []), ...(IDX.planned || [])] : [];
+    const all = IDX ? (IDX.lessons || []) : [];          // only posted lessons: no teasers for what's coming
     all.forEach((n) => { nodes[n.slug] = Object.assign({}, n, { title: (n.i18n && n.i18n[LANG] && n.i18n[LANG].title) || n.title }); });
     nodes[slug] = Object.assign({}, nodes[slug] || {}, { slug, title: L.title, status: L.status === 'planned' ? 'planned' : 'ready', links: L.links || (nodes[slug] || {}).links });
     const edges = [];
