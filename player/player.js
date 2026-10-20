@@ -25,7 +25,7 @@
   const LANGS = { en: 'EN', es: 'ES' };
   const UI = {
     en: {
-      style: 'Style', style_simple: 'Simple', style_tv: 'TV', navLessons: 'Lessons', navNeed: 'What you need', navAbout: 'About', style_clean: 'Clean', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', allLessons: '← All lessons', lessonEyebrow: "Glitch'n lesson", draft: 'Draft', draftTitle: 'Step text and links are drafts for the team to review',
+      style: 'Style', style_simple: 'Simple', style_tv: 'TV', navLessons: 'Lessons', navNeed: 'Materials', navAbout: 'About', style_clean: 'Clean', style_gadget: 'Gadget', style_solarpunk: 'Solar Punk', style_treehouse: 'Treehouse', style_quest: 'Quest', style_skyline: 'Skyline', style_daydream: 'Daydream', style_terminal: 'Terminal', allLessons: '← All lessons', lessonEyebrow: "Glitch'n lesson", draft: 'Draft', draftTitle: 'Step text and links are drafts for the team to review',
       loading: 'Loading…', language: 'Language',
       tutorialVideo: 'Tutorial video', play: 'Play', pause: 'Pause', mute: 'Mute', unmute: 'Unmute', speed: 'Playback speed', fullScreen: 'Full screen', seek: 'Seek through the lesson',
       instructions: 'Instructions', buildSteps: 'Build steps', follow: 'Follow video', followTitle: 'Scroll the list to follow the video',
@@ -42,7 +42,7 @@
       kind_variation: 'variation', kind_related: 'related', 'kind_next day': 'next day', kind_revisited: 'revisited'
     },
     es: {
-      style: 'Estilo', style_simple: 'Sencillo', style_tv: 'Tele', navLessons: 'Lecciones', navNeed: 'Lo que necesitas', navAbout: 'Acerca de', style_clean: 'Limpio', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', allLessons: '← Todas las lecciones', lessonEyebrow: 'Lección de Glitch’n', draft: 'Borrador', draftTitle: 'El texto de los pasos y los enlaces son un borrador',
+      style: 'Estilo', style_simple: 'Sencillo', style_tv: 'Tele', navLessons: 'Lecciones', navNeed: 'Materiales', navAbout: 'Acerca de', style_clean: 'Limpio', style_gadget: 'Aparato', style_solarpunk: 'Solarpunk', style_treehouse: 'Casa del árbol', style_quest: 'Aventura', style_skyline: 'Rascacielos', style_daydream: 'Ensueño', style_terminal: 'Terminal', allLessons: '← Todas las lecciones', lessonEyebrow: 'Lección de Glitch’n', draft: 'Borrador', draftTitle: 'El texto de los pasos y los enlaces son un borrador',
       loading: 'Cargando…', language: 'Idioma',
       tutorialVideo: 'Video de la lección', play: 'Reproducir', pause: 'Pausar', mute: 'Silenciar', unmute: 'Activar sonido', speed: 'Velocidad de reproducción', fullScreen: 'Pantalla completa', seek: 'Avanzar o retroceder en la lección',
       instructions: 'Instrucciones', buildSteps: 'Pasos de armado', follow: 'Seguir el video', followTitle: 'Desplazar la lista para seguir el video',

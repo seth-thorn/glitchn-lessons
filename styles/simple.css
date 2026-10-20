@@ -1,5 +1,5 @@
 /* Simple: the Glitch'n house style, and the default look for lessons. The same look as the rest of the site
-   (home, lessons, what you need): white and cream, the logo blue and pink, Manrope at medium weight, the site
+   (home, lessons, materials): white and cream, the logo blue and pink, Manrope at medium weight, the site
    header with a thin coral rule, flat colour, no outlines or shadows, no TV cabinet. Few words: the video,
    the steps and the pictures lead. Nothing is shown by colour alone (the current sub-step has a bar, a tint
    and bold text; finished sub-steps have check marks). This file styles the lesson player; the lesson library
@@ -195,7 +195,7 @@
 :root[data-style="simple"] .parts-group { background: var(--card); border-radius: 12px; }
 :root[data-style="simple"] .parts-group h3 { font-family: var(--body); font-weight: 600; font-size: 14px; color: var(--muted); }
 :root[data-style="simple"] .parts-group .qty { font-family: var(--body); font-weight: 700; color: var(--ink); }
-/* Simple: the parts as pictures, like the What you need page. Kids find a part by how it looks. */
+/* Simple: the parts as pictures, like the Materials page. Kids find a part by how it looks. */
 :root[data-style="simple"] .parts-groups { columns: auto; display: flex; flex-wrap: wrap; gap: 12px; }
 :root[data-style="simple"] .parts-group { flex: 1 1 auto; margin: 0; padding: 14px 16px 16px; }
 :root[data-style="simple"] .parts-groups > .parts-buy { flex-basis: 100%; margin: 4px 0 20px; }

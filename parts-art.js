@@ -1,5 +1,5 @@
 /* Glitch'n part pictures: flat, top-down, in the colours the parts really have (viewBox 0 0 100 100).
-   One small SVG per kit key (materials/kit.json, lessons/catalog.json). Used by the What you need page
+   One small SVG per kit key (materials/kit.json, lessons/catalog.json). Used by the Materials page
    and by every lesson's parts list. GlitchnParts.picture(key) returns an <svg> string ('' for an unknown key). */
 (function () {
   const LEG = '#A9ADB2';

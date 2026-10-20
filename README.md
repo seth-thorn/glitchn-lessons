@@ -16,12 +16,12 @@ about/
   index.html               About: an executive summary for donors (why, how, results, milestones, team, publications, funding)
   img/                     the About page's photos (team headshots in img/people/)
 materials/
-  index.html               "What you need": how many kits, 1 buy (one DigiKey cart), 2 print, 3 pop-up (optional), share
+  index.html               "Materials": how many kits, 1 buy (one DigiKey cart), 2 print, 3 pop-up (optional), share
   kit.json                 the kit list: quantities and stores for each part (edit by hand)
 downloads/                 files to download: chip labels, chip maps (pinout cards), posters and table signs, stickers, logos, colors,
                            and glitchn-pack.zip with all of them (made by tools/make_pack.py)
 player/player.js, .css     the one lesson player every lesson page uses
-parts-art.js               the part pictures, shared by the What you need page and the lessons' parts lists
+parts-art.js               the part pictures, shared by the Materials page and the lessons' parts lists
 lessons/
   index.html               the lesson library: lesson cards, the map of all lessons, what's coming
   index.json               the list of lessons (made by tools/build_index.py; don't edit by hand)
@@ -138,7 +138,7 @@ All five lessons from the original five-day course are up, as drafts for the Gli
 
 The site is plain HTML with no build step, published with GitHub Pages from the `main` branch.
 
-## What you need (materials/)
+## Materials (materials/)
 
 `materials/index.html` is for the adults who set Glitch'n up, so it explains more than the rest of the site. One number drives it: **how many kits** (kept in the address as `?kits=` and in the browser). A switch, **I'm hosting a pop-up event** (`?popup=1`), adds the pop-up section. Sections: **1 Buy** (one button fills a DigiKey cart with every part in the right amounts; "Also get" for what isn't in it; a note on screens; the kit in pictures; other stores with copyable lists and a CSV), **2 Print** (chip labels: must print; chip maps: recommended; with how-to steps and how many to print), **3 Pop-up** (only when switched on: the three zones, a room layout, a checklist, posters, table signs, stickers), **Share** (the Glitch'n pack zip). Each lesson's parts list and the lesson library link here.
 
