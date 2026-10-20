@@ -375,42 +375,42 @@ h3 { margin: 36px 0 16px; font-weight: 600; font-size: 16px; color: var(--soft);
     },
   };
 
-  /* everyone on the team besides Seth, in one group: t = official title (or major, for students), j = role in Glitch'n */
-  const CO = { en: 'Co-principal investigator', es: 'Coinvestigadora principal' };
-  const COM = { en: 'Co-principal investigator', es: 'Coinvestigador principal' };
-  const FEL = (y) => ({ en: 'Teaching fellow, ' + y, es: 'Fellow docente, ' + y });
+  /* everyone on the team besides Seth, in one group: t = official title (or year and major, for students), j = investigator, consultant or student fellow */
+  const INV = { en: 'Investigator', es: 'Investigadora' }, INVM = { en: 'Investigator', es: 'Investigador' };
+  const CON = { en: 'Consultant', es: 'Consultora' }, CONM = { en: 'Consultant', es: 'Consultor' };
+  const FEL = { en: 'Student fellow', es: 'Fellow estudiantil' };
   const TEAM = [
-    { n: 'Jennifer Blain Christen, PhD', p: 'jennifer-blain-christen.jpg', j: CO,
+    { n: 'Jennifer Blain Christen, PhD', p: 'jennifer-blain-christen.jpg', j: INV,
       t: { en: 'Professor of Electrical Engineering, School of Electrical, Computer and Energy Engineering, ASU', es: 'Profesora de Ingeniería Eléctrica, School of Electrical, Computer and Energy Engineering, ASU' } },
-    { n: 'Mirka Koro, PhD', p: 'mirka-koro.jpg', j: CO,
+    { n: 'Mirka Koro, PhD', p: 'mirka-koro.jpg', j: INV,
       t: { en: 'Professor of Qualitative Research, Mary Lou Fulton College for Teaching and Learning Innovation, ASU', es: 'Profesora de Investigación Cualitativa, Mary Lou Fulton College for Teaching and Learning Innovation, ASU' } },
-    { n: 'Margarita (Rita) Pivovarova, PhD', p: 'margarita-pivovarova.jpg', j: CO,
+    { n: 'Margarita (Rita) Pivovarova, PhD', p: 'margarita-pivovarova.jpg', j: INV,
       t: { en: 'Associate Professor of Economics, Mary Lou Fulton College for Teaching and Learning Innovation, ASU', es: 'Profesora asociada de Economía, Mary Lou Fulton College for Teaching and Learning Innovation, ASU' } },
-    { n: 'Evan Tobias, PhD', p: 'evan-tobias.jpg', j: COM,
+    { n: 'Evan Tobias, PhD', p: 'evan-tobias.jpg', j: INVM,
       t: { en: 'Associate Professor of Music Learning and Teaching, School of Music, Dance and Theatre, ASU', es: 'Profesor asociado de Aprendizaje y Enseñanza de la Música, School of Music, Dance and Theatre, ASU' } },
-    { n: 'Ananí Vasquez, PhD', p: 'anani-vasquez.jpg',
+    { n: 'Ananí Vasquez, PhD', p: 'anani-vasquez.jpg', j: CON,
       t: { en: 'Accessibility consultant', es: 'Consultora de accesibilidad' } },
-    { n: 'Corey Reutlinger, PhD',
+    { n: 'Corey Reutlinger, PhD', j: INVM,
       t: { en: 'Postdoctoral researcher, ASU', es: 'Investigador posdoctoral, ASU' } },
-    { n: 'Bukola Akinbadewa', p: 'bukola-akinbadewa.jpg', j: { en: 'Project manager', es: 'Gerente de proyecto' },
+    { n: 'Bukola Akinbadewa', p: 'bukola-akinbadewa.jpg', j: INV,
       t: { en: 'Doctoral student, Learning, Literacies and Technologies, ASU', es: 'Estudiante de doctorado, Learning, Literacies and Technologies, ASU' } },
-    { n: 'Kirk Markarian', p: 'kirk-markarian.jpg',
+    { n: 'Kirk Markarian', p: 'kirk-markarian.jpg', j: CONM,
       t: { en: 'Visual branding and artist mentor', es: 'Identidad visual y mentor artístico' } },
-    { n: 'Jadyn Calhoun', p: 'jadyn-calhoun.jpg', j: FEL(2026),
+    { n: 'Jadyn Calhoun', p: 'jadyn-calhoun.jpg', j: FEL,
       t: { en: 'ASU senior, Media Arts and Sciences', es: 'ASU, cuarto año: Artes y Ciencias de los Medios' } },
-    { n: 'Carl Mitchell', p: 'carl-mitchell.jpg', j: FEL(2026),
+    { n: 'Carl Mitchell', p: 'carl-mitchell.jpg', j: FEL,
       t: { en: 'ASU junior, Media Arts and Sciences, Electrical Engineering and Nonprofit Leadership', es: 'ASU, tercer año: Artes y Ciencias de los Medios, Ingeniería Eléctrica y Liderazgo sin fines de lucro' } },
-    { n: 'Miah Miner', p: 'miah-miner.jpg', j: FEL(2026),
+    { n: 'Miah Miner', p: 'miah-miner.jpg', j: FEL,
       t: { en: 'ASU junior, Electrical Engineering and Media Arts and Sciences', es: 'ASU, tercer año: Ingeniería Eléctrica y Artes y Ciencias de los Medios' } },
-    { n: 'Patrick Neal', p: 'patrick-neal.jpg', j: FEL(2026),
+    { n: 'Patrick Neal', p: 'patrick-neal.jpg', j: FEL,
       t: { en: 'ASU freshman, Electrical Engineering', es: 'ASU, primer año: Ingeniería Eléctrica' } },
-    { n: 'Kayla Sanchez Chavarria', p: 'kayla-sanchez-chavarria.jpg', j: FEL(2025),
+    { n: 'Kayla Sanchez Chavarria', p: 'kayla-sanchez-chavarria.jpg', j: FEL,
       t: { en: 'ASU sophomore, Ceramics and Media Arts and Sciences', es: 'ASU, segundo año: Cerámica y Artes y Ciencias de los Medios' } },
-    { n: 'Iniobong (Ini) Obong', p: 'iniobong-obong.jpg', j: FEL(2025),
+    { n: 'Iniobong (Ini) Obong', p: 'iniobong-obong.jpg', j: FEL,
       t: { en: 'ASU senior, Media Arts and Sciences and Video Games', es: 'ASU, cuarto año: Artes y Ciencias de los Medios y Videojuegos' } },
-    { n: 'Aivery Onstott', p: 'aivery-onstott.jpg', j: FEL(2025),
+    { n: 'Aivery Onstott', p: 'aivery-onstott.jpg', j: FEL,
       t: { en: 'ASU junior, Computer Science and Media Arts and Sciences', es: 'ASU, tercer año: Ciencias de la Computación y Artes y Ciencias de los Medios' } },
-    { n: 'Andrea Salazar', p: 'andrea-salazar.jpg', j: FEL(2025),
+    { n: 'Andrea Salazar', p: 'andrea-salazar.jpg', j: FEL,
       t: { en: 'ASU senior, Creative Writing and Theater, and Media Arts and Sciences', es: 'ASU, cuarto año: Escritura Creativa y Teatro, y Artes y Ciencias de los Medios' } },
   ];
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
